@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pablo Pavón · Senior Business &amp; Data Analyst</title>
+<meta name="description" content="Pablo Pavón, Senior Business & Data Analyst. Análisis de datos, tableros, migraciones y automatización con IA, con números que cierran.">
+<meta property="og:title" content="Pablo Pavón · Senior Business & Data Analyst">
+<meta property="og:description" content="Análisis de datos, procesos e IA, con controles que garantizan que los números cierran.">
+<meta property="og:image" content="https://pablodpavon.github.io/assets/proj_ap.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#eef1ec; --sheet:#f7f9f6; --ink:#1e3329; --ink-2:#4f6359; --rule:#c9d3cc;
+  --green:#2f6b4f; --green-bg:#dcebe2; --diff:#9a3b5c;
+  --wide:"wdth" 118; --normal:"wdth" 100; --narrow:"wdth" 82;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Archivo,system-ui,sans-serif;font-size:17px;line-height:1.55;font-variation-settings:var(--normal);font-variant-numeric:tabular-nums}
+a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+html[lang=es] [lang=en], html[lang=en] [lang=es]{display:none !important}
+
+.page{max-width:1120px;margin:0 auto;padding:0 32px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-size:15px}
+.top .who{font-weight:600;font-variation-settings:var(--wide)}
+.langs{display:flex;gap:2px;border:1px solid var(--rule);border-radius:999px;padding:2px;background:var(--sheet)}
+.langs button{font:inherit;font-size:13px;border:0;background:transparent;color:var(--ink-2);padding:4px 11px;border-radius:999px;cursor:pointer}
+.langs button[aria-pressed=true]{background:var(--ink);color:var(--sheet)}
+
+/* Ledger layout: account column on the left, entries on the right */
+.row{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:56px 0;border-top:1px solid var(--rule)}
+.row > h2{margin:0;font-size:15px;font-weight:600;color:var(--ink-2);font-variation-settings:var(--normal);line-height:1.4;position:sticky;top:20px;align-self:start}
+
+/* Hero */
+.hero{padding:36px 0 64px}
+.hero h1{margin:0;font-size:clamp(46px,8.4vw,104px);line-height:.95;font-weight:760;letter-spacing:-.025em;font-variation-settings:"wdth" 125}
+.hero .role{margin:18px 0 0;font-size:clamp(20px,2.4vw,27px);font-weight:500;font-variation-settings:var(--wide);color:var(--ink)}
+.hero .pitch{max-width:60ch;margin:18px 0 0;color:var(--ink-2);font-size:18px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-block;padding:11px 18px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--sheet)}
+.btn.secondary{color:var(--ink);background:transparent}
+.btn:hover{text-decoration:none;filter:brightness(1.12)}
+
+/* The memorable thing: a reconciliation that has to close */
+.ledger{margin-top:48px;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;max-width:760px;box-shadow:0 1px 0 var(--rule)}
+.ledger table{width:100%;border-collapse:collapse;font-size:16px}
+.ledger td{padding:12px 20px;border-bottom:1px solid var(--rule);vertical-align:baseline}
+.ledger td.amt{text-align:right;white-space:nowrap;font-variation-settings:var(--narrow);font-weight:500;font-size:18px}
+.ledger tr.sub td{color:var(--ink-2);font-size:15px;padding-top:6px;padding-bottom:6px;border-bottom-style:dashed}
+.ledger tr.sub td:first-child{padding-left:40px}
+.ledger tr.total td{border-bottom:0;font-weight:700}
+.ledger tr.total td.amt{font-size:22px}
+.ledger .check{display:inline-block;margin-left:10px;color:var(--green);opacity:0;transition:opacity .4s}
+.ledger.closed .check{opacity:1}
+.ledger.closed tr.total td.amt{color:var(--green)}
+.ledger caption{caption-side:bottom;text-align:left;padding:10px 20px 14px;font-size:13.5px;color:var(--ink-2)}
+
+/* Projects */
+.project{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:32px;padding:0 0 44px;margin-bottom:44px;border-bottom:1px dashed var(--rule)}
+.project:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.project h3{margin:0 0 8px;font-size:23px;line-height:1.2;font-variation-settings:var(--wide);font-weight:700}
+.project p{margin:0 0 12px;max-width:58ch}
+.proof{margin:14px 0 16px;padding:10px 14px;background:var(--green-bg);border-left:3px solid var(--green);font-size:15.5px}
+.project figure{margin:0}
+.project img,.case img{width:100%;height:auto;display:block;border:1px solid var(--rule);border-radius:3px;background:#fff}
+.links{font-size:15px;display:flex;gap:18px;flex-wrap:wrap}
+
+/* Case studies */
+.note{margin:0 0 24px;color:var(--ink-2);max-width:62ch}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 28px}
+.case h3{margin:12px 0 4px;font-size:17px;font-weight:650;font-variation-settings:var(--normal)}
+.case p{margin:0;color:var(--ink-2);font-size:15px}
+.older{margin:36px 0 0;padding:0;list-style:none}
+.older li{padding:10px 0;border-top:1px dashed var(--rule)}
+
+/* Experience: a real sequence, so years mark it */
+.timeline{margin:0;padding:0;list-style:none}
+.timeline li{display:grid;grid-template-columns:118px 1fr;gap:20px;padding:0 0 26px}
+.timeline .yrs{font-variation-settings:var(--narrow);color:var(--ink-2);font-size:15.5px;padding-top:2px}
+.timeline h3{margin:0;font-size:18px;font-weight:650}
+.timeline .org{color:var(--ink-2);font-size:15.5px}
+.timeline p{margin:6px 0 0;max-width:62ch;font-size:16px}
+
+.how p{margin:0 0 18px;max-width:64ch}
+.how b{font-weight:650}
+.contact p{margin:0 0 14px;max-width:60ch}
+.contact .mail{font-size:clamp(22px,3.2vw,34px);font-weight:650;font-variation-settings:var(--wide)}
+footer{padding:28px 0 40px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink-2)}
+
+@media (max-width:860px){
+  .page{padding:0 16px}
+  .row{grid-template-columns:1fr;gap:18px;padding:40px 0}
+  .row > h2{position:static}
+  .project{grid-template-columns:1fr}
+  .cases{grid-template-columns:1fr}
+  .ledger td{padding:10px 12px}
+  .ledger tr.sub td:first-child{padding-left:22px}
+  .timeline li{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){.ledger .check{transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <span class="who">Pablo Pavón</span>
+    <div class="langs" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+  <section class="hero">
+    <h1>Pablo Pavón</h1>
+    <p class="role" lang="es">Senior Business &amp; Data Analyst. Datos, procesos e IA.</p>
+    <p class="role" lang="en">Senior Business &amp; Data Analyst. Data, processes and AI.</p>
+    <p class="pitch" lang="es">Más de diez años entre banca, e-commerce y seguros. Tomo un problema de negocio, lo bajo a requerimientos y lo resuelvo con análisis, tableros y automatización. Uso IA para ejecutar más rápido y valido yo cada número antes de entregarlo.</p>
+    <p class="pitch" lang="en">Ten-plus years across banking, e-commerce and insurance. I take a business problem, turn it into requirements and solve it with analysis, dashboards and automation. I use AI to execute faster, and I check every number myself before it ships.</p>
+    <div class="actions">
+      <a class="btn primary" lang="es" href="assets/CV_Pablo_Pavon_ES.pdf" download>Descargar CV</a>
+      <a class="btn primary" lang="en" href="assets/CV_Pablo_Pavon_EN.pdf" download>Download CV</a>
+      <a class="btn secondary" href="mailto:pablodpavon@gmail.com"><span lang="es">Escribirme</span><span lang="en">Email me</span></a>
+      <a class="btn secondary" href="https://www.linkedin.com/in/pablo-damian-pavon">LinkedIn</a>
+      <a class="btn secondary" href="https://github.com/pablodpavon">GitHub</a>
+    </div>
+
+    <div class="ledger" id="ledger">
+      <table>
+        <caption><span lang="es">Control de cierre del proyecto de cuentas a pagar, más abajo. Si la diferencia no da cero, el proceso no termina.</span><span lang="en">Closing check from the accounts payable project below. If the difference is not zero, the run does not finish.</span></caption>
+        <tbody>
+          <tr><td><span lang="es">Facturas recibidas (1.260)</span><span lang="en">Invoices received (1,260)</span></td><td class="amt" data-v="500151392.93">ARS 500.151.392,93</td></tr>
+          <tr class="sub"><td><span lang="es">Listas para pagar (1.139)</span><span lang="en">Ready to pay (1,139)</span></td><td class="amt" data-v="431282079.36">ARS 431.282.079,36</td></tr>
+          <tr class="sub"><td><span lang="es">A revisar (48)</span><span lang="en">Needs review (48)</span></td><td class="amt" data-v="29447448.42">ARS 29.447.448,42</td></tr>
+          <tr class="sub"><td><span lang="es">Bloqueadas (73)</span><span lang="en">Blocked (73)</span></td><td class="amt" data-v="39421865.15">ARS 39.421.865,15</td></tr>
+          <tr><td><span lang="es">Total clasificado</span><span lang="en">Total classified</span></td><td class="amt" data-v="500151392.93">ARS 500.151.392,93</td></tr>
+          <tr class="total"><td><span lang="es">Diferencia</span><span lang="en">Difference</span></td><td class="amt"><span id="diff">ARS 0,00</span><span class="check" aria-hidden="true">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="row" id="proyectos">
+    <h2><span lang="es">Proyectos con código</span><span lang="en">Projects with code</span></h2>
+    <div>
+      <article class="project">
+        <div>
+          <h3 lang="es">Control de cuentas a pagar</h3>
+          <h3 lang="en">Accounts payable control</h3>
+          <p lang="es">Doce reglas revisan cada factura de proveedor antes de la corrida de pagos: CUIT, duplicados, IVA, factura contra orden de compra y recepción, tipo de comprobante y CAE. Cada factura queda lista para pagar, a revisar o bloqueada, con el motivo.</p>
+          <p lang="en">Twelve rules check every supplier invoice before the payment run: CUIT, duplicates, VAT, invoice against purchase order and goods receipt, invoice type and CAE. Each invoice ends up ready to pay, needs review or blocked, with the reason.</p>
+          <p class="proof" lang="es">Detecta las 121 anomalías cargadas a propósito y no marca ninguna factura limpia.</p>
+          <p class="proof" lang="en">Catches all 121 planted issues and flags none of the clean invoices.</p>
+          <div class="links"><a href="https://github.com/pablodpavon/ap-invoice-control"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
+        </div>
+        <figure><img src="assets/proj_ap.jpg" alt="" loading="lazy" width="1600" height="613"></figure>
+      </article>
+
+      <article class="project">
+        <div>
+          <h3 lang="es">Migración de datos con conciliación</h3>
+          <h3 lang="en">Data migration with reconciliation</h3>
+          <p lang="es">Migración de clientes y contratos desde un sistema heredado, guiada por una especificación de mapeo que leen negocio y sistemas. Unifica duplicados, rechaza lo inválido con su motivo y corre doce controles al terminar.</p>
+          <p lang="en">Customers and contracts moved off a legacy system, driven by a mapping spec that business and IT both read. It merges duplicates, rejects invalid records with a reason and runs twelve checks at the end.</p>
+          <p class="proof" lang="es">ARS 157.915.740 de abono mensual migrados, iguales al centavo al sistema de origen.</p>
+          <p class="proof" lang="en">ARS 157,915,740 in monthly fees migrated, equal to the legacy system to the cent.</p>
+          <div class="links"><a href="https://github.com/pablodpavon/data-migration-toolkit"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
+        </div>
+        <figure><img src="assets/proj_migration.jpg" alt="" loading="lazy" width="1600" height="587"></figure>
+      </article>
+
+      <article class="project">
+        <div>
+          <h3 lang="es">Reporte mensual con IA y números verificados</h3>
+          <h3 lang="en">Monthly report with AI and verified numbers</h3>
+          <p lang="es">Un LLM redacta el comentario de los KPIs y un control revisa cada número: que exista en los datos, que sea de la métrica y el período que dice la oración y que "subió" o "cayó" coincida con el dato.</p>
+          <p lang="en">An LLM drafts the KPI commentary and a checker reviews every number: it must exist in the data, belong to the metric and period the sentence names, and agree with "rose" or "fell".</p>
+          <p class="proof" lang="es">Si un solo número no se puede respaldar, el reporte no se publica.</p>
+          <p class="proof" lang="en">If a single number cannot be backed by the data, the report is not released.</p>
+          <div class="links"><a href="https://github.com/pablodpavon/ai-kpi-commentary"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
+        </div>
+        <figure><img src="assets/proj_kpi.jpg" alt="" loading="lazy" width="1400" height="1340"></figure>
+      </article>
+    </div>
+  </section>
+
+  <section class="row" id="casos">
+    <h2><span lang="es">Casos de estudio</span><span lang="en">Case studies</span></h2>
+    <div>
+      <p class="note" lang="es">Casos completos sobre datos sintéticos, con empresas ficticias. Muestran cómo encaro un problema y qué entrego.</p>
+      <p class="note" lang="en">Complete cases on synthetic data, with fictional companies. They show how I approach a problem and what I deliver.</p>
+      <div class="cases">
+        <div class="case">
+          <img src="assets/case_retention.jpg" alt="" loading="lazy" width="1400" height="875">
+          <h3 lang="es">Retención, segmentación RFM y LTV</h3><h3 lang="en">Retention, RFM segmentation and LTV</h3>
+          <p lang="es">Tienda online: el 39 % de los clientes genera el 65 % de la facturación y el 13 % está en riesgo. Cuatro acciones de retención.</p>
+          <p lang="en">Online store: 39 % of customers bring 65 % of revenue and 13 % sits at risk. Four retention actions.</p>
+        </div>
+        <div class="case">
+          <img src="assets/case_pricing_cars.jpg" alt="" loading="lazy" width="1400" height="875">
+          <h3 lang="es">Pricing de autos usados en 6 mercados</h3><h3 lang="en">Used-car pricing across 6 markets</h3>
+          <p lang="es">Índice de precios, margen por ruta de compra y venta y estacionalidad. Basado en mi trabajo de pricing en Auto1.</p>
+          <p lang="en">Price index, margin per buy/sell route and seasonality. Based on my pricing work at Auto1.</p>
+        </div>
+        <div class="case">
+          <img src="assets/case_saas_pricing.jpg" alt="" loading="lazy" width="1400" height="875">
+          <h3 lang="es">Estrategia de precios y unit economics</h3><h3 lang="en">Pricing strategy and unit economics</h3>
+          <p lang="es">Elasticidad por plan a partir de un test de precios y un modelo en Excel a 24 meses: +€256k de contribución conservando el 97 % de los clientes.</p>
+          <p lang="en">Elasticity per plan from a price test and a 24-month Excel model: +€256k contribution while keeping 97 % of customers.</p>
+        </div>
+        <div class="case">
+          <img src="assets/case_revenue.jpg" alt="" loading="lazy" width="1400" height="875">
+          <h3 lang="es">Confiabilidad de la facturación</h3><h3 lang="en">Revenue reliability</h3>
+          <p lang="es">Fabricante B2B: los encabezados de pedido inflaban la facturación un 16 %. Una causa raíz y cuatro acciones para Finanzas, Ventas y Operaciones.</p>
+          <p lang="en">B2B manufacturer: order headers overstated revenue by 16 %. One root cause and four actions for Finance, Sales and Ops.</p>
+        </div>
+        <div class="case">
+          <img src="assets/case_cleaning.jpg" alt="" loading="lazy" width="1400" height="875">
+          <h3 lang="es">Limpieza de datos y reporte automático</h3><h3 lang="en">Data cleaning and automated report</h3>
+          <p lang="es">Tres exportaciones de CRM y ERP en un maestro confiable: €214k de facturación duplicada eliminada y un reporte de 4 horas que pasa a 5 minutos.</p>
+          <p lang="en">Three CRM and ERP exports into one reliable master: €214k of double-counted revenue removed and a 4-hour report cut to 5 minutes.</p>
+        </div>
+        <div class="case">
+          <img src="assets/case_sharepoint.jpg" alt="" loading="lazy" width="1400" height="1050">
+          <h3 lang="es">SharePoint y registro de préstamos en Excel</h3><h3 lang="en">SharePoint workspace and Excel loan register</h3>
+          <p lang="es">Diseño de sitios, bibliotecas y permisos para un prestamista privado, y un registro con controles de cierre contra el banco.</p>
+          <p lang="en">Sites, libraries and permissions for a private lender, plus a register with month-end checks against the bank.</p>
+        </div>
+      </div>
+      <ul class="older">
+        <li><a href="https://github.com/pablodpavon/employee-attrition-cost-and-scoring"><span lang="es">Rotación de personal: costo y modelo de riesgo</span><span lang="en">Employee attrition: cost and risk scoring</span></a> <span lang="es">(Python, scikit-learn)</span><span lang="en">(Python, scikit-learn)</span></li>
+        <li><a href="https://github.com/pablodpavon/berlin-rental-investment-analysis"><span lang="es">Alquiler turístico en Berlín: dónde comprar</span><span lang="en">Berlin short-term rental: where to buy</span></a> <span lang="es">(Python, SQL, mapas)</span><span lang="en">(Python, SQL, maps)</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" id="experiencia">
+    <h2><span lang="es">Experiencia</span><span lang="en">Experience</span></h2>
+    <ol class="timeline" reversed>
+      <li>
+        <span class="yrs"><span lang="es">2023 – hoy</span><span lang="en">2023 – now</span></span>
+        <div>
+          <h3>Senior Business Analyst, IT &amp; Processes</h3>
+          <div class="org" lang="es">Grupo asegurador multinacional</div><div class="org" lang="en">Multinational insurance group</div>
+          <p lang="es">Coordino el análisis de negocio del reemplazo del sistema central heredado y la migración de sus datos a tres plataformas nuevas. Coautor del modelo de borrado de datos personales de la compañía. Impulso la adopción de IA en el área.</p>
+          <p lang="en">I coordinate the business analysis for replacing the legacy core system and migrating its data to three new platforms. Co-author of the company's personal-data deletion model. I drive AI adoption in the department.</p>
+        </div>
+      </li>
+      <li>
+        <span class="yrs">2021 – 2023</span>
+        <div>
+          <h3>Senior Strategy + Data Analyst</h3>
+          <div class="org">Foundry</div>
+          <p lang="es">Diseñé un modelo predictivo de rotación de personal que la empresa adoptó como base de su sistema de retención.</p>
+          <p lang="en">Designed an employee attrition model that the company adopted as the basis of its retention scoring.</p>
+        </div>
+      </li>
+      <li>
+        <span class="yrs">2020 – 2021</span>
+        <div>
+          <h3>Pricing Intelligence Analyst</h3>
+          <div class="org">Auto1 Group</div>
+          <p lang="es">Pricing del marketplace de autos usados en nueve países europeos y tableros para los gerentes regionales.</p>
+          <p lang="en">Pricing across the used-car marketplace in nine European countries, and dashboards for regional managers.</p>
+        </div>
+      </li>
+      <li>
+        <span class="yrs">2011 – 2020</span>
+        <div>
+          <h3 lang="es">Analista de Inversiones</h3><h3 lang="en">Investment Analyst</h3>
+          <div class="org">Santander Argentina</div>
+          <p lang="es">Nueve años asesorando a clientes de alto patrimonio en la asignación de sus carteras.</p>
+          <p lang="en">Nine years advising high-net-worth clients on portfolio allocation.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="row how" id="como-trabajo">
+    <h2><span lang="es">Cómo trabajo</span><span lang="en">How I work</span></h2>
+    <div>
+      <p lang="es"><b>Primero el problema de negocio.</b> Antes de tocar datos, acuerdo qué decisión se va a tomar con el resultado y cómo vamos a medir si salió bien.</p>
+      <p lang="en"><b>Business problem first.</b> Before touching data, I agree on which decision the result will feed and how we will know it worked.</p>
+      <p lang="es"><b>La IA ejecuta, yo respondo.</b> Uso IA para escribir Python y SQL más rápido. La lógica de negocio y los números los valido yo, con totales de control, tests y una segunda revisión independiente.</p>
+      <p lang="en"><b>AI executes, I answer for it.</b> I use AI to write Python and SQL faster. I validate the business logic and the numbers myself, with control totals, tests and an independent second review.</p>
+      <p lang="es"><b>Todo queda documentado.</b> Especificaciones, decisiones y supuestos por escrito, para que el equipo pueda seguir sin depender de mí.</p>
+      <p lang="en"><b>Everything is written down.</b> Specs, decisions and assumptions in writing, so the team can carry on without depending on me.</p>
+    </div>
+  </section>
+
+  <section class="row contact" id="contacto">
+    <h2><span lang="es">Contacto</span><span lang="en">Contact</span></h2>
+    <div>
+      <p lang="es">Trabajo de forma remota, en español, inglés y alemán. Escribime con el problema que tenés y te respondo con una propuesta concreta.</p>
+      <p lang="en">I work remotely, in Spanish, English and German. Email me the problem you have and I will reply with a concrete proposal.</p>
+      <p><a class="mail" href="mailto:pablodpavon@gmail.com">pablodpavon@gmail.com</a></p>
+      <p class="links"><a href="https://www.linkedin.com/in/pablo-damian-pavon">LinkedIn</a><a href="https://www.upwork.com/freelancers/pablopavon">Upwork</a><a href="https://github.com/pablodpavon">GitHub</a></p>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <span lang="es">Los casos de estudio usan datos sintéticos y empresas ficticias.</span>
+    <span lang="en">Case studies use synthetic data and fictional companies.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function setLang(l){
+    root.lang=l;
+    document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed', b.dataset.lang===l ? 'true':'false');});
+    try{localStorage.setItem('lang',l);}catch(e){}
+    paint(true);
+  }
+  var saved=null; try{saved=localStorage.getItem('lang');}catch(e){}
+  var initial=saved || ((navigator.language||'es').toLowerCase().indexOf('es')===0 ? 'es' : 'en');
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang);});});
+
+  // Ledger: count the entries up once, then close the difference to zero.
+  var ledger=document.getElementById('ledger');
+  var cells=[].slice.call(ledger.querySelectorAll('td.amt[data-v]'));
+  function fmt(v,full){
+    var es=root.lang==='es';
+    if(full){
+      var s=v.toLocaleString(es?'es-AR':'en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+      return 'ARS '+s;
+    }
+    var m=(v/1e6).toLocaleString(es?'es-AR':'en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+    return 'ARS '+m+' M';
+  }
+  function paint(final,t){
+    cells.forEach(function(c){
+      var v=parseFloat(c.dataset.v), full=true;
+      c.textContent=fmt(final?v:v*t, full);
+    });
+    document.getElementById('diff').textContent=fmt(0,true);
+  }
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.lang=initial;
+  document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed', b.dataset.lang===initial ? 'true':'false');});
+  if(reduce){paint(true);ledger.classList.add('closed');return;}
+  var start=null, dur=1100;
+  function step(ts){
+    if(!start) start=ts;
+    var t=Math.min(1,(ts-start)/dur), e=1-Math.pow(1-t,3);
+    paint(false,e);
+    if(t<1) requestAnimationFrame(step); else {paint(true); ledger.classList.add('closed');}
+  }
+  paint(false,0);
+  requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>
