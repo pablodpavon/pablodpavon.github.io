@@ -26,6 +26,7 @@
   function render() {
     const tk = PP.tok(), cc = chColor(tk);
     const list = cohortsIn();
+    PP.ret._last = list;
     const k = document.getElementById('k-ret'); k.innerHTML = '';
     const n = list.reduce((s, c) => s + c.customers, 0);
     const r1 = retentionAt(list, 1), r3 = retentionAt(list, 3), r6 = retentionAt(list, 6);
@@ -96,6 +97,7 @@
 
   PP.ret = {
     async init() { D = await PP.loadJSON('assets/data/retention.json'); st = defaults(); buildFilters(); render(); },
-    rerender() { if (!D) return; buildFilters(); render(); }
+    rerender() { if (!D) return; buildFilters(); render(); },
+    csv() { const L = PP.ret._last || []; const maxK = Math.max(0, ...L.map(c => c.active.length - 1)); PP.downloadCSV('cohortes_filtradas.csv', ['cohort', 'channel', 'customers', ...Array.from({ length: maxK }, (_, i) => 'active_m' + (i + 1))], L.map(c => [c.cohort, c.channel, c.customers, ...c.active.slice(1)])); }
   };
 })();

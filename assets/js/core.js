@@ -228,9 +228,9 @@
       d.append(k);
     }
     if (spark && spark.length > 1) {
-      const max = Math.max(...spark), min = Math.min(...spark), w = 84, h = 26;
-      const pts = spark.map((y, i) => `${(i / (spark.length - 1)) * w},${h - ((y - min) / ((max - min) || 1)) * h}`).join(' ');
-      d.insertAdjacentHTML('beforeend', `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${PP.tok().s[0]}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+      const max = Math.max(...spark), min = Math.min(...spark), w = 200, h = 28, c = PP.tok().s[0];
+      const pts = spark.map((y, i) => `${((i / (spark.length - 1)) * w).toFixed(1)},${(2 + (h - 4) - ((y - min) / ((max - min) || 1)) * (h - 4)).toFixed(1)}`).join(' ');
+      d.insertAdjacentHTML('beforeend', `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,${h} ${pts} ${w},${h}" fill="${c}" fill-opacity=".1"/><polyline points="${pts}" fill="none" stroke="${c}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`);
     }
     return d;
   };
@@ -246,5 +246,11 @@
     t.append(tb); return t;
   };
 
+  PP.downloadCSV = (name, header, rows) => {
+    const esc = v => { const t = String(v ?? ''); return /[",;\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+    const csv = '\ufeff' + [header, ...rows].map(r => r.map(esc).join(',')).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
   PP.loadJSON = (url) => fetch(url).then(r => { if (!r.ok) throw new Error(url + ' ' + r.status); return r.json(); });
 })();

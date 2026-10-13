@@ -1,0 +1,345 @@
+"""Build the three case-study pages in proyectos/ from one template.
+
+Numbers come from the outputs of each repository (ap-invoice-control,
+data-migration-toolkit, ai-kpi-commentary) and are typed here once.
+Run:  python tools/build_cases.py
+"""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "proyectos"
+
+ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>'
+ICON_GH = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>'
+ICON_BACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg>'
+ICON_NEXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'
+ICON_CHART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>'
+ICON_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>'
+
+
+def bi(es, en, tag="span", cls=""):
+    c = f' class="{cls}"' if cls else ""
+    return f'<{tag}{c} lang="es">{es}</{tag}><{tag}{c} lang="en">{en}</{tag}>'
+
+
+def head(title_es, title_en, desc, image):
+    return f"""<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title_es} · Pablo Pavon</title>
+<meta name="title-es" content="{title_es} · Pablo Pavon">
+<meta name="title-en" content="{title_en} · Pablo Pavon">
+<meta name="description" content="{desc}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{title_en} · Pablo Pavon">
+<meta property="og:description" content="{desc}">
+<meta property="og:image" content="https://pablodpavon.github.io/assets/{image}">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e7a58'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='12.5' fill='white'%3EPP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){{try{{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var l=localStorage.getItem('lang');document.documentElement.lang=l||((navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en');}}catch(e){{}}}})();</script>
+</head>
+<body data-base="../">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="../index.html#servicios">{bi('Servicios', 'Services')}</a>
+      <a href="../index.html#lab">Dashboards</a>
+      <a href="../index.html#proyectos">{bi('Proyectos', 'Work')}</a>
+      <a href="../index.html#experiencia">{bi('Experiencia', 'Experience')}</a>
+      <a href="../index.html#contacto">{bi('Contacto', 'Contact')}</a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <a class="btn btn-primary btn-sm" data-cv href="../assets/CV_Pablo_Pavon_ES.pdf" download>{ICON_DL}{bi('Descargar CV', 'Download CV')}</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+"""
+
+
+FOOT = f"""
+<footer class="site"><div class="container">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  {bi('Casos de estudio con datos sintéticos y empresas ficticias.', 'Case studies on synthetic data and fictional companies.')}
+</div></footer>
+<script src="../assets/js/shell.js"></script>
+</body>
+</html>
+"""
+
+
+def page(c):
+    toc = "\n".join(f'<a href="#{sid}">{bi(es, en)}</a>' for sid, es, en, _ in c["sections"])
+    secs = "\n".join(f'<section id="{sid}">\n<h2 lang="es">{es}</h2><h2 lang="en">{en}</h2>\n{body}\n</section>'
+                     for sid, es, en, body in c["sections"])
+    facts = "".join(f'<div><small>{bi(a, b)}</small><b>{bi(x, y)}</b></div>' for a, b, x, y in c["facts"])
+    tags = "".join(f"<span>{t}</span>" for t in c["tags"])
+    extra = c.get("extra_action", "")
+    nx = c["next"]
+    return head(c["title_es"], c["title_en"], c["desc"], c["image"]) + f"""
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="../index.html#proyectos">{ICON_BACK}{bi('Todos los proyectos', 'All projects')}</a><br>
+    <span class="pill"><span class="dot"></span>{bi('Caso de estudio · datos sintéticos', 'Case study · synthetic data')}</span>
+    <h1 lang="es">{c['h1_es']}</h1><h1 lang="en">{c['h1_en']}</h1>
+    <p class="lede" lang="es">{c['lede_es']}</p><p class="lede" lang="en">{c['lede_en']}</p>
+    <div class="cs-tags">{tags}</div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="{c['repo']}">{ICON_GH}{bi('Ver el código en GitHub', 'View the code on GitHub')}</a>
+      {extra}
+    </div>
+    <div class="cs-facts">{facts}</div>
+    <figure class="cs-shot"><img src="../assets/{c['image']}" alt="{c['alt']}" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido">{toc}</nav>
+    <article class="prose">
+{secs}
+    </article>
+  </div>
+  <a class="next-case" href="{nx[0]}">
+    <div><small>{bi('Siguiente caso', 'Next case')}</small><b>{bi(nx[1], nx[2])}</b></div>
+    <span class="arrow">{ICON_NEXT}</span>
+  </a>
+</div>
+</main>
+""" + FOOT
+
+
+def checks(rows):
+    return '<div class="checks">' + "".join(
+        f'<div>{ICON_CHECK}<span>{bi(es, en)}</span><em>PASS</em></div>' for es, en in rows) + "</div>"
+
+
+def steps(rows):
+    return '<div class="steps">' + "".join(
+        f'<div><b>{bi(a, b)}</b><span>{bi(x, y)}</span></div>' for a, b, x, y in rows) + "</div>"
+
+
+def metrics(rows):
+    out = '<div class="metric-row">'
+    for cls, val_es, val_en, lab_es, lab_en, sub_es, sub_en in rows:
+        sub = f"<small>{bi(sub_es, sub_en)}</small>" if sub_es else ""
+        out += f'<div class="metric {cls}"><b>{bi(val_es, val_en)}</b><span>{bi(lab_es, lab_en)}</span>{sub}</div>'
+    return out + "</div>"
+
+
+def p(es, en):
+    return f'<p lang="es">{es}</p><p lang="en">{en}</p>'
+
+
+# ---------------------------------------------------------------- AP
+RULES = [  # code, ES, EN, severity, invoices  (rule_summary.csv)
+    ("R01", "CUIT con dígito verificador inválido", "Invalid CUIT check digit", "block", 10),
+    ("R02", "Proveedor fuera del maestro", "Supplier not in master", "block", 18),
+    ("R03", "Duplicado exacto", "Exact duplicate", "block", 14),
+    ("R04", "Posible duplicado (7 días)", "Possible duplicate (7 days)", "review", 6),
+    ("R05", "IVA mal calculado o alícuota inválida", "Wrong IVA rate or amount", "block", 12),
+    ("R06", "Total ≠ neto + IVA + otros", "Total ≠ net + IVA + other", "block", 8),
+    ("R07", "Sin orden de compra sobre ARS 250.000", "No PO above ARS 250,000", "review", 10),
+    ("R08", "Precio > 2 % sobre la OC", "Price > 2 % above PO", "review", 18),
+    ("R09", "Cantidad facturada > recibida", "Qty invoiced > received", "block", 12),
+    ("R10", "Tipo de factura vs condición fiscal", "Invoice type vs tax status", "review", 8),
+    ("R11", "CAE faltante o vencido", "CAE missing or expired", "block", 9),
+    ("R12", "Fechas inconsistentes", "Inconsistent dates", "review", 6),
+]
+mx = max(r[4] for r in RULES)
+bars = '<div class="legend-inline"><span><i style="background:var(--crit)"></i>' + bi("Bloquea el pago", "Blocks payment") + \
+       '</span><span><i style="background:var(--warn)"></i>' + bi("Pide revisión", "Needs review") + '</span></div><div class="bars">' + "".join(
+    f'<div class="r"><span class="code">{c}</span><span class="lbl">{bi(es, en)}</span>'
+    f'<span class="track"><span class="fill{" rv" if s == "review" else ""}" style="width:{n / mx * 100:.0f}%"></span></span><span class="n">{n}</span></div>'
+    for c, es, en, s, n in RULES) + "</div>"
+
+AP = dict(
+    slug="cuentas-a-pagar", image="proj_ap.jpg", repo="https://github.com/pablodpavon/ap-invoice-control",
+    title_es="Control de cuentas a pagar", title_en="Accounts payable control",
+    desc="Case study on synthetic data: 12 rules over 1,260 supplier invoices, CUIT validation and 3-way match before the payment run.",
+    alt="Resumen del control de facturas: estados y reglas",
+    h1_es="Que ninguna factura mal cargada llegue a la corrida de pagos.",
+    h1_en="No wrong invoice reaches the payment run.",
+    lede_es="Un control automático para el área de cuentas a pagar de una empresa argentina ficticia: valida CUIT, cruza factura, orden de compra y recepción, y entrega una lista de excepciones con el motivo de cada una.",
+    lede_en="An automated control for the payables team of a fictional Argentine company: it validates CUITs, matches invoice, purchase order and goods receipt, and hands over an exception list with the reason for each one.",
+    tags=["Python", "pandas", "pytest", "Excel", "CUIT / IVA / CAE", "3-way match"],
+    extra_action=f'<a class="btn" href="../index.html#lab-ap">{ICON_CHART}{bi("Abrir el dashboard", "Open the dashboard")}</a>',
+    facts=[("Sector", "Industry", "Servicios compartidos", "Shared services"),
+           ("Mi rol", "My role", "Reglas, análisis y QA", "Rules, analysis and QA"),
+           ("Volumen", "Volume", "1.260 facturas", "1,260 invoices"),
+           ("Validación", "Validation", "121 / 121 anomalías", "121 / 121 issues")],
+    next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
+    sections=[
+        ("contexto", "Contexto", "Context", p(
+            "Un equipo de servicios compartidos recibe cientos de facturas de proveedores por mes. La mayoría está bien. Las que cuestan plata son pocas: una factura cargada dos veces, más unidades que las recibidas, un precio que se fue por encima de la orden de compra, un CUIT mal tipeado, un IVA que no cierra.",
+            "A shared-services team receives hundreds of supplier invoices a month. Most are fine. The costly ones are few: an invoice keyed twice, more units than were received, a price that drifted above the purchase order, a mistyped CUIT, IVA that does not add up.")
+         + p("Encontrarlas a ojo es lento y depende de quién revise. Y casi siempre aparecen cuando el pago ya salió.",
+             "Finding them by eye is slow and depends on who is reviewing. And they usually surface after the money has left.")),
+        ("enfoque", "Enfoque", "Approach",
+         p("Escribí doce reglas en lenguaje de negocio, cada una con un código, una acción (<strong>bloquear</strong> o <strong>revisar</strong>) y un umbral que finanzas puede cambiar sin tocar la lógica. Después cada factura cae en uno de tres estados: lista para pagar, para revisar o bloqueada.",
+           "I wrote twelve rules in business language, each with a code, an action (<strong>block</strong> or <strong>review</strong>) and a threshold finance can change without touching the logic. Every invoice then lands in one of three states: ready to pay, needs review or blocked.")
+         + bars
+         + p("Las reglas se superponen a propósito: un CUIT mal tipeado (R01) tampoco aparece en el maestro de proveedores (R02). Por eso la suma por regla es mayor que la cantidad de facturas marcadas.",
+             "Rules overlap on purpose: a mistyped CUIT (R01) is also missing from the supplier master (R02). That is why the per-rule total is higher than the number of flagged invoices.")
+         + '<pre class="code"><span class="c"># src/apcontrol/rules.py: thresholds finance can edit</span>\nIVA_RATES = {<span class="s">0.21</span>, <span class="s">0.105</span>, <span class="s">0.27</span>, <span class="s">0.0</span>}\nPRICE_TOLERANCE = <span class="s">0.02</span>      <span class="c"># 2 % above the purchase order</span>\nAMOUNT_TOLERANCE = <span class="s">0.01</span>     <span class="c"># ARS rounding</span>\nNO_PO_THRESHOLD = <span class="s">250_000</span>   <span class="c"># ARS: above this, a PO is required</span>\nPOSSIBLE_DUP_DAYS = <span class="s">7</span></pre>'),
+        ("validacion", "Cómo sé que está bien", "How I know it is right",
+         p("Un control de pagos que se equivoca es peor que no tenerlo. Por eso el proceso se valida a sí mismo en cada corrida:",
+           "A payment control that is wrong is worse than none. So the process checks itself on every run:")
+         + checks([("Cada factura y cada peso cae en un solo estado (si no, el proceso se detiene)", "Every invoice and every peso lands in exactly one state (otherwise the run stops)"),
+                   ("Las 121 anomalías cargadas a propósito son detectadas por su regla", "All 121 planted issues are caught by their rule"),
+                   ("Ninguna factura limpia queda marcada", "No clean invoice is flagged"),
+                   ("Los cruces con proveedores, OC y recepciones no duplican facturas", "Joins with suppliers, POs and receipts never duplicate an invoice")])),
+        ("resultado", "Resultado", "Result",
+         p("Sobre 1.260 facturas por ARS 500,2 M (marzo a agosto de 2026, datos sintéticos):",
+           "On 1,260 invoices worth ARS 500.2 M (March to August 2026, synthetic data):")
+         + metrics([("good", "1.139", "1,139", "listas para pagar", "ready to pay", "ARS 431,3 M", "ARS 431.3 M"),
+                    ("warn", "48", "48", "para revisar", "need review", "ARS 29,4 M", "ARS 29.4 M"),
+                    ("crit", "73", "73", "bloqueadas", "blocked", "ARS 39,4 M", "ARS 39.4 M")])
+         + p("ARS 39,4 M que no salen antes de corregirse, con el motivo escrito al lado de cada factura. El equipo no revisa 1.260 facturas: revisa 121, y sabe por qué.",
+             "ARS 39.4 M that does not go out until it is fixed, with the reason written next to each invoice. The team does not review 1,260 invoices: it reviews 121, and knows why.")),
+        ("entregables", "Entregables", "Deliverables",
+         f'<ul lang="es"><li><code>exceptions.csv</code>: una fila por factura con las reglas que activó.</li><li><code>ap_review.xlsx</code>: estados, reglas, excepciones y totales de control, listo para el equipo.</li><li>Catálogo de reglas documentado y 7 tests automáticos.</li><li>Un <a href="../index.html#lab-ap">dashboard interactivo</a> con filtros por estado y regla.</li></ul>'
+         f'<ul lang="en"><li><code>exceptions.csv</code>: one row per invoice with the rules it hit.</li><li><code>ap_review.xlsx</code>: states, rules, exceptions and control totals, ready for the team.</li><li>Documented rule catalogue and 7 automated tests.</li><li>An <a href="../index.html#lab-ap">interactive dashboard</a> with filters by status and rule.</li></ul>'),
+    ],
+)
+
+# ---------------------------------------------------------------- Migration
+MIG = dict(
+    slug="migracion-de-datos", image="proj_migration.jpg", repo="https://github.com/pablodpavon/data-migration-toolkit",
+    title_es="Migración de datos con conciliación", title_en="Data migration with reconciliation",
+    desc="Case study on synthetic data: spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks.",
+    alt="Resumen de la migración y de los controles de conciliación",
+    h1_es="Migrar un sistema sin perder un solo cliente ni un solo peso.",
+    h1_en="Move a system without losing a single customer or a single peso.",
+    lede_es="Una migración desde un sistema de facturación heredado a una plataforma nueva, guiada por una especificación de mapeo que negocio y sistemas revisan juntos, y cerrada con doce controles de conciliación.",
+    lede_en="A migration from a legacy billing system to a new platform, driven by a mapping spec that business and IT review together, and closed with twelve reconciliation checks.",
+    tags=["Python", "pandas", "pytest", "Mapping spec", "Data quality", "Reconciliation"],
+    facts=[("Sector", "Industry", "Telecomunicaciones", "Telecom"),
+           ("Mi rol", "My role", "Mapeo, reglas y conciliación", "Mapping, rules, reconciliation"),
+           ("Volumen", "Volume", "4.060 clientes · 6.500 contratos", "4,060 customers · 6,500 contracts"),
+           ("Validación", "Validation", "12 / 12 controles", "12 / 12 checks")],
+    next=("cuentas-a-pagar.html", "Control de cuentas a pagar", "Accounts payable control"),
+    sections=[
+        ("contexto", "Contexto", "Context",
+         p("Un proveedor regional de internet y TV (ficticio) da de baja su sistema de facturación. La exportación trae lo de siempre: clientes cargados dos veces, contratos de clientes que no existen, fechas como 31.02.2019, códigos de estado que nadie documentó, importes guardados como texto en centavos.",
+           "A regional internet and TV provider (fictional) is retiring its billing system. The export has the usual problems: customers entered twice, contracts pointing to customers that do not exist, dates like 31.02.2019, undocumented status codes, amounts stored as text in cents.")
+         + '<div class="callout">' + bi("Lo difícil de una migración casi nunca es copiar los datos. Es poder explicarle al negocio, registro por registro, qué pasó con su información, con números que pueda verificar.",
+                                         "The hard part of a migration is rarely copying the data. It is being able to tell the business, record by record, what happened to their information, with numbers they can check.") + "</div>"),
+        ("enfoque", "Enfoque", "Approach",
+         steps([("La especificación de mapeo es la fuente de verdad", "The mapping spec is the source of truth",
+                  "Para cada campo destino: campo origen, transformación, si es obligatorio y por qué. Si la especificación nombra una transformación que no existe, el código no corre.",
+                  "For every target field: source field, transformation, whether it is mandatory and why. If the spec names a transformation that does not exist, the code refuses to run."),
+                 ("Transformar, validar, decidir", "Transform, validate, decide",
+                  "Un error en un campo obligatorio rechaza el registro con su motivo. Uno en un campo opcional deja el valor vacío y queda registrado: no se pierde un cliente por un mail mal escrito.",
+                  "An error on a mandatory field rejects the record with a reason. One on an optional field blanks the value and logs it: no customer is lost over a typo in an e-mail."),
+                 ("Unificar duplicados con tabla de equivalencias", "Merge duplicates with a crosswalk",
+                  "Clientes con el mismo documento se unifican. La tabla guarda cada número viejo con su ID nuevo, así los contratos del duplicado encuentran a su cliente.",
+                  "Customers with the same national ID are merged. The crosswalk keeps every legacy number with its new ID, so contracts of the duplicate still find their customer."),
+                 ("Conciliar", "Reconcile",
+                  "Doce controles corren después de cada migración. Si uno falla, la migración falla.",
+                  "Twelve checks run after every migration. If one fails, the migration fails.")])
+         + '<pre class="code"><span class="c"># mapping/mapping_spec.csv (excerpt)</span>\n<span class="k">entity,target_field,source_field,transform,required</span>\ncustomer,customer_id,CUST_NO,surrogate_after_dedup,yes\ncustomer,national_id,DOC_NR,digits_only,yes\ncustomer,last_name,NAME_1,strip_title,yes\ncustomer,email,EMAIL,lower_validate_email,no</pre>'),
+        ("validacion", "Conciliación", "Reconciliation",
+         p("Estos son los doce controles tal como salen de la última corrida:", "These are the twelve checks as they come out of the last run:")
+         + checks([("Clientes: origen = migrados + unificados + rechazados (4.060)", "Customers: source = migrated + merged + rejected (4,060)"),
+                   ("Contratos: origen = migrados + rechazados (6.500)", "Contracts: source = migrated + rejected (6,500)"),
+                   ("Cada clave de origen tiene un único destino", "Each legacy key has exactly one outcome"),
+                   ("ID de cliente único en destino", "Unique customer ID in target"),
+                   ("Documento único en destino (duplicados unificados)", "Unique national ID in target (duplicates merged)"),
+                   ("ID de contrato único en destino", "Unique contract ID in target"),
+                   ("Todo contrato apunta a un cliente migrado", "Every contract points to a migrated customer"),
+                   ("Abonos: centavos de origen = importe destino × 100", "Fees: legacy cents = target amount × 100"),
+                   ("Control inverso campo a campo: estado", "Field-level reverse check: status"),
+                   ("Control inverso campo a campo: producto", "Field-level reverse check: product"),
+                   ("Control inverso campo a campo: fecha de alta", "Field-level reverse check: start date"),
+                   ("Control inverso campo a campo: abono", "Field-level reverse check: fee")])),
+        ("resultado", "Resultado", "Result",
+         metrics([("good", "3.976", "3,976", "clientes migrados", "customers migrated", "59 duplicados unificados · 25 rechazados", "59 duplicates merged · 25 rejected"),
+                  ("good", "6.384", "6,384", "contratos migrados", "contracts migrated", "116 rechazados, cada uno con su motivo", "116 rejected, each with its reason"),
+                  ("", "ARS 157.915.740", "ARS 157,915,740", "de abono mensual", "in monthly fees", "idéntico al centavo al origen", "identical to the cent to the source")])
+         + p("Los 116 contratos rechazados se explican solos: 51 porque su cliente fue rechazado, 30 huérfanos, 20 con fechas imposibles y 15 con códigos de estado desconocidos. Vuelven al negocio en <code>rejects.csv</code> para corregirse en origen.",
+             "The 116 rejected contracts explain themselves: 51 because their customer was rejected, 30 orphans, 20 with impossible dates and 15 with unknown status codes. They go back to the business in <code>rejects.csv</code> to be fixed at source.")),
+        ("entregables", "Entregables", "Deliverables",
+         '<ul lang="es"><li>Especificación de mapeo revisable por negocio y sistemas.</li><li>Tabla de equivalencias entre IDs viejos y nuevos.</li><li>Reporte de conciliación y lista de rechazados con motivo.</li><li>8 tests que verifican cada problema cargado en los datos de origen.</li></ul>'
+         '<ul lang="en"><li>Mapping spec that business and IT can review.</li><li>Crosswalk between legacy and new IDs.</li><li>Reconciliation report and rejects list with reasons.</li><li>8 tests that check every problem planted in the legacy data.</li></ul>'),
+    ],
+)
+
+# ---------------------------------------------------------------- AI KPI
+TERM = ('<div class="term"><div class="tb"><i></i><i></i><i></i><span>kpicheck</span></div><pre>'
+        '<span class="dim">$</span> python run.py --draft examples/draft_ok.md\n'
+        '18 numbers checked, 0 problems -&gt; <span class="ok">RELEASED</span>\n\n'
+        '<span class="dim">$</span> python run.py --draft examples/draft_with_errors.md\n'
+        '13 numbers checked, 5 problems -&gt; <span class="bad">BLOCKED</span>\n'
+        '  <span class="y">NOT_FOUND</span>             4,8  | La facturación bajó 4,8% contra agosto ...\n'
+        '  <span class="y">WRONG_DIRECTION</span>      10,6  | Los clientes nuevos crecieron 10,6% contra agosto ...\n'
+        '  <span class="y">WRONG_METRIC</span>          7,9  | La tasa de devolución fue 7,9% ...\n'
+        '  <span class="y">WRONG_PERIOD</span>         30,7  | El CAC subió 30,7% contra agosto.\n'
+        '  <span class="y">NOT_FOUND</span>              30  | ... una inflación cercana al 30% anual.</pre></div>')
+
+KPI = dict(
+    slug="reporte-con-ia", image="proj_kpi.jpg", repo="https://github.com/pablodpavon/ai-kpi-commentary",
+    title_es="Reporte de KPIs con IA verificado", title_en="AI KPI report, verified",
+    desc="Case study on synthetic data: an LLM drafts the monthly KPI commentary and a checker verifies every number before release.",
+    alt="Reporte bloqueado: cinco números del comentario no se respaldan con los datos",
+    h1_es="La IA redacta el reporte. Ningún número sale sin verificar.",
+    h1_en="AI drafts the report. No number goes out unchecked.",
+    lede_es="Un reporte mensual de KPIs en el que un modelo de lenguaje escribe el comentario y un control revisa cada cifra contra los datos. Si un solo número no se puede respaldar, el reporte queda bloqueado.",
+    lede_en="A monthly KPI report where a language model writes the commentary and a checker tests every figure against the data. If a single number cannot be backed, the report is blocked.",
+    tags=["Python", "LLM", "pandas", "pytest", "KPI reporting", "Release gate"],
+    facts=[("Sector", "Industry", "E-commerce", "E-commerce"),
+           ("Mi rol", "My role", "Diseño del control y QA", "Control design and QA"),
+           ("Volumen", "Volume", "~47.000 órdenes", "~47,000 orders"),
+           ("Validación", "Validation", "5 / 5 errores detectados", "5 / 5 errors caught")],
+    next=("migracion-de-datos.html", "Migración de datos con conciliación", "Data migration with reconciliation"),
+    sections=[
+        ("contexto", "Contexto", "Context",
+         p("Los modelos de lenguaje escriben buenos primeros borradores de un comentario mensual. También cometen exactamente los errores que hacen que finanzas deje de confiar en un reporte: una cifra parecida pero no exacta, el interanual citado como mensual, “creció” cuando el dato cayó, el número de otra métrica, o un dato externo sin fuente.",
+           "Language models write good first drafts of a monthly commentary. They also make exactly the mistakes that make finance stop trusting a report: a figure that is close but not right, year-on-year quoted as month-on-month, “grew” where the data fell, a number borrowed from another metric, or an outside figure nobody sourced.")
+         + p("Revisar oración por oración a mano anula el beneficio de automatizar.", "Checking sentence by sentence by hand defeats the point of automating.")),
+        ("enfoque", "Enfoque", "Approach",
+         steps([("Primero los datos", "Facts first",
+                  "Se calculan los KPIs del mes desde las órdenes: facturación, órdenes, ticket promedio, margen, devoluciones, clientes nuevos y CAC, contra el mes anterior y el mismo mes del año pasado.",
+                  "The month's KPIs are computed from raw orders: revenue, orders, average ticket, margin, returns, new customers and CAC, against the previous month and the same month last year."),
+                 ("El modelo redacta", "The model drafts",
+                  "Recibe solo esos datos y una instrucción breve. No tiene de dónde sacar otra cosa.",
+                  "It receives only those facts and a short instruction. It has nowhere else to take numbers from."),
+                 ("Cada número se verifica", "Every number is checked",
+                  "Que exista con el redondeo que muestra el texto, que sea de la métrica que nombra la oración, del período que dice, y que el verbo coincida con el signo.",
+                  "That it exists at the rounding the text shows, belongs to the metric the sentence names, to the period it states, and that the verb matches the sign."),
+                 ("Compuerta de publicación", "Release gate",
+                  "El reporte marca cada número en verde o en rojo. Si hay uno en rojo, el proceso termina con error y no se publica.",
+                  "The report marks every number green or red. If one is red, the job exits with an error and nothing is published.")])),
+        ("validacion", "Prueba", "Test",
+         p("Dos borradores incluidos en el repositorio: uno correcto y otro con cinco errores típicos plantados a propósito. Esta es la salida real:",
+           "Two drafts ship with the repository: one correct and one with five typical mistakes planted on purpose. This is the actual output:")
+         + TERM),
+        ("resultado", "Resultado", "Result",
+         metrics([("good", "18 / 18", "18 / 18", "números verificados en el borrador correcto", "numbers verified in the correct draft", "reporte publicado", "report released"),
+                  ("crit", "5 / 5", "5 / 5", "errores plantados detectados", "planted errors caught", "reporte bloqueado", "report blocked"),
+                  ("", "4", "4", "tipos de error distintos", "distinct error types", "dato, métrica, período, dirección", "value, metric, period, direction")])
+         + '<div class="callout">' + bi("<strong>Límite, dicho claro:</strong> el control asegura que cada número es correcto. Si la explicación es la acertada lo sigue decidiendo el analista, y por eso el reporte tiene un responsable humano.",
+                                         "<strong>Limit, stated plainly:</strong> the checker proves every number is right. Whether the explanation is the right one is still the analyst's call, which is why the report has a human owner.") + "</div>"),
+        ("entregables", "Entregables", "Deliverables",
+         '<ul lang="es"><li>Cálculo de KPIs reproducible desde los datos crudos.</li><li>Verificador de números en formato argentino (1.234,5).</li><li>Reporte HTML con cada cifra en verde o rojo.</li><li>Compuerta que bloquea la publicación, lista para un job programado.</li></ul>'
+         '<ul lang="en"><li>Reproducible KPI computation from raw data.</li><li>Number checker for Argentine formatting (1.234,5).</li><li>HTML report with every figure in green or red.</li><li>Release gate that blocks publishing, ready for a scheduled job.</li></ul>'),
+    ],
+)
+
+if __name__ == "__main__":
+    OUT.mkdir(exist_ok=True)
+    for c in (AP, MIG, KPI):
+        (OUT / f"{c['slug']}.html").write_text(page(c), encoding="utf-8")
+        print("wrote", c["slug"])

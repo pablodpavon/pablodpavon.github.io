@@ -40,6 +40,7 @@
     const inP = rowsDim.filter(r => r[0] >= a && r[0] <= b);
     const inLY = a - 12 >= 0 ? rowsDim.filter(r => r[0] >= a - 12 && r[0] <= b - 12) : null;
     const months = D.months.slice(a, b + 1);
+    PP.sales._last = inP;
 
     /* KPIs */
     const k = document.getElementById('k-sales'); k.innerHTML = '';
@@ -160,6 +161,10 @@
       const tb = document.querySelector('[data-table="sales"]');
       tb.textContent = PP.t('common.showTable');
       tb.onclick = () => { const tw = document.getElementById('t-sales'); tw.hidden = !tw.hidden; tb.setAttribute('aria-expanded', String(!tw.hidden)); tb.textContent = PP.t(tw.hidden ? 'common.showTable' : 'common.hideTable'); render(); };
+    },
+    csv() {
+      const rows = (PP.sales._last || []).map(r => [D.months[r[0]], r[1], r[2], r[3], Math.round(r[4]), Math.round(r[4] / D.cpi[r[0]]), r[5], r[6], r[7]]);
+      PP.downloadCSV('ventas_filtradas.csv', ['month', 'region', 'channel', 'category', 'revenue_nominal_ars', 'revenue_real_ars_sep2026', 'units', 'gross_margin_ars', 'orders'], rows);
     },
     rerender() { if (!D) return; buildFilters(); render(); const tb = document.querySelector('[data-table="sales"]'); tb.textContent = PP.t(document.getElementById('t-sales').hidden ? 'common.showTable' : 'common.hideTable'); }
   };

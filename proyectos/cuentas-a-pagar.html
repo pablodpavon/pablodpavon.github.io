@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control de cuentas a pagar · Pablo Pavon</title>
+<meta name="title-es" content="Control de cuentas a pagar · Pablo Pavon">
+<meta name="title-en" content="Accounts payable control · Pablo Pavon">
+<meta name="description" content="Case study on synthetic data: 12 rules over 1,260 supplier invoices, CUIT validation and 3-way match before the payment run.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Accounts payable control · Pablo Pavon">
+<meta property="og:description" content="Case study on synthetic data: 12 rules over 1,260 supplier invoices, CUIT validation and 3-way match before the payment run.">
+<meta property="og:image" content="https://pablodpavon.github.io/assets/proj_ap.jpg">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e7a58'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='12.5' fill='white'%3EPP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var l=localStorage.getItem('lang');document.documentElement.lang=l||((navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en');}catch(e){}})();</script>
+</head>
+<body data-base="../">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="../index.html#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
+      <a href="../index.html#lab">Dashboards</a>
+      <a href="../index.html#proyectos"><span lang="es">Proyectos</span><span lang="en">Work</span></a>
+      <a href="../index.html#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
+      <a href="../index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <a class="btn btn-primary btn-sm" data-cv href="../assets/CV_Pablo_Pavon_ES.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="../index.html#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span lang="es">Todos los proyectos</span><span lang="en">All projects</span></a><br>
+    <span class="pill"><span class="dot"></span><span lang="es">Caso de estudio · datos sintéticos</span><span lang="en">Case study · synthetic data</span></span>
+    <h1 lang="es">Que ninguna factura mal cargada llegue a la corrida de pagos.</h1><h1 lang="en">No wrong invoice reaches the payment run.</h1>
+    <p class="lede" lang="es">Un control automático para el área de cuentas a pagar de una empresa argentina ficticia: valida CUIT, cruza factura, orden de compra y recepción, y entrega una lista de excepciones con el motivo de cada una.</p><p class="lede" lang="en">An automated control for the payables team of a fictional Argentine company: it validates CUITs, matches invoice, purchase order and goods receipt, and hands over an exception list with the reason for each one.</p>
+    <div class="cs-tags"><span>Python</span><span>pandas</span><span>pytest</span><span>Excel</span><span>CUIT / IVA / CAE</span><span>3-way match</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/ap-invoice-control"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ver el código en GitHub</span><span lang="en">View the code on GitHub</span></a>
+      <a class="btn" href="../index.html#lab-ap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg><span lang="es">Abrir el dashboard</span><span lang="en">Open the dashboard</span></a>
+    </div>
+    <div class="cs-facts"><div><small><span lang="es">Sector</span><span lang="en">Industry</span></small><b><span lang="es">Servicios compartidos</span><span lang="en">Shared services</span></b></div><div><small><span lang="es">Mi rol</span><span lang="en">My role</span></small><b><span lang="es">Reglas, análisis y QA</span><span lang="en">Rules, analysis and QA</span></b></div><div><small><span lang="es">Volumen</span><span lang="en">Volume</span></small><b><span lang="es">1.260 facturas</span><span lang="en">1,260 invoices</span></b></div><div><small><span lang="es">Validación</span><span lang="en">Validation</span></small><b><span lang="es">121 / 121 anomalías</span><span lang="en">121 / 121 issues</span></b></div></div>
+    <figure class="cs-shot"><img src="../assets/proj_ap.jpg" alt="Resumen del control de facturas: estados y reglas" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span lang="es">Contexto</span><span lang="en">Context</span></a>
+<a href="#enfoque"><span lang="es">Enfoque</span><span lang="en">Approach</span></a>
+<a href="#validacion"><span lang="es">Cómo sé que está bien</span><span lang="en">How I know it is right</span></a>
+<a href="#resultado"><span lang="es">Resultado</span><span lang="en">Result</span></a>
+<a href="#entregables"><span lang="es">Entregables</span><span lang="en">Deliverables</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2 lang="es">Contexto</h2><h2 lang="en">Context</h2>
+<p lang="es">Un equipo de servicios compartidos recibe cientos de facturas de proveedores por mes. La mayoría está bien. Las que cuestan plata son pocas: una factura cargada dos veces, más unidades que las recibidas, un precio que se fue por encima de la orden de compra, un CUIT mal tipeado, un IVA que no cierra.</p><p lang="en">A shared-services team receives hundreds of supplier invoices a month. Most are fine. The costly ones are few: an invoice keyed twice, more units than were received, a price that drifted above the purchase order, a mistyped CUIT, IVA that does not add up.</p><p lang="es">Encontrarlas a ojo es lento y depende de quién revise. Y casi siempre aparecen cuando el pago ya salió.</p><p lang="en">Finding them by eye is slow and depends on who is reviewing. And they usually surface after the money has left.</p>
+</section>
+<section id="enfoque">
+<h2 lang="es">Enfoque</h2><h2 lang="en">Approach</h2>
+<p lang="es">Escribí doce reglas en lenguaje de negocio, cada una con un código, una acción (<strong>bloquear</strong> o <strong>revisar</strong>) y un umbral que finanzas puede cambiar sin tocar la lógica. Después cada factura cae en uno de tres estados: lista para pagar, para revisar o bloqueada.</p><p lang="en">I wrote twelve rules in business language, each with a code, an action (<strong>block</strong> or <strong>review</strong>) and a threshold finance can change without touching the logic. Every invoice then lands in one of three states: ready to pay, needs review or blocked.</p><div class="legend-inline"><span><i style="background:var(--crit)"></i><span lang="es">Bloquea el pago</span><span lang="en">Blocks payment</span></span><span><i style="background:var(--warn)"></i><span lang="es">Pide revisión</span><span lang="en">Needs review</span></span></div><div class="bars"><div class="r"><span class="code">R01</span><span class="lbl"><span lang="es">CUIT con dígito verificador inválido</span><span lang="en">Invalid CUIT check digit</span></span><span class="track"><span class="fill" style="width:56%"></span></span><span class="n">10</span></div><div class="r"><span class="code">R02</span><span class="lbl"><span lang="es">Proveedor fuera del maestro</span><span lang="en">Supplier not in master</span></span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">18</span></div><div class="r"><span class="code">R03</span><span class="lbl"><span lang="es">Duplicado exacto</span><span lang="en">Exact duplicate</span></span><span class="track"><span class="fill" style="width:78%"></span></span><span class="n">14</span></div><div class="r"><span class="code">R04</span><span class="lbl"><span lang="es">Posible duplicado (7 días)</span><span lang="en">Possible duplicate (7 days)</span></span><span class="track"><span class="fill rv" style="width:33%"></span></span><span class="n">6</span></div><div class="r"><span class="code">R05</span><span class="lbl"><span lang="es">IVA mal calculado o alícuota inválida</span><span lang="en">Wrong IVA rate or amount</span></span><span class="track"><span class="fill" style="width:67%"></span></span><span class="n">12</span></div><div class="r"><span class="code">R06</span><span class="lbl"><span lang="es">Total ≠ neto + IVA + otros</span><span lang="en">Total ≠ net + IVA + other</span></span><span class="track"><span class="fill" style="width:44%"></span></span><span class="n">8</span></div><div class="r"><span class="code">R07</span><span class="lbl"><span lang="es">Sin orden de compra sobre ARS 250.000</span><span lang="en">No PO above ARS 250,000</span></span><span class="track"><span class="fill rv" style="width:56%"></span></span><span class="n">10</span></div><div class="r"><span class="code">R08</span><span class="lbl"><span lang="es">Precio > 2 % sobre la OC</span><span lang="en">Price > 2 % above PO</span></span><span class="track"><span class="fill rv" style="width:100%"></span></span><span class="n">18</span></div><div class="r"><span class="code">R09</span><span class="lbl"><span lang="es">Cantidad facturada > recibida</span><span lang="en">Qty invoiced > received</span></span><span class="track"><span class="fill" style="width:67%"></span></span><span class="n">12</span></div><div class="r"><span class="code">R10</span><span class="lbl"><span lang="es">Tipo de factura vs condición fiscal</span><span lang="en">Invoice type vs tax status</span></span><span class="track"><span class="fill rv" style="width:44%"></span></span><span class="n">8</span></div><div class="r"><span class="code">R11</span><span class="lbl"><span lang="es">CAE faltante o vencido</span><span lang="en">CAE missing or expired</span></span><span class="track"><span class="fill" style="width:50%"></span></span><span class="n">9</span></div><div class="r"><span class="code">R12</span><span class="lbl"><span lang="es">Fechas inconsistentes</span><span lang="en">Inconsistent dates</span></span><span class="track"><span class="fill rv" style="width:33%"></span></span><span class="n">6</span></div></div><p lang="es">Las reglas se superponen a propósito: un CUIT mal tipeado (R01) tampoco aparece en el maestro de proveedores (R02). Por eso la suma por regla es mayor que la cantidad de facturas marcadas.</p><p lang="en">Rules overlap on purpose: a mistyped CUIT (R01) is also missing from the supplier master (R02). That is why the per-rule total is higher than the number of flagged invoices.</p><pre class="code"><span class="c"># src/apcontrol/rules.py: thresholds finance can edit</span>
+IVA_RATES = {<span class="s">0.21</span>, <span class="s">0.105</span>, <span class="s">0.27</span>, <span class="s">0.0</span>}
+PRICE_TOLERANCE = <span class="s">0.02</span>      <span class="c"># 2 % above the purchase order</span>
+AMOUNT_TOLERANCE = <span class="s">0.01</span>     <span class="c"># ARS rounding</span>
+NO_PO_THRESHOLD = <span class="s">250_000</span>   <span class="c"># ARS: above this, a PO is required</span>
+POSSIBLE_DUP_DAYS = <span class="s">7</span></pre>
+</section>
+<section id="validacion">
+<h2 lang="es">Cómo sé que está bien</h2><h2 lang="en">How I know it is right</h2>
+<p lang="es">Un control de pagos que se equivoca es peor que no tenerlo. Por eso el proceso se valida a sí mismo en cada corrida:</p><p lang="en">A payment control that is wrong is worse than none. So the process checks itself on every run:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Cada factura y cada peso cae en un solo estado (si no, el proceso se detiene)</span><span lang="en">Every invoice and every peso lands in exactly one state (otherwise the run stops)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Las 121 anomalías cargadas a propósito son detectadas por su regla</span><span lang="en">All 121 planted issues are caught by their rule</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Ninguna factura limpia queda marcada</span><span lang="en">No clean invoice is flagged</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Los cruces con proveedores, OC y recepciones no duplican facturas</span><span lang="en">Joins with suppliers, POs and receipts never duplicate an invoice</span></span><em>PASS</em></div></div>
+</section>
+<section id="resultado">
+<h2 lang="es">Resultado</h2><h2 lang="en">Result</h2>
+<p lang="es">Sobre 1.260 facturas por ARS 500,2 M (marzo a agosto de 2026, datos sintéticos):</p><p lang="en">On 1,260 invoices worth ARS 500.2 M (March to August 2026, synthetic data):</p><div class="metric-row"><div class="metric good"><b><span lang="es">1.139</span><span lang="en">1,139</span></b><span><span lang="es">listas para pagar</span><span lang="en">ready to pay</span></span><small><span lang="es">ARS 431,3 M</span><span lang="en">ARS 431.3 M</span></small></div><div class="metric warn"><b><span lang="es">48</span><span lang="en">48</span></b><span><span lang="es">para revisar</span><span lang="en">need review</span></span><small><span lang="es">ARS 29,4 M</span><span lang="en">ARS 29.4 M</span></small></div><div class="metric crit"><b><span lang="es">73</span><span lang="en">73</span></b><span><span lang="es">bloqueadas</span><span lang="en">blocked</span></span><small><span lang="es">ARS 39,4 M</span><span lang="en">ARS 39.4 M</span></small></div></div><p lang="es">ARS 39,4 M que no salen antes de corregirse, con el motivo escrito al lado de cada factura. El equipo no revisa 1.260 facturas: revisa 121, y sabe por qué.</p><p lang="en">ARS 39.4 M that does not go out until it is fixed, with the reason written next to each invoice. The team does not review 1,260 invoices: it reviews 121, and knows why.</p>
+</section>
+<section id="entregables">
+<h2 lang="es">Entregables</h2><h2 lang="en">Deliverables</h2>
+<ul lang="es"><li><code>exceptions.csv</code>: una fila por factura con las reglas que activó.</li><li><code>ap_review.xlsx</code>: estados, reglas, excepciones y totales de control, listo para el equipo.</li><li>Catálogo de reglas documentado y 7 tests automáticos.</li><li>Un <a href="../index.html#lab-ap">dashboard interactivo</a> con filtros por estado y regla.</li></ul><ul lang="en"><li><code>exceptions.csv</code>: one row per invoice with the rules it hit.</li><li><code>ap_review.xlsx</code>: states, rules, exceptions and control totals, ready for the team.</li><li>Documented rule catalogue and 7 automated tests.</li><li>An <a href="../index.html#lab-ap">interactive dashboard</a> with filters by status and rule.</li></ul>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="reporte-con-ia.html">
+    <div><small><span lang="es">Siguiente caso</span><span lang="en">Next case</span></small><b><span lang="es">Reporte de KPIs con IA verificado</span><span lang="en">AI KPI report, verified</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site"><div class="container">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span lang="es">Casos de estudio con datos sintéticos y empresas ficticias.</span><span lang="en">Case studies on synthetic data and fictional companies.</span>
+</div></footer>
+<script src="../assets/js/shell.js"></script>
+</body>
+</html>

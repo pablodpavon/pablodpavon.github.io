@@ -48,6 +48,7 @@
   function render() {
     const tk = PP.tok();
     const rows = filtered(false);
+    PP.ap._last = rows;
     const amt = rows.reduce((s, r) => s + r[7], 0);
     const by = (s) => rows.filter(r => r[5] === s);
     const blocked = by('blocked').reduce((s, r) => s + r[7], 0), review = by('review').reduce((s, r) => s + r[7], 0);
@@ -142,6 +143,7 @@
   PP.ap = {
     async init() { D = await PP.loadJSON('assets/data/ap.json'); st = defaults(); buildFilters(); render(); },
     rerender() { if (!D) return; buildFilters(); render(); },
+    csv() { PP.downloadCSV('facturas_filtradas.csv', ['invoice_id', 'supplier', 'cuit', 'date', 'status', 'rules', 'amount_ars'], (PP.ap._last || []).map(r => [r[0], r[1], r[2], r[4], r[5], r[6], r[7].toFixed(2)])); },
     focusRule(code) { if (!D) return; st.rules = new Set([code]); ui.rules.set(st.rules); render(); }
   };
 })();
