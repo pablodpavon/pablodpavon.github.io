@@ -88,8 +88,8 @@
         data: counts.map(([r, n]) => ({ value: n, itemStyle: { color: (allRules() || st.rules.has(r.rule)) ? (r.severity === 'block' ? tk.crit : tk.warn) : tk.grid, borderRadius: [0, 4, 4, 0] } })),
         label: { show: true, position: 'right', color: tk.ink2, fontSize: 11.5 } }]
     }), true);
-    rc.off('click'); rc.on('click', p => {
-      const code = counts[p.dataIndex][0].rule;
+    PP.rowClick(rc, i => {
+      if (!counts[i]) return; const code = counts[i][0].rule;
       st.rules = (st.rules.size === 1 && st.rules.has(code)) ? new Set(D.rules.map(r => r.rule)) : new Set([code]);
       ui.rules.set(st.rules); page = 0; render();
     });

@@ -95,9 +95,10 @@
         data: regs.map(r => ({ value: Math.round(rm.get(r) || 0), itemStyle: { color: st.region.has(r) ? tk.s[0] : tk.grid, borderRadius: [0, 4, 4, 0] } })),
         label: { show: true, position: 'right', color: tk.ink2, fontSize: 11.5, formatter: p => PP.ars(p.value).replace('ARS ', '') } }]
     }), true);
-    reg.off('click'); reg.on('click', p => {
-      const only = st.region.size === 1 && st.region.has(p.name);
-      st.region = only ? new Set(D.dims.region) : new Set([p.name]); ui.region.set(st.region); render();
+    PP.rowClick(reg, i => {
+      const name = regs[i]; if (!name) return;
+      const only = st.region.size === 1 && st.region.has(name);
+      st.region = only ? new Set(D.dims.region) : new Set([name]); ui.region.set(st.region); render();
     });
 
     /* Category real YoY growth (diverging) */

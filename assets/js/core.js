@@ -120,6 +120,21 @@
     if (!c || c.isDisposed()) { c = echarts.init(document.getElementById(id), null, { renderer: 'svg' }); charts.set(id, c); }
     return c;
   };
+  /* whole-row hit target for horizontal bar charts: click anywhere on the row, not only on the painted bar */
+  PP.rowClick = (chart, cb) => {
+    chart.__rowCb = cb;
+    if (chart.__rowBound) return;
+    chart.__rowBound = true;
+    const zr = chart.getZr();
+    const idx = (e) => {
+      const v = chart.convertFromPixel({ gridIndex: 0 }, [e.offsetX, e.offsetY]);
+      const n = ((chart.getOption().yAxis || [{}])[0].data || []).length;
+      const i = v ? Math.round(v[1]) : NaN;
+      return Number.isFinite(i) && i >= 0 && i < n && chart.containPixel({ gridIndex: 0 }, [chart.getWidth() / 2, e.offsetY]) ? i : null;
+    };
+    zr.on('click', e => { const i = idx(e); if (i != null) chart.__rowCb(i); });
+    zr.on('mousemove', e => { zr.setCursorStyle(idx(e) != null ? 'pointer' : 'default'); });
+  };
   PP.resizeAll = () => charts.forEach(c => !c.isDisposed() && c.resize());
   PP.disposeAll = () => { charts.forEach(c => c.dispose()); charts.clear(); };
   window.addEventListener('resize', () => { clearTimeout(PP._rt); PP._rt = setTimeout(PP.resizeAll, 120); });
