@@ -33,7 +33,7 @@
     <div class="nav-tools">
       <div class="seg" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
-      <a class="btn btn-primary btn-sm" data-cv href="../assets/CV_Pablo_Pavon_ES.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span lang="es">Hablemos</span><span lang="en">Let’s talk</span></button>
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -53,7 +53,7 @@
       <a class="btn btn-brand" href="https://github.com/pablodpavon/ap-invoice-control"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ver el código en GitHub</span><span lang="en">View the code on GitHub</span></a>
       <a class="btn" href="../index.html#lab-ap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg><span lang="es">Abrir el dashboard</span><span lang="en">Open the dashboard</span></a>
     </div>
-    <div class="cs-facts"><div><small><span lang="es">Sector</span><span lang="en">Industry</span></small><b><span lang="es">Servicios compartidos</span><span lang="en">Shared services</span></b></div><div><small><span lang="es">Mi rol</span><span lang="en">My role</span></small><b><span lang="es">Reglas, análisis y QA</span><span lang="en">Rules, analysis and QA</span></b></div><div><small><span lang="es">Volumen</span><span lang="en">Volume</span></small><b><span lang="es">1.260 facturas</span><span lang="en">1,260 invoices</span></b></div><div><small><span lang="es">Validación</span><span lang="en">Validation</span></small><b><span lang="es">121 / 121 anomalías</span><span lang="en">121 / 121 issues</span></b></div></div>
+    <div class="cs-facts"><div><small><span lang="es">Sector</span><span lang="en">Industry</span></small><b><span lang="es">Servicios compartidos</span><span lang="en">Shared services</span></b></div><div><small><span lang="es">Mi rol</span><span lang="en">My role</span></small><b><span lang="es">Reglas, análisis y QA</span><span lang="en">Rules, analysis and QA</span></b></div><div><small><span lang="es">Volumen</span><span lang="en">Volume</span></small><b><span lang="es">1.260 facturas</span><span lang="en">1,260 invoices</span></b></div><div><small><span lang="es">Validación</span><span lang="en">Validation</span></small><b><span lang="es">Totales de control + 7 tests</span><span lang="en">Control totals + 7 tests</span></b></div></div>
     <figure class="cs-shot"><img src="../assets/proj_ap.jpg" alt="Resumen del control de facturas: estados y reglas" width="1600" height="1000"></figure>
   </div>
 </section>
@@ -85,7 +85,7 @@ POSSIBLE_DUP_DAYS = <span class="s">7</span></pre>
 </section>
 <section id="resultado">
 <h2 lang="es">Resultado</h2><h2 lang="en">Result</h2>
-<p lang="es">Sobre 1.260 facturas por ARS 500,2 M (marzo a agosto de 2026, datos sintéticos):</p><p lang="en">On 1,260 invoices worth ARS 500.2 M (March to August 2026, synthetic data):</p><div class="metric-row"><div class="metric good"><b><span lang="es">1.139</span><span lang="en">1,139</span></b><span><span lang="es">listas para pagar</span><span lang="en">ready to pay</span></span><small><span lang="es">ARS 431,3 M</span><span lang="en">ARS 431.3 M</span></small></div><div class="metric warn"><b><span lang="es">48</span><span lang="en">48</span></b><span><span lang="es">para revisar</span><span lang="en">need review</span></span><small><span lang="es">ARS 29,4 M</span><span lang="en">ARS 29.4 M</span></small></div><div class="metric crit"><b><span lang="es">73</span><span lang="en">73</span></b><span><span lang="es">bloqueadas</span><span lang="en">blocked</span></span><small><span lang="es">ARS 39,4 M</span><span lang="en">ARS 39.4 M</span></small></div></div><p lang="es">ARS 39,4 M que no salen antes de corregirse, con el motivo escrito al lado de cada factura. El equipo no revisa 1.260 facturas: revisa 121, y sabe por qué.</p><p lang="en">ARS 39.4 M that does not go out until it is fixed, with the reason written next to each invoice. The team does not review 1,260 invoices: it reviews 121, and knows why.</p>
+<p lang="es">Salida del caso de prueba: 1.260 facturas sintéticas por ARS 500,2 M (marzo a agosto de 2026).</p><p lang="en">Output of the test case: 1,260 synthetic invoices worth ARS 500.2 M (March to August 2026).</p><div class="metric-row"><div class="metric good"><b><span lang="es">1.139</span><span lang="en">1,139</span></b><span><span lang="es">listas para pagar</span><span lang="en">ready to pay</span></span><small><span lang="es">ARS 431,3 M</span><span lang="en">ARS 431.3 M</span></small></div><div class="metric warn"><b><span lang="es">48</span><span lang="en">48</span></b><span><span lang="es">para revisar</span><span lang="en">need review</span></span><small><span lang="es">ARS 29,4 M</span><span lang="en">ARS 29.4 M</span></small></div><div class="metric crit"><b><span lang="es">73</span><span lang="en">73</span></b><span><span lang="es">bloqueadas</span><span lang="en">blocked</span></span><small><span lang="es">ARS 39,4 M</span><span lang="en">ARS 39.4 M</span></small></div></div><p lang="es">El equipo deja de revisar todas las facturas: revisa solo las marcadas, y cada una llega con el motivo escrito.</p><p lang="en">The team stops reviewing every invoice: it reviews only the flagged ones, and each arrives with its reason written down.</p>
 </section>
 <section id="entregables">
 <h2 lang="es">Entregables</h2><h2 lang="en">Deliverables</h2>
@@ -100,10 +100,11 @@ POSSIBLE_DUP_DAYS = <span class="s">7</span></pre>
 </div>
 </main>
 
-<footer class="site"><div class="container">
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
   <span>© <span data-year>2026</span> Pablo Pavon</span>
   <span lang="es">Casos de estudio con datos sintéticos y empresas ficticias.</span><span lang="en">Case studies on synthetic data and fictional companies.</span>
-</div></footer>
+</div></div></footer>
 <script src="../assets/js/shell.js"></script>
+<script src="../assets/js/contact.js"></script>
 </body>
 </html>

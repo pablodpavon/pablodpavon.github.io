@@ -58,7 +58,7 @@ def head(title_es, title_en, desc, image):
     <div class="nav-tools">
       <div class="seg" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
-      <a class="btn btn-primary btn-sm" data-cv href="../assets/CV_Pablo_Pavon_ES.pdf" download>{ICON_DL}{bi('Descargar CV', 'Download CV')}</a>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact>{bi('Hablemos', 'Let’s talk')}</button>
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -67,11 +67,12 @@ def head(title_es, title_en, desc, image):
 
 
 FOOT = f"""
-<footer class="site"><div class="container">
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
   <span>© <span data-year>2026</span> Pablo Pavon</span>
   {bi('Casos de estudio con datos sintéticos y empresas ficticias.', 'Case studies on synthetic data and fictional companies.')}
-</div></footer>
+</div></div></footer>
 <script src="../assets/js/shell.js"></script>
+<script src="../assets/js/contact.js"></script>
 </body>
 </html>
 """
@@ -179,7 +180,7 @@ AP = dict(
     facts=[("Sector", "Industry", "Servicios compartidos", "Shared services"),
            ("Mi rol", "My role", "Reglas, análisis y QA", "Rules, analysis and QA"),
            ("Volumen", "Volume", "1.260 facturas", "1,260 invoices"),
-           ("Validación", "Validation", "121 / 121 anomalías", "121 / 121 issues")],
+           ("Validación", "Validation", "Totales de control + 7 tests", "Control totals + 7 tests")],
     next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
     sections=[
         ("contexto", "Contexto", "Context", p(
@@ -202,13 +203,13 @@ AP = dict(
                    ("Ninguna factura limpia queda marcada", "No clean invoice is flagged"),
                    ("Los cruces con proveedores, OC y recepciones no duplican facturas", "Joins with suppliers, POs and receipts never duplicate an invoice")])),
         ("resultado", "Resultado", "Result",
-         p("Sobre 1.260 facturas por ARS 500,2 M (marzo a agosto de 2026, datos sintéticos):",
-           "On 1,260 invoices worth ARS 500.2 M (March to August 2026, synthetic data):")
+         p("Salida del caso de prueba: 1.260 facturas sintéticas por ARS 500,2 M (marzo a agosto de 2026).",
+           "Output of the test case: 1,260 synthetic invoices worth ARS 500.2 M (March to August 2026).")
          + metrics([("good", "1.139", "1,139", "listas para pagar", "ready to pay", "ARS 431,3 M", "ARS 431.3 M"),
                     ("warn", "48", "48", "para revisar", "need review", "ARS 29,4 M", "ARS 29.4 M"),
                     ("crit", "73", "73", "bloqueadas", "blocked", "ARS 39,4 M", "ARS 39.4 M")])
-         + p("ARS 39,4 M que no salen antes de corregirse, con el motivo escrito al lado de cada factura. El equipo no revisa 1.260 facturas: revisa 121, y sabe por qué.",
-             "ARS 39.4 M that does not go out until it is fixed, with the reason written next to each invoice. The team does not review 1,260 invoices: it reviews 121, and knows why.")),
+         + p("El equipo deja de revisar todas las facturas: revisa solo las marcadas, y cada una llega con el motivo escrito.",
+             "The team stops reviewing every invoice: it reviews only the flagged ones, and each arrives with its reason written down.")),
         ("entregables", "Entregables", "Deliverables",
          f'<ul lang="es"><li><code>exceptions.csv</code>: una fila por factura con las reglas que activó.</li><li><code>ap_review.xlsx</code>: estados, reglas, excepciones y totales de control, listo para el equipo.</li><li>Catálogo de reglas documentado y 7 tests automáticos.</li><li>Un <a href="../index.html#lab-ap">dashboard interactivo</a> con filtros por estado y regla.</li></ul>'
          f'<ul lang="en"><li><code>exceptions.csv</code>: one row per invoice with the rules it hit.</li><li><code>ap_review.xlsx</code>: states, rules, exceptions and control totals, ready for the team.</li><li>Documented rule catalogue and 7 automated tests.</li><li>An <a href="../index.html#lab-ap">interactive dashboard</a> with filters by status and rule.</li></ul>'),
@@ -229,7 +230,7 @@ MIG = dict(
     facts=[("Sector", "Industry", "Telecomunicaciones", "Telecom"),
            ("Mi rol", "My role", "Mapeo, reglas y conciliación", "Mapping, rules, reconciliation"),
            ("Volumen", "Volume", "4.060 clientes · 6.500 contratos", "4,060 customers · 6,500 contracts"),
-           ("Validación", "Validation", "12 / 12 controles", "12 / 12 checks")],
+           ("Validación", "Validation", "12 controles + 8 tests", "12 checks + 8 tests")],
     next=("cuentas-a-pagar.html", "Control de cuentas a pagar", "Accounts payable control"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -266,7 +267,8 @@ MIG = dict(
                    ("Control inverso campo a campo: fecha de alta", "Field-level reverse check: start date"),
                    ("Control inverso campo a campo: abono", "Field-level reverse check: fee")])),
         ("resultado", "Resultado", "Result",
-         metrics([("good", "3.976", "3,976", "clientes migrados", "customers migrated", "59 duplicados unificados · 25 rechazados", "59 duplicates merged · 25 rejected"),
+         p("Salida del caso de prueba sobre datos sintéticos:", "Output of the test case on synthetic data:")
+         + metrics([("good", "3.976", "3,976", "clientes migrados", "customers migrated", "59 duplicados unificados · 25 rechazados", "59 duplicates merged · 25 rejected"),
                   ("good", "6.384", "6,384", "contratos migrados", "contracts migrated", "116 rechazados, cada uno con su motivo", "116 rejected, each with its reason"),
                   ("", "ARS 157.915.740", "ARS 157,915,740", "de abono mensual", "in monthly fees", "idéntico al centavo al origen", "identical to the cent to the source")])
          + p("Los 116 contratos rechazados se explican solos: 51 porque su cliente fue rechazado, 30 huérfanos, 20 con fechas imposibles y 15 con códigos de estado desconocidos. Vuelven al negocio en <code>rejects.csv</code> para corregirse en origen.",
@@ -302,7 +304,7 @@ KPI = dict(
     facts=[("Sector", "Industry", "E-commerce", "E-commerce"),
            ("Mi rol", "My role", "Diseño del control y QA", "Control design and QA"),
            ("Volumen", "Volume", "~47.000 órdenes", "~47,000 orders"),
-           ("Validación", "Validation", "5 / 5 errores detectados", "5 / 5 errors caught")],
+           ("Validación", "Validation", "Compuerta + 4 tests", "Release gate + 4 tests")],
     next=("migracion-de-datos.html", "Migración de datos con conciliación", "Data migration with reconciliation"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -327,8 +329,9 @@ KPI = dict(
            "Two drafts ship with the repository: one correct and one with five typical mistakes planted on purpose. This is the actual output:")
          + TERM),
         ("resultado", "Resultado", "Result",
-         metrics([("good", "18 / 18", "18 / 18", "números verificados en el borrador correcto", "numbers verified in the correct draft", "reporte publicado", "report released"),
-                  ("crit", "5 / 5", "5 / 5", "errores plantados detectados", "planted errors caught", "reporte bloqueado", "report blocked"),
+         p("Salida del caso de prueba (datos sintéticos, errores cargados a propósito):", "Output of the test case (synthetic data, errors planted on purpose):")
+         + metrics([("good", "18", "18", "números en el borrador correcto", "numbers in the correct draft", "todos verificados: se publica", "all verified: released"),
+                  ("crit", "5", "5", "errores típicos plantados", "typical errors planted", "todos marcados: se bloquea", "all flagged: blocked"),
                   ("", "4", "4", "tipos de error distintos", "distinct error types", "dato, métrica, período, dirección", "value, metric, period, direction")])
          + '<div class="callout">' + bi("<strong>Límite, dicho claro:</strong> el control asegura que cada número es correcto. Si la explicación es la acertada lo sigue decidiendo el analista, y por eso el reporte tiene un responsable humano.",
                                          "<strong>Limit, stated plainly:</strong> the checker proves every number is right. Whether the explanation is the right one is still the analyst's call, which is why the report has a human owner.") + "</div>"),
