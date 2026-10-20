@@ -684,3 +684,4 @@ footer.site .container{display:block}
 }
 .seg .seg-ic{width:15px;height:15px;margin:0 3px 0 6px;color:var(--ink-2);flex:none}
 @media (max-width:420px){.seg .seg-ic{display:none}}
+.shot.v4{background:linear-gradient(135deg,rgba(233,196,106,.38),rgba(42,157,143,.22))}

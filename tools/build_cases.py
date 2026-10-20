@@ -231,7 +231,7 @@ MIG = dict(
            ("Mi rol", "My role", "Mapeo, reglas y conciliación", "Mapping, rules, reconciliation"),
            ("Volumen", "Volume", "4.060 clientes · 6.500 contratos", "4,060 customers · 6,500 contracts"),
            ("Validación", "Validation", "12 controles + 8 tests", "12 checks + 8 tests")],
-    next=("cuentas-a-pagar.html", "Control de cuentas a pagar", "Accounts payable control"),
+    next=("conciliacion-y-caja.html", "Conciliación y caja diaria automáticas", "Automated daily reconciliation and cash"),
     sections=[
         ("contexto", "Contexto", "Context",
          p("Un proveedor regional de internet y TV (ficticio) da de baja su sistema de facturación. La exportación trae lo de siempre: clientes cargados dos veces, contratos de clientes que no existen, fechas como 31.02.2019, códigos de estado que nadie documentó, importes guardados como texto en centavos.",
@@ -341,8 +341,60 @@ KPI = dict(
     ],
 )
 
+# ---------------------------------------------------------------- Daily cash
+CASH = dict(
+    slug="conciliacion-y-caja", image="proj_cash.jpg", repo="https://github.com/pablodpavon/daily-cash-control",
+    title_es="Conciliación y caja diaria automáticas", title_en="Automated daily reconciliation and cash",
+    desc="Case study on synthetic data: bank reconciliation, collections and a 20-day cash forecast that run by themselves every morning.",
+    alt="Saldo de caja diario con proyección y pendientes marcados cada mañana",
+    h1_es="La caja del día, conciliada y proyectada antes de que llegue el equipo.",
+    h1_en="Today's cash, reconciled and projected before the team arrives.",
+    lede_es="Un proceso que corre solo cada mañana para una distribuidora argentina ficticia: concilia los extractos de dos bancos contra el sistema, marca las cobranzas sin imputar con la factura sugerida, avisa qué clientes están atrasados y proyecta la caja de las próximas cuatro semanas.",
+    lede_en="A process that runs by itself every morning for a fictional Argentine distributor: it reconciles two bank statements against the ERP, flags unbooked receipts with the suggested invoice, lists late customers and projects cash for the next four weeks.",
+    tags=["Python", "pandas", "pytest", "Excel", "Ley 25.413", "Cash flow", "GitHub Actions"],
+    facts=[("Sector", "Industry", "Distribución mayorista", "Wholesale distribution"),
+           ("Mi rol", "My role", "Reglas, análisis y QA", "Rules, analysis and QA"),
+           ("Frecuencia", "Frequency", "Todos los días hábiles", "Every business day"),
+           ("Validación", "Validation", "Saldo del banco + 10 tests", "Bank balance + 10 tests")],
+    next=("cuentas-a-pagar.html", "Control de cuentas a pagar", "Accounts payable control"),
+    sections=[
+        ("contexto", "Contexto", "Context", p(
+            "En muchas pymes, la conciliación bancaria, la lista de clientes atrasados y el cash flow viven en planillas que alguien rehace a mano. Mientras esa persona esté y no se equivoque, funciona.",
+            "In many small and mid-sized companies, the bank reconciliation, the list of late customers and the cash flow live in spreadsheets someone rebuilds by hand. It works as long as that person is in and makes no mistake.")
+         + p("Si falta un día o una celda está mal, se demora la facturación, una cobranza queda sin imputar y el cliente aparece como deudor, o se decide un pago con números viejos.",
+             "If they are out for a day or a cell is wrong, invoicing slips, a receipt goes unbooked and the customer shows as overdue, or a payment is decided on old numbers.")),
+        ("enfoque", "Enfoque", "Approach",
+         p("Un solo comando, programado para correr cada mañana, toma los movimientos nuevos del banco y el libro de tesorería del sistema, y aplica cinco reglas en orden. Cada movimiento termina en un solo estado, con el motivo escrito.",
+           "One command, scheduled every morning, takes the new bank lines and the ERP treasury book and applies five rules in order. Every line ends in exactly one state, with the reason written down.")
+         + steps([("Gastos bancarios", "Bank charges", "El impuesto a los débitos y créditos y las comisiones se reconocen y se registran solos.", "The tax on bank debits and credits and account fees are recognised and booked automatically."),
+                  ("Misma referencia", "Same reference", "Cruza por número de factura, orden de pago o lote. Las tarjetas se concilian netas de comisión, y la comisión queda propuesta como asiento.", "Matches on invoice, payment order or batch number. Card settlements match net of the fee, and the fee is proposed as an entry."),
+                  ("Monto y fecha", "Amount and date", "Si no hay referencia: misma cuenta y monto, hasta tres días hábiles de diferencia, uno a uno.", "Without a reference: same account and amount, up to three business days apart, one to one."),
+                  ("Lo que sobra en el banco", "Left in the bank", "Una transferencia recibida sin imputar se asigna al cliente por el CUIT y a la factura por el monto.", "An unbooked incoming transfer is assigned to the customer by CUIT and to the invoice by amount."),
+                  ("Lo que sobra en el sistema", "Left in the ERP", "Un pago registrado que no salió del banco queda en tránsito tres días; después, alerta.", "A payment recorded but not yet debited is in transit for three days; then it is an alert.")])
+         + '<pre class="code"><span class="c"># reports/2026-09-29/resumen_diario.md (extracto)</span>\n## Conciliación\n- 907 movimientos del banco, 97,6 % conciliados o registrados automáticamente.\n- Pendientes abiertos: <span class="s">26</span> (4 nuevos hoy).\n\n- Cobranza sin imputar · FARMACIA DEL SUR · ARS 3.764.182\n  Sugerido: Farmacia del Sur, factura FC-A-0003-00010429</pre>'),
+        ("validacion", "Cómo sé que está bien", "How I know it is right",
+         p("Un resumen de caja que se equivoca es peor que no tenerlo. Cada cambio pasa diez controles automáticos:",
+           "A cash summary that is wrong is worse than none. Every change passes ten automated checks:")
+         + checks([("El saldo calculado desde el extracto coincide con el saldo que informa el banco, todos los días", "The balance computed from the statement equals the balance the bank reports, every day"),
+                   ("Cada movimiento y cada asiento termina en un solo estado, y los cruces son uno a uno", "Every line and every entry ends in exactly one state, and matches are one to one"),
+                   ("Las 22 anomalías cargadas a propósito se detectan con el motivo correcto, sin falsas alarmas", "All 22 planted issues are caught with the right reason, with no false alarms"),
+                   ("El aging suma lo mismo que las facturas abiertas y la proyección arranca del saldo de hoy", "Aging adds up to open invoices and the forecast starts from today's balance")])),
+        ("resultado", "Resultado", "Result",
+         p("Salida del caso de prueba: 66 corridas diarias, de julio a septiembre de 2026, sobre 927 movimientos de dos bancos.",
+           "Output of the test case: 66 daily runs, July to September 2026, over 927 lines from two banks.")
+         + metrics([("good", "98,1 %", "98.1%", "conciliado o registrado solo", "reconciled or booked automatically", "último día del período", "last day of the period"),
+                    ("warn", "22", "22", "anomalías detectadas", "issues caught", "cobranzas sin imputar, duplicados, montos distintos", "unbooked receipts, duplicates, mismatches"),
+                    ("crit", "3", "3", "alertas de caja", "cash alerts", "proyección por debajo del mínimo", "forecast below the minimum")])
+         + p("El equipo deja de armar la conciliación y el cash flow: cada mañana recibe qué está bien, qué hay que corregir y cuánta caja va a haber.",
+             "The team stops building the reconciliation and the cash flow: every morning it gets what is fine, what to fix and how much cash there will be.")),
+        ("entregables", "Entregables", "Deliverables",
+         '<ul lang="es"><li><code>resumen_diario.md</code>: el resumen de la mañana, listo para mandar por mail o Teams.</li><li><code>exceptions.csv</code>: un pendiente por fila, con el motivo y la factura sugerida.</li><li><code>daily_control.xlsx</code>: pendientes, cuentas por cobrar, proyección de caja y extracto conciliado.</li><li><code>history.csv</code>: la evolución diaria, para un tablero.</li></ul>'
+         '<ul lang="en"><li><code>resumen_diario.md</code>: the morning summary, ready to send by email or Teams.</li><li><code>exceptions.csv</code>: one open item per row, with the reason and the suggested invoice.</li><li><code>daily_control.xlsx</code>: open items, receivables, cash forecast and the reconciled statement.</li><li><code>history.csv</code>: the daily trend, for a dashboard.</li></ul>'),
+    ],
+)
+
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
-    for c in (AP, MIG, KPI):
+    for c in (AP, MIG, KPI, CASH):
         (OUT / f"{c['slug']}.html").write_text(page(c), encoding="utf-8")
         print("wrote", c["slug"])

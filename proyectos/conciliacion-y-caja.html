@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conciliación y caja diaria automáticas · Pablo Pavon</title>
+<meta name="title-es" content="Conciliación y caja diaria automáticas · Pablo Pavon">
+<meta name="title-en" content="Automated daily reconciliation and cash · Pablo Pavon">
+<meta name="description" content="Case study on synthetic data: bank reconciliation, collections and a 20-day cash forecast that run by themselves every morning.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automated daily reconciliation and cash · Pablo Pavon">
+<meta property="og:description" content="Case study on synthetic data: bank reconciliation, collections and a 20-day cash forecast that run by themselves every morning.">
+<meta property="og:image" content="https://pablodpavon.github.io/assets/proj_cash.jpg">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e7a58'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='12.5' fill='white'%3EPP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var l=localStorage.getItem('lang');document.documentElement.lang=l||((((navigator.languages&&navigator.languages[0])||navigator.language||'en').toLowerCase().indexOf('es')===0?'es':'en'));}catch(e){}})();</script>
+</head>
+<body data-base="../">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="../index.html#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
+      <a href="../index.html#lab">Dashboards</a>
+      <a href="../index.html#proyectos"><span lang="es">Proyectos</span><span lang="en">Work</span></a>
+      <a href="../index.html#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
+      <a href="../index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma / Language"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span lang="es">Hablemos</span><span lang="en">Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="../index.html#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span lang="es">Todos los proyectos</span><span lang="en">All projects</span></a><br>
+    <span class="pill"><span class="dot"></span><span lang="es">Caso de estudio · datos sintéticos</span><span lang="en">Case study · synthetic data</span></span>
+    <h1 lang="es">La caja del día, conciliada y proyectada antes de que llegue el equipo.</h1><h1 lang="en">Today's cash, reconciled and projected before the team arrives.</h1>
+    <p class="lede" lang="es">Un proceso que corre solo cada mañana para una distribuidora argentina ficticia: concilia los extractos de dos bancos contra el sistema, marca las cobranzas sin imputar con la factura sugerida, avisa qué clientes están atrasados y proyecta la caja de las próximas cuatro semanas.</p><p class="lede" lang="en">A process that runs by itself every morning for a fictional Argentine distributor: it reconciles two bank statements against the ERP, flags unbooked receipts with the suggested invoice, lists late customers and projects cash for the next four weeks.</p>
+    <div class="cs-tags"><span>Python</span><span>pandas</span><span>pytest</span><span>Excel</span><span>Ley 25.413</span><span>Cash flow</span><span>GitHub Actions</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/daily-cash-control"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ver el código en GitHub</span><span lang="en">View the code on GitHub</span></a>
+      
+    </div>
+    <div class="cs-facts"><div><small><span lang="es">Sector</span><span lang="en">Industry</span></small><b><span lang="es">Distribución mayorista</span><span lang="en">Wholesale distribution</span></b></div><div><small><span lang="es">Mi rol</span><span lang="en">My role</span></small><b><span lang="es">Reglas, análisis y QA</span><span lang="en">Rules, analysis and QA</span></b></div><div><small><span lang="es">Frecuencia</span><span lang="en">Frequency</span></small><b><span lang="es">Todos los días hábiles</span><span lang="en">Every business day</span></b></div><div><small><span lang="es">Validación</span><span lang="en">Validation</span></small><b><span lang="es">Saldo del banco + 10 tests</span><span lang="en">Bank balance + 10 tests</span></b></div></div>
+    <figure class="cs-shot"><img src="../assets/proj_cash.jpg" alt="Saldo de caja diario con proyección y pendientes marcados cada mañana" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span lang="es">Contexto</span><span lang="en">Context</span></a>
+<a href="#enfoque"><span lang="es">Enfoque</span><span lang="en">Approach</span></a>
+<a href="#validacion"><span lang="es">Cómo sé que está bien</span><span lang="en">How I know it is right</span></a>
+<a href="#resultado"><span lang="es">Resultado</span><span lang="en">Result</span></a>
+<a href="#entregables"><span lang="es">Entregables</span><span lang="en">Deliverables</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2 lang="es">Contexto</h2><h2 lang="en">Context</h2>
+<p lang="es">En muchas pymes, la conciliación bancaria, la lista de clientes atrasados y el cash flow viven en planillas que alguien rehace a mano. Mientras esa persona esté y no se equivoque, funciona.</p><p lang="en">In many small and mid-sized companies, the bank reconciliation, the list of late customers and the cash flow live in spreadsheets someone rebuilds by hand. It works as long as that person is in and makes no mistake.</p><p lang="es">Si falta un día o una celda está mal, se demora la facturación, una cobranza queda sin imputar y el cliente aparece como deudor, o se decide un pago con números viejos.</p><p lang="en">If they are out for a day or a cell is wrong, invoicing slips, a receipt goes unbooked and the customer shows as overdue, or a payment is decided on old numbers.</p>
+</section>
+<section id="enfoque">
+<h2 lang="es">Enfoque</h2><h2 lang="en">Approach</h2>
+<p lang="es">Un solo comando, programado para correr cada mañana, toma los movimientos nuevos del banco y el libro de tesorería del sistema, y aplica cinco reglas en orden. Cada movimiento termina en un solo estado, con el motivo escrito.</p><p lang="en">One command, scheduled every morning, takes the new bank lines and the ERP treasury book and applies five rules in order. Every line ends in exactly one state, with the reason written down.</p><div class="steps"><div><b><span lang="es">Gastos bancarios</span><span lang="en">Bank charges</span></b><span><span lang="es">El impuesto a los débitos y créditos y las comisiones se reconocen y se registran solos.</span><span lang="en">The tax on bank debits and credits and account fees are recognised and booked automatically.</span></span></div><div><b><span lang="es">Misma referencia</span><span lang="en">Same reference</span></b><span><span lang="es">Cruza por número de factura, orden de pago o lote. Las tarjetas se concilian netas de comisión, y la comisión queda propuesta como asiento.</span><span lang="en">Matches on invoice, payment order or batch number. Card settlements match net of the fee, and the fee is proposed as an entry.</span></span></div><div><b><span lang="es">Monto y fecha</span><span lang="en">Amount and date</span></b><span><span lang="es">Si no hay referencia: misma cuenta y monto, hasta tres días hábiles de diferencia, uno a uno.</span><span lang="en">Without a reference: same account and amount, up to three business days apart, one to one.</span></span></div><div><b><span lang="es">Lo que sobra en el banco</span><span lang="en">Left in the bank</span></b><span><span lang="es">Una transferencia recibida sin imputar se asigna al cliente por el CUIT y a la factura por el monto.</span><span lang="en">An unbooked incoming transfer is assigned to the customer by CUIT and to the invoice by amount.</span></span></div><div><b><span lang="es">Lo que sobra en el sistema</span><span lang="en">Left in the ERP</span></b><span><span lang="es">Un pago registrado que no salió del banco queda en tránsito tres días; después, alerta.</span><span lang="en">A payment recorded but not yet debited is in transit for three days; then it is an alert.</span></span></div></div><pre class="code"><span class="c"># reports/2026-09-29/resumen_diario.md (extracto)</span>
+## Conciliación
+- 907 movimientos del banco, 97,6 % conciliados o registrados automáticamente.
+- Pendientes abiertos: <span class="s">26</span> (4 nuevos hoy).
+
+- Cobranza sin imputar · FARMACIA DEL SUR · ARS 3.764.182
+  Sugerido: Farmacia del Sur, factura FC-A-0003-00010429</pre>
+</section>
+<section id="validacion">
+<h2 lang="es">Cómo sé que está bien</h2><h2 lang="en">How I know it is right</h2>
+<p lang="es">Un resumen de caja que se equivoca es peor que no tenerlo. Cada cambio pasa diez controles automáticos:</p><p lang="en">A cash summary that is wrong is worse than none. Every change passes ten automated checks:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">El saldo calculado desde el extracto coincide con el saldo que informa el banco, todos los días</span><span lang="en">The balance computed from the statement equals the balance the bank reports, every day</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Cada movimiento y cada asiento termina en un solo estado, y los cruces son uno a uno</span><span lang="en">Every line and every entry ends in exactly one state, and matches are one to one</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Las 22 anomalías cargadas a propósito se detectan con el motivo correcto, sin falsas alarmas</span><span lang="en">All 22 planted issues are caught with the right reason, with no false alarms</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">El aging suma lo mismo que las facturas abiertas y la proyección arranca del saldo de hoy</span><span lang="en">Aging adds up to open invoices and the forecast starts from today's balance</span></span><em>PASS</em></div></div>
+</section>
+<section id="resultado">
+<h2 lang="es">Resultado</h2><h2 lang="en">Result</h2>
+<p lang="es">Salida del caso de prueba: 66 corridas diarias, de julio a septiembre de 2026, sobre 927 movimientos de dos bancos.</p><p lang="en">Output of the test case: 66 daily runs, July to September 2026, over 927 lines from two banks.</p><div class="metric-row"><div class="metric good"><b><span lang="es">98,1 %</span><span lang="en">98.1%</span></b><span><span lang="es">conciliado o registrado solo</span><span lang="en">reconciled or booked automatically</span></span><small><span lang="es">último día del período</span><span lang="en">last day of the period</span></small></div><div class="metric warn"><b><span lang="es">22</span><span lang="en">22</span></b><span><span lang="es">anomalías detectadas</span><span lang="en">issues caught</span></span><small><span lang="es">cobranzas sin imputar, duplicados, montos distintos</span><span lang="en">unbooked receipts, duplicates, mismatches</span></small></div><div class="metric crit"><b><span lang="es">3</span><span lang="en">3</span></b><span><span lang="es">alertas de caja</span><span lang="en">cash alerts</span></span><small><span lang="es">proyección por debajo del mínimo</span><span lang="en">forecast below the minimum</span></small></div></div><p lang="es">El equipo deja de armar la conciliación y el cash flow: cada mañana recibe qué está bien, qué hay que corregir y cuánta caja va a haber.</p><p lang="en">The team stops building the reconciliation and the cash flow: every morning it gets what is fine, what to fix and how much cash there will be.</p>
+</section>
+<section id="entregables">
+<h2 lang="es">Entregables</h2><h2 lang="en">Deliverables</h2>
+<ul lang="es"><li><code>resumen_diario.md</code>: el resumen de la mañana, listo para mandar por mail o Teams.</li><li><code>exceptions.csv</code>: un pendiente por fila, con el motivo y la factura sugerida.</li><li><code>daily_control.xlsx</code>: pendientes, cuentas por cobrar, proyección de caja y extracto conciliado.</li><li><code>history.csv</code>: la evolución diaria, para un tablero.</li></ul><ul lang="en"><li><code>resumen_diario.md</code>: the morning summary, ready to send by email or Teams.</li><li><code>exceptions.csv</code>: one open item per row, with the reason and the suggested invoice.</li><li><code>daily_control.xlsx</code>: open items, receivables, cash forecast and the reconciled statement.</li><li><code>history.csv</code>: the daily trend, for a dashboard.</li></ul>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="cuentas-a-pagar.html">
+    <div><small><span lang="es">Siguiente caso</span><span lang="en">Next case</span></small><b><span lang="es">Control de cuentas a pagar</span><span lang="en">Accounts payable control</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span lang="es">Casos de estudio con datos sintéticos y empresas ficticias.</span><span lang="en">Case studies on synthetic data and fictional companies.</span>
+</div></div></footer>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/contact.js"></script>
+</body>
+</html>
