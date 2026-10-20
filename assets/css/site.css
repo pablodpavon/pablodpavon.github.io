@@ -682,3 +682,5 @@ footer.site .container{display:block}
   .next-case{padding:22px}
   .next-case b{font-size:18px}
 }
+.seg .seg-ic{width:15px;height:15px;margin:0 3px 0 6px;color:var(--ink-2);flex:none}
+@media (max-width:420px){.seg .seg-ic{display:none}}
