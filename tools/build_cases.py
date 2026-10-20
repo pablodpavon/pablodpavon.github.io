@@ -35,7 +35,7 @@ def head(title_es, title_en, desc, image):
 <meta property="og:type" content="article">
 <meta property="og:title" content="{title_en} · Pablo Pavon">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="https://pablodpavon.github.io/assets/{image}">
+<meta property="og:image" content="https://pablodpavon.com/assets/{image}">
 <meta name="theme-color" content="#0e7a58">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e7a58'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='12.5' fill='white'%3EPP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
