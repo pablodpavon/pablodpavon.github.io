@@ -321,8 +321,7 @@ def person_node(lang: str, full: bool) -> dict:
              "url": SITE + lang_root(lang) + anchor,
              "itemOffered": {"@type": "Service", "name": (en if lang == "en" else es), "serviceType": en,
                              "description": (den if lang == "en" else des),
-                             "provider": {"@id": PERSON_ID}, "areaServed": AREA_SERVED,
-                             "availableLanguage": ["en", "es", "de"]}}
+                             "provider": {"@id": PERSON_ID}, "areaServed": AREA_SERVED}}
             for en, es, den, des, anchor in SERVICES
         ],
     })
