@@ -5,7 +5,7 @@
   const S = window.SHELL;
   const EMAIL = 'contact@pablodpavon.com';
   const LINKEDIN = 'https://www.linkedin.com/in/pablo-damian-pavon';
-  const ENDPOINT = 'https://formsubmit.co/ajax/' + EMAIL;
+  const ENDPOINT = 'https://formsubmit.co/ajax/1d21c427e306a00c748bcfd9b07bd093';  // FormSubmit alias of contact@pablodpavon.com
   const base = document.body.dataset.base || '/';
   const L = () => S.lang();
   const bi = (es, en) => (L() === 'es' ? es : en);  // one language per page
