@@ -410,6 +410,7 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
             '<meta property="article:section" content="Case studies">',
         ]
     lines += [
+        '<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">',  # Bing Webmaster Tools verification
         '<meta name="theme-color" content="#0e7a58">',
         '<link rel="icon" href="/favicon.ico" sizes="48x48">',
         '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
