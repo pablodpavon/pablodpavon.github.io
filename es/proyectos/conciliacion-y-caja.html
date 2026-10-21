@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conciliación y caja diaria automáticas · Pablo Pavon</title>
+<meta name="description" content="Caso de estudio con datos sintéticos: conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/conciliacion-y-caja.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/conciliacion-y-caja.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html">
+<meta property="og:title" content="Conciliación y caja diaria automáticas · Pablo Pavon">
+<meta property="og:description" content="Caso de estudio con datos sintéticos: conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/conciliacion-y-caja-es.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Saldo de caja diario con proyección y pendientes marcados cada mañana">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Conciliación y caja diaria automáticas · Pablo Pavon">
+<meta name="twitter:description" content="Caso de estudio con datos sintéticos: conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/conciliacion-y-caja-es.png">
+<meta name="twitter:image:alt" content="Saldo de caja diario con proyección y pendientes marcados cada mañana">
+<meta property="article:published_time" content="2026-10-20">
+<meta property="article:modified_time" content="2026-10-21">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html#article",
+   "headline": "Conciliación y caja diaria automáticas · Pablo Pavon",
+   "alternativeHeadline": "La caja del día, conciliada y proyectada antes de que llegue el equipo.",
+   "description": "Caso de estudio con datos sintéticos: conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.",
+   "inLanguage": "es",
+   "url": "https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/conciliacion-y-caja-es.png",
+    "https://pablodpavon.com/assets/proj_cash.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-10-20",
+   "dateModified": "2026-10-21",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "conciliación bancaria automática, cash flow pyme, proyección de caja, cobranzas, Ley 25.413, Python, estudio contable",
+   "isAccessibleForFree": true,
+   "genre": "Case study on synthetic data",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "daily-cash-control",
+    "codeRepository": "https://github.com/pablodpavon/daily-cash-control",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/daily-cash-control"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Inicio",
+     "item": "https://pablodpavon.com/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Proyectos",
+     "item": "https://pablodpavon.com/es/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Conciliación y caja diaria automáticas",
+     "item": "https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
+</head>
+<body data-base="/">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/es/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="/es/#servicios"><span>Servicios</span></a>
+      <a href="/es/#lab">Dashboards</a>
+      <a href="/es/#proyectos"><span>Proyectos</span></a>
+      <a href="/es/#experiencia"><span>Experiencia</span></a>
+      <a href="/es/#contacto"><span>Contacto</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/conciliacion-y-caja.html" hreflang="es" title="Versión en español" aria-current="page">ES</a><a data-lang="en" href="/proyectos/conciliacion-y-caja.html" hreflang="en" title="English version">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Hablemos</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="/es/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>Todos los proyectos</span></a><br>
+    <span class="pill"><span class="dot"></span><span>Caso de estudio · datos sintéticos</span></span>
+    <span class="cs-updated"><span>Actualizado: octubre de 2026</span></span>
+    <h1>La caja del día, conciliada y proyectada antes de que llegue el equipo.</h1>
+    <p class="lede">Un proceso que corre solo cada mañana para una distribuidora argentina ficticia: concilia los extractos de dos bancos contra el sistema, marca las cobranzas sin imputar con la factura sugerida, avisa qué clientes están atrasados y proyecta la caja de las próximas cuatro semanas.</p>
+    <div class="cs-tags"><span>Python</span><span>pandas</span><span>pytest</span><span>Excel</span><span>Ley 25.413</span><span>Cash flow</span><span>GitHub Actions</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/daily-cash-control"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>Ver el código en GitHub</span></a>
+      
+    </div>
+    <div class="cs-facts"><div><small><span>Sector</span></small><b><span>Distribución mayorista</span></b></div><div><small><span>Mi rol</span></small><b><span>Reglas, análisis y QA</span></b></div><div><small><span>Frecuencia</span></small><b><span>Todos los días hábiles</span></b></div><div><small><span>Validación</span></small><b><span>Saldo del banco + 10 tests</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_cash.jpg" alt="Saldo de caja diario con proyección y pendientes marcados cada mañana" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Contexto</span></a>
+<a href="#enfoque"><span>Enfoque</span></a>
+<a href="#validacion"><span>Cómo sé que está bien</span></a>
+<a href="#resultado"><span>Resultado</span></a>
+<a href="#entregables"><span>Entregables</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2>Contexto</h2>
+<p>En muchas pymes, la conciliación bancaria, la lista de clientes atrasados y el cash flow viven en planillas que alguien rehace a mano. Mientras esa persona esté y no se equivoque, funciona.</p><p>Si falta un día o una celda está mal, se demora la facturación, una cobranza queda sin imputar y el cliente aparece como deudor, o se decide un pago con números viejos.</p>
+</section>
+<section id="enfoque">
+<h2>Enfoque</h2>
+<p>Un solo comando, programado para correr cada mañana, toma los movimientos nuevos del banco y el libro de tesorería del sistema, y aplica cinco reglas en orden. Cada movimiento termina en un solo estado, con el motivo escrito.</p><div class="steps"><div><b><span>Gastos bancarios</span></b><span><span>El impuesto a los débitos y créditos y las comisiones se reconocen y se registran solos.</span></span></div><div><b><span>Misma referencia</span></b><span><span>Cruza por número de factura, orden de pago o lote. Las tarjetas se concilian netas de comisión, y la comisión queda propuesta como asiento.</span></span></div><div><b><span>Monto y fecha</span></b><span><span>Si no hay referencia: misma cuenta y monto, hasta tres días hábiles de diferencia, uno a uno.</span></span></div><div><b><span>Lo que sobra en el banco</span></b><span><span>Una transferencia recibida sin imputar se asigna al cliente por el CUIT y a la factura por el monto.</span></span></div><div><b><span>Lo que sobra en el sistema</span></b><span><span>Un pago registrado que no salió del banco queda en tránsito tres días; después, alerta.</span></span></div></div><pre class="code"><span class="c"># reports/2026-09-29/resumen_diario.md (extracto)</span>
+## Conciliación
+- 907 movimientos del banco, 97,6 % conciliados o registrados automáticamente.
+- Pendientes abiertos: <span class="s">26</span> (4 nuevos hoy).
+
+- Cobranza sin imputar · FARMACIA DEL SUR · ARS 3.764.182
+  Sugerido: Farmacia del Sur, factura FC-A-0003-00010429</pre>
+</section>
+<section id="validacion">
+<h2>Cómo sé que está bien</h2>
+<p>Un resumen de caja que se equivoca es peor que no tenerlo. Cada cambio pasa diez controles automáticos:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>El saldo calculado desde el extracto coincide con el saldo que informa el banco, todos los días</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Cada movimiento y cada asiento termina en un solo estado, y los cruces son uno a uno</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Las 22 anomalías cargadas a propósito se detectan con el motivo correcto, sin falsas alarmas</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>El aging suma lo mismo que las facturas abiertas y la proyección arranca del saldo de hoy</span></span><em>PASS</em></div></div>
+</section>
+<section id="resultado">
+<h2>Resultado</h2>
+<p>Salida del caso de prueba: 66 corridas diarias, de julio a septiembre de 2026, sobre 927 movimientos de dos bancos.</p><div class="metric-row"><div class="metric good"><b><span>98,1 %</span></b><span><span>conciliado o registrado solo</span></span><small><span>último día del período</span></small></div><div class="metric warn"><b><span>22</span></b><span><span>anomalías detectadas</span></span><small><span>cobranzas sin imputar, duplicados, montos distintos</span></small></div><div class="metric crit"><b><span>3</span></b><span><span>alertas de caja</span></span><small><span>proyección por debajo del mínimo</span></small></div></div><p>El equipo deja de armar la conciliación y el cash flow: cada mañana recibe qué está bien, qué hay que corregir y cuánta caja va a haber.</p>
+</section>
+<section id="entregables">
+<h2>Entregables</h2>
+<ul><li><code>resumen_diario.md</code>: el resumen de la mañana, listo para mandar por mail o Teams.</li><li><code>exceptions.csv</code>: un pendiente por fila, con el motivo y la factura sugerida.</li><li><code>daily_control.xlsx</code>: pendientes, cuentas por cobrar, proyección de caja y extracto conciliado.</li><li><code>history.csv</code>: la evolución diaria, para un tablero.</li></ul>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="/es/proyectos/cuentas-a-pagar.html">
+    <div><small><span>Siguiente caso</span></small><b><span>Control de cuentas a pagar</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span>Casos de estudio con datos sintéticos y empresas ficticias.</span>
+</div></div></footer>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
+</body>
+</html>

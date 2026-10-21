@@ -3,38 +3,148 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Migración de datos con conciliación · Pablo Pavon</title>
-<meta name="title-es" content="Migración de datos con conciliación · Pablo Pavon">
-<meta name="title-en" content="Data migration with reconciliation · Pablo Pavon">
+<title>Data migration with reconciliation · Pablo Pavon</title>
 <meta name="description" content="Case study on synthetic data: spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/proyectos/migracion-de-datos.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/migracion-de-datos.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/migracion-de-datos.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/migracion-de-datos.html">
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta property="og:url" content="https://pablodpavon.com/proyectos/migracion-de-datos.html">
 <meta property="og:title" content="Data migration with reconciliation · Pablo Pavon">
 <meta property="og:description" content="Case study on synthetic data: spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks.">
-<meta property="og:image" content="https://pablodpavon.com/assets/proj_migration.jpg">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/migracion-de-datos-en.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Migration summary and reconciliation checks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data migration with reconciliation · Pablo Pavon">
+<meta name="twitter:description" content="Case study on synthetic data: spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/migracion-de-datos-en.png">
+<meta name="twitter:image:alt" content="Migration summary and reconciliation checks">
+<meta property="article:published_time" content="2026-10-13">
+<meta property="article:modified_time" content="2026-10-21">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
 <meta name="theme-color" content="#0e7a58">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e7a58'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='12.5' fill='white'%3EPP%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css">
-<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var l=localStorage.getItem('lang');document.documentElement.lang=l||((((navigator.languages&&navigator.languages[0])||navigator.language||'en').toLowerCase().indexOf('es')===0?'es':'en'));}catch(e){}})();</script>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/proyectos/migracion-de-datos.html#article",
+   "headline": "Data migration with reconciliation · Pablo Pavon",
+   "alternativeHeadline": "Move a system without losing a single customer or a single peso.",
+   "description": "Case study on synthetic data: spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks.",
+   "inLanguage": "en",
+   "url": "https://pablodpavon.com/proyectos/migracion-de-datos.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/proyectos/migracion-de-datos.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/migracion-de-datos-en.png",
+    "https://pablodpavon.com/assets/proj_migration.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-10-13",
+   "dateModified": "2026-10-21",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "data migration, mapping specification, reconciliation, data quality, deduplication, legacy system, Python",
+   "isAccessibleForFree": true,
+   "genre": "Case study on synthetic data",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "data-migration-toolkit",
+    "codeRepository": "https://github.com/pablodpavon/data-migration-toolkit",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/data-migration-toolkit"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://pablodpavon.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Work",
+     "item": "https://pablodpavon.com/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Data migration with reconciliation",
+     "item": "https://pablodpavon.com/proyectos/migracion-de-datos.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
 </head>
-<body data-base="../">
+<body data-base="/">
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="../index.html"><span class="logo">PP</span>Pablo Pavon</a>
-    <nav class="links" aria-label="Secciones">
-      <a href="../index.html#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
-      <a href="../index.html#lab">Dashboards</a>
-      <a href="../index.html#proyectos"><span lang="es">Proyectos</span><span lang="en">Work</span></a>
-      <a href="../index.html#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
-      <a href="../index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    <a class="brand" href="/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Sections">
+      <a href="/#servicios"><span>Services</span></a>
+      <a href="/#lab">Dashboards</a>
+      <a href="/#proyectos"><span>Work</span></a>
+      <a href="/#experiencia"><span>Experience</span></a>
+      <a href="/#contacto"><span>Contact</span></a>
     </nav>
     <div class="nav-tools">
-      <div class="seg" role="group" aria-label="Idioma / Language"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
-      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
-      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span lang="es">Hablemos</span><span lang="en">Let’s talk</span></button>
-      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="seg" role="group" aria-label="Language"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/migracion-de-datos.html" hreflang="es" title="Versión en español">ES</a><a data-lang="en" href="/proyectos/migracion-de-datos.html" hreflang="en" title="English version" aria-current="page">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </header>
@@ -44,35 +154,36 @@
   <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="container">
-    <a class="cs-back" href="../index.html#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span lang="es">Todos los proyectos</span><span lang="en">All projects</span></a><br>
-    <span class="pill"><span class="dot"></span><span lang="es">Caso de estudio · datos sintéticos</span><span lang="en">Case study · synthetic data</span></span>
-    <h1 lang="es">Migrar un sistema sin perder un solo cliente ni un solo peso.</h1><h1 lang="en">Move a system without losing a single customer or a single peso.</h1>
-    <p class="lede" lang="es">Una migración desde un sistema de facturación heredado a una plataforma nueva, guiada por una especificación de mapeo que negocio y sistemas revisan juntos, y cerrada con doce controles de conciliación.</p><p class="lede" lang="en">A migration from a legacy billing system to a new platform, driven by a mapping spec that business and IT review together, and closed with twelve reconciliation checks.</p>
+    <a class="cs-back" href="/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>All projects</span></a><br>
+    <span class="pill"><span class="dot"></span><span>Case study · synthetic data</span></span>
+    <span class="cs-updated"><span>Updated: October 2026</span></span>
+    <h1>Move a system without losing a single customer or a single peso.</h1>
+    <p class="lede">A migration from a legacy billing system to a new platform, driven by a mapping spec that business and IT review together, and closed with twelve reconciliation checks.</p>
     <div class="cs-tags"><span>Python</span><span>pandas</span><span>pytest</span><span>Mapping spec</span><span>Data quality</span><span>Reconciliation</span></div>
     <div class="cs-actions">
-      <a class="btn btn-brand" href="https://github.com/pablodpavon/data-migration-toolkit"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ver el código en GitHub</span><span lang="en">View the code on GitHub</span></a>
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/data-migration-toolkit"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>View the code on GitHub</span></a>
       
     </div>
-    <div class="cs-facts"><div><small><span lang="es">Sector</span><span lang="en">Industry</span></small><b><span lang="es">Telecomunicaciones</span><span lang="en">Telecom</span></b></div><div><small><span lang="es">Mi rol</span><span lang="en">My role</span></small><b><span lang="es">Mapeo, reglas y conciliación</span><span lang="en">Mapping, rules, reconciliation</span></b></div><div><small><span lang="es">Volumen</span><span lang="en">Volume</span></small><b><span lang="es">4.060 clientes · 6.500 contratos</span><span lang="en">4,060 customers · 6,500 contracts</span></b></div><div><small><span lang="es">Validación</span><span lang="en">Validation</span></small><b><span lang="es">12 controles + 8 tests</span><span lang="en">12 checks + 8 tests</span></b></div></div>
-    <figure class="cs-shot"><img src="../assets/proj_migration.jpg" alt="Resumen de la migración y de los controles de conciliación" width="1600" height="1000"></figure>
+    <div class="cs-facts"><div><small><span>Industry</span></small><b><span>Telecom</span></b></div><div><small><span>My role</span></small><b><span>Mapping, rules, reconciliation</span></b></div><div><small><span>Volume</span></small><b><span>4,060 customers · 6,500 contracts</span></b></div><div><small><span>Validation</span></small><b><span>12 checks + 8 tests</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_migration.jpg" alt="Migration summary and reconciliation checks" width="1600" height="1000"></figure>
   </div>
 </section>
 
 <div class="container">
   <div class="cs-body">
-    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span lang="es">Contexto</span><span lang="en">Context</span></a>
-<a href="#enfoque"><span lang="es">Enfoque</span><span lang="en">Approach</span></a>
-<a href="#validacion"><span lang="es">Conciliación</span><span lang="en">Reconciliation</span></a>
-<a href="#resultado"><span lang="es">Resultado</span><span lang="en">Result</span></a>
-<a href="#entregables"><span lang="es">Entregables</span><span lang="en">Deliverables</span></a></nav>
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Context</span></a>
+<a href="#enfoque"><span>Approach</span></a>
+<a href="#validacion"><span>Reconciliation</span></a>
+<a href="#resultado"><span>Result</span></a>
+<a href="#entregables"><span>Deliverables</span></a></nav>
     <article class="prose">
 <section id="contexto">
-<h2 lang="es">Contexto</h2><h2 lang="en">Context</h2>
-<p lang="es">Un proveedor regional de internet y TV (ficticio) da de baja su sistema de facturación. La exportación trae lo de siempre: clientes cargados dos veces, contratos de clientes que no existen, fechas como 31.02.2019, códigos de estado que nadie documentó, importes guardados como texto en centavos.</p><p lang="en">A regional internet and TV provider (fictional) is retiring its billing system. The export has the usual problems: customers entered twice, contracts pointing to customers that do not exist, dates like 31.02.2019, undocumented status codes, amounts stored as text in cents.</p><div class="callout"><span lang="es">Lo difícil de una migración casi nunca es copiar los datos. Es poder explicarle al negocio, registro por registro, qué pasó con su información, con números que pueda verificar.</span><span lang="en">The hard part of a migration is rarely copying the data. It is being able to tell the business, record by record, what happened to their information, with numbers they can check.</span></div>
+<h2>Context</h2>
+<p>A regional internet and TV provider (fictional) is retiring its billing system. The export has the usual problems: customers entered twice, contracts pointing to customers that do not exist, dates like 31.02.2019, undocumented status codes, amounts stored as text in cents.</p><div class="callout"><span>The hard part of a migration is rarely copying the data. It is being able to tell the business, record by record, what happened to their information, with numbers they can check.</span></div>
 </section>
 <section id="enfoque">
-<h2 lang="es">Enfoque</h2><h2 lang="en">Approach</h2>
-<div class="steps"><div><b><span lang="es">La especificación de mapeo es la fuente de verdad</span><span lang="en">The mapping spec is the source of truth</span></b><span><span lang="es">Para cada campo destino: campo origen, transformación, si es obligatorio y por qué. Si la especificación nombra una transformación que no existe, el código no corre.</span><span lang="en">For every target field: source field, transformation, whether it is mandatory and why. If the spec names a transformation that does not exist, the code refuses to run.</span></span></div><div><b><span lang="es">Transformar, validar, decidir</span><span lang="en">Transform, validate, decide</span></b><span><span lang="es">Un error en un campo obligatorio rechaza el registro con su motivo. Uno en un campo opcional deja el valor vacío y queda registrado: no se pierde un cliente por un mail mal escrito.</span><span lang="en">An error on a mandatory field rejects the record with a reason. One on an optional field blanks the value and logs it: no customer is lost over a typo in an e-mail.</span></span></div><div><b><span lang="es">Unificar duplicados con tabla de equivalencias</span><span lang="en">Merge duplicates with a crosswalk</span></b><span><span lang="es">Clientes con el mismo documento se unifican. La tabla guarda cada número viejo con su ID nuevo, así los contratos del duplicado encuentran a su cliente.</span><span lang="en">Customers with the same national ID are merged. The crosswalk keeps every legacy number with its new ID, so contracts of the duplicate still find their customer.</span></span></div><div><b><span lang="es">Conciliar</span><span lang="en">Reconcile</span></b><span><span lang="es">Doce controles corren después de cada migración. Si uno falla, la migración falla.</span><span lang="en">Twelve checks run after every migration. If one fails, the migration fails.</span></span></div></div><pre class="code"><span class="c"># mapping/mapping_spec.csv (excerpt)</span>
+<h2>Approach</h2>
+<div class="steps"><div><b><span>The mapping spec is the source of truth</span></b><span><span>For every target field: source field, transformation, whether it is mandatory and why. If the spec names a transformation that does not exist, the code refuses to run.</span></span></div><div><b><span>Transform, validate, decide</span></b><span><span>An error on a mandatory field rejects the record with a reason. One on an optional field blanks the value and logs it: no customer is lost over a typo in an e-mail.</span></span></div><div><b><span>Merge duplicates with a crosswalk</span></b><span><span>Customers with the same national ID are merged. The crosswalk keeps every legacy number with its new ID, so contracts of the duplicate still find their customer.</span></span></div><div><b><span>Reconcile</span></b><span><span>Twelve checks run after every migration. If one fails, the migration fails.</span></span></div></div><pre class="code"><span class="c"># mapping/mapping_spec.csv (excerpt)</span>
 <span class="k">entity,target_field,source_field,transform,required</span>
 customer,customer_id,CUST_NO,surrogate_after_dedup,yes
 customer,national_id,DOC_NR,digits_only,yes
@@ -80,21 +191,21 @@ customer,last_name,NAME_1,strip_title,yes
 customer,email,EMAIL,lower_validate_email,no</pre>
 </section>
 <section id="validacion">
-<h2 lang="es">Conciliación</h2><h2 lang="en">Reconciliation</h2>
-<p lang="es">Estos son los doce controles tal como salen de la última corrida:</p><p lang="en">These are the twelve checks as they come out of the last run:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Clientes: origen = migrados + unificados + rechazados (4.060)</span><span lang="en">Customers: source = migrated + merged + rejected (4,060)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Contratos: origen = migrados + rechazados (6.500)</span><span lang="en">Contracts: source = migrated + rejected (6,500)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Cada clave de origen tiene un único destino</span><span lang="en">Each legacy key has exactly one outcome</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">ID de cliente único en destino</span><span lang="en">Unique customer ID in target</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Documento único en destino (duplicados unificados)</span><span lang="en">Unique national ID in target (duplicates merged)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">ID de contrato único en destino</span><span lang="en">Unique contract ID in target</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Todo contrato apunta a un cliente migrado</span><span lang="en">Every contract points to a migrated customer</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Abonos: centavos de origen = importe destino × 100</span><span lang="en">Fees: legacy cents = target amount × 100</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Control inverso campo a campo: estado</span><span lang="en">Field-level reverse check: status</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Control inverso campo a campo: producto</span><span lang="en">Field-level reverse check: product</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Control inverso campo a campo: fecha de alta</span><span lang="en">Field-level reverse check: start date</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span lang="es">Control inverso campo a campo: abono</span><span lang="en">Field-level reverse check: fee</span></span><em>PASS</em></div></div>
+<h2>Reconciliation</h2>
+<p>These are the twelve checks as they come out of the last run:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Customers: source = migrated + merged + rejected (4,060)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Contracts: source = migrated + rejected (6,500)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Each legacy key has exactly one outcome</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Unique customer ID in target</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Unique national ID in target (duplicates merged)</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Unique contract ID in target</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Every contract points to a migrated customer</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Fees: legacy cents = target amount × 100</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Field-level reverse check: status</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Field-level reverse check: product</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Field-level reverse check: start date</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Field-level reverse check: fee</span></span><em>PASS</em></div></div>
 </section>
 <section id="resultado">
-<h2 lang="es">Resultado</h2><h2 lang="en">Result</h2>
-<p lang="es">Salida del caso de prueba sobre datos sintéticos:</p><p lang="en">Output of the test case on synthetic data:</p><div class="metric-row"><div class="metric good"><b><span lang="es">3.976</span><span lang="en">3,976</span></b><span><span lang="es">clientes migrados</span><span lang="en">customers migrated</span></span><small><span lang="es">59 duplicados unificados · 25 rechazados</span><span lang="en">59 duplicates merged · 25 rejected</span></small></div><div class="metric good"><b><span lang="es">6.384</span><span lang="en">6,384</span></b><span><span lang="es">contratos migrados</span><span lang="en">contracts migrated</span></span><small><span lang="es">116 rechazados, cada uno con su motivo</span><span lang="en">116 rejected, each with its reason</span></small></div><div class="metric "><b><span lang="es">ARS 157.915.740</span><span lang="en">ARS 157,915,740</span></b><span><span lang="es">de abono mensual</span><span lang="en">in monthly fees</span></span><small><span lang="es">idéntico al centavo al origen</span><span lang="en">identical to the cent to the source</span></small></div></div><p lang="es">Los 116 contratos rechazados se explican solos: 51 porque su cliente fue rechazado, 30 huérfanos, 20 con fechas imposibles y 15 con códigos de estado desconocidos. Vuelven al negocio en <code>rejects.csv</code> para corregirse en origen.</p><p lang="en">The 116 rejected contracts explain themselves: 51 because their customer was rejected, 30 orphans, 20 with impossible dates and 15 with unknown status codes. They go back to the business in <code>rejects.csv</code> to be fixed at source.</p>
+<h2>Result</h2>
+<p>Output of the test case on synthetic data:</p><div class="metric-row"><div class="metric good"><b><span>3,976</span></b><span><span>customers migrated</span></span><small><span>59 duplicates merged · 25 rejected</span></small></div><div class="metric good"><b><span>6,384</span></b><span><span>contracts migrated</span></span><small><span>116 rejected, each with its reason</span></small></div><div class="metric "><b><span>ARS 157,915,740</span></b><span><span>in monthly fees</span></span><small><span>identical to the cent to the source</span></small></div></div><p>The 116 rejected contracts explain themselves: 51 because their customer was rejected, 30 orphans, 20 with impossible dates and 15 with unknown status codes. They go back to the business in <code>rejects.csv</code> to be fixed at source.</p>
 </section>
 <section id="entregables">
-<h2 lang="es">Entregables</h2><h2 lang="en">Deliverables</h2>
-<ul lang="es"><li>Especificación de mapeo revisable por negocio y sistemas.</li><li>Tabla de equivalencias entre IDs viejos y nuevos.</li><li>Reporte de conciliación y lista de rechazados con motivo.</li><li>8 tests que verifican cada problema cargado en los datos de origen.</li></ul><ul lang="en"><li>Mapping spec that business and IT can review.</li><li>Crosswalk between legacy and new IDs.</li><li>Reconciliation report and rejects list with reasons.</li><li>8 tests that check every problem planted in the legacy data.</li></ul>
+<h2>Deliverables</h2>
+<ul><li>Mapping spec that business and IT can review.</li><li>Crosswalk between legacy and new IDs.</li><li>Reconciliation report and rejects list with reasons.</li><li>8 tests that check every problem planted in the legacy data.</li></ul>
 </section>
     </article>
   </div>
-  <a class="next-case" href="conciliacion-y-caja.html">
-    <div><small><span lang="es">Siguiente caso</span><span lang="en">Next case</span></small><b><span lang="es">Conciliación y caja diaria automáticas</span><span lang="en">Automated daily reconciliation and cash</span></b></div>
+  <a class="next-case" href="/proyectos/conciliacion-y-caja.html">
+    <div><small><span>Next case</span></small><b><span>Automated daily reconciliation and cash</span></b></div>
     <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
   </a>
 </div>
@@ -102,9 +213,9 @@ customer,email,EMAIL,lower_validate_email,no</pre>
 
 <footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
   <span>© <span data-year>2026</span> Pablo Pavon</span>
-  <span lang="es">Casos de estudio con datos sintéticos y empresas ficticias.</span><span lang="en">Case studies on synthetic data and fictional companies.</span>
+  <span>Case studies on synthetic data and fictional companies.</span>
 </div></div></footer>
-<script src="../assets/js/shell.js"></script>
-<script src="../assets/js/contact.js"></script>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
 </body>
 </html>

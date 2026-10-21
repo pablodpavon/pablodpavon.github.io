@@ -156,7 +156,7 @@
 
   PP.sales = {
     async init() {
-      D = await PP.loadJSON('assets/data/sales.json');
+      D = await PP.loadJSON('/assets/data/sales.json');
       st = defaults(); buildFilters(); render();
       const tb = document.querySelector('[data-table="sales"]');
       tb.textContent = PP.t('common.showTable');

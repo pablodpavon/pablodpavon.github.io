@@ -141,7 +141,7 @@
   }
 
   PP.ap = {
-    async init() { D = await PP.loadJSON('assets/data/ap.json'); st = defaults(); buildFilters(); render(); },
+    async init() { D = await PP.loadJSON('/assets/data/ap.json'); st = defaults(); buildFilters(); render(); },
     rerender() { if (!D) return; buildFilters(); render(); },
     csv() { PP.downloadCSV('facturas_filtradas.csv', ['invoice_id', 'supplier', 'cuit', 'date', 'status', 'rules', 'amount_ars'], (PP.ap._last || []).map(r => [r[0], r[1], r[2], r[4], r[5], r[6], r[7].toFixed(2)])); },
     focusRule(code) { if (!D) return; st.rules = new Set([code]); ui.rules.set(st.rules); render(); }

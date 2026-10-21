@@ -14,7 +14,7 @@
   /* ---------- hero: live product window ---------- */
   let heroData = null;
   async function hero() {
-    try { heroData = heroData || await PP.loadJSON('assets/data/sales.json'); } catch (e) { return; }
+    try { heroData = heroData || await PP.loadJSON('/assets/data/sales.json'); } catch (e) { return; }
     const D = heroData, n = D.months.length, from = n - 18;
     const nom = new Array(n).fill(0), real = new Array(n).fill(0), units = new Array(n).fill(0);
     D.rows.forEach(r => { nom[r[0]] += r[4]; real[r[0]] += r[4] / D.cpi[r[0]]; units[r[0]] += r[5]; });
@@ -69,8 +69,7 @@
   const exp = document.getElementById('exportBtn');
   exp && exp.addEventListener('click', () => { if (started.has(current) && DASH[current].csv) { DASH[current].csv(); S.toast(S.lang() === 'es' ? 'CSV descargado con los filtros actuales' : 'CSV downloaded with current filters'); } });
 
-  /* language / theme hooks */
-  S.onLang.push(() => { PP.applyText(); started.forEach(k => DASH[k].rerender()); const crumb = document.getElementById('crumb'); if (crumb) crumb.textContent = META[current][S.lang()]; hero(); });
+  /* theme hook (the language is fixed per page) */
   S.onTheme.push(() => { PP.disposeAll(); started.forEach(k => DASH[k].rerender()); hero(); });
 
   /* ---------- lightbox ---------- */

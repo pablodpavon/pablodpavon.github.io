@@ -1,0 +1,7 @@
+# pablodpavon.com
+# All crawlers are welcome, including AI search crawlers (OAI-SearchBot, Claude-SearchBot, PerplexityBot)
+# and AI training crawlers (GPTBot, ClaudeBot, Google-Extended). A summary for language models is at /llms.txt.
+User-agent: *
+Allow: /
+
+Sitemap: https://pablodpavon.com/sitemap.xml

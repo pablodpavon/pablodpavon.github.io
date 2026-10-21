@@ -3,12 +3,12 @@
 (function () {
   'use strict';
   const S = window.SHELL;
-  const EMAIL = 'pablodpavon@gmail.com';
+  const EMAIL = 'contact@pablodpavon.com';
   const LINKEDIN = 'https://www.linkedin.com/in/pablo-damian-pavon';
   const ENDPOINT = 'https://formsubmit.co/ajax/' + EMAIL;
-  const base = document.body.dataset.base || '';
+  const base = document.body.dataset.base || '/';
   const L = () => S.lang();
-  const bi = (es, en) => `<span lang="es">${es}</span><span lang="en">${en}</span>`;
+  const bi = (es, en) => (L() === 'es' ? es : en);  // one language per page
 
   const I = {
     msg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg>',
@@ -24,6 +24,7 @@
 
   const TOPICS = [
     ['dash', 'Dashboards y BI', 'Dashboards & BI'],
+    ['fin', 'Automatización financiera', 'Finance automation'],
     ['data', 'Análisis de datos', 'Data analysis'],
     ['mig', 'Migración de datos', 'Data migration'],
     ['ai', 'IA en procesos', 'AI in processes'],
@@ -42,7 +43,7 @@
   function formHTML(p) {
     const topics = TOPICS.map(([v, es, en]) =>
       `<label class="tchip"><input type="checkbox" name="topics" value="${v}"><span>${bi(es, en)}</span></label>`).join('');
-    const times = TIMES.map(([v, es, en]) => `<option value="${v}" data-es="${es}" data-en="${en}">${es}</option>`).join('');
+    const times = TIMES.map(([v, es, en]) => `<option value="${v}">${bi(es, en)}</option>`).join('');
     return `
 <form class="cform" novalidate data-form="${p}">
   <div class="cf-grid">
@@ -226,10 +227,4 @@
     done.querySelector('.cf-again').addEventListener('click', () => { done.hidden = true; form.hidden = false; form.elements.name.focus(); });
   }
   document.querySelectorAll('.cform').forEach(wire);
-
-  /* keep select labels in the current language */
-  const relabel = () => document.querySelectorAll('.cform select option').forEach(o => { o.textContent = o.dataset[L()]; });
-  relabel();
-  S.onLang.push(relabel);
-  S.onLang.push(() => document.querySelectorAll('[data-cv]').forEach(a => { a.href = base + (L() === 'es' ? 'assets/CV_Pablo_Pavon_ES.pdf' : 'assets/CV_Pablo_Pavon_EN.pdf'); }));
 })();
