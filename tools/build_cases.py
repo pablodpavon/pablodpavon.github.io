@@ -61,10 +61,11 @@ def head(title_es, title_en, desc, image):
 """
 
 
+FOOT_SYNTH = bi('Casos de estudio con datos sintéticos y empresas ficticias.', 'Case studies on synthetic data and fictional companies.')
 FOOT = f"""
 <footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
   <span>© <span data-year>2026</span> Pablo Pavon</span>
-  {bi('Casos de estudio con datos sintéticos y empresas ficticias.', 'Case studies on synthetic data and fictional companies.')}
+  <!--FOOTNOTE-->
 </div></div></footer>
 <script src="../assets/js/shell.js"></script>
 <script src="../assets/js/contact.js"></script>
@@ -88,13 +89,13 @@ def page(c):
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="container">
     <a class="cs-back" href="../index.html#proyectos">{ICON_BACK}{bi('Todos los proyectos', 'All projects')}</a><br>
-    <span class="pill"><span class="dot"></span>{bi('Caso de estudio · datos sintéticos', 'Case study · synthetic data')}</span>
+    <span class="pill"><span class="dot"></span>{bi(*c.get('pill', ('Caso de estudio · datos sintéticos', 'Case study · synthetic data')))}</span>
     <span class="cs-updated">{bi('Actualizado: ' + UPDATED_ES, 'Updated: ' + UPDATED_EN)}</span>
     <h1 lang="es">{c['h1_es']}</h1><h1 lang="en">{c['h1_en']}</h1>
     <p class="lede" lang="es">{c['lede_es']}</p><p class="lede" lang="en">{c['lede_en']}</p>
     <div class="cs-tags">{tags}</div>
     <div class="cs-actions">
-      <a class="btn btn-brand" href="{c['repo']}">{ICON_GH}{bi('Ver el código en GitHub', 'View the code on GitHub')}</a>
+      <a class="btn btn-brand" href="{c['repo']}">{ICON_GH}{bi(*c.get('repo_label', ('Ver el código en GitHub', 'View the code on GitHub')))}</a>
       {extra}
     </div>
     <div class="cs-facts">{facts}</div>
@@ -115,7 +116,7 @@ def page(c):
   </a>
 </div>
 </main>
-""" + FOOT
+""" + FOOT.replace("<!--FOOTNOTE-->", c.get("foot", FOOT_SYNTH))
 
 
 def checks(rows):
@@ -409,7 +410,75 @@ CASH = dict(
     ],
 )
 
-CASES = (CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
+
+# ---------------------------------------------------------------- GEO Scan (own product, not synthetic)
+# Numbers: GEO/Producto_v1 (README, checks.yaml, sampler.py), test suites of 30-oct-2026 (1,919 + 693),
+# and the facts shown on scan.pablodpavon.com (21 checks in the free scan, 8 real sites on 24 Oct).
+GEO = dict(
+    slug="geo-scan", image="proj_geo.jpg", repo="https://github.com/pablodpavon/geo-scan-case-study",
+    pill=("Producto propio · beta cerrada", "Own product · closed beta"),
+    repo_label=("Leer el caso en GitHub", "Read the case on GitHub"),
+    foot=bi("Producto propio en beta cerrada. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
+            "Own product in a closed beta. No client data; the example uses a fictional business."),
+    genre="Product case study",
+    title_es="GEO Scan: producto con IA", title_en="GEO Scan: an AI product",
+    desc="Own product, closed beta: a scan that shows how visible a business is in AI search, built with Claude Code and checked by about 2,600 tests.",
+    desc_es="Producto propio en beta cerrada: un scan que muestra cuán visible es un negocio en las búsquedas con IA, hecho con Claude Code y controlado con unos 2.600 tests.",
+    alt="Resultado de ejemplo de GEO Scan para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
+    alt_en="GEO Scan example result for a fictional business: technical readiness and who AI assistants name",
+    published="2026-10-31",
+    keywords_es="GEO, visibilidad en IA, búsqueda con IA, ChatGPT, Perplexity, Google AI Overviews, producto con IA, Claude Code, QA",
+    keywords_en="GEO, AI visibility, AI search, ChatGPT, Perplexity, Google AI Overviews, AI product, Claude Code, QA",
+    h1_es="La IA escribió el código. Las reglas y los controles son míos.",
+    h1_en="AI wrote the code. The rules and the checks are mine.",
+    lede_es="GEO Scan muestra a un negocio qué responden ChatGPT, Perplexity y Google con IA cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo encuentren. Lo llevé de la idea a producción en unos diez días.",
+    lede_en="GEO Scan shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be found. I took it from idea to production in about ten days.",
+    tags=["Claude Code", "Python", "FastAPI", "LLM APIs", "pytest", "GEO / SEO"],
+    extra_action=f'<a class="btn" href="https://scan.pablodpavon.com">{ICON_NEXT}{bi("Abrir GEO Scan", "Open GEO Scan")}</a>',
+    facts=[("Tipo", "Type", "Producto propio", "Own product"),
+           ("Mi rol", "My role", "Producto, reglas y QA", "Product, rules and QA"),
+           ("Idiomas", "Languages", "4 en la interfaz", "4 in the interface"),
+           ("Validación", "Validation", "~2.600 tests por deploy", "~2,600 tests per deploy")],
+    next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
+    sections=[
+        ("contexto", "Contexto", "Context",
+         p("Cada vez más gente le pregunta a un asistente de IA en lugar de buscar en Google. Un negocio puede estar bien posicionado en Google y no aparecer nunca en esas respuestas, sin enterarse.",
+           "More and more people ask an AI assistant instead of searching on Google. A business can rank well on Google and never show up in those answers, without knowing it.")
+         + p("Quería probar dos cosas: si podía llevar un producto real a producción con la IA escribiendo casi todo el código, y si se podía medir esa visibilidad de forma honesta.",
+             "I wanted to test two things: whether I could take a real product to production with AI writing almost all of the code, and whether that visibility could be measured honestly.")),
+        ("enfoque", "Cómo funciona", "How it works",
+         steps([("Leer el sitio", "Crawl the site",
+                  "21 controles automáticos en el scan gratis: acceso de los bots de IA, datos estructurados, contenido en HTML, consistencia de la empresa.",
+                  "21 automated checks in the free scan: AI bot access, structured data, content in HTML, entity consistency."),
+                 ("Armar las preguntas", "Build the questions",
+                  "El scan detecta el tipo de negocio y arma las preguntas que haría un cliente real, con la ciudad si es un local.",
+                  "The scan detects the business type and builds the questions a real customer would ask, with the city for a local business."),
+                 ("Preguntarle a la IA", "Ask the AI engines",
+                  "Las preguntas van a los motores por API: ChatGPT, Perplexity, Claude y Google AI Overviews y AI Mode, según el mercado.",
+                  "The questions go to the engines by API: ChatGPT, Perplexity, Claude and Google AI Overviews and AI Mode, depending on the market."),
+                 ("Clasificar y explicar", "Classify and explain",
+                  "Si el negocio aparece, si lo citan o si falta, y quién aparece en su lugar. Una sola respuesta nunca se presenta como puntaje.",
+                  "Whether the business is mentioned, cited or missing, and who shows up instead. A single answer is never presented as a score.")])),
+        ("roles", "Qué hizo la IA y qué hice yo", "What the AI did and what I did",
+         p("El código (Python, FastAPI, SQLite, un servidor en Hetzner detrás de Cloudflare) lo escribió Claude Code. Yo escribí el método, las reglas de puntaje y de qué se muestra, el texto de cada hallazgo y los criterios de aceptación.",
+           "The code (Python, FastAPI, SQLite, a Hetzner server behind Cloudflare) was written by Claude Code. I wrote the method, the scoring and disclosure rules, the wording of every finding and the acceptance criteria.")
+         + '<div class="callout">' + bi("Con la IA, el cuello de botella deja de ser escribir código y pasa a ser definir qué es correcto. Ese es trabajo de analista.",
+                                         "With AI, the bottleneck moves from writing code to defining what is correct. That is analyst work.") + "</div>"),
+        ("validacion", "Cómo sé que está bien", "How I know it is right",
+         checks([("Unos 2.600 tests automáticos (1.919 del pipeline y 693 de la web) en dos versiones de Python antes de cada deploy", "About 2,600 automated tests (1,919 pipeline, 693 web app) on two Python versions before every deploy"),
+                 ("Backup antes de cada deploy y comparación archivo por archivo entre la Mac y el servidor", "Backup before every deploy and a file-by-file comparison between my machine and the server"),
+                 ("Ningún idioma se publica sin revisión nativa: el hebreo estuvo oculto hasta que lo revisó un hablante nativo", "No language ships without native review: Hebrew stayed hidden until a native speaker checked it"),
+                 ("Cada resultado de la beta lo reviso yo antes de que cuente", "I review every beta result before it counts")])),
+        ("resultado", "Estado", "Status",
+         metrics([("good", "4", "4", "idiomas en la interfaz", "interface languages", "inglés y español completos", "English and Spanish complete"),
+                  ("", "8", "8", "sitios reales probados el 24-oct", "real sites tested on 24 Oct", "antes de abrir la beta", "before opening the beta"),
+                  ("", "5", "5", "motores de IA soportados", "AI engines supported", "configurables por mercado", "configurable per market")])
+         + p("Beta cerrada, por invitación. El código es privado; el caso completo está en GitHub.",
+             "Closed beta, by invitation. The code is private; the full case is on GitHub.")),
+    ],
+)
+
+CASES = (GEO, CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
 
 
 def build():

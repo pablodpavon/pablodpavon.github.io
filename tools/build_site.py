@@ -357,7 +357,7 @@ def case_jsonld(c: dict, lang: str) -> dict:
          "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID},
          "datePublished": c["published"], "dateModified": UPDATED, "isPartOf": {"@id": WEBSITE_ID},
          "keywords": c["keywords_en"] if lang == "en" else c["keywords_es"], "isAccessibleForFree": True,
-         "genre": "Case study on synthetic data",
+         "genre": c.get("genre", "Case study on synthetic data"),
          "about": {"@type": "SoftwareSourceCode", "name": repo_name, "codeRepository": c["repo"],
                    "programmingLanguage": "Python", "author": {"@id": PERSON_ID}},
          "isBasedOn": c["repo"]},
@@ -519,7 +519,7 @@ def write_llms_txt():
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
-All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub.
+All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is GEO Scan, Pablo's own product in a closed beta (private code, public case study).
 Site last updated: {UPDATED}.
 
 ## Site
@@ -531,7 +531,7 @@ Site last updated: {UPDATED}.
 ## Services
 {services}
 
-## Case studies (English; synthetic data, open code)
+## Case studies (English)
 {cases_en}
 
 ## Casos de estudio (español)
