@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From workshop to backlog, traceable · Pablo Pavon</title>
+<meta name="description" content="Case study on synthetic data: an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta property="og:url" content="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<meta property="og:title" content="From workshop to backlog, traceable · Pablo Pavon">
+<meta property="og:description" content="Case study on synthetic data: an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said.">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/requirements-to-backlog-en.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A blocked story: its quote does not appear in the workshop transcript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="From workshop to backlog, traceable · Pablo Pavon">
+<meta name="twitter:description" content="Case study on synthetic data: an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/requirements-to-backlog-en.png">
+<meta name="twitter:image:alt" content="A blocked story: its quote does not appear in the workshop transcript">
+<meta property="article:published_time" content="2026-11-01">
+<meta property="article:modified_time" content="2026-11-01">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
+<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/vitrina.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/proyectos/requirements-to-backlog.html#article",
+   "headline": "From workshop to backlog, traceable · Pablo Pavon",
+   "alternativeHeadline": "AI drafts the backlog. Every story shows who asked for it.",
+   "description": "Case study on synthetic data: an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said.",
+   "inLanguage": "en",
+   "url": "https://pablodpavon.com/proyectos/requirements-to-backlog.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/proyectos/requirements-to-backlog.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/requirements-to-backlog-en.png",
+    "https://pablodpavon.com/assets/proj_requirements.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-11-01",
+   "dateModified": "2026-11-01",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "business analysis, requirements, user stories, acceptance criteria, backlog, traceability, LLM, Jira, Azure DevOps",
+   "isAccessibleForFree": true,
+   "genre": "Case study on synthetic data",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "requirements-to-backlog",
+    "codeRepository": "https://github.com/pablodpavon/requirements-to-backlog",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/requirements-to-backlog"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://pablodpavon.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Work",
+     "item": "https://pablodpavon.com/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "From workshop to backlog, traceable",
+     "item": "https://pablodpavon.com/proyectos/requirements-to-backlog.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
+</head>
+<body data-base="/">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Sections">
+      <a href="/#servicios"><span>Services</span></a>
+      <a href="/#lab">Dashboards</a>
+      <a href="/#proyectos"><span>Work</span></a>
+      <a href="/systems.html"><span>Systems</span></a>
+      <a href="/#experiencia"><span>Experience</span></a>
+      <a href="/#contacto"><span>Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Language"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/requirements-to-backlog.html" hreflang="es" title="Versión en español">ES</a><a data-lang="en" href="/proyectos/requirements-to-backlog.html" hreflang="en" title="English version" aria-current="page">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>All projects</span></a><br>
+    <span class="pill"><span class="dot"></span><span>Case study · synthetic data</span></span>
+    <span class="cs-updated"><span>Updated: October 2026</span></span>
+    <h1>AI drafts the backlog. Every story shows who asked for it.</h1>
+    <p class="lede">From a requirements workshop transcript to epics, user stories with acceptance criteria, open questions and contradictions. Every story quotes the sentence it comes from, and a code check removes it from the backlog if that sentence is not in the transcript.</p>
+    <div class="cs-tags"><span>Python</span><span>LLM</span><span>Business analysis</span><span>User stories</span><span>pytest</span><span>Jira / Azure DevOps</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/requirements-to-backlog"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>View the code on GitHub</span></a>
+      <a class="btn" href="https://pablodpavon.github.io/requirements-to-backlog/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span>Open the demo</span></a>
+    </div>
+    <div class="cs-facts"><div><small><span>Discipline</span></small><b><span>Business analysis</span></b></div><div><small><span>My role</span></small><b><span>Evidence rules and QA</span></b></div><div><small><span>Volume</span></small><b><span>3 workshops · 64 stories</span></b></div><div><small><span>Validation</span></small><b><span>200 quotes checked + 38 tests</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_requirements.jpg" alt="A blocked story: its quote does not appear in the workshop transcript" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Context</span></a>
+<a href="#enfoque"><span>How it works</span></a>
+<a href="#validacion"><span>What the check catches</span></a>
+<a href="#resultado"><span>Result</span></a>
+<a href="#entregables"><span>Deliverables</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2>Context</h2>
+<p>Turning a two-hour workshop into a backlog takes hours. A language model writes a good first draft in two minutes, with a known risk: a story that sounds right and that nobody in the room asked for.</p><p>An invented requirement costs more than a missing one, because it gets estimated, built and tested before anyone asks who wanted it.</p>
+</section>
+<section id="enfoque">
+<h2>How it works</h2>
+<div class="steps"><div><b><span>The transcript</span></b><span><span>One numbered turn per speaker. Three synthetic workshops: last-mile delivery, supplier onboarding in retail and class bookings at a gym chain, with contradictions and gaps on purpose.</span></span></div><div><b><span>The model drafts</span></b><span><span>One call per workshop with fixed-schema JSON output: epics, stories with Given/When/Then, open questions, assumptions and contradictions. Every item carries its quote and turn.</span></span></div><div><b><span>Code checks</span></b><span><span>That the quote is verbatim in that turn, unique IDs, no duplicates, testable criteria, and which workshop turns produced nothing.</span></span></div><div><b><span>Output</span></b><span><span>Backlog in Markdown, a CSV ready to import into Jira or Azure DevOps, a traceability matrix and a page to review each story next to its sentence.</span></span></div></div>
+</section>
+<section id="validacion">
+<h2>What the check catches</h2>
+<p>In the real run the model invented none of its 200 quotes. To show what happens when it does, a copy of the real draft carries five typical mistakes planted on purpose. This is the output:</p><div class="term"><div class="tb"><i></i><i></i><i></i><span>r2b check</span></div><pre><span class="dim">$</span> python -m r2b check
+last-mile-delivery: 20 drafted -&gt; <span class="ok">20 in backlog</span> (20 ready, 0 needs rework); blocked 0 ...
+last-mile-delivery (planted errors): 22 drafted -&gt; 19 in backlog (18 ready, 1 needs rework); <span class="bad">blocked 2 unsupported, 1 duplicate</span> ...
+  <span class="y">unsupported</span>   US-04  QUOTE_NOT_FOUND: "the customer must be notified within 15 minutes of a failed attempt" (claimed T05)
+  <span class="y">needs_rework</span>  US-19  UNTESTABLE: AC1: 'then' uses the untestable word "fast"
+  <span class="y">unsupported</span>   US-21  QUOTE_NOT_FOUND: "customers keep asking to see the driver live on a map" (claimed T36)
+  <span class="y">duplicate</span>     US-22  DUPLICATE_OF: US-05 (similarity 1.00, same source turn T18)</pre></div><p>US-04 is the case that matters. The requirement exists: it was said in turn T05. The draft quotes a tidied-up version of that sentence, and the check blocks it anyway, because an “improved” quote cannot be told apart from an invented one without going back to the recording. With the real sentence, the story passes.</p>
+</section>
+<section id="resultado">
+<h2>Result</h2>
+<p>Real run of 1 November 2026 on the three workshops (synthetic data):</p><div class="metric-row"><div class="metric good"><b><span>64</span></b><span><span>stories in the backlog</span></span><small><span>of 64 drafted</span></small></div><div class="metric "><b><span>200</span></b><span><span>quotes checked</span></span><small><span>0 not found</span></small></div><div class="metric "><b><span>US$ 0.50</span></b><span><span>cost of the three workshops</span></span><small><span>one call per workshop</span></small></div></div><p>The check also listed 13 stakeholder turns that produced no item. Most are context; some are a requirement without a trace, and that list is what the analyst reads.</p><div class="callout"><span><strong>Limit, stated plainly:</strong> the check proves that every story comes from something someone said. Whether the story is a good one, whether the priority is right and how a contradiction is resolved is still the analyst's call.</span></div>
+</section>
+<section id="entregables">
+<h2>Deliverables</h2>
+<ul><li>Python pipeline: one model call per workshop, with a cost estimate and a limit before calling.</li><li>Deterministic check of quotes, IDs, duplicates, acceptance criteria and coverage.</li><li>CSV for Jira or Azure DevOps import and a traceability matrix.</li><li>Review page: every story next to the sentence it comes from.</li><li>38 offline tests with the model simulated.</li></ul>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="/proyectos/reporte-con-ia.html">
+    <div><small><span>Next case</span></small><b><span>AI KPI report, verified</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span>Case studies on synthetic data and fictional companies.</span>
+  <span class="f-legal"><a href="/impressum.html">Impressum</a> · <a href="/privacy.html"><span>Privacy</span></a></span>
+</div></div></footer>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
+</body>
+</html>

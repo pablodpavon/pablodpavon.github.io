@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Del workshop al backlog, con trazabilidad · Pablo Pavon</title>
+<meta name="description" content="Caso de estudio con datos sintéticos: un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/es/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/requirements-to-backlog.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/requirements-to-backlog.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://pablodpavon.com/es/proyectos/requirements-to-backlog.html">
+<meta property="og:title" content="Del workshop al backlog, con trazabilidad · Pablo Pavon">
+<meta property="og:description" content="Caso de estudio con datos sintéticos: un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/requirements-to-backlog-es.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Una story bloqueada: su cita no aparece en la transcripción del workshop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Del workshop al backlog, con trazabilidad · Pablo Pavon">
+<meta name="twitter:description" content="Caso de estudio con datos sintéticos: un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/requirements-to-backlog-es.png">
+<meta name="twitter:image:alt" content="Una story bloqueada: su cita no aparece en la transcripción del workshop">
+<meta property="article:published_time" content="2026-11-01">
+<meta property="article:modified_time" content="2026-11-01">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
+<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/vitrina.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/es/proyectos/requirements-to-backlog.html#article",
+   "headline": "Del workshop al backlog, con trazabilidad · Pablo Pavon",
+   "alternativeHeadline": "La IA arma el backlog. Cada story muestra quién la pidió.",
+   "description": "Caso de estudio con datos sintéticos: un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.",
+   "inLanguage": "es",
+   "url": "https://pablodpavon.com/es/proyectos/requirements-to-backlog.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/es/proyectos/requirements-to-backlog.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/requirements-to-backlog-es.png",
+    "https://pablodpavon.com/assets/proj_requirements.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-11-01",
+   "dateModified": "2026-11-01",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "análisis de negocio, requerimientos, user stories, criterios de aceptación, backlog, trazabilidad, LLM, Jira, Azure DevOps",
+   "isAccessibleForFree": true,
+   "genre": "Case study on synthetic data",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "requirements-to-backlog",
+    "codeRepository": "https://github.com/pablodpavon/requirements-to-backlog",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/requirements-to-backlog"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Inicio",
+     "item": "https://pablodpavon.com/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Proyectos",
+     "item": "https://pablodpavon.com/es/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Del workshop al backlog, con trazabilidad",
+     "item": "https://pablodpavon.com/es/proyectos/requirements-to-backlog.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
+</head>
+<body data-base="/">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/es/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="/es/#servicios"><span>Servicios</span></a>
+      <a href="/es/#lab">Dashboards</a>
+      <a href="/es/#proyectos"><span>Proyectos</span></a>
+      <a href="/es/systems.html"><span>Sistemas</span></a>
+      <a href="/es/#experiencia"><span>Experiencia</span></a>
+      <a href="/es/#contacto"><span>Contacto</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/requirements-to-backlog.html" hreflang="es" title="Versión en español" aria-current="page">ES</a><a data-lang="en" href="/proyectos/requirements-to-backlog.html" hreflang="en" title="English version">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Hablemos</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="/es/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>Todos los proyectos</span></a><br>
+    <span class="pill"><span class="dot"></span><span>Caso de estudio · datos sintéticos</span></span>
+    <span class="cs-updated"><span>Actualizado: octubre de 2026</span></span>
+    <h1>La IA arma el backlog. Cada story muestra quién la pidió.</h1>
+    <p class="lede">De la transcripción de un workshop de requerimientos a épicas, user stories con criterios de aceptación, preguntas abiertas y contradicciones. Cada story cita la frase textual que la origina, y un control en código la saca del backlog si esa frase no está en la transcripción.</p>
+    <div class="cs-tags"><span>Python</span><span>LLM</span><span>Business analysis</span><span>User stories</span><span>pytest</span><span>Jira / Azure DevOps</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/requirements-to-backlog"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>Ver el código en GitHub</span></a>
+      <a class="btn" href="https://pablodpavon.github.io/requirements-to-backlog/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span>Abrir la demo</span></a>
+    </div>
+    <div class="cs-facts"><div><small><span>Disciplina</span></small><b><span>Análisis de negocio</span></b></div><div><small><span>Mi rol</span></small><b><span>Reglas de evidencia y QA</span></b></div><div><small><span>Volumen</span></small><b><span>3 workshops · 64 stories</span></b></div><div><small><span>Validación</span></small><b><span>200 citas verificadas + 38 tests</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_requirements.jpg" alt="Una story bloqueada: su cita no aparece en la transcripción del workshop" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Contexto</span></a>
+<a href="#enfoque"><span>Cómo funciona</span></a>
+<a href="#validacion"><span>Qué atrapa el control</span></a>
+<a href="#resultado"><span>Resultado</span></a>
+<a href="#entregables"><span>Entregables</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2>Contexto</h2>
+<p>Pasar un workshop de dos horas a un backlog lleva horas de trabajo. Un modelo de lenguaje hace un buen primer borrador en dos minutos, con un riesgo conocido: una story que suena bien y que nadie en la sala pidió.</p><p>Un requerimiento inventado cuesta más que uno que falta, porque se estima, se construye y se prueba antes de que alguien pregunte quién lo quería.</p>
+</section>
+<section id="enfoque">
+<h2>Cómo funciona</h2>
+<div class="steps"><div><b><span>La transcripción</span></b><span><span>Un turno por persona, numerado. Tres workshops sintéticos: entregas de última milla, alta de proveedores en retail y reservas en una cadena de gimnasios, con contradicciones y huecos a propósito.</span></span></div><div><b><span>El modelo propone</span></b><span><span>Una llamada por workshop con salida JSON de esquema fijo: épicas, stories con Given/When/Then, preguntas abiertas, supuestos y contradicciones. Cada ítem trae su cita y el turno.</span></span></div><div><b><span>El código verifica</span></b><span><span>Que la cita esté textual en ese turno, IDs únicos, sin duplicados, criterios que se puedan probar, y qué intervenciones del workshop no generaron nada.</span></span></div><div><b><span>Salida</span></b><span><span>Backlog en Markdown, CSV listo para importar en Jira o Azure DevOps, matriz de trazabilidad y una página para revisar cada story junto a su frase.</span></span></div></div>
+</section>
+<section id="validacion">
+<h2>Qué atrapa el control</h2>
+<p>En la corrida real el modelo no inventó ninguna de las 200 citas. Para mostrar qué pasa cuando sí lo hace, una copia del borrador real lleva cinco errores típicos cargados a propósito. Esta es la salida:</p><div class="term"><div class="tb"><i></i><i></i><i></i><span>r2b check</span></div><pre><span class="dim">$</span> python -m r2b check
+last-mile-delivery: 20 drafted -&gt; <span class="ok">20 in backlog</span> (20 ready, 0 needs rework); blocked 0 ...
+last-mile-delivery (planted errors): 22 drafted -&gt; 19 in backlog (18 ready, 1 needs rework); <span class="bad">blocked 2 unsupported, 1 duplicate</span> ...
+  <span class="y">unsupported</span>   US-04  QUOTE_NOT_FOUND: "the customer must be notified within 15 minutes of a failed attempt" (claimed T05)
+  <span class="y">needs_rework</span>  US-19  UNTESTABLE: AC1: 'then' uses the untestable word "fast"
+  <span class="y">unsupported</span>   US-21  QUOTE_NOT_FOUND: "customers keep asking to see the driver live on a map" (claimed T36)
+  <span class="y">duplicate</span>     US-22  DUPLICATE_OF: US-05 (similarity 1.00, same source turn T18)</pre></div><p>US-04 es el caso que importa. El requerimiento existe: está dicho en el turno T05. La cita del borrador es una versión prolija de esa frase, y el control la bloquea igual, porque una cita “mejorada” no se distingue de una inventada sin volver a la grabación. Con la frase real, la story pasa.</p>
+</section>
+<section id="resultado">
+<h2>Resultado</h2>
+<p>Corrida real del 1 de noviembre de 2026 sobre los tres workshops (datos sintéticos):</p><div class="metric-row"><div class="metric good"><b><span>64</span></b><span><span>stories en el backlog</span></span><small><span>de 64 propuestas</span></small></div><div class="metric "><b><span>200</span></b><span><span>citas verificadas</span></span><small><span>0 no encontradas</span></small></div><div class="metric "><b><span>US$ 0,50</span></b><span><span>costo de los tres workshops</span></span><small><span>una llamada por workshop</span></small></div></div><p>Además, el control listó 13 intervenciones de los participantes que no generaron ningún ítem. La mayoría es contexto; alguna es un requisito sin rastro, y esa lista es la que lee el analista.</p><div class="callout"><span><strong>Límite, dicho claro:</strong> el control asegura que cada story sale de algo que alguien dijo. Si la story es buena, si la prioridad es la correcta y cómo se resuelve una contradicción lo sigue decidiendo el analista.</span></div>
+</section>
+<section id="entregables">
+<h2>Entregables</h2>
+<ul><li>Pipeline en Python: una llamada al modelo por workshop, con estimación de costo y tope antes de llamar.</li><li>Control determinista de citas, IDs, duplicados, criterios de aceptación y cobertura.</li><li>CSV para importar en Jira o Azure DevOps y matriz de trazabilidad.</li><li>Página de revisión: cada story junto a la frase que la origina.</li><li>38 tests sin red, con el modelo simulado.</li></ul>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="/es/proyectos/reporte-con-ia.html">
+    <div><small><span>Siguiente caso</span></small><b><span>Reporte de KPIs con IA verificado</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span>Casos de estudio con datos sintéticos y empresas ficticias.</span>
+  <span class="f-legal"><a href="/es/impressum.html">Impressum</a> · <a href="/es/privacy.html"><span>Privacidad</span></a></span>
+</div></div></footer>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
+</body>
+</html>

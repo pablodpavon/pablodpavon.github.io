@@ -775,7 +775,84 @@ OPS = dict(
 )
 
 
-CASES = (GEO, OPS, CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
+# ---------------------------------------------------------------- Requirements to backlog (P4, 1-nov-2026)
+# Entry for tools/build_cases.py of pablodpavon.github.io. Paste this block after the GEO dict and before CASES,
+# then add REQ to CASES (see INFORME.md). Uses the helpers already defined in build_cases.py: bi, p, steps, metrics.
+# Image: copy proj_requirements.jpg (1600x1000) to assets/. Every number comes from the real run of 1 Nov 2026
+# in ~/code/vitrina/requirements-to-backlog/outputs/*/check_report.json and run.json (sources in INFORME.md).
+
+REQ_TERM = ('<div class="term"><div class="tb"><i></i><i></i><i></i><span>r2b check</span></div><pre>'
+            '<span class="dim">$</span> python -m r2b check\n'
+            'last-mile-delivery: 20 drafted -&gt; <span class="ok">20 in backlog</span> (20 ready, 0 needs rework); blocked 0 ...\n'
+            'last-mile-delivery (planted errors): 22 drafted -&gt; 19 in backlog (18 ready, 1 needs rework); <span class="bad">blocked 2 unsupported, 1 duplicate</span> ...\n'
+            '  <span class="y">unsupported</span>   US-04  QUOTE_NOT_FOUND: "the customer must be notified within 15 minutes of a failed attempt" (claimed T05)\n'
+            '  <span class="y">needs_rework</span>  US-19  UNTESTABLE: AC1: \'then\' uses the untestable word "fast"\n'
+            '  <span class="y">unsupported</span>   US-21  QUOTE_NOT_FOUND: "customers keep asking to see the driver live on a map" (claimed T36)\n'
+            '  <span class="y">duplicate</span>     US-22  DUPLICATE_OF: US-05 (similarity 1.00, same source turn T18)</pre></div>')
+
+REQ = dict(
+    slug="requirements-to-backlog", image="proj_requirements.jpg", repo="https://github.com/pablodpavon/requirements-to-backlog",
+    title_es="Del workshop al backlog, con trazabilidad", title_en="From workshop to backlog, traceable",
+    desc="Case study on synthetic data: an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said.",
+    desc_es="Caso de estudio con datos sintéticos: un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.",
+    alt="Una story bloqueada: su cita no aparece en la transcripción del workshop",
+    alt_en="A blocked story: its quote does not appear in the workshop transcript",
+    published="2026-11-01",
+    keywords_es="análisis de negocio, requerimientos, user stories, criterios de aceptación, backlog, trazabilidad, LLM, Jira, Azure DevOps",
+    keywords_en="business analysis, requirements, user stories, acceptance criteria, backlog, traceability, LLM, Jira, Azure DevOps",
+    h1_es="La IA arma el backlog. Cada story muestra quién la pidió.",
+    h1_en="AI drafts the backlog. Every story shows who asked for it.",
+    lede_es="De la transcripción de un workshop de requerimientos a épicas, user stories con criterios de aceptación, preguntas abiertas y contradicciones. Cada story cita la frase textual que la origina, y un control en código la saca del backlog si esa frase no está en la transcripción.",
+    lede_en="From a requirements workshop transcript to epics, user stories with acceptance criteria, open questions and contradictions. Every story quotes the sentence it comes from, and a code check removes it from the backlog if that sentence is not in the transcript.",
+    tags=["Python", "LLM", "Business analysis", "User stories", "pytest", "Jira / Azure DevOps"],
+    extra_action=f'<a class="btn" href="https://pablodpavon.github.io/requirements-to-backlog/">{ICON_NEXT}{bi("Abrir la demo", "Open the demo")}</a>',
+    facts=[("Disciplina", "Discipline", "Análisis de negocio", "Business analysis"),
+           ("Mi rol", "My role", "Reglas de evidencia y QA", "Evidence rules and QA"),
+           ("Volumen", "Volume", "3 workshops · 64 stories", "3 workshops · 64 stories"),
+           ("Validación", "Validation", "200 citas verificadas + 38 tests", "200 quotes checked + 38 tests")],
+    next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
+    sections=[
+        ("contexto", "Contexto", "Context",
+         p("Pasar un workshop de dos horas a un backlog lleva horas de trabajo. Un modelo de lenguaje hace un buen primer borrador en dos minutos, con un riesgo conocido: una story que suena bien y que nadie en la sala pidió.",
+           "Turning a two-hour workshop into a backlog takes hours. A language model writes a good first draft in two minutes, with a known risk: a story that sounds right and that nobody in the room asked for.")
+         + p("Un requerimiento inventado cuesta más que uno que falta, porque se estima, se construye y se prueba antes de que alguien pregunte quién lo quería.",
+             "An invented requirement costs more than a missing one, because it gets estimated, built and tested before anyone asks who wanted it.")),
+        ("enfoque", "Cómo funciona", "How it works",
+         steps([("La transcripción", "The transcript",
+                 "Un turno por persona, numerado. Tres workshops sintéticos: entregas de última milla, alta de proveedores en retail y reservas en una cadena de gimnasios, con contradicciones y huecos a propósito.",
+                 "One numbered turn per speaker. Three synthetic workshops: last-mile delivery, supplier onboarding in retail and class bookings at a gym chain, with contradictions and gaps on purpose."),
+                ("El modelo propone", "The model drafts",
+                 "Una llamada por workshop con salida JSON de esquema fijo: épicas, stories con Given/When/Then, preguntas abiertas, supuestos y contradicciones. Cada ítem trae su cita y el turno.",
+                 "One call per workshop with fixed-schema JSON output: epics, stories with Given/When/Then, open questions, assumptions and contradictions. Every item carries its quote and turn."),
+                ("El código verifica", "Code checks",
+                 "Que la cita esté textual en ese turno, IDs únicos, sin duplicados, criterios que se puedan probar, y qué intervenciones del workshop no generaron nada.",
+                 "That the quote is verbatim in that turn, unique IDs, no duplicates, testable criteria, and which workshop turns produced nothing."),
+                ("Salida", "Output",
+                 "Backlog en Markdown, CSV listo para importar en Jira o Azure DevOps, matriz de trazabilidad y una página para revisar cada story junto a su frase.",
+                 "Backlog in Markdown, a CSV ready to import into Jira or Azure DevOps, a traceability matrix and a page to review each story next to its sentence.")])),
+        ("validacion", "Qué atrapa el control", "What the check catches",
+         p("En la corrida real el modelo no inventó ninguna de las 200 citas. Para mostrar qué pasa cuando sí lo hace, una copia del borrador real lleva cinco errores típicos cargados a propósito. Esta es la salida:",
+           "In the real run the model invented none of its 200 quotes. To show what happens when it does, a copy of the real draft carries five typical mistakes planted on purpose. This is the output:")
+         + REQ_TERM
+         + p("US-04 es el caso que importa. El requerimiento existe: está dicho en el turno T05. La cita del borrador es una versión prolija de esa frase, y el control la bloquea igual, porque una cita “mejorada” no se distingue de una inventada sin volver a la grabación. Con la frase real, la story pasa.",
+             "US-04 is the case that matters. The requirement exists: it was said in turn T05. The draft quotes a tidied-up version of that sentence, and the check blocks it anyway, because an “improved” quote cannot be told apart from an invented one without going back to the recording. With the real sentence, the story passes.")),
+        ("resultado", "Resultado", "Result",
+         p("Corrida real del 1 de noviembre de 2026 sobre los tres workshops (datos sintéticos):", "Real run of 1 November 2026 on the three workshops (synthetic data):")
+         + metrics([("good", "64", "64", "stories en el backlog", "stories in the backlog", "de 64 propuestas", "of 64 drafted"),
+                    ("", "200", "200", "citas verificadas", "quotes checked", "0 no encontradas", "0 not found"),
+                    ("", "US$ 0,50", "US$ 0.50", "costo de los tres workshops", "cost of the three workshops", "una llamada por workshop", "one call per workshop")])
+         + p("Además, el control listó 13 intervenciones de los participantes que no generaron ningún ítem. La mayoría es contexto; alguna es un requisito sin rastro, y esa lista es la que lee el analista.",
+             "The check also listed 13 stakeholder turns that produced no item. Most are context; some are a requirement without a trace, and that list is what the analyst reads.")
+         + '<div class="callout">' + bi("<strong>Límite, dicho claro:</strong> el control asegura que cada story sale de algo que alguien dijo. Si la story es buena, si la prioridad es la correcta y cómo se resuelve una contradicción lo sigue decidiendo el analista.",
+                                         "<strong>Limit, stated plainly:</strong> the check proves that every story comes from something someone said. Whether the story is a good one, whether the priority is right and how a contradiction is resolved is still the analyst's call.") + "</div>"),
+        ("entregables", "Entregables", "Deliverables",
+         '<ul lang="es"><li>Pipeline en Python: una llamada al modelo por workshop, con estimación de costo y tope antes de llamar.</li><li>Control determinista de citas, IDs, duplicados, criterios de aceptación y cobertura.</li><li>CSV para importar en Jira o Azure DevOps y matriz de trazabilidad.</li><li>Página de revisión: cada story junto a la frase que la origina.</li><li>38 tests sin red, con el modelo simulado.</li></ul>'
+         '<ul lang="en"><li>Python pipeline: one model call per workshop, with a cost estimate and a limit before calling.</li><li>Deterministic check of quotes, IDs, duplicates, acceptance criteria and coverage.</li><li>CSV for Jira or Azure DevOps import and a traceability matrix.</li><li>Review page: every story next to the sentence it comes from.</li><li>38 offline tests with the model simulated.</li></ul>'),
+    ],
+)
+
+
+CASES = (GEO, OPS, REQ, CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
 
 
 def build():
