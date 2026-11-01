@@ -190,9 +190,9 @@ def main():
             title = c["h1_" + lang].rstrip(".")
             real = "pill" in c
             if lang == "en":
-                sub = c["title_en"] + (" · Own product, closed beta" if real else " · Case study on synthetic data, open code")
+                sub = c["title_en"] + (" · Own product, open beta" if real else " · Case study on synthetic data, open code")
             else:
-                sub = c["title_es"] + (" · Producto propio, beta cerrada" if real else " · Caso de estudio con datos sintéticos, código abierto")
+                sub = c["title_es"] + (" · Producto propio, beta abierta" if real else " · Caso de estudio con datos sintéticos, código abierto")
             chips = c["tags"][:3] + ((["Own product"] if lang == "en" else ["Producto propio"]) if real else
                                      (["Synthetic data"] if lang == "en" else ["Datos sintéticos"]))
             card(title, sub, chips, A / c["image"], OG / f"{c['slug']}-{lang}.png")

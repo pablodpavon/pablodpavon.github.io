@@ -66,6 +66,7 @@ FOOT = f"""
 <footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
   <span>© <span data-year>2026</span> Pablo Pavon</span>
   <!--FOOTNOTE-->
+  <span class="f-legal"><a href="../impressum.html">Impressum</a> · <a href="../privacy.html">{bi('Privacidad', 'Privacy')}</a></span>
 </div></div></footer>
 <script src="../assets/js/shell.js"></script>
 <script src="../assets/js/contact.js"></script>
@@ -411,34 +412,38 @@ CASH = dict(
 )
 
 
-# ---------------------------------------------------------------- GEO Scan (own product, not synthetic)
+# ---------------------------------------------------------------- SearchedBy, formerly GEO Scan (own product, not synthetic)
+# Renamed on 1-nov-2026 (D146/D148 4a); the slug geo-scan stays (it is linked from LinkedIn, Upwork and the sitemap).
+# Tests: ~3,800 = pipeline 2,677 + web app 1,181 on 1-nov-2026 (GEO/_WIP/2026-11-01_seo_propio_v3/medicion/base_*.log).
 # Numbers: GEO/Producto_v1 (README, checks.yaml, sampler.py), test suites of 30-oct-2026 (1,919 + 693),
 # and the facts shown on scan.pablodpavon.com (21 checks in the free scan, 8 real sites on 24 Oct).
 GEO = dict(
     slug="geo-scan", image="proj_geo.jpg", repo="https://github.com/pablodpavon/geo-scan-case-study",
-    pill=("Producto propio · beta cerrada", "Own product · closed beta"),
+    pill=("Producto propio · beta abierta", "Own product · open beta"),
     repo_label=("Leer el caso en GitHub", "Read the case on GitHub"),
-    foot=bi("Producto propio en beta cerrada. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
-            "Own product in a closed beta. No client data; the example uses a fictional business."),
+    foot=bi("Producto propio en beta abierta. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
+            "Own product in an open beta. No client data; the example uses a fictional business."),
+    updated="2026-11-01",
     genre="Product case study",
-    title_es="GEO Scan: producto con IA", title_en="GEO Scan: an AI product",
-    desc="Own product, closed beta: a scan that shows how visible a business is in AI search, built with Claude Code and checked by about 2,600 tests.",
-    desc_es="Producto propio en beta cerrada: un scan que muestra cuán visible es un negocio en las búsquedas con IA, hecho con Claude Code y controlado con unos 2.600 tests.",
-    alt="Resultado de ejemplo de GEO Scan para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
-    alt_en="GEO Scan example result for a fictional business: technical readiness and who AI assistants name",
+    title_es="SearchedBy: producto con IA", title_en="SearchedBy: an AI product",
+    desc="SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by ~3,800 tests.",
+    desc_es="SearchedBy (antes GEO Scan), producto propio: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con ~3.800 tests.",
+    alt="Resultado de ejemplo de SearchedBy (antes GEO Scan) para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
+    alt_en="SearchedBy (formerly GEO Scan) example result for a fictional business: technical readiness and who AI assistants name",
     published="2026-10-31",
     keywords_es="GEO, visibilidad en IA, búsqueda con IA, ChatGPT, Perplexity, Google AI Overviews, producto con IA, Claude Code, QA",
     keywords_en="GEO, AI visibility, AI search, ChatGPT, Perplexity, Google AI Overviews, AI product, Claude Code, QA",
     h1_es="La IA escribió el código. Las reglas y los controles son míos.",
     h1_en="AI wrote the code. The rules and the checks are mine.",
-    lede_es="GEO Scan muestra a un negocio qué responden ChatGPT, Perplexity y Google con IA cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo encuentren. Lo llevé de la idea a producción en unos diez días.",
-    lede_en="GEO Scan shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be found. I took it from idea to production in about ten days.",
+    lede_es="SearchedBy (antes GEO Scan) muestra a un negocio qué responden ChatGPT, Perplexity y Google con IA cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo encuentren. Lo llevé de la idea a producción en unos diez días.",
+    lede_en="SearchedBy (formerly GEO Scan) shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be found. I took it from idea to production in about ten days.",
     tags=["Claude Code", "Python", "FastAPI", "LLM APIs", "pytest", "GEO / SEO"],
-    extra_action=f'<a class="btn" href="https://scan.pablodpavon.com">{ICON_NEXT}{bi("Abrir GEO Scan", "Open GEO Scan")}</a>',
+    extra_action=f'<a class="btn" href="https://searchedby.com/">{ICON_NEXT}{bi("Abrir SearchedBy", "Open SearchedBy")}</a>',
+    product={"@type": "Organization", "@id": "https://searchedby.com/#org", "name": "SearchedBy", "url": "https://searchedby.com/"},
     facts=[("Tipo", "Type", "Producto propio", "Own product"),
            ("Mi rol", "My role", "Producto, reglas y QA", "Product, rules and QA"),
            ("Idiomas", "Languages", "4 en la interfaz", "4 in the interface"),
-           ("Validación", "Validation", "~2.600 tests por deploy", "~2,600 tests per deploy")],
+           ("Validación", "Validation", "~3.800 tests por deploy", "~3,800 tests per deploy")],
     next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -465,7 +470,7 @@ GEO = dict(
          + '<div class="callout">' + bi("Con la IA, el cuello de botella deja de ser escribir código y pasa a ser definir qué es correcto. Ese es trabajo de analista.",
                                          "With AI, the bottleneck moves from writing code to defining what is correct. That is analyst work.") + "</div>"),
         ("validacion", "Cómo sé que está bien", "How I know it is right",
-         checks([("Unos 2.600 tests automáticos (1.919 del pipeline y 693 de la web) en dos versiones de Python antes de cada deploy", "About 2,600 automated tests (1,919 pipeline, 693 web app) on two Python versions before every deploy"),
+         checks([("Unos 3.800 tests automáticos (2.677 del pipeline y 1.181 de la web, al 1-nov) en dos versiones de Python antes de cada deploy", "About 3,800 automated tests (2,677 pipeline, 1,181 web app, as of 1 Nov) on two Python versions before every deploy"),
                  ("Backup antes de cada deploy y comparación archivo por archivo entre la Mac y el servidor", "Backup before every deploy and a file-by-file comparison between my machine and the server"),
                  ("Ningún idioma se publica sin revisión nativa: el hebreo estuvo oculto hasta que lo revisó un hablante nativo", "No language ships without native review: Hebrew stayed hidden until a native speaker checked it"),
                  ("Cada resultado de la beta lo reviso yo antes de que cuente", "I review every beta result before it counts")])),
@@ -473,8 +478,8 @@ GEO = dict(
          metrics([("good", "4", "4", "idiomas en la interfaz", "interface languages", "inglés y español completos", "English and Spanish complete"),
                   ("", "8", "8", "sitios reales probados el 24-oct", "real sites tested on 24 Oct", "antes de abrir la beta", "before opening the beta"),
                   ("", "5", "5", "motores de IA soportados", "AI engines supported", "configurables por mercado", "configurable per market")])
-         + p("Beta cerrada, por invitación. El código es privado; el caso completo está en GitHub.",
-             "Closed beta, by invitation. The code is private; the full case is on GitHub.")),
+         + p("Beta abierta desde octubre de 2026 en <a href=\"https://searchedby.com/\">searchedby.com</a> (antes se llamaba GEO Scan). El código es privado; el caso completo está en GitHub.",
+             "Open beta since October 2026 at <a href=\"https://searchedby.com/\">searchedby.com</a> (it was called GEO Scan). The code is private; the full case is on GitHub.")),
     ],
 )
 

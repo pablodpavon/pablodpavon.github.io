@@ -4,8 +4,8 @@
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
-All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is GEO Scan, Pablo's own product in a closed beta (private code, public case study).
-Site last updated: 2026-10-21.
+All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study).
+Site last updated: 2026-11-01.
 
 ## Site
 - [Home, English](https://pablodpavon.com/): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
@@ -23,18 +23,21 @@ Site last updated: 2026-10-21.
 - Data migration & quality / Migración y calidad de datos: Data mapping for system changes, cleansing, deduplication and reconciliations that prove nothing was lost; operational GDPR data management.
 
 ## Case studies (English)
-- [GEO Scan: an AI product](https://pablodpavon.com/proyectos/geo-scan.html): Own product, closed beta: a scan that shows how visible a business is in AI search, built with Claude Code and checked by about 2,600 tests. Code: https://github.com/pablodpavon/geo-scan-case-study
+- [SearchedBy: an AI product](https://pablodpavon.com/proyectos/geo-scan.html): SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by ~3,800 tests. Code: https://github.com/pablodpavon/geo-scan-case-study
 - [Automated daily reconciliation and cash](https://pablodpavon.com/proyectos/conciliacion-y-caja.html): bank reconciliation, collections and a 20-day cash forecast that run by themselves every morning. Code: https://github.com/pablodpavon/daily-cash-control
 - [Accounts payable control](https://pablodpavon.com/proyectos/cuentas-a-pagar.html): 12 rules over 1,260 supplier invoices, CUIT validation and 3-way match before the payment run. Code: https://github.com/pablodpavon/ap-invoice-control
 - [Data migration with reconciliation](https://pablodpavon.com/proyectos/migracion-de-datos.html): spec-driven migration of 4,060 customers and 6,500 contracts with 12 reconciliation checks. Code: https://github.com/pablodpavon/data-migration-toolkit
 - [AI KPI report, verified](https://pablodpavon.com/proyectos/reporte-con-ia.html): an LLM drafts the monthly KPI commentary and a checker verifies every number before release. Code: https://github.com/pablodpavon/ai-kpi-commentary
 
 ## Casos de estudio (español)
-- [GEO Scan: producto con IA](https://pablodpavon.com/es/proyectos/geo-scan.html): Producto propio en beta cerrada: un scan que muestra cuán visible es un negocio en las búsquedas con IA, hecho con Claude Code y controlado con unos 2.600 tests.
+- [SearchedBy: producto con IA](https://pablodpavon.com/es/proyectos/geo-scan.html): SearchedBy (antes GEO Scan), producto propio: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con ~3.800 tests.
 - [Conciliación y caja diaria automáticas](https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html): conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.
 - [Control de cuentas a pagar](https://pablodpavon.com/es/proyectos/cuentas-a-pagar.html): 12 reglas sobre 1.260 facturas de proveedores, validación de CUIT y cruce con orden de compra y recepción antes de pagar.
 - [Migración de datos con conciliación](https://pablodpavon.com/es/proyectos/migracion-de-datos.html): migración guiada por una especificación de mapeo, 4.060 clientes y 6.500 contratos, con 12 controles de conciliación.
 - [Reporte de KPIs con IA verificado](https://pablodpavon.com/es/proyectos/reporte-con-ia.html): un modelo de lenguaje redacta el comentario mensual de KPIs y un control verifica cada número antes de publicarlo.
+
+## Own product
+- SearchedBy: https://searchedby.com/: shows a business how AI assistants (ChatGPT, Perplexity, Google's AI) present it, and whether its site can be read, cited and recommended. Made by Pablo Pavon in Berlin; formerly called GEO Scan. About: https://searchedby.com/about/
 
 ## Profiles
 - LinkedIn: https://www.linkedin.com/in/pablo-damian-pavon
@@ -44,3 +47,4 @@ Site last updated: 2026-10-21.
 ## Contact
 - Email: contact@pablodpavon.com
 - Contact form: https://pablodpavon.com/#contacto
+- Legal notice (Impressum): https://pablodpavon.com/impressum.html · Privacy: https://pablodpavon.com/privacy.html

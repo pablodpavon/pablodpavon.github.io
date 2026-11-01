@@ -34,6 +34,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_cases  # noqa: E402
+import build_legal  # noqa: E402  (Impressum and privacy notice, AJ-47, 1-nov-2026)
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
@@ -41,7 +42,14 @@ SRC = ROOT / "src"
 SITE = "https://pablodpavon.com"
 LANGS = ("en", "es")
 DEFAULT = "en"                     # served at the root and used as x-default
-UPDATED = "2026-10-21"             # dateModified / lastmod for this build
+UPDATED = "2026-10-21"             # base dateModified / lastmod: the last change that touched every page
+HOME_UPDATED = "2026-11-01"        # the home: SearchedBy card + Impressum/privacy links (1-nov-2026); bump with each home change
+
+
+def modified(published: str, updated: str = UPDATED) -> str:
+    """dateModified is never before datePublished (the GEO Scan case had 2026-10-31 > 2026-10-21; audit 31-oct-2026)."""
+    return max(updated, published)
+
 PERSON_ID = SITE + "/#person"
 WEBSITE_ID = SITE + "/#website"
 NAME = "Pablo Pavon"
@@ -337,7 +345,7 @@ def home_jsonld(lang: str) -> dict:
         {"@type": "ProfilePage", "@id": url + "#profilepage", "url": url, "name": HOME["title"][lang],
          "description": HOME["description"][lang], "inLanguage": lang, "isPartOf": {"@id": WEBSITE_ID},
          "about": {"@id": PERSON_ID}, "mainEntity": {"@id": PERSON_ID},
-         "datePublished": HOME["published"], "dateModified": UPDATED,
+         "datePublished": HOME["published"], "dateModified": modified(HOME["published"], HOME_UPDATED),
          "primaryImageOfPage": {"@type": "ImageObject", "url": SITE + f"/assets/og/home-{lang}.png", "width": 1200, "height": 630}},
         person_node(lang, full=True),
     ]}
@@ -355,12 +363,12 @@ def case_jsonld(c: dict, lang: str) -> dict:
          "mainEntityOfPage": {"@type": "WebPage", "@id": url},
          "image": [SITE + f"/assets/og/{c['slug']}-{lang}.png", SITE + "/assets/" + c["image"]],
          "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID},
-         "datePublished": c["published"], "dateModified": UPDATED, "isPartOf": {"@id": WEBSITE_ID},
+         "datePublished": c["published"], "dateModified": modified(c["published"], c.get("updated", UPDATED)), "isPartOf": {"@id": WEBSITE_ID},
          "keywords": c["keywords_en"] if lang == "en" else c["keywords_es"], "isAccessibleForFree": True,
          "genre": c.get("genre", "Case study on synthetic data"),
          "about": {"@type": "SoftwareSourceCode", "name": repo_name, "codeRepository": c["repo"],
                    "programmingLanguage": "Python", "author": {"@id": PERSON_ID}},
-         "isBasedOn": c["repo"]},
+         "isBasedOn": c["repo"], **({"mentions": c["product"]} if c.get("product") else {})},   # SearchedBy's Organization (1-nov-2026)
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": UI[lang]["home"], "item": page_url("index.html", lang)},
             {"@type": "ListItem", "position": 2, "name": UI[lang]["work"], "item": page_url("index.html", lang) + "#proyectos"},
@@ -373,14 +381,14 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
     url = page_url(rel, lang)
     alt = {l: page_url(rel, l) for l in LANGS}
     other = [l for l in LANGS if l != lang][0]
-    is_article = rel != "index.html"
+    is_article = rel != "index.html" and not meta.get("legal")
     lines = [
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         f"<title>{esc(meta['title'])}</title>",
         f'<meta name="description" content="{esc(meta["description"])}">',
         f'<meta name="author" content="{NAME}">',
-        '<meta name="robots" content="index, follow, max-image-preview:large">',
+        f'<meta name="robots" content="{meta.get("robots", "index, follow, max-image-preview:large")}">',
         f'<link rel="canonical" href="{url}">',
     ] + [f'<link rel="alternate" hreflang="{l}" href="{alt[l]}">' for l in LANGS] + [
         f'<link rel="alternate" hreflang="x-default" href="{alt[DEFAULT]}">',
@@ -405,7 +413,7 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
     if is_article:
         lines += [
             f'<meta property="article:published_time" content="{meta["published"]}">',
-            f'<meta property="article:modified_time" content="{UPDATED}">',
+            f'<meta property="article:modified_time" content="{meta.get("modified", UPDATED)}">',
             f'<meta property="article:author" content="{SITE}/">',
             '<meta property="article:section" content="Case studies">',
         ]
@@ -475,18 +483,30 @@ def pages() -> list[tuple[str, dict]]:
                 "description": c["desc"] if l == "en" else c["desc_es"],
                 "image": f"/assets/og/{c['slug']}-{l}.png",
                 "image_alt": c["alt_en"] if l == "en" else c["alt"],
-                "published": c["published"], "jsonld": case_jsonld(c, l)} for l in LANGS}))
+                "published": c["published"], "modified": modified(c["published"], c.get("updated", UPDATED)),
+                "jsonld": case_jsonld(c, l)} for l in LANGS}))
+    for rel, page in build_legal.PAGES.items():       # AJ-47 (1-nov-2026): noindex, outside the sitemap
+        items.append((rel, {
+            l: {"title": page["title"][l] + " · " + NAME, "description": page["description"][l],
+                "image": f"/assets/og/home-{l}.png", "image_alt": HOME["image_alt"][l], "published": page["published"],
+                "robots": "noindex, follow", "legal": True,
+                "jsonld": {"@context": "https://schema.org", "@type": "WebPage", "url": page_url(rel, l), "name": page["title"][l],
+                           "inLanguage": l, "isPartOf": {"@id": WEBSITE_ID}, "about": {"@id": PERSON_ID},
+                           "dateModified": page["published"]}} for l in LANGS}))
     return items
 
 
 def write_sitemap(items):
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
-    for rel, _ in items:
+    for rel, meta in items:
+        if meta[DEFAULT].get("legal"):               # noindex pages stay out of the sitemap
+            continue
         for lang in LANGS:
             lines.append("  <url>")
             lines.append(f"    <loc>{page_url(rel, lang)}</loc>")
-            lines.append(f"    <lastmod>{UPDATED}</lastmod>")
+            day = modified(meta[lang]["published"], HOME_UPDATED) if rel == "index.html" else meta[lang]["modified"]
+            lines.append(f"    <lastmod>{day}</lastmod>")
             for l in LANGS:
                 lines.append(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{page_url(rel, l)}"/>')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{page_url(rel, DEFAULT)}"/>')
@@ -519,8 +539,8 @@ def write_llms_txt():
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
-All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is GEO Scan, Pablo's own product in a closed beta (private code, public case study).
-Site last updated: {UPDATED}.
+All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study).
+Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES])}.
 
 ## Site
 - [Home, English]({page_url('index.html', 'en')}): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
@@ -537,6 +557,9 @@ Site last updated: {UPDATED}.
 ## Casos de estudio (español)
 {cases_es}
 
+## Own product
+- SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Google's AI) present it, and whether its site can be read, cited and recommended. Made by Pablo Pavon in Berlin; formerly called GEO Scan. About: https://searchedby.com/about/
+
 ## Profiles
 - LinkedIn: {LINKEDIN}
 - GitHub: {GITHUB}
@@ -545,12 +568,14 @@ Site last updated: {UPDATED}.
 ## Contact
 - Email: {EMAIL}
 - Contact form: {page_url('index.html', 'en')}#contacto
+- Legal notice (Impressum): {page_url('impressum.html', 'en')} · Privacy: {page_url('privacy.html', 'en')}
 """
     (ROOT / "llms.txt").write_text(txt, encoding="utf-8")
 
 
 def main():
     build_cases.build()
+    build_legal.build()
     items = pages()
     missing_og = []
     for rel, by_lang in items:
