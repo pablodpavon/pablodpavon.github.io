@@ -1,6 +1,6 @@
 # Pablo Pavon — Freelance Senior Business & Data Analyst, Berlin
 
-> Pablo Pavon is a freelance Senior Business & Data Analyst based in Berlin, Germany, originally from Argentina. He works remotely with small and mid-sized companies, accounting firms and corporate teams in Argentina, Latin America, Europe and the United States, in English, Spanish and German. He specialises in Power BI and SQL dashboards, data migration with reconciliation, finance automation (bank reconciliation, supplier invoice control, cash forecasting) and AI-assisted reporting where every number is verified before release. Background: banking, e-commerce, marketing analytics and insurance; 10+ years of experience.
+> Pablo Pavon is a freelance Senior Business & Data Analyst based in Berlin, Germany, originally from Argentina. He builds AI automations for reporting and business processes in which code checks every number the model writes, and runs his own AI product, SearchedBy. He works remotely with small and mid-sized companies, accounting firms and corporate teams in Argentina, Latin America, Europe and the United States, in English, Spanish and German. He specialises in Power BI and SQL dashboards, data migration with reconciliation, finance automation (bank reconciliation, supplier invoice control, cash forecasting) and AI-assisted reporting where every number is verified before release. Background: banking, e-commerce, marketing analytics and insurance; 10+ years of experience.
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
@@ -17,9 +17,9 @@ Site last updated: 2026-11-01.
 - [CV (español, PDF)](https://pablodpavon.com/assets/CV_Pablo_Pavon_ES.pdf)
 
 ## Services
+- AI automation, verified / Automatización con IA, verificada: Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.
 - Dashboards & BI / Dashboards y BI: Power BI, Tableau or web dashboards that replace manual reports: defined KPIs, meaningful filters, one version of the numbers.
 - Finance automation / Automatización financiera: Bank reconciliation, supplier invoice control, collections and cash forecasting that update themselves every morning, for SMEs and accounting firms.
-- AI applied to processes / IA aplicada a procesos: Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.
 - Data analysis / Análisis de datos: SQL and Python to answer concrete business questions, with assumptions and limits stated.
 - Requirements & processes / Requerimientos y procesos: Discovery, user stories with acceptance criteria, functional specs and process maps that IT can build without guessing.
 - Pricing & customer analytics / Pricing y analítica de clientes: Pricing by market and channel, elasticity, cohorts, RFM segmentation, churn and customer lifetime value.

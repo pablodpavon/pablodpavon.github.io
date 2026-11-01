@@ -68,12 +68,12 @@ URL_ATTRS = {"href", "src", "data-zoom-src", "poster"}
 # ------------------------------------------------------------------ page metadata
 HOME = {
     "title": {
-        "en": "Pablo Pavon · Freelance Data & Business Analyst in Berlin",
-        "es": "Pablo Pavon · Analista de datos y procesos freelance · Berlín",
+        "en": "Pablo Pavon · Data & Business Analyst, AI automation · Berlin",
+        "es": "Pablo Pavon · Data & Business Analyst, automatización con IA · Berlín",
     },
     "description": {
-        "en": "Freelance Senior Business & Data Analyst in Berlin, from Argentina. Power BI dashboards, data migration, finance automation, AI reporting: numbers verified.",
-        "es": "Analista de datos y procesos freelance en Berlín, argentino. Conciliación bancaria y caja automáticas, control de facturas, Power BI y reportes con IA.",
+        "en": "Freelance Senior Data & Business Analyst in Berlin. AI automation for reporting and processes, with every number checked by code. Power BI, SQL, Python.",
+        "es": "Senior Data & Business Analyst freelance en Berlín. Automatización con IA de reportes y procesos, con cada número verificado por código. Power BI, SQL.",
     },
     "image_alt": {
         "en": "Pablo Pavon, freelance Senior Business & Data Analyst in Berlin: dashboards, data migration, finance automation",
@@ -84,12 +84,14 @@ HOME = {
 
 PERSON_DESCRIPTION = {
     "en": "Pablo Pavon is a freelance Senior Business & Data Analyst based in Berlin, Germany, originally from Argentina. "
+          "He builds AI automations for reporting and business processes in which code checks every number the model writes, and runs his own AI product, SearchedBy. "
           "He works remotely with small and mid-sized companies, accounting firms and corporate teams in Argentina, "
           "Latin America, Europe and the United States, in English, Spanish and German. He specialises in Power BI and "
           "SQL dashboards, data migration with reconciliation, finance automation (bank reconciliation, supplier invoice "
           "control, cash forecasting) and AI-assisted reporting where every number is verified before release. "
           "Background: banking, e-commerce, marketing analytics and insurance; 10+ years of experience.",
     "es": "Pablo Pavon es Senior Business & Data Analyst freelance con base en Berlín, Alemania, y origen argentino. "
+          "Construye automatizaciones con IA para reportes y procesos en las que el código verifica cada número que escribe el modelo, y opera un producto propio con IA, SearchedBy. "
           "Trabaja en remoto con pymes, estudios contables y equipos corporativos de Argentina, América Latina, Europa y "
           "Estados Unidos, en español, inglés y alemán. Se especializa en dashboards en Power BI y SQL, migraciones de "
           "datos con conciliación, automatización financiera (conciliación bancaria, control de facturas de proveedores, "
@@ -98,6 +100,10 @@ PERSON_DESCRIPTION = {
 }
 
 SERVICES = [  # (en name, es name, en description, es description, anchor)
+    ("AI automation, verified", "Automatización con IA, verificada",
+     "Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.",
+     "Reportes y tareas repetitivas automatizados con IA, con controles que verifican cada cifra antes de que alguien la lea.",
+     "#ia"),
     ("Dashboards & BI", "Dashboards y BI",
      "Power BI, Tableau or web dashboards that replace manual reports: defined KPIs, meaningful filters, one version of the numbers.",
      "Tableros en Power BI, Tableau o web que reemplazan reportes manuales: KPIs definidos, filtros con sentido y una sola versión de los números.",
@@ -106,10 +112,6 @@ SERVICES = [  # (en name, es name, en description, es description, anchor)
      "Bank reconciliation, supplier invoice control, collections and cash forecasting that update themselves every morning, for SMEs and accounting firms.",
      "Conciliación bancaria, control de facturas de proveedores, cobranzas y caja proyectada que se actualizan solos cada mañana, para pymes y estudios contables.",
      "#automatizacion-financiera"),
-    ("AI applied to processes", "IA aplicada a procesos",
-     "Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.",
-     "Reportes y tareas repetitivas automatizados con IA, con controles que verifican cada cifra antes de que alguien la lea.",
-     "#servicios"),
     ("Data analysis", "Análisis de datos",
      "SQL and Python to answer concrete business questions, with assumptions and limits stated.",
      "SQL y Python para responder preguntas concretas del negocio, con supuestos y limitaciones a la vista.",
