@@ -35,6 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_cases  # noqa: E402
 import build_legal  # noqa: E402  (Impressum and privacy notice, AJ-47, 1-nov-2026)
+import build_vitrina  # noqa: E402  (/systems, /status, /links, 1-nov-2026)
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
@@ -377,11 +378,25 @@ def case_jsonld(c: dict, lang: str) -> dict:
     ]}
 
 
+def vitrina_jsonld(rel: str, page: dict, lang: str) -> dict:
+    url = page_url(rel, lang)
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type": page["type"], "@id": url + "#webpage", "url": url, "name": page["title"][lang],
+         "description": page["description"][lang], "inLanguage": lang, "isPartOf": {"@id": WEBSITE_ID},
+         "about": {"@id": PERSON_ID}, "author": {"@id": PERSON_ID},
+         "datePublished": page["published"], "dateModified": page["published"]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": UI[lang]["home"], "item": page_url("index.html", lang)},
+            {"@type": "ListItem", "position": 2, "name": page["title"][lang], "item": url}]},
+        person_node(lang, full=False),
+    ]}
+
+
 def head_html(rel: str, lang: str, meta: dict) -> str:
     url = page_url(rel, lang)
     alt = {l: page_url(rel, l) for l in LANGS}
     other = [l for l in LANGS if l != lang][0]
-    is_article = rel != "index.html" and not meta.get("legal")
+    is_article = rel != "index.html" and not meta.get("legal") and meta.get("kind") != "page"
     lines = [
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -426,6 +441,7 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
         '<link rel="sitemap" type="application/xml" href="/sitemap.xml">',
         '<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>',
         '<link rel="stylesheet" href="/assets/css/site.css">',
+    ] + [f'<link rel="stylesheet" href="{css}">' for css in meta.get("css", [])] + [
         "<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>",
         '<script type="application/ld+json">' + jsonld(meta["jsonld"]) + "</script>",
     ]
@@ -475,7 +491,7 @@ def pages() -> list[tuple[str, dict]]:
     items.append(("index.html", {
         l: {"title": HOME["title"][l], "description": HOME["description"][l],
             "image": f"/assets/og/home-{l}.png", "image_alt": HOME["image_alt"][l],
-            "published": HOME["published"], "jsonld": home_jsonld(l)} for l in LANGS}))
+            "published": HOME["published"], "css": ["/assets/css/vitrina.css"], "jsonld": home_jsonld(l)} for l in LANGS}))
     for c in build_cases.CASES:
         rel = f"proyectos/{c['slug']}.html"
         items.append((rel, {
@@ -484,7 +500,14 @@ def pages() -> list[tuple[str, dict]]:
                 "image": f"/assets/og/{c['slug']}-{l}.png",
                 "image_alt": c["alt_en"] if l == "en" else c["alt"],
                 "published": c["published"], "modified": modified(c["published"], c.get("updated", UPDATED)),
+                "css": ["/assets/css/vitrina.css"],          # nav with the Systems link (1-nov-2026)
                 "jsonld": case_jsonld(c, l)} for l in LANGS}))
+    for rel, page in build_vitrina.PAGES.items():     # /systems, /status, /links (1-nov-2026): indexed, in the sitemap
+        items.append((rel, {
+            l: {"title": page["title"][l] + " · " + NAME, "description": page["description"][l],
+                "image": f"/assets/og/home-{l}.png", "image_alt": page["image_alt"][l],
+                "published": page["published"], "modified": page["published"], "kind": "page",
+                "css": ["/assets/css/vitrina.css"], "jsonld": vitrina_jsonld(rel, page, l)} for l in LANGS}))
     for rel, page in build_legal.PAGES.items():       # AJ-47 (1-nov-2026): noindex, outside the sitemap
         items.append((rel, {
             l: {"title": page["title"][l] + " · " + NAME, "description": page["description"][l],
@@ -545,6 +568,9 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 ## Site
 - [Home, English]({page_url('index.html', 'en')}): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
 - [Inicio, español]({page_url('index.html', 'es')}): la misma página en español
+- [Systems I built and run]({page_url('systems.html', 'en')}): what each system does, what runs on its own, links to the case and the code
+- [Systems status]({page_url('status.html', 'en')}): last run, items processed, cost and state of each scheduled system, generated daily (data: {SITE}/assets/data/status.json)
+- [Links]({page_url('links.html', 'en')}): all profiles on one page
 - [CV (English, PDF)]({SITE}/assets/CV_Pablo_Pavon_EN.pdf)
 - [CV (español, PDF)]({SITE}/assets/CV_Pablo_Pavon_ES.pdf)
 
@@ -576,6 +602,7 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 def main():
     build_cases.build()
     build_legal.build()
+    build_vitrina.build()
     items = pages()
     missing_og = []
     for rel, by_lang in items:

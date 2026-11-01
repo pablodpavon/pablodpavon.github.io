@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systems I built and run · Pablo Pavon · bilingual source</title>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/vitrina.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body data-base="">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label-es="Secciones" aria-label-en="Sections">
+      <a href="index.html#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
+      <a href="index.html#lab">Dashboards</a>
+      <a href="index.html#proyectos"><span lang="es">Proyectos</span><span lang="en">Work</span></a>
+      <a href="systems.html" aria-current="page"><span lang="es">Sistemas</span><span lang="en">Systems</span></a>
+      <a href="index.html#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
+      <a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <!--LANGSWITCH-->
+      <button class="icon-btn" id="themeBtn" type="button" aria-label-es="Tema" aria-label-en="Theme"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span lang="es">Hablemos</span><span lang="en">Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label-es="Menú" aria-label-en="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero v-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span lang="es">Inicio</span><span lang="en">Home</span></a><br>
+    <h1 lang="es">Sistemas que construí y que corren</h1><h1 lang="en">Systems I built and run</h1>
+    <p class="lede" lang="es">Cada tarjeta dice qué hace el sistema, qué parte corre sin mí y dónde leer el caso y el código. SearchedBy es un producto en uso; los demás casos usan datos sintéticos de empresas ficticias.</p><p class="lede" lang="en">Each card says what the system does, which part runs without me, and where to read the case and the code. SearchedBy is a product in use; the other cases use synthetic data from fictional companies.</p>
+    <div class="cs-actions"><a class="btn" href="status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg><span lang="es">Ver el estado de cada sistema</span><span lang="en">See the status of each system</span></a></div>
+  </div>
+</section>
+
+<div class="container">
+<div class="sys-grid">
+<article class="sys-card feature">
+  <div class="sys-top"><span class="chip own"><span lang="es">Producto propio · beta abierta</span><span lang="en">Own product · open beta</span></span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">LLM APIs</span></div>
+  <h2 lang="es">SearchedBy: cómo te presentan los asistentes de IA</h2><h2 lang="en">SearchedBy: how AI assistants present a business</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Muestra a un negocio qué responden ChatGPT, Perplexity y Google con IA cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo citen.</p><p lang="en">Shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be cited.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Cada scan corre en dos procesos de fondo: uno lee el sitio y el otro les pregunta a los motores de IA. La salud del servicio se revisa todos los días en la página de estado.</p><p lang="en">Each scan runs on two background workers: one reads the site, the other asks the AI engines. The service health is checked every day on the status page.</p></div>
+  <ul class="sys-figs"><li><b><span lang="es">~3.800</span><span lang="en">~3,800</span></b><span><span lang="es">tests antes de cada deploy</span><span lang="en">tests before every deploy</span></span></li><li><b><span lang="es">US$ 0,23</span><span lang="en">US$ 0.23</span></b><span><span lang="es">costo de IA de un scan completo reciente</span><span lang="en">AI cost of a recent full scan</span></span></li><li><b>4</b><span><span lang="es">idiomas en la interfaz</span><span lang="en">interface languages</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/geo-scan.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://searchedby.com/" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Abrir SearchedBy</span><span lang="en">Open SearchedBy</span></a><a class="btn" href="https://github.com/pablodpavon/searchedby-engineering" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ingeniería en GitHub</span><span lang="en">Engineering on GitHub</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">Método</span><span lang="en">Method</span></span><span class="chip">QA</span><span class="chip">Claude Code</span></div>
+  <h2 lang="es">Cómo llevo sistemas de IA a producción</h2><h2 lang="en">How I ship AI systems</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">El método detrás de SearchedBy contado como caso: cada decisión registrada, los tests antes que el código, una checklist y una comparación de archivos por checksum en cada deploy, revisores nativos para cada idioma y el costo de cada corrida a la vista.</p><p lang="en">The method behind SearchedBy, written up as a case: every decision logged, tests before code, a checklist and a checksum comparison of every file on each deploy, native-speaker reviewers for each language, and the cost of every run on record.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">No agrega nada que corra: documenta cómo se construyen, se despliegan y se controlan los demás sistemas.</p><p lang="en">It adds nothing that runs: it documents how the other systems are built, deployed and checked.</p></div>
+  <ul class="sys-figs"><li><b>155</b><span><span lang="es">decisiones registradas</span><span lang="en">decisions logged</span></span></li><li><b><span lang="es">197 de 197</span><span lang="en">197 of 197</span></b><span><span lang="es">archivos iguales en servidor y origen, último control</span><span lang="en">files identical on server and source, last check</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/ai-systems-operating-model.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://github.com/pablodpavon/searchedby-engineering" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Ver en GitHub</span><span lang="en">View on GitHub</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">IA</span><span lang="en">AI</span></span><span class="chip syn"><span lang="es">Caso con datos sintéticos</span><span lang="en">Case study on synthetic data</span></span><span class="chip">Python</span></div>
+  <h2 lang="es">Reporte de KPIs con IA que verifica sus números</h2><h2 lang="en">AI KPI report that checks its own numbers</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Un LLM redacta el comentario de KPIs y un control prueba cada cifra contra los datos: que exista, que sea de la métrica y el período correctos, y que "subió" coincida con el dato. Si un número falla, no se publica nada.</p><p lang="en">An LLM drafts the KPI commentary and a checker tests every figure against the data: it must exist, belong to the right metric and period, and "rose" must match the data. If one number fails, nothing is published.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Una corrida programada genera datos nuevos de la tienda sintética, recalcula los KPIs, redacta el comentario y pasa el control. La última corrida figura en la página de estado.</p><p lang="en">A scheduled run generates new data for the synthetic store, recomputes the KPIs, drafts the commentary and runs the check. The last run is on the status page.</p></div>
+  <ul class="sys-figs"><li><b>4</b><span><span lang="es">tipos de error que detecta</span><span lang="en">error types it detects</span></span></li><li><b><span lang="es">~47.000</span><span lang="en">~47,000</span></b><span><span lang="es">órdenes en los datos de prueba</span><span lang="en">orders in the test data</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/reporte-con-ia.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://github.com/pablodpavon/ai-kpi-commentary" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Código</span><span lang="en">Code</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip">Business analysis</span><span class="chip syn"><span lang="es">Caso con datos sintéticos</span><span lang="en">Case study on synthetic data</span></span></div>
+  <h2 lang="es">De requerimientos a backlog</h2><h2 lang="en">Requirements to backlog</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Convierte la transcripción de un workshop en user stories con criterios de aceptación, preguntas abiertas y una matriz de trazabilidad. Cada story cita la frase de la que sale, y un control marca las que no tienen origen.</p><p lang="en">Turns a workshop transcript into user stories with acceptance criteria, open questions and a traceability matrix. Every story quotes the sentence it comes from, and a check flags any story without a source.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Tres casos ya procesados para recorrer. No hay campo de texto libre, así que no hay costo por visita.</p><p lang="en">Three precomputed cases to browse. There is no free-text input, so there is no cost per visit.</p></div>
+  
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/requirements-to-backlog.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">Finanzas</span><span lang="en">Finance</span></span><span class="chip syn"><span lang="es">Caso con datos sintéticos</span><span lang="en">Case study on synthetic data</span></span><span class="chip">Python</span></div>
+  <h2 lang="es">Conciliación y caja diaria</h2><h2 lang="en">Daily reconciliation and cash</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Concilia los extractos de dos bancos contra el sistema, marca las cobranzas sin imputar con la factura sugerida, lista los clientes atrasados y proyecta la caja de cuatro semanas.</p><p lang="en">Reconciles two bank statements against the ERP, flags unbooked receipts with the suggested invoice, lists late customers and projects four weeks of cash.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Corre cada mañana y deja listos el resumen del día, la lista de pendientes y el Excel de control antes de que llegue el equipo.</p><p lang="en">Runs every morning and leaves the daily summary, the open-items list and the control workbook ready before the team arrives.</p></div>
+  <ul class="sys-figs"><li><b><span lang="es">98,1 %</span><span lang="en">98.1%</span></b><span><span lang="es">conciliado o registrado solo</span><span lang="en">reconciled or booked automatically</span></span></li><li><b>66</b><span><span lang="es">corridas diarias en el caso de prueba</span><span lang="en">daily runs in the test case</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/conciliacion-y-caja.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://github.com/pablodpavon/daily-cash-control" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Código</span><span lang="en">Code</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">Finanzas</span><span lang="en">Finance</span></span><span class="chip syn"><span lang="es">Caso con datos sintéticos</span><span lang="en">Case study on synthetic data</span></span><span class="chip">Python</span></div>
+  <h2 lang="es">Control de facturas antes de pagar</h2><h2 lang="en">Supplier invoice control before payment</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Doce reglas revisan CUIT, duplicados, IVA, orden de compra, recepción y CAE, y clasifican cada factura en pagar, revisar o bloquear.</p><p lang="en">Twelve rules check tax ID, duplicates, VAT, purchase order, goods receipt and CAE, and sort each invoice into pay, review or block.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Corre antes de cada corrida de pagos y entrega la lista de excepciones con el motivo de cada una.</p><p lang="en">Runs before each payment run and hands over the exception list with the reason for each one.</p></div>
+  <ul class="sys-figs"><li><b>12</b><span><span lang="es">reglas documentadas</span><span lang="en">documented rules</span></span></li><li><b><span lang="es">1.260</span><span lang="en">1,260</span></b><span><span lang="es">facturas en los datos de prueba</span><span lang="en">invoices in the test data</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/cuentas-a-pagar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://github.com/pablodpavon/ap-invoice-control" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Código</span><span lang="en">Code</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">Migración</span><span lang="en">Migration</span></span><span class="chip syn"><span lang="es">Caso con datos sintéticos</span><span lang="en">Case study on synthetic data</span></span><span class="chip">Python</span></div>
+  <h2 lang="es">Migración de datos con conciliación</h2><h2 lang="en">Data migration with reconciliation</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">Migra un sistema de facturación heredado siguiendo una especificación de mapeo, unifica duplicados y cierra con doce controles de conciliación.</p><p lang="en">Moves a legacy billing system following a mapping spec, merges duplicates and closes with twelve reconciliation checks.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Cada corrida repite los doce controles y deja cada registro con su destino o con el motivo por el que quedó afuera.</p><p lang="en">Every run repeats the twelve checks and traces each record to its target or to the reason it was left out.</p></div>
+  <ul class="sys-figs"><li><b>12</b><span><span lang="es">controles en cada corrida</span><span lang="en">checks on every run</span></span></li><li><b><span lang="es">4.060 · 6.500</span><span lang="en">4,060 · 6,500</span></b><span><span lang="es">clientes y contratos de prueba</span><span lang="en">test customers and contracts</span></span></li></ul>
+  <div class="sys-links"><a class="btn btn-brand" href="proyectos/migracion-de-datos.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Leer el caso</span><span lang="en">Read the case</span></a><a class="btn" href="https://github.com/pablodpavon/data-migration-toolkit" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Código</span><span lang="en">Code</span></a></div>
+</article>
+<article class="sys-card">
+  <div class="sys-top"><span class="chip"><span lang="es">Repositorio público</span><span lang="en">Public repository</span></span><span class="chip">GitHub</span></div>
+  <h2>searchedby-engineering</h2>
+  <div><span class="v-label"><span lang="es">Qué hace</span><span lang="en">What it does</span></span><p lang="es">La parte pública de la ingeniería de SearchedBy: cómo se prueba, cómo se despliega y cómo se controla. El código del producto sigue siendo privado.</p><p lang="en">The public side of SearchedBy's engineering: how it is tested, deployed and checked. The product code stays private.</p></div>
+  <div class="sys-run"><span class="v-label"><span lang="es">Qué corre solo</span><span lang="en">What runs on its own</span></span><p lang="es">Es la referencia de los sistemas de esta página, no un proceso que corra.</p><p lang="en">It is the reference for the systems on this page, not a process that runs.</p></div>
+  
+  <div class="sys-links"><a class="btn" href="https://github.com/pablodpavon/searchedby-engineering" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span lang="es">Abrir en GitHub</span><span lang="en">Open on GitHub</span></a></div>
+</article>
+</div>
+<div class="sys-foot">
+  <p lang="es">La última corrida, lo que procesó, cuánto costó y si terminó bien: una página que se genera sola una vez por día desde los logs.</p>
+  <p lang="en">Last run, what it processed, what it cost and whether it worked: a page that rebuilds itself once a day from the logs.</p>
+  <a class="btn btn-brand" href="status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span lang="es">Estado de los sistemas</span><span lang="en">Systems status</span></a>
+</div>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span lang="es">Los casos marcados usan datos sintéticos y empresas ficticias.</span><span lang="en">Cases marked as such use synthetic data and fictional companies.</span>
+  <span class="f-legal"><a href="impressum.html">Impressum</a> · <a href="privacy.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></span>
+</div></div></footer>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/contact.js"></script>
+</body>
+</html>

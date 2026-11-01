@@ -10,6 +10,9 @@ Site last updated: 2026-11-01.
 ## Site
 - [Home, English](https://pablodpavon.com/): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
 - [Inicio, español](https://pablodpavon.com/es/): la misma página en español
+- [Systems I built and run](https://pablodpavon.com/systems.html): what each system does, what runs on its own, links to the case and the code
+- [Systems status](https://pablodpavon.com/status.html): last run, items processed, cost and state of each scheduled system, generated daily (data: https://pablodpavon.com/assets/data/status.json)
+- [Links](https://pablodpavon.com/links.html): all profiles on one page
 - [CV (English, PDF)](https://pablodpavon.com/assets/CV_Pablo_Pavon_EN.pdf)
 - [CV (español, PDF)](https://pablodpavon.com/assets/CV_Pablo_Pavon_ES.pdf)
 

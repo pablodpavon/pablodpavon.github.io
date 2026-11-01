@@ -47,6 +47,7 @@ def head(title_es, title_en, desc, image):
       <a href="../index.html#servicios">{bi('Servicios', 'Services')}</a>
       <a href="../index.html#lab">Dashboards</a>
       <a href="../index.html#proyectos">{bi('Proyectos', 'Work')}</a>
+      <a href="../systems.html">{bi('Sistemas', 'Systems')}</a>
       <a href="../index.html#experiencia">{bi('Experiencia', 'Experience')}</a>
       <a href="../index.html#contacto">{bi('Contacto', 'Contact')}</a>
     </nav>

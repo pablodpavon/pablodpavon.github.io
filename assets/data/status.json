@@ -1,0 +1,73 @@
+{
+ "schema": 1,
+ "generated_utc": "2026-11-01T11:15:45Z",
+ "systems": [
+  {
+   "system": "scoring-pipeline",
+   "title_en": "Hiring-signal radar · 16 public sources",
+   "title_es": "Radar de señales de contratación · 16 fuentes públicas",
+   "items_label_en": "items in scope",
+   "items_label_es": "ítems en alcance",
+   "schedule_en": "Daily, 08:40 Berlin",
+   "schedule_es": "Diario, 08:40 Berlín",
+   "kind_en": "Scheduled LLM scoring pipeline",
+   "kind_es": "Pipeline programado de puntaje con LLM",
+   "last_run_utc": "2026-11-01T07:45:21Z",
+   "ok": true,
+   "items": 114,
+   "cost_usd": 0.1954,
+   "duration_s": 316,
+   "sources_total": 16,
+   "sources_failed": 1,
+   "note": "1 of 16 sources did not answer.",
+   "note_es": "1 de 16 fuentes no respondió."
+  },
+  {
+   "system": "searchedby",
+   "title_en": "SearchedBy · public web app",
+   "title_es": "SearchedBy · aplicación web pública",
+   "kind_en": "Own product, open beta",
+   "kind_es": "Producto propio, beta abierta",
+   "last_run_utc": "2026-11-01T11:15:45Z",
+   "ok": true,
+   "items": null,
+   "cost_usd": null,
+   "latency_ms": 156,
+   "schedule_en": "Health checked once a day",
+   "schedule_es": "Salud revisada una vez por día",
+   "link": "https://searchedby.com/",
+   "note": "",
+   "note_es": ""
+  },
+  {
+   "system": "kpi-report",
+   "title_en": "AI KPI report, verified weekly",
+   "title_es": "Reporte de KPIs con IA, verificado cada semana",
+   "last_run_utc": "2026-11-01T11:14:05Z",
+   "ok": true,
+   "items": 14,
+   "items_label_en": "numbers checked",
+   "items_label_es": "números verificados",
+   "cost_usd": 0.00139,
+   "schedule_en": "Weekly, Mondays 07:30 Berlin",
+   "schedule_es": "Semanal, lunes 07:30 Berlín",
+   "note": "2026-W43: RELEASED, 14 numbers checked. 2 weekly runs, 1 blocked. Synthetic data."
+  },
+  {
+   "system": "website",
+   "title_en": "pablodpavon.com",
+   "title_es": "pablodpavon.com",
+   "kind_en": "Static site, built from source by a script",
+   "kind_es": "Sitio estático, generado por un script",
+   "schedule_en": "Updated on every change",
+   "schedule_es": "Se actualiza con cada cambio",
+   "items": null,
+   "cost_usd": null,
+   "link": "https://github.com/pablodpavon/pablodpavon.github.io",
+   "last_run_utc": "2026-11-01T10:57:51Z",
+   "ok": true,
+   "note": "",
+   "note_es": ""
+  }
+ ]
+}

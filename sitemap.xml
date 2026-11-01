@@ -84,4 +84,46 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/reporte-con-ia.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/reporte-con-ia.html"/>
   </url>
+  <url>
+    <loc>https://pablodpavon.com/systems.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/systems.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/systems.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/systems.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/es/systems.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/systems.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/systems.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/systems.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/status.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/status.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/status.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/status.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/es/status.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/status.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/status.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/status.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/links.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/links.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/links.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/links.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/es/links.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/links.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/links.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/links.html"/>
+  </url>
 </urlset>

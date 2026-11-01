@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systems status · Pablo Pavon · bilingual source</title>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/vitrina.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body data-base="">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label-es="Secciones" aria-label-en="Sections">
+      <a href="index.html#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
+      <a href="index.html#lab">Dashboards</a>
+      <a href="index.html#proyectos"><span lang="es">Proyectos</span><span lang="en">Work</span></a>
+      <a href="systems.html"><span lang="es">Sistemas</span><span lang="en">Systems</span></a>
+      <a href="index.html#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
+      <a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <!--LANGSWITCH-->
+      <button class="icon-btn" id="themeBtn" type="button" aria-label-es="Tema" aria-label-en="Theme"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span lang="es">Hablemos</span><span lang="en">Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label-es="Menú" aria-label-en="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero v-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span lang="es">Inicio</span><span lang="en">Home</span></a><br>
+    <h1 lang="es">Estado de los sistemas</h1><h1 lang="en">Systems status</h1>
+    <p class="lede" lang="es">Los sistemas que corren de forma programada, con su última corrida, lo que procesaron, cuánto costó y si terminó bien. Un script en mi máquina lee los logs una vez por día y publica estos datos; nada se carga a mano.</p><p class="lede" lang="en">The systems that run on a schedule, with their last run, what they processed, what it cost and whether it worked. A script on my machine reads the logs once a day and publishes this data; nothing is typed in by hand.</p>
+    <p class="st-meta" id="st-meta" hidden></p>
+  </div>
+</section>
+
+<div class="container">
+<div class="st-grid" id="st-grid" aria-live="polite">
+  <p class="st-empty"><span lang="es">Los datos de estado no se pudieron cargar. El archivo está en <a href="assets/data/status.json">status.json</a>.</span><span lang="en">The status data could not be loaded. The file is at <a href="assets/data/status.json">status.json</a>.</span></p>
+</div>
+<p class="st-how" lang="es">Fuentes: el log de cada corrida, un chequeo público de salud de SearchedBy (un GET a /healthz), los archivos de estado que escriben otros sistemas y la fecha del último cambio de este sitio. Datos crudos: <a href="assets/data/status.json">status.json</a>. Generador: <a href="https://github.com/pablodpavon/pablodpavon.github.io/blob/main/tools/status/build_status.py" rel="noopener">build_status.py</a>. Los sistemas y sus casos: <a href="systems.html">Sistemas</a>.</p>
+<p class="st-how" lang="en">Sources: the log of each run, a public health check of SearchedBy (a GET to /healthz), status files written by other systems and the date of the last change to this site. Raw data: <a href="assets/data/status.json">status.json</a>. Generator: <a href="https://github.com/pablodpavon/pablodpavon.github.io/blob/main/tools/status/build_status.py" rel="noopener">build_status.py</a>. The systems and their cases: <a href="systems.html">Systems</a>.</p>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  
+  <span class="f-legal"><a href="impressum.html">Impressum</a> · <a href="privacy.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></span>
+</div></div></footer>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/contact.js"></script>
+<script src="assets/js/status.js"></script>
+</body>
+</html>
