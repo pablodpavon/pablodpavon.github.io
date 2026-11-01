@@ -484,7 +484,245 @@ GEO = dict(
     ],
 )
 
-CASES = (GEO, CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
+# ---------------------------------------------------------------- AI systems operating model (P1, 1-nov-2026)
+# Paste this block into tools/build_cases.py right before `CASES = (...)`, then add OPS to CASES
+# (suggested order: CASES = (GEO, OPS, CASH, AP, MIG, KPI)). It only uses helpers already in that file
+# (bi, p, checks, metrics, ICON_NEXT). Needs assets/proj_ops.jpg (1600x1000, delivered next to this file).
+# Sources of every figure: INFORME.md, section "Fuentes", in Web/_WIP/2026-11-01_vitrina/P1_operating_model/.
+# Own product, not synthetic: it carries "pill" and "foot" like the GEO case.
+
+OPS_STYLE = """<style>
+.ops-fig,.ops-tbl{contain:inline-size;max-width:100%}
+.ops-fig{--op-a:#5b45c9;--op-a-tint:#f0edfd;--op-b:#b06f00;--op-b-tint:#fdf4e3;margin:26px 0 8px;padding:18px 18px 12px;border:1px solid var(--line);border-radius:var(--r-l);background:var(--card);overflow-x:auto}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}}
+:root[data-theme="dark"] .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}
+.ops-fig svg{display:block;min-width:600px;width:100%;height:auto;font-family:var(--font)}
+.ops-fig figcaption{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
+.ops-fig .st{fill:var(--card-2);stroke:var(--line-2);stroke-width:1.2}
+.ops-fig .st.gate{fill:var(--op-b-tint);stroke:var(--op-b)}
+.ops-fig .st.ship{fill:var(--op-a-tint);stroke:var(--op-a)}
+.ops-fig .num{fill:var(--op-a);font:600 12px var(--font);letter-spacing:.06em}
+.ops-fig .gate .num,.ops-fig .num.g{fill:var(--op-b)}
+.ops-fig .ttl{fill:var(--ink);font:600 17px var(--font)}
+.ops-fig .tx{fill:var(--ink-2);font:400 13.5px var(--font)}
+.ops-fig .sm{fill:var(--muted);font:500 13px var(--font)}
+.ops-fig .ln{stroke:var(--ink-2);stroke-width:1.6;fill:none}
+.ops-fig .lp{stroke:var(--op-b);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+.ops-fig .wr{stroke:var(--op-a);stroke-width:1.2;fill:none;stroke-dasharray:2 4;opacity:.8}
+.ops-fig .rec{fill:var(--op-a-tint);stroke:var(--op-a);stroke-width:1.2}
+.ops-fig .ah{fill:var(--ink-2)}.ops-fig .ah2{fill:var(--op-b)}
+.ops-tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:var(--r-m);background:var(--card)}
+.ops-tbl table{width:100%;border-collapse:collapse;font:400 12.5px/1.45 "Geist Mono",ui-monospace,monospace;min-width:560px}
+.ops-tbl th{font:600 11.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.ops-tbl td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.ops-tbl tr:last-child td{border-bottom:0}
+.ops-tbl .k{color:var(--ink);font-weight:600}
+.ops-tbl .new{color:var(--good-text)}
+</style>"""
+
+
+def _svg_text(x, y, es, en, cls="tx", anchor="start"):
+    a = f' text-anchor="{anchor}"' if anchor != "start" else ""
+    return (f'<text class="{cls}" x="{x}" y="{y}"{a} lang="es">{es}</text>'
+            f'<text class="{cls}" x="{x}" y="{y}"{a} lang="en">{en}</text>')
+
+
+# Five stations of the loop: number, title ES/EN, three short lines ES/EN, card class.
+_STATIONS = [
+    ("01", "Decidir", "Decide",
+     [("Decisión numerada", "Numbered decision"), ("fecha, hora y fuente", "date, time and source"), ("costo estimado antes", "cost stated first")], ""),
+    ("02", "Encargar", "Brief",
+     [("Brief a un agente:", "Brief to an agent:"), ("base, alcance, costo", "base, scope, budget"), ("y entregable", "and deliverable")], ""),
+    ("03", "Construir", "Build",
+     [("Tests primero:", "Tests first: red"), ("en rojo sin el cambio", "on the unchanged copy"), ("producción intacta", "production untouched")], ""),
+    ("04", "Probar", "Prove",
+     [("2 versiones de Python", "2 Python versions"), ("set ciego, una corrida", "blind set, run once"), ("revisión nativa", "native review")], "gate"),
+    ("05", "Publicar", "Ship",
+     [("Mi OK, originales", "My OK, originals"), ("copiados, backup", "copied, backup"), ("md5 servidor = Mac", "md5 server = Mac")], "ship"),
+]
+
+
+def _ops_svg():
+    W, gap, x0, y0, h = 168, 30, 0, 34, 132
+    out = ['<svg viewBox="0 0 960 400" role="img" aria-labelledby="opsT opsD" xmlns="http://www.w3.org/2000/svg">',
+           '<title id="opsT" lang="es">El circuito de un cambio</title><title id="opsT" lang="en">The loop for one change</title>',
+           '<desc id="opsD" lang="es">Cinco pasos: decidir, encargar, construir, probar y publicar. Si una compuerta falla, el cambio vuelve a su copia de trabajo. Cada paso escribe en el registro: diario con hora, log de decisiones y pendientes.</desc>'
+           '<desc id="opsD" lang="en">Five steps: decide, brief, build, prove and ship. If a gate fails, the change goes back to its working copy. Every step writes to the record: a diary with the time, the decision log and the backlog.</desc>',
+           '<defs><marker id="opsAh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0 10 5 0 10z"/></marker>'
+           '<marker id="opsAh2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah2" d="M0 0 10 5 0 10z"/></marker></defs>']
+    out.append(_svg_text(0, 16, "UN CAMBIO, DE PUNTA A PUNTA", "ONE CHANGE, START TO FINISH", "sm"))
+    for i, (num, es, en, lines, cls) in enumerate(_STATIONS):
+        x = x0 + i * (W + gap)
+        out.append(f'<g class="{cls}"><rect class="st {cls}" x="{x + 1}" y="{y0}" width="{W - 2}" height="{h}" rx="14"/>')
+        out.append(f'<text class="num" x="{x + 16}" y="{y0 + 26}">{num}</text>')
+        out.append(_svg_text(x + 16, y0 + 50, es, en, "ttl"))
+        for j, (les, len_) in enumerate(lines):
+            out.append(_svg_text(x + 16, y0 + 76 + j * 19, les, len_))
+        out.append("</g>")
+        if i < len(_STATIONS) - 1:
+            ax = x + W
+            out.append(f'<path class="ln" d="M{ax + 3} {y0 + h / 2}H{ax + gap - 4}" marker-end="url(#opsAh)"/>')
+    # Gate failure loop: from Prove back to Build, under the cards.
+    bx = x0 + 2 * (W + gap) + W / 2
+    px = x0 + 3 * (W + gap) + W / 2
+    yb = y0 + h
+    out.append(f'<path class="lp" d="M{px} {yb + 3}V{yb + 30}H{bx}V{yb + 9}" marker-end="url(#opsAh2)"/>')
+    out.append(_svg_text((bx + px) / 2, yb + 48, "una compuerta falla: vuelve a la copia", "a gate fails: back to the working copy", "sm", "middle"))
+    # Owner OK marker on the Prove -> Ship arrow.
+    sx = x0 + 4 * (W + gap) - gap / 2
+    out.append(f'<circle cx="{sx}" cy="{y0 + h / 2 - 22}" r="11" fill="var(--op-a)"/>')
+    out.append(f'<text x="{sx}" y="{y0 + h / 2 - 18}" text-anchor="middle" style="fill:var(--card);font:700 11px var(--font)">OK</text>')
+    # The record band.
+    ry = 296
+    out.append(f'<rect class="rec" x="1" y="{ry}" width="958" height="72" rx="14"/>')
+    out.append(_svg_text(20, ry + 30, "Registro", "Record", "ttl"))
+    out.append(_svg_text(20, ry + 52, "Cada paso escribe aquí antes de contestarme", "Every step writes here before answering me", "tx"))
+    cols = [(380, "Diario: una línea con hora de Berlín", "Diary: one line with the Berlin time"),
+            (380, "Log de decisiones: D1 a D155", "Decision log: D1 to D155"),
+            (690, "Pendientes que se abren o cierran", "Open items that open or close"),
+            (690, "Checklist y registro de cada deploy", "Checklist and record of each deploy")]
+    for k, (cx, es, en) in enumerate(cols):
+        out.append(f'<circle cx="{cx - 10}" cy="{ry + 26 + (k % 2) * 22 - 4}" r="3" fill="var(--op-a)"/>')
+        out.append(_svg_text(cx, ry + 26 + (k % 2) * 22, es, en, "tx"))
+    for i in range(len(_STATIONS)):
+        cx = x0 + i * (W + gap) + 22
+        out.append(f'<path class="wr" d="M{cx} {y0 + h + 2}V{ry - 4}"/>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+OPS_FIG = ('<figure class="ops-fig">' + _ops_svg()
+           + '<figcaption>' + bi("Cada cambio, desde una frase hasta un arreglo de seguridad, pasa por el mismo circuito. Solo mi OK lo lleva de la copia de trabajo a producción.",
+                                 "Every change, from one phrase to a security fix, goes through the same loop. Only my OK moves it from the working copy to production.")
+           + '</figcaption></figure>')
+
+OPS_DECISION = ('<pre class="code"><span class="c" lang="es"># Una entrada del log de decisiones (recortada; el original está en español)</span>'
+                '<span class="c" lang="en"># One entry of the decision log (trimmed, translated from Spanish)</span>\n'
+                '<span class="k">D96</span> (25 Oct 2026, 18:42–18:50). Close the scope of deploy A; rule against overspending.\n'
+                '  In:   fixes D01–D08, D10–D13, D19–D24, each with a test written first.\n'
+                '  Out:  D09, D14–D18 (details), kept as pending in the tests.\n'
+                '  Measured on blind set 3, run once on the final copy:\n'
+                '        precision <span class="s">0.56 → 0.80</span>, recall <span class="s">0.53 → 0.74</span> against production.\n'
+                '  Rule: state the cost before any review by agents; at most one independent\n'
+                '        review and one blind set per deploy; if the candidate clearly beats\n'
+                '        production with no serious errors, it ships and edge cases go to the backlog.\n'
+                '  Source: owner, 18:42.</pre>')
+
+_ROWS = [  # status, path, md5 production (prefix), md5 candidate (prefix). From a real checklist of 1-nov, paths shortened.
+    ("changed", "app/main.py", "f52da5e8…", "eeb03639…"),
+    ("changed", "app/templates/start.html", "0e543837…", "c485c7a1…"),
+    ("changed", "tests/test_flow_steps.py", "6a68b323…", "21ec7c25…"),
+    ("new", "app/ux_texts.py", "-", "7cec3eba…"),
+    ("new", "tests/test_ux_2026_11_01.py", "-", "264df87f…"),
+]
+OPS_TABLE = ('<div class="ops-tbl"><table><thead><tr>'
+             f'<th>{bi("estado", "status")}</th><th>{bi("archivo", "file")}</th><th>md5 {bi("producción", "production")}</th><th>md5 {bi("copia", "candidate")}</th>'
+             '</tr></thead><tbody>'
+             + "".join(f'<tr><td class="{"new" if s == "new" else "k"}">{bi({"changed": "cambiado", "new": "nuevo"}[s], s)}</td><td>{f}</td><td>{a}</td><td>{b}</td></tr>'
+                       for s, f, a, b in _ROWS)
+             + '</tbody></table></div>')
+
+OPS = dict(
+    slug="ai-systems-operating-model", image="proj_ops.jpg", repo="https://github.com/pablodpavon/searchedby-engineering",
+    pill=("Cómo trabajo · producto propio", "How I work · own product"),
+    repo_label=("Ver las notas de ingeniería en GitHub", "Read the engineering notes on GitHub"),
+    extra_action=f'<a class="btn" href="geo-scan.html">{ICON_NEXT}{bi("Ver el caso del producto", "Read the product case")}</a>',
+    foot=bi("Producto propio en beta abierta. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.",
+            "Own product in an open beta. No client data or names; the examples are trimmed from the project records."),
+    updated="2026-11-01",
+    genre="Engineering case study",
+    title_es="Cómo llevo sistemas con IA a producción", title_en="How I ship AI systems",
+    desc="How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review.",
+    desc_es="Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.",
+    alt="Una decisión numerada, la evolución de los tests y un registro de deploy con la verificación md5 entre servidor y Mac",
+    alt_en="A numbered decision, the growth of the test suites and a deploy record with the md5 check between server and Mac",
+    published="2026-11-01",
+    keywords_es="IA en producción, Claude Code, agentes de IA, QA, tests, deploy, evaluación de LLM, sets ciegos, revisión nativa, control de costos",
+    keywords_en="AI deployment, Claude Code, AI agents, QA, testing, deploy verification, LLM evaluation, blind test sets, native review, cost control",
+    product={"@type": "Organization", "@id": "https://searchedby.com/#org", "name": "SearchedBy", "url": "https://searchedby.com/"},
+    h1_es="El agente escribe el código. El proceso decide qué se publica.",
+    h1_en="The agent writes the code. The process decides what ships.",
+    lede_es="El modelo operativo con el que construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests escritos primero, producción que nunca se edita en el lugar, sets ciegos de evaluación, revisión nativa por idioma y el costo dicho antes de gastar. Con ejemplos reales de los registros del proyecto.",
+    lede_en="The operating model I use to build and run SearchedBy with Claude Code: numbered decisions, tests written first, production never edited in place, blind evaluation sets, native review for every language, and the cost stated before anything is spent. With real examples from the project records.",
+    tags=["Claude Code", "Python", "pytest", "LLM evaluation", "Deploy verification", "Cost control"],
+    facts=[("Tipo", "Type", "Modelo operativo", "Operating model"),
+           ("Mi rol", "My role", "Reglas, revisión y OK final", "Rules, review, go-live call"),
+           ("Período", "Period", "Octubre–noviembre de 2026", "October–November 2026"),
+           ("Evidencia", "Evidence", "155 decisiones · 70+ checklists de deploy", "155 decisions · 70+ deploy checklists")],
+    next=("geo-scan.html", "SearchedBy: producto con IA", "SearchedBy: an AI product"),
+    sections=[
+        ("contexto", "Contexto", "Context",
+         OPS_STYLE
+         + p("SearchedBy (antes GEO Scan) es mi producto: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.",
+             "SearchedBy (formerly GEO Scan) is my own product: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.")
+         + p("Con un agente escribiendo el código, mi trabajo pasó a todo lo que lo rodea: saber qué cambió, probar que funciona, que el servidor sea idéntico a lo que probé y cuánto costó cada paso, con varias sesiones cambiando el producto al mismo tiempo. Esta página es el proceso que uso para eso.",
+             "With an agent writing the code, my work moved to everything around it: knowing what changed, proving it works, keeping the server identical to what I tested, and knowing what each step cost, while several sessions change the product at the same time. This page is the process I use for that.")),
+        ("circuito", "El circuito", "The loop",
+         p("Todo cambio, desde corregir una frase hasta un arreglo de seguridad, pasa por los mismos cinco pasos. Las compuertas lo devuelven a su copia de trabajo; solo mi OK lo pasa a producción. Cada paso deja su rastro en el registro.",
+           "Every change, from fixing one phrase to a security patch, goes through the same five steps. Gates send it back to its working copy; only my OK moves it to production. Every step leaves its trace in the record.")
+         + OPS_FIG),
+        ("decisiones", "Decisiones con número", "Numbered decisions",
+         p("Una sesión se puede compactar o cortar en cualquier momento, y lo que estaba solo en la conversación se pierde. Por eso cada decisión va a un único log con número, fecha, hora y fuente: mis palabras, citadas, o “decisión técnica” cuando el agente decidió dentro de reglas que yo había fijado. Al 1 de noviembre de 2026 el log, que cubre todos mis proyectos y no solo SearchedBy, tenía 155 entradas. Esta es una, recortada:",
+           "A session can be compacted or cut off at any moment, and whatever was only in the conversation is lost. So every decision goes into one log with a number, date, time and source: my words, quoted, or “technical decision” when the agent decided within rules I had set. By 1 November 2026 the log, which covers all my projects and not only SearchedBy, had 155 entries. This is one, trimmed:")
+         + OPS_DECISION
+         + p("El diario hace lo mismo con las acciones: después de cada paso, una línea con la hora de Berlín, cómo quedó y qué sigue. Cualquier sesión, local o en la nube, retoma el trabajo leyendo la carpeta.",
+             "The diary does the same for actions: after each step, a line with the Berlin time, the state it was left in and what comes next. Any session, local or in the cloud, picks up the work by reading the folder.")),
+        ("tests", "Tests primero, en dos versiones de Python", "Tests first, on two Python versions",
+         p("Los tests nuevos corren primero sobre la copia sin cambios y tienen que fallar ahí. En un cambio de experiencia de usuario del 1 de noviembre, 28 tests nuevos corrieron sobre la copia sin cambios: 27 fallaron y uno pasó, el que comprueba que las otras páginas conservan sus ejemplos, que tiene que pasar. Después del cambio, pasaron los 28.",
+           "New tests run first on the unchanged copy and have to fail there. On a user-experience change on 1 November, 28 new tests ran on the unchanged copy: 27 failed and one passed, the one checking that other pages keep their examples, which is meant to pass. After the change, all 28 passed.")
+         + p("Después corren las dos suites completas en Python 3.13, el de mi Mac, y en 3.12, el del servidor, cada una en su entorno con las mismas versiones de paquetes. El 1 de noviembre eran 2.684 tests del pipeline del scan y 1.184 de la web. Corren sin conexión: ninguna API paga, ningún sitio real.",
+             "Then both full suites run on Python 3.13, my Mac's, and on 3.12, the server's, each in its own environment with the same package versions. On 1 November that was 2,684 tests for the scan pipeline and 1,184 for the web app. They run offline: no paid API, no real website.")),
+        ("deploy", "Producción no se edita en el lugar", "Production is never edited in place",
+         p("El trabajo se hace en una copia con fecha. La lista de archivos de un deploy se calcula contra producción, nunca contra otra copia, para que dos cambios en paralelo no se pisen. Antes de copiar nada, los originales van a una carpeta con fecha, hora y motivo. Así empieza el checklist de un deploy real:",
+           "Work happens in a dated copy. The list of files a deploy changes is computed against production, never against another copy, so two parallel changes cannot undo each other. Before anything is copied in, the originals go to a folder named with the date, time and reason. This is how a real deploy checklist starts:")
+         + OPS_TABLE
+         + p("El deploy corre solo con mi OK explícito, después de un backup que imprime su propia marca de éxito. Termina con estos controles:",
+             "The deploy runs only with my explicit OK, after a backup that prints its own success marker. It ends with these checks:")
+         + checks([("Health check del servidor", "Server health check"),
+                   ("md5 servidor = Mac en todo el código: 197 de 197 archivos el 30-oct", "md5 server = Mac on all code: 197 of 197 files on 30 Oct"),
+                   ("Controles funcionales que no gastan: páginas e idiomas, hasta antes de cualquier llamada paga", "Functional checks that spend nothing: pages and languages, up to the step before any paid call"),
+                   ("Registro: quién dio el OK y con qué palabras, horas del backup y del deploy, cómo volver atrás", "Record: who gave the OK and in which words, backup and deploy times, how to roll back")])),
+        ("evaluacion", "Sets ciegos, una sola corrida", "Blind sets, run once",
+         p("Los tests unitarios muestran que cada regla hace lo que dice. No muestran si un cambio mejoró el producto en casos que nadie miró. Para la parte que lee las respuestas de la IA y detecta qué negocios recomiendan, otro agente escribe un set ciego antes de tocar el código, sin ver el código ni los sets anteriores. El archivo se firma con sha256 y corre una sola vez, sobre el candidato y sobre producción.",
+           "Unit tests show that each rule does what it says. They cannot show whether a change made the product better on cases nobody looked at. For the part that reads AI answers and finds which businesses they recommend, a separate agent writes a blind set before the code is touched, without seeing the code or earlier sets. The file is hashed with sha256 and runs once, on the candidate and on production.")
+         + metrics([("warn", "0,79", "0.79", "alemán en el set 4", "German on set 4", "debajo del objetivo: segunda ronda", "below target: second round"),
+                    ("good", "0,90 / 0,85", "0.90 / 0.85", "precisión / cobertura en el set 5", "precision / recall on set 5", "producción: 0,84 / 0,83", "production: 0.84 / 0.83"),
+                    ("good", "0,77 → 0,85", "0.77 → 0.85", "alemán en el set 5", "German on set 5", "70 casos nuevos en 4 idiomas", "70 new cases in 4 languages")])
+         + p("La segunda ronda de arreglos existe porque el set 4 no llegó al objetivo. Un set ya corrido no se vuelve a usar: la ronda siguiente tiene uno nuevo.",
+             "The second round of fixes exists because set 4 missed its target. A set that has been run is not reused: the next round gets a new one.")),
+        ("idiomas", "Un lector nativo por idioma", "A native reader for every language",
+         p("La interfaz está en inglés, español, alemán y hebreo. Puedo juzgar dos de esos idiomas. Para los otros, el agente primero lee páginas reales en ese idioma (42 páginas en hebreo de 32 dominios para el primer glosario) y arma un glosario versionado donde cada término tiene un nivel de confianza. Revisores nativos contestan preguntas numeradas y agrupadas por pantalla, en un idioma que leen (a uno se le manda todo solo en hebreo), y sus respuestas se convierten en la versión siguiente. Al 1 de noviembre: hebreo v7, alemán v3, español v2.",
+           "The interface is in English, Spanish, German and Hebrew. I can judge two of those. For the others, the agent first reads real pages in that language (42 Hebrew pages from 32 domains for the first glossary) and writes a versioned glossary where every term has a confidence level. Native-speaker reviewers answer numbered questions grouped by screen, in a language they read (one gets everything in Hebrew only), and their answers become the next version. By 1 November: Hebrew v7, German v3, Spanish v2.")
+         + p("Un idioma queda oculto hasta su primera revisión nativa. Después, cada frase nueva sin revisar queda anotada para la ronda siguiente, y yo decido si puede salir antes.",
+             "A language stays hidden until its first native review. After that, every new phrase without review is listed for the next round, and I decide whether it can go out before then.")),
+        ("costo", "El costo se dice antes de gastar", "The cost is stated before it is spent",
+         p("Antes de cualquier scan, llamada paga o revisión con agentes, la sesión dice el costo estimado. El 24 de octubre, antes del primer scan real, la estimación con precios de lista oficiales fue de US$ 0,08 a 0,16 por scan de 10 corridas, con los volúmenes de tokens marcados como supuestos. Hoy cada corrida registra tokens, búsquedas y costo: un scan real de 15 corridas costó US$ 0,2333 el 1 de noviembre. Hay topes por scan y por día en el código.",
+           "Before any scan, paid API call or review by agents, the session states the estimated cost. On 24 October, before the first real scan, the estimate from official list prices was US$ 0.08 to 0.16 for a scan with 10 engine runs, with token volumes marked as assumptions. Each run now logs tokens, searches and cost: a real scan with 15 runs cost US$ 0.2333 on 1 November. Caps per scan and per day are enforced in code.")
+         + p("La misma regla limita mi propio proceso: como máximo una revisión independiente y un set ciego por deploy. Si el candidato supera con claridad a producción y no tiene errores graves, sale, y los casos de borde van a pendientes.",
+             "The same rule limits my own process: at most one independent review and one blind set per deploy. If the candidate clearly beats production and has no serious errors, it ships, and the edge cases go to the backlog.")),
+        ("seguridad", "Una auditoría de seguridad independiente", "An independent security review",
+         p("Antes de abrir más la beta, una sesión de Claude Code en la nube auditó la web y los scripts de deploy solo desde el repositorio, con una prueba de concepto o un test donde se podía armar. Encontró 14: 2 altos, 6 medios y 6 bajos. Otra sesión en la nube corrigió 8, los dos altos incluidos, en su propia rama y con 45 tests nuevos que fallan sobre el código viejo. La rama llegó a producción por el checklist de siempre, y después del deploy pasaron 35 tests de seguridad en el propio servidor.",
+           "Before opening the beta wider, a Claude Code session in the cloud audited the web app and the deploy scripts from the repository alone, with a proof of concept or a test wherever one could be built. It found 14: 2 high, 6 medium and 6 low. A second cloud session fixed 8 of them, both highs included, on its own branch and with 45 new tests that fail on the old code. The branch reached production through the usual checklist, and after the deploy 35 security tests passed on the server itself.")
+         + p("Lo que quedó es endurecimiento de servidor, red y backups, documentado como recomendaciones. El resumen público está en las notas de ingeniería, sin nada que le sirva a un atacante.",
+             "What remains is server, network and backup hardening, documented as recommendations. The public summary is in the engineering notes, with nothing that would help an attacker.")),
+        ("agentes", "Agentes en paralelo, cada uno con su brief", "Parallel agents, each with a brief",
+         p("Varias sesiones trabajan a la vez: una coordina y otras toman un idioma, una mejora de experiencia de usuario o una revisión. Cada una recibe un brief escrito (base, alcance, costo y entregable) y devuelve una copia de trabajo, un checklist de deploy y un informe corto. Ninguna despliega. Las sesiones en la nube trabajan en ramas propias; sus informes llegan a mi Mac cada cinco minutos y su código entra a producción solo por el mismo checklist.",
+           "Several sessions work at the same time: one coordinates, others take a language, a user-experience pass or a review. Each gets a written brief (base, scope, budget and deliverable) and returns a working copy, a deploy checklist and a short report. None of them deploys. Cloud sessions work on their own branches; their reports reach my Mac every five minutes and their code goes to production only through the same checklist.")
+         + '<div class="callout">' + bi("Lo que es mío: las reglas, la evidencia que acepto y la decisión de publicar. El resto se delega, y queda escrito.",
+                                         "What I own: the rules, the evidence I accept and the decision to ship. The rest is delegated, and written down.") + "</div>"),
+        ("resultado", "Estado", "Status",
+         metrics([("", "155", "155", "decisiones numeradas", "numbered decisions", "en el log, al 1-nov-2026", "in the log, as of 1 Nov 2026"),
+                  ("good", "~3.800", "~3,800", "tests en dos versiones de Python", "tests on two Python versions", "2.684 del pipeline + 1.184 de la web", "2,684 pipeline + 1,184 web app"),
+                  ("good", "197/197", "197/197", "archivos idénticos, servidor = Mac", "files identical, server = Mac", "30-oct-2026", "30 Oct 2026")])
+         + p("Lo que cuesta: cada respuesta del agente tarda uno o dos minutos más porque documenta mientras trabaja, y algunos cambios esperan días a un revisor nativo. Acepto las dos cosas. Es el proceso de una persona para un producto en beta abierta; todavía no lo probé con un equipo.",
+             "What it costs: every answer from the agent takes a minute or two longer because it documents as it works, and some changes wait days for a native reviewer. I accept both. This is one person's process for one product in an open beta; I have not run it with a team yet.")
+         + p('Las herramientas genéricas (verificación md5 entre dos copias, lista de deploy contra producción, ediciones ancladas) y ocho registros de decisión de ejemplo están en <a href="https://github.com/pablodpavon/searchedby-engineering">GitHub</a>.',
+             'The generic tools (md5 parity between two copies, deploy list against production, anchored edits) and eight sample decision records are on <a href="https://github.com/pablodpavon/searchedby-engineering">GitHub</a>.')),
+    ],
+)
+
+
+CASES = (GEO, OPS, CASH, AP, MIG, KPI)  # order used by the sitemap and llms.txt (same as the home page)
 
 
 def build():

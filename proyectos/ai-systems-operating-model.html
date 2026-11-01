@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I ship AI systems · Pablo Pavon</title>
+<meta name="description" content="How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta property="og:url" content="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<meta property="og:title" content="How I ship AI systems · Pablo Pavon">
+<meta property="og:description" content="How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review.">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/ai-systems-operating-model-en.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A numbered decision, the growth of the test suites and a deploy record with the md5 check between server and Mac">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How I ship AI systems · Pablo Pavon">
+<meta name="twitter:description" content="How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/ai-systems-operating-model-en.png">
+<meta name="twitter:image:alt" content="A numbered decision, the growth of the test suites and a deploy record with the md5 check between server and Mac">
+<meta property="article:published_time" content="2026-11-01">
+<meta property="article:modified_time" content="2026-11-01">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
+<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/proyectos/ai-systems-operating-model.html#article",
+   "headline": "How I ship AI systems · Pablo Pavon",
+   "alternativeHeadline": "The agent writes the code. The process decides what ships.",
+   "description": "How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review.",
+   "inLanguage": "en",
+   "url": "https://pablodpavon.com/proyectos/ai-systems-operating-model.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/proyectos/ai-systems-operating-model.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/ai-systems-operating-model-en.png",
+    "https://pablodpavon.com/assets/proj_ops.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-11-01",
+   "dateModified": "2026-11-01",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "AI deployment, Claude Code, AI agents, QA, testing, deploy verification, LLM evaluation, blind test sets, native review, cost control",
+   "isAccessibleForFree": true,
+   "genre": "Engineering case study",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "searchedby-engineering",
+    "codeRepository": "https://github.com/pablodpavon/searchedby-engineering",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/searchedby-engineering",
+   "mentions": {
+    "@type": "Organization",
+    "@id": "https://searchedby.com/#org",
+    "name": "SearchedBy",
+    "url": "https://searchedby.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://pablodpavon.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Work",
+     "item": "https://pablodpavon.com/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "How I ship AI systems",
+     "item": "https://pablodpavon.com/proyectos/ai-systems-operating-model.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
+</head>
+<body data-base="/">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Sections">
+      <a href="/#servicios"><span>Services</span></a>
+      <a href="/#lab">Dashboards</a>
+      <a href="/#proyectos"><span>Work</span></a>
+      <a href="/#experiencia"><span>Experience</span></a>
+      <a href="/#contacto"><span>Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Language"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/ai-systems-operating-model.html" hreflang="es" title="Versión en español">ES</a><a data-lang="en" href="/proyectos/ai-systems-operating-model.html" hreflang="en" title="English version" aria-current="page">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Let’s talk</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>All projects</span></a><br>
+    <span class="pill"><span class="dot"></span><span>How I work · own product</span></span>
+    <span class="cs-updated"><span>Updated: October 2026</span></span>
+    <h1>The agent writes the code. The process decides what ships.</h1>
+    <p class="lede">The operating model I use to build and run SearchedBy with Claude Code: numbered decisions, tests written first, production never edited in place, blind evaluation sets, native review for every language, and the cost stated before anything is spent. With real examples from the project records.</p>
+    <div class="cs-tags"><span>Claude Code</span><span>Python</span><span>pytest</span><span>LLM evaluation</span><span>Deploy verification</span><span>Cost control</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/searchedby-engineering"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>Read the engineering notes on GitHub</span></a>
+      <a class="btn" href="/proyectos/geo-scan.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span>Read the product case</span></a>
+    </div>
+    <div class="cs-facts"><div><small><span>Type</span></small><b><span>Operating model</span></b></div><div><small><span>My role</span></small><b><span>Rules, review, go-live call</span></b></div><div><small><span>Period</span></small><b><span>October–November 2026</span></b></div><div><small><span>Evidence</span></small><b><span>155 decisions · 70+ deploy checklists</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_ops.jpg" alt="A numbered decision, the growth of the test suites and a deploy record with the md5 check between server and Mac" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Context</span></a>
+<a href="#circuito"><span>The loop</span></a>
+<a href="#decisiones"><span>Numbered decisions</span></a>
+<a href="#tests"><span>Tests first, on two Python versions</span></a>
+<a href="#deploy"><span>Production is never edited in place</span></a>
+<a href="#evaluacion"><span>Blind sets, run once</span></a>
+<a href="#idiomas"><span>A native reader for every language</span></a>
+<a href="#costo"><span>The cost is stated before it is spent</span></a>
+<a href="#seguridad"><span>An independent security review</span></a>
+<a href="#agentes"><span>Parallel agents, each with a brief</span></a>
+<a href="#resultado"><span>Status</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2>Context</h2>
+<style>
+.ops-fig,.ops-tbl{contain:inline-size;max-width:100%}
+.ops-fig{--op-a:#5b45c9;--op-a-tint:#f0edfd;--op-b:#b06f00;--op-b-tint:#fdf4e3;margin:26px 0 8px;padding:18px 18px 12px;border:1px solid var(--line);border-radius:var(--r-l);background:var(--card);overflow-x:auto}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}}
+:root[data-theme="dark"] .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}
+.ops-fig svg{display:block;min-width:600px;width:100%;height:auto;font-family:var(--font)}
+.ops-fig figcaption{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
+.ops-fig .st{fill:var(--card-2);stroke:var(--line-2);stroke-width:1.2}
+.ops-fig .st.gate{fill:var(--op-b-tint);stroke:var(--op-b)}
+.ops-fig .st.ship{fill:var(--op-a-tint);stroke:var(--op-a)}
+.ops-fig .num{fill:var(--op-a);font:600 12px var(--font);letter-spacing:.06em}
+.ops-fig .gate .num,.ops-fig .num.g{fill:var(--op-b)}
+.ops-fig .ttl{fill:var(--ink);font:600 17px var(--font)}
+.ops-fig .tx{fill:var(--ink-2);font:400 13.5px var(--font)}
+.ops-fig .sm{fill:var(--muted);font:500 13px var(--font)}
+.ops-fig .ln{stroke:var(--ink-2);stroke-width:1.6;fill:none}
+.ops-fig .lp{stroke:var(--op-b);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+.ops-fig .wr{stroke:var(--op-a);stroke-width:1.2;fill:none;stroke-dasharray:2 4;opacity:.8}
+.ops-fig .rec{fill:var(--op-a-tint);stroke:var(--op-a);stroke-width:1.2}
+.ops-fig .ah{fill:var(--ink-2)}.ops-fig .ah2{fill:var(--op-b)}
+.ops-tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:var(--r-m);background:var(--card)}
+.ops-tbl table{width:100%;border-collapse:collapse;font:400 12.5px/1.45 "Geist Mono",ui-monospace,monospace;min-width:560px}
+.ops-tbl th{font:600 11.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.ops-tbl td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.ops-tbl tr:last-child td{border-bottom:0}
+.ops-tbl .k{color:var(--ink);font-weight:600}
+.ops-tbl .new{color:var(--good-text)}
+</style><p>SearchedBy (formerly GEO Scan) is my own product: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.</p><p>With an agent writing the code, my work moved to everything around it: knowing what changed, proving it works, keeping the server identical to what I tested, and knowing what each step cost, while several sessions change the product at the same time. This page is the process I use for that.</p>
+</section>
+<section id="circuito">
+<h2>The loop</h2>
+<p>Every change, from fixing one phrase to a security patch, goes through the same five steps. Gates send it back to its working copy; only my OK moves it to production. Every step leaves its trace in the record.</p><figure class="ops-fig"><svg viewBox="0 0 960 400" role="img" aria-labelledby="opsT opsD" xmlns="http://www.w3.org/2000/svg"><title id="opsT">The loop for one change</title><desc id="opsD">Five steps: decide, brief, build, prove and ship. If a gate fails, the change goes back to its working copy. Every step writes to the record: a diary with the time, the decision log and the backlog.</desc><defs><marker id="opsAh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0 10 5 0 10z"/></marker><marker id="opsAh2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah2" d="M0 0 10 5 0 10z"/></marker></defs><text class="sm" x="0" y="16">ONE CHANGE, START TO FINISH</text><g class=""><rect class="st " x="1" y="34" width="166" height="132" rx="14"/><text class="num" x="16" y="60">01</text><text class="ttl" x="16" y="84">Decide</text><text class="tx" x="16" y="110">Numbered decision</text><text class="tx" x="16" y="129">date, time and source</text><text class="tx" x="16" y="148">cost stated first</text></g><path class="ln" d="M171 100.0H194" marker-end="url(#opsAh)"/><g class=""><rect class="st " x="199" y="34" width="166" height="132" rx="14"/><text class="num" x="214" y="60">02</text><text class="ttl" x="214" y="84">Brief</text><text class="tx" x="214" y="110">Brief to an agent:</text><text class="tx" x="214" y="129">base, scope, budget</text><text class="tx" x="214" y="148">and deliverable</text></g><path class="ln" d="M369 100.0H392" marker-end="url(#opsAh)"/><g class=""><rect class="st " x="397" y="34" width="166" height="132" rx="14"/><text class="num" x="412" y="60">03</text><text class="ttl" x="412" y="84">Build</text><text class="tx" x="412" y="110">Tests first: red</text><text class="tx" x="412" y="129">on the unchanged copy</text><text class="tx" x="412" y="148">production untouched</text></g><path class="ln" d="M567 100.0H590" marker-end="url(#opsAh)"/><g class="gate"><rect class="st gate" x="595" y="34" width="166" height="132" rx="14"/><text class="num" x="610" y="60">04</text><text class="ttl" x="610" y="84">Prove</text><text class="tx" x="610" y="110">2 Python versions</text><text class="tx" x="610" y="129">blind set, run once</text><text class="tx" x="610" y="148">native review</text></g><path class="ln" d="M765 100.0H788" marker-end="url(#opsAh)"/><g class="ship"><rect class="st ship" x="793" y="34" width="166" height="132" rx="14"/><text class="num" x="808" y="60">05</text><text class="ttl" x="808" y="84">Ship</text><text class="tx" x="808" y="110">My OK, originals</text><text class="tx" x="808" y="129">copied, backup</text><text class="tx" x="808" y="148">md5 server = Mac</text></g><path class="lp" d="M678.0 169V196H480.0V175" marker-end="url(#opsAh2)"/><text class="sm" x="579.0" y="214" text-anchor="middle">a gate fails: back to the working copy</text><circle cx="777.0" cy="78.0" r="11" fill="var(--op-a)"/><text x="777.0" y="82.0" text-anchor="middle" style="fill:var(--card);font:700 11px var(--font)">OK</text><rect class="rec" x="1" y="296" width="958" height="72" rx="14"/><text class="ttl" x="20" y="326">Record</text><text class="tx" x="20" y="348">Every step writes here before answering me</text><circle cx="370" cy="318" r="3" fill="var(--op-a)"/><text class="tx" x="380" y="322">Diary: one line with the Berlin time</text><circle cx="370" cy="340" r="3" fill="var(--op-a)"/><text class="tx" x="380" y="344">Decision log: D1 to D155</text><circle cx="680" cy="318" r="3" fill="var(--op-a)"/><text class="tx" x="690" y="322">Open items that open or close</text><circle cx="680" cy="340" r="3" fill="var(--op-a)"/><text class="tx" x="690" y="344">Checklist and record of each deploy</text><path class="wr" d="M22 168V292"/><path class="wr" d="M220 168V292"/><path class="wr" d="M418 168V292"/><path class="wr" d="M616 168V292"/><path class="wr" d="M814 168V292"/></svg><figcaption><span>Every change, from one phrase to a security fix, goes through the same loop. Only my OK moves it from the working copy to production.</span></figcaption></figure>
+</section>
+<section id="decisiones">
+<h2>Numbered decisions</h2>
+<p>A session can be compacted or cut off at any moment, and whatever was only in the conversation is lost. So every decision goes into one log with a number, date, time and source: my words, quoted, or “technical decision” when the agent decided within rules I had set. By 1 November 2026 the log, which covers all my projects and not only SearchedBy, had 155 entries. This is one, trimmed:</p><pre class="code"><span class="c"># One entry of the decision log (trimmed, translated from Spanish)</span>
+<span class="k">D96</span> (25 Oct 2026, 18:42–18:50). Close the scope of deploy A; rule against overspending.
+  In:   fixes D01–D08, D10–D13, D19–D24, each with a test written first.
+  Out:  D09, D14–D18 (details), kept as pending in the tests.
+  Measured on blind set 3, run once on the final copy:
+        precision <span class="s">0.56 → 0.80</span>, recall <span class="s">0.53 → 0.74</span> against production.
+  Rule: state the cost before any review by agents; at most one independent
+        review and one blind set per deploy; if the candidate clearly beats
+        production with no serious errors, it ships and edge cases go to the backlog.
+  Source: owner, 18:42.</pre><p>The diary does the same for actions: after each step, a line with the Berlin time, the state it was left in and what comes next. Any session, local or in the cloud, picks up the work by reading the folder.</p>
+</section>
+<section id="tests">
+<h2>Tests first, on two Python versions</h2>
+<p>New tests run first on the unchanged copy and have to fail there. On a user-experience change on 1 November, 28 new tests ran on the unchanged copy: 27 failed and one passed, the one checking that other pages keep their examples, which is meant to pass. After the change, all 28 passed.</p><p>Then both full suites run on Python 3.13, my Mac's, and on 3.12, the server's, each in its own environment with the same package versions. On 1 November that was 2,684 tests for the scan pipeline and 1,184 for the web app. They run offline: no paid API, no real website.</p>
+</section>
+<section id="deploy">
+<h2>Production is never edited in place</h2>
+<p>Work happens in a dated copy. The list of files a deploy changes is computed against production, never against another copy, so two parallel changes cannot undo each other. Before anything is copied in, the originals go to a folder named with the date, time and reason. This is how a real deploy checklist starts:</p><div class="ops-tbl"><table><thead><tr><th><span>status</span></th><th><span>file</span></th><th>md5 <span>production</span></th><th>md5 <span>candidate</span></th></tr></thead><tbody><tr><td class="k"><span>changed</span></td><td>app/main.py</td><td>f52da5e8…</td><td>eeb03639…</td></tr><tr><td class="k"><span>changed</span></td><td>app/templates/start.html</td><td>0e543837…</td><td>c485c7a1…</td></tr><tr><td class="k"><span>changed</span></td><td>tests/test_flow_steps.py</td><td>6a68b323…</td><td>21ec7c25…</td></tr><tr><td class="new"><span>new</span></td><td>app/ux_texts.py</td><td>-</td><td>7cec3eba…</td></tr><tr><td class="new"><span>new</span></td><td>tests/test_ux_2026_11_01.py</td><td>-</td><td>264df87f…</td></tr></tbody></table></div><p>The deploy runs only with my explicit OK, after a backup that prints its own success marker. It ends with these checks:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Server health check</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>md5 server = Mac on all code: 197 of 197 files on 30 Oct</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Functional checks that spend nothing: pages and languages, up to the step before any paid call</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Record: who gave the OK and in which words, backup and deploy times, how to roll back</span></span><em>PASS</em></div></div>
+</section>
+<section id="evaluacion">
+<h2>Blind sets, run once</h2>
+<p>Unit tests show that each rule does what it says. They cannot show whether a change made the product better on cases nobody looked at. For the part that reads AI answers and finds which businesses they recommend, a separate agent writes a blind set before the code is touched, without seeing the code or earlier sets. The file is hashed with sha256 and runs once, on the candidate and on production.</p><div class="metric-row"><div class="metric warn"><b><span>0.79</span></b><span><span>German on set 4</span></span><small><span>below target: second round</span></small></div><div class="metric good"><b><span>0.90 / 0.85</span></b><span><span>precision / recall on set 5</span></span><small><span>production: 0.84 / 0.83</span></small></div><div class="metric good"><b><span>0.77 → 0.85</span></b><span><span>German on set 5</span></span><small><span>70 new cases in 4 languages</span></small></div></div><p>The second round of fixes exists because set 4 missed its target. A set that has been run is not reused: the next round gets a new one.</p>
+</section>
+<section id="idiomas">
+<h2>A native reader for every language</h2>
+<p>The interface is in English, Spanish, German and Hebrew. I can judge two of those. For the others, the agent first reads real pages in that language (42 Hebrew pages from 32 domains for the first glossary) and writes a versioned glossary where every term has a confidence level. Native-speaker reviewers answer numbered questions grouped by screen, in a language they read (one gets everything in Hebrew only), and their answers become the next version. By 1 November: Hebrew v7, German v3, Spanish v2.</p><p>A language stays hidden until its first native review. After that, every new phrase without review is listed for the next round, and I decide whether it can go out before then.</p>
+</section>
+<section id="costo">
+<h2>The cost is stated before it is spent</h2>
+<p>Before any scan, paid API call or review by agents, the session states the estimated cost. On 24 October, before the first real scan, the estimate from official list prices was US$ 0.08 to 0.16 for a scan with 10 engine runs, with token volumes marked as assumptions. Each run now logs tokens, searches and cost: a real scan with 15 runs cost US$ 0.2333 on 1 November. Caps per scan and per day are enforced in code.</p><p>The same rule limits my own process: at most one independent review and one blind set per deploy. If the candidate clearly beats production and has no serious errors, it ships, and the edge cases go to the backlog.</p>
+</section>
+<section id="seguridad">
+<h2>An independent security review</h2>
+<p>Before opening the beta wider, a Claude Code session in the cloud audited the web app and the deploy scripts from the repository alone, with a proof of concept or a test wherever one could be built. It found 14: 2 high, 6 medium and 6 low. A second cloud session fixed 8 of them, both highs included, on its own branch and with 45 new tests that fail on the old code. The branch reached production through the usual checklist, and after the deploy 35 security tests passed on the server itself.</p><p>What remains is server, network and backup hardening, documented as recommendations. The public summary is in the engineering notes, with nothing that would help an attacker.</p>
+</section>
+<section id="agentes">
+<h2>Parallel agents, each with a brief</h2>
+<p>Several sessions work at the same time: one coordinates, others take a language, a user-experience pass or a review. Each gets a written brief (base, scope, budget and deliverable) and returns a working copy, a deploy checklist and a short report. None of them deploys. Cloud sessions work on their own branches; their reports reach my Mac every five minutes and their code goes to production only through the same checklist.</p><div class="callout"><span>What I own: the rules, the evidence I accept and the decision to ship. The rest is delegated, and written down.</span></div>
+</section>
+<section id="resultado">
+<h2>Status</h2>
+<div class="metric-row"><div class="metric "><b><span>155</span></b><span><span>numbered decisions</span></span><small><span>in the log, as of 1 Nov 2026</span></small></div><div class="metric good"><b><span>~3,800</span></b><span><span>tests on two Python versions</span></span><small><span>2,684 pipeline + 1,184 web app</span></small></div><div class="metric good"><b><span>197/197</span></b><span><span>files identical, server = Mac</span></span><small><span>30 Oct 2026</span></small></div></div><p>What it costs: every answer from the agent takes a minute or two longer because it documents as it works, and some changes wait days for a native reviewer. I accept both. This is one person's process for one product in an open beta; I have not run it with a team yet.</p><p>The generic tools (md5 parity between two copies, deploy list against production, anchored edits) and eight sample decision records are on <a href="https://github.com/pablodpavon/searchedby-engineering">GitHub</a>.</p>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="/proyectos/geo-scan.html">
+    <div><small><span>Next case</span></small><b><span>SearchedBy: an AI product</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span>Own product in an open beta. No client data or names; the examples are trimmed from the project records.</span>
+  <span class="f-legal"><a href="/impressum.html">Impressum</a> · <a href="/privacy.html"><span>Privacy</span></a></span>
+</div></div></footer>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
+</body>
+</html>

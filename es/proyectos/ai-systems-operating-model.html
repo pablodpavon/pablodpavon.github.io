@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo llevo sistemas con IA a producción · Pablo Pavon</title>
+<meta name="description" content="Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.">
+<meta name="author" content="Pablo Pavon">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html">
+<link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/ai-systems-operating-model.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pablo Pavon">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html">
+<meta property="og:title" content="Cómo llevo sistemas con IA a producción · Pablo Pavon">
+<meta property="og:description" content="Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.">
+<meta property="og:image" content="https://pablodpavon.com/assets/og/ai-systems-operating-model-es.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Una decisión numerada, la evolución de los tests y un registro de deploy con la verificación md5 entre servidor y Mac">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cómo llevo sistemas con IA a producción · Pablo Pavon">
+<meta name="twitter:description" content="Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.">
+<meta name="twitter:image" content="https://pablodpavon.com/assets/og/ai-systems-operating-model-es.png">
+<meta name="twitter:image:alt" content="Una decisión numerada, la evolución de los tests y un registro de deploy con la verificación md5 entre servidor y Mac">
+<meta property="article:published_time" content="2026-11-01">
+<meta property="article:modified_time" content="2026-11-01">
+<meta property="article:author" content="https://pablodpavon.com/">
+<meta property="article:section" content="Case studies">
+<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">
+<meta name="theme-color" content="#0e7a58">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html#article",
+   "headline": "Cómo llevo sistemas con IA a producción · Pablo Pavon",
+   "alternativeHeadline": "El agente escribe el código. El proceso decide qué se publica.",
+   "description": "Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.",
+   "inLanguage": "es",
+   "url": "https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html",
+   "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html"
+   },
+   "image": [
+    "https://pablodpavon.com/assets/og/ai-systems-operating-model-es.png",
+    "https://pablodpavon.com/assets/proj_ops.jpg"
+   ],
+   "author": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "publisher": {
+    "@id": "https://pablodpavon.com/#person"
+   },
+   "datePublished": "2026-11-01",
+   "dateModified": "2026-11-01",
+   "isPartOf": {
+    "@id": "https://pablodpavon.com/#website"
+   },
+   "keywords": "IA en producción, Claude Code, agentes de IA, QA, tests, deploy, evaluación de LLM, sets ciegos, revisión nativa, control de costos",
+   "isAccessibleForFree": true,
+   "genre": "Engineering case study",
+   "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "searchedby-engineering",
+    "codeRepository": "https://github.com/pablodpavon/searchedby-engineering",
+    "programmingLanguage": "Python",
+    "author": {
+     "@id": "https://pablodpavon.com/#person"
+    }
+   },
+   "isBasedOn": "https://github.com/pablodpavon/searchedby-engineering",
+   "mentions": {
+    "@type": "Organization",
+    "@id": "https://searchedby.com/#org",
+    "name": "SearchedBy",
+    "url": "https://searchedby.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Inicio",
+     "item": "https://pablodpavon.com/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Proyectos",
+     "item": "https://pablodpavon.com/es/#proyectos"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Cómo llevo sistemas con IA a producción",
+     "item": "https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://pablodpavon.com/#person",
+   "name": "Pablo Pavon",
+   "givenName": "Pablo",
+   "familyName": "Pavon",
+   "alternateName": [
+    "Pablo Pavón",
+    "Pablo Damián Pavón",
+    "Pablo D. Pavon"
+   ],
+   "url": "https://pablodpavon.com/",
+   "jobTitle": "Senior Business \u0026 Data Analyst",
+   "sameAs": [
+    "https://www.linkedin.com/in/pablo-damian-pavon",
+    "https://github.com/pablodpavon",
+    "https://www.upwork.com/freelancers/pablopavon"
+   ]
+  }
+ ]
+}</script>
+</head>
+<body data-base="/">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/es/"><span class="logo">PP</span>Pablo Pavon</a>
+    <nav class="links" aria-label="Secciones">
+      <a href="/es/#servicios"><span>Servicios</span></a>
+      <a href="/es/#lab">Dashboards</a>
+      <a href="/es/#proyectos"><span>Proyectos</span></a>
+      <a href="/es/#experiencia"><span>Experiencia</span></a>
+      <a href="/es/#contacto"><span>Contacto</span></a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" aria-label="Idioma"><svg class="seg-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><a data-lang="es" href="/es/proyectos/ai-systems-operating-model.html" hreflang="es" title="Versión en español" aria-current="page">ES</a><a data-lang="en" href="/proyectos/ai-systems-operating-model.html" hreflang="en" title="English version">EN</a></div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema"></button>
+      <button class="btn btn-primary btn-sm" type="button" data-open-contact><span>Hablemos</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cs-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="/es/#proyectos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span>Todos los proyectos</span></a><br>
+    <span class="pill"><span class="dot"></span><span>Cómo trabajo · producto propio</span></span>
+    <span class="cs-updated"><span>Actualizado: octubre de 2026</span></span>
+    <h1>El agente escribe el código. El proceso decide qué se publica.</h1>
+    <p class="lede">El modelo operativo con el que construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests escritos primero, producción que nunca se edita en el lugar, sets ciegos de evaluación, revisión nativa por idioma y el costo dicho antes de gastar. Con ejemplos reales de los registros del proyecto.</p>
+    <div class="cs-tags"><span>Claude Code</span><span>Python</span><span>pytest</span><span>LLM evaluation</span><span>Deploy verification</span><span>Cost control</span></div>
+    <div class="cs-actions">
+      <a class="btn btn-brand" href="https://github.com/pablodpavon/searchedby-engineering"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>Ver las notas de ingeniería en GitHub</span></a>
+      <a class="btn" href="/es/proyectos/geo-scan.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span>Ver el caso del producto</span></a>
+    </div>
+    <div class="cs-facts"><div><small><span>Tipo</span></small><b><span>Modelo operativo</span></b></div><div><small><span>Mi rol</span></small><b><span>Reglas, revisión y OK final</span></b></div><div><small><span>Período</span></small><b><span>Octubre–noviembre de 2026</span></b></div><div><small><span>Evidencia</span></small><b><span>155 decisiones · 70+ checklists de deploy</span></b></div></div>
+    <figure class="cs-shot"><img src="/assets/proj_ops.jpg" alt="Una decisión numerada, la evolución de los tests y un registro de deploy con la verificación md5 entre servidor y Mac" width="1600" height="1000"></figure>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label="Contenido"><a href="#contexto"><span>Contexto</span></a>
+<a href="#circuito"><span>El circuito</span></a>
+<a href="#decisiones"><span>Decisiones con número</span></a>
+<a href="#tests"><span>Tests primero, en dos versiones de Python</span></a>
+<a href="#deploy"><span>Producción no se edita en el lugar</span></a>
+<a href="#evaluacion"><span>Sets ciegos, una sola corrida</span></a>
+<a href="#idiomas"><span>Un lector nativo por idioma</span></a>
+<a href="#costo"><span>El costo se dice antes de gastar</span></a>
+<a href="#seguridad"><span>Una auditoría de seguridad independiente</span></a>
+<a href="#agentes"><span>Agentes en paralelo, cada uno con su brief</span></a>
+<a href="#resultado"><span>Estado</span></a></nav>
+    <article class="prose">
+<section id="contexto">
+<h2>Contexto</h2>
+<style>
+.ops-fig,.ops-tbl{contain:inline-size;max-width:100%}
+.ops-fig{--op-a:#5b45c9;--op-a-tint:#f0edfd;--op-b:#b06f00;--op-b-tint:#fdf4e3;margin:26px 0 8px;padding:18px 18px 12px;border:1px solid var(--line);border-radius:var(--r-l);background:var(--card);overflow-x:auto}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}}
+:root[data-theme="dark"] .ops-fig{--op-a:#a898ff;--op-a-tint:#1f1a3a;--op-b:#f0b54a;--op-b-tint:#2c220f}
+.ops-fig svg{display:block;min-width:600px;width:100%;height:auto;font-family:var(--font)}
+.ops-fig figcaption{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
+.ops-fig .st{fill:var(--card-2);stroke:var(--line-2);stroke-width:1.2}
+.ops-fig .st.gate{fill:var(--op-b-tint);stroke:var(--op-b)}
+.ops-fig .st.ship{fill:var(--op-a-tint);stroke:var(--op-a)}
+.ops-fig .num{fill:var(--op-a);font:600 12px var(--font);letter-spacing:.06em}
+.ops-fig .gate .num,.ops-fig .num.g{fill:var(--op-b)}
+.ops-fig .ttl{fill:var(--ink);font:600 17px var(--font)}
+.ops-fig .tx{fill:var(--ink-2);font:400 13.5px var(--font)}
+.ops-fig .sm{fill:var(--muted);font:500 13px var(--font)}
+.ops-fig .ln{stroke:var(--ink-2);stroke-width:1.6;fill:none}
+.ops-fig .lp{stroke:var(--op-b);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+.ops-fig .wr{stroke:var(--op-a);stroke-width:1.2;fill:none;stroke-dasharray:2 4;opacity:.8}
+.ops-fig .rec{fill:var(--op-a-tint);stroke:var(--op-a);stroke-width:1.2}
+.ops-fig .ah{fill:var(--ink-2)}.ops-fig .ah2{fill:var(--op-b)}
+.ops-tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:var(--r-m);background:var(--card)}
+.ops-tbl table{width:100%;border-collapse:collapse;font:400 12.5px/1.45 "Geist Mono",ui-monospace,monospace;min-width:560px}
+.ops-tbl th{font:600 11.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.ops-tbl td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.ops-tbl tr:last-child td{border-bottom:0}
+.ops-tbl .k{color:var(--ink);font-weight:600}
+.ops-tbl .new{color:var(--good-text)}
+</style><p>SearchedBy (antes GEO Scan) es mi producto: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.</p><p>Con un agente escribiendo el código, mi trabajo pasó a todo lo que lo rodea: saber qué cambió, probar que funciona, que el servidor sea idéntico a lo que probé y cuánto costó cada paso, con varias sesiones cambiando el producto al mismo tiempo. Esta página es el proceso que uso para eso.</p>
+</section>
+<section id="circuito">
+<h2>El circuito</h2>
+<p>Todo cambio, desde corregir una frase hasta un arreglo de seguridad, pasa por los mismos cinco pasos. Las compuertas lo devuelven a su copia de trabajo; solo mi OK lo pasa a producción. Cada paso deja su rastro en el registro.</p><figure class="ops-fig"><svg viewBox="0 0 960 400" role="img" aria-labelledby="opsT opsD" xmlns="http://www.w3.org/2000/svg"><title id="opsT">El circuito de un cambio</title><desc id="opsD">Cinco pasos: decidir, encargar, construir, probar y publicar. Si una compuerta falla, el cambio vuelve a su copia de trabajo. Cada paso escribe en el registro: diario con hora, log de decisiones y pendientes.</desc><defs><marker id="opsAh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0 10 5 0 10z"/></marker><marker id="opsAh2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah2" d="M0 0 10 5 0 10z"/></marker></defs><text class="sm" x="0" y="16">UN CAMBIO, DE PUNTA A PUNTA</text><g class=""><rect class="st " x="1" y="34" width="166" height="132" rx="14"/><text class="num" x="16" y="60">01</text><text class="ttl" x="16" y="84">Decidir</text><text class="tx" x="16" y="110">Decisión numerada</text><text class="tx" x="16" y="129">fecha, hora y fuente</text><text class="tx" x="16" y="148">costo estimado antes</text></g><path class="ln" d="M171 100.0H194" marker-end="url(#opsAh)"/><g class=""><rect class="st " x="199" y="34" width="166" height="132" rx="14"/><text class="num" x="214" y="60">02</text><text class="ttl" x="214" y="84">Encargar</text><text class="tx" x="214" y="110">Brief a un agente:</text><text class="tx" x="214" y="129">base, alcance, costo</text><text class="tx" x="214" y="148">y entregable</text></g><path class="ln" d="M369 100.0H392" marker-end="url(#opsAh)"/><g class=""><rect class="st " x="397" y="34" width="166" height="132" rx="14"/><text class="num" x="412" y="60">03</text><text class="ttl" x="412" y="84">Construir</text><text class="tx" x="412" y="110">Tests primero:</text><text class="tx" x="412" y="129">en rojo sin el cambio</text><text class="tx" x="412" y="148">producción intacta</text></g><path class="ln" d="M567 100.0H590" marker-end="url(#opsAh)"/><g class="gate"><rect class="st gate" x="595" y="34" width="166" height="132" rx="14"/><text class="num" x="610" y="60">04</text><text class="ttl" x="610" y="84">Probar</text><text class="tx" x="610" y="110">2 versiones de Python</text><text class="tx" x="610" y="129">set ciego, una corrida</text><text class="tx" x="610" y="148">revisión nativa</text></g><path class="ln" d="M765 100.0H788" marker-end="url(#opsAh)"/><g class="ship"><rect class="st ship" x="793" y="34" width="166" height="132" rx="14"/><text class="num" x="808" y="60">05</text><text class="ttl" x="808" y="84">Publicar</text><text class="tx" x="808" y="110">Mi OK, originales</text><text class="tx" x="808" y="129">copiados, backup</text><text class="tx" x="808" y="148">md5 servidor = Mac</text></g><path class="lp" d="M678.0 169V196H480.0V175" marker-end="url(#opsAh2)"/><text class="sm" x="579.0" y="214" text-anchor="middle">una compuerta falla: vuelve a la copia</text><circle cx="777.0" cy="78.0" r="11" fill="var(--op-a)"/><text x="777.0" y="82.0" text-anchor="middle" style="fill:var(--card);font:700 11px var(--font)">OK</text><rect class="rec" x="1" y="296" width="958" height="72" rx="14"/><text class="ttl" x="20" y="326">Registro</text><text class="tx" x="20" y="348">Cada paso escribe aquí antes de contestarme</text><circle cx="370" cy="318" r="3" fill="var(--op-a)"/><text class="tx" x="380" y="322">Diario: una línea con hora de Berlín</text><circle cx="370" cy="340" r="3" fill="var(--op-a)"/><text class="tx" x="380" y="344">Log de decisiones: D1 a D155</text><circle cx="680" cy="318" r="3" fill="var(--op-a)"/><text class="tx" x="690" y="322">Pendientes que se abren o cierran</text><circle cx="680" cy="340" r="3" fill="var(--op-a)"/><text class="tx" x="690" y="344">Checklist y registro de cada deploy</text><path class="wr" d="M22 168V292"/><path class="wr" d="M220 168V292"/><path class="wr" d="M418 168V292"/><path class="wr" d="M616 168V292"/><path class="wr" d="M814 168V292"/></svg><figcaption><span>Cada cambio, desde una frase hasta un arreglo de seguridad, pasa por el mismo circuito. Solo mi OK lo lleva de la copia de trabajo a producción.</span></figcaption></figure>
+</section>
+<section id="decisiones">
+<h2>Decisiones con número</h2>
+<p>Una sesión se puede compactar o cortar en cualquier momento, y lo que estaba solo en la conversación se pierde. Por eso cada decisión va a un único log con número, fecha, hora y fuente: mis palabras, citadas, o “decisión técnica” cuando el agente decidió dentro de reglas que yo había fijado. Al 1 de noviembre de 2026 el log, que cubre todos mis proyectos y no solo SearchedBy, tenía 155 entradas. Esta es una, recortada:</p><pre class="code"><span class="c"># Una entrada del log de decisiones (recortada; el original está en español)</span>
+<span class="k">D96</span> (25 Oct 2026, 18:42–18:50). Close the scope of deploy A; rule against overspending.
+  In:   fixes D01–D08, D10–D13, D19–D24, each with a test written first.
+  Out:  D09, D14–D18 (details), kept as pending in the tests.
+  Measured on blind set 3, run once on the final copy:
+        precision <span class="s">0.56 → 0.80</span>, recall <span class="s">0.53 → 0.74</span> against production.
+  Rule: state the cost before any review by agents; at most one independent
+        review and one blind set per deploy; if the candidate clearly beats
+        production with no serious errors, it ships and edge cases go to the backlog.
+  Source: owner, 18:42.</pre><p>El diario hace lo mismo con las acciones: después de cada paso, una línea con la hora de Berlín, cómo quedó y qué sigue. Cualquier sesión, local o en la nube, retoma el trabajo leyendo la carpeta.</p>
+</section>
+<section id="tests">
+<h2>Tests primero, en dos versiones de Python</h2>
+<p>Los tests nuevos corren primero sobre la copia sin cambios y tienen que fallar ahí. En un cambio de experiencia de usuario del 1 de noviembre, 28 tests nuevos corrieron sobre la copia sin cambios: 27 fallaron y uno pasó, el que comprueba que las otras páginas conservan sus ejemplos, que tiene que pasar. Después del cambio, pasaron los 28.</p><p>Después corren las dos suites completas en Python 3.13, el de mi Mac, y en 3.12, el del servidor, cada una en su entorno con las mismas versiones de paquetes. El 1 de noviembre eran 2.684 tests del pipeline del scan y 1.184 de la web. Corren sin conexión: ninguna API paga, ningún sitio real.</p>
+</section>
+<section id="deploy">
+<h2>Producción no se edita en el lugar</h2>
+<p>El trabajo se hace en una copia con fecha. La lista de archivos de un deploy se calcula contra producción, nunca contra otra copia, para que dos cambios en paralelo no se pisen. Antes de copiar nada, los originales van a una carpeta con fecha, hora y motivo. Así empieza el checklist de un deploy real:</p><div class="ops-tbl"><table><thead><tr><th><span>estado</span></th><th><span>archivo</span></th><th>md5 <span>producción</span></th><th>md5 <span>copia</span></th></tr></thead><tbody><tr><td class="k"><span>cambiado</span></td><td>app/main.py</td><td>f52da5e8…</td><td>eeb03639…</td></tr><tr><td class="k"><span>cambiado</span></td><td>app/templates/start.html</td><td>0e543837…</td><td>c485c7a1…</td></tr><tr><td class="k"><span>cambiado</span></td><td>tests/test_flow_steps.py</td><td>6a68b323…</td><td>21ec7c25…</td></tr><tr><td class="new"><span>nuevo</span></td><td>app/ux_texts.py</td><td>-</td><td>7cec3eba…</td></tr><tr><td class="new"><span>nuevo</span></td><td>tests/test_ux_2026_11_01.py</td><td>-</td><td>264df87f…</td></tr></tbody></table></div><p>El deploy corre solo con mi OK explícito, después de un backup que imprime su propia marca de éxito. Termina con estos controles:</p><div class="checks"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Health check del servidor</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>md5 servidor = Mac en todo el código: 197 de 197 archivos el 30-oct</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Controles funcionales que no gastan: páginas e idiomas, hasta antes de cualquier llamada paga</span></span><em>PASS</em></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span><span>Registro: quién dio el OK y con qué palabras, horas del backup y del deploy, cómo volver atrás</span></span><em>PASS</em></div></div>
+</section>
+<section id="evaluacion">
+<h2>Sets ciegos, una sola corrida</h2>
+<p>Los tests unitarios muestran que cada regla hace lo que dice. No muestran si un cambio mejoró el producto en casos que nadie miró. Para la parte que lee las respuestas de la IA y detecta qué negocios recomiendan, otro agente escribe un set ciego antes de tocar el código, sin ver el código ni los sets anteriores. El archivo se firma con sha256 y corre una sola vez, sobre el candidato y sobre producción.</p><div class="metric-row"><div class="metric warn"><b><span>0,79</span></b><span><span>alemán en el set 4</span></span><small><span>debajo del objetivo: segunda ronda</span></small></div><div class="metric good"><b><span>0,90 / 0,85</span></b><span><span>precisión / cobertura en el set 5</span></span><small><span>producción: 0,84 / 0,83</span></small></div><div class="metric good"><b><span>0,77 → 0,85</span></b><span><span>alemán en el set 5</span></span><small><span>70 casos nuevos en 4 idiomas</span></small></div></div><p>La segunda ronda de arreglos existe porque el set 4 no llegó al objetivo. Un set ya corrido no se vuelve a usar: la ronda siguiente tiene uno nuevo.</p>
+</section>
+<section id="idiomas">
+<h2>Un lector nativo por idioma</h2>
+<p>La interfaz está en inglés, español, alemán y hebreo. Puedo juzgar dos de esos idiomas. Para los otros, el agente primero lee páginas reales en ese idioma (42 páginas en hebreo de 32 dominios para el primer glosario) y arma un glosario versionado donde cada término tiene un nivel de confianza. Revisores nativos contestan preguntas numeradas y agrupadas por pantalla, en un idioma que leen (a uno se le manda todo solo en hebreo), y sus respuestas se convierten en la versión siguiente. Al 1 de noviembre: hebreo v7, alemán v3, español v2.</p><p>Un idioma queda oculto hasta su primera revisión nativa. Después, cada frase nueva sin revisar queda anotada para la ronda siguiente, y yo decido si puede salir antes.</p>
+</section>
+<section id="costo">
+<h2>El costo se dice antes de gastar</h2>
+<p>Antes de cualquier scan, llamada paga o revisión con agentes, la sesión dice el costo estimado. El 24 de octubre, antes del primer scan real, la estimación con precios de lista oficiales fue de US$ 0,08 a 0,16 por scan de 10 corridas, con los volúmenes de tokens marcados como supuestos. Hoy cada corrida registra tokens, búsquedas y costo: un scan real de 15 corridas costó US$ 0,2333 el 1 de noviembre. Hay topes por scan y por día en el código.</p><p>La misma regla limita mi propio proceso: como máximo una revisión independiente y un set ciego por deploy. Si el candidato supera con claridad a producción y no tiene errores graves, sale, y los casos de borde van a pendientes.</p>
+</section>
+<section id="seguridad">
+<h2>Una auditoría de seguridad independiente</h2>
+<p>Antes de abrir más la beta, una sesión de Claude Code en la nube auditó la web y los scripts de deploy solo desde el repositorio, con una prueba de concepto o un test donde se podía armar. Encontró 14: 2 altos, 6 medios y 6 bajos. Otra sesión en la nube corrigió 8, los dos altos incluidos, en su propia rama y con 45 tests nuevos que fallan sobre el código viejo. La rama llegó a producción por el checklist de siempre, y después del deploy pasaron 35 tests de seguridad en el propio servidor.</p><p>Lo que quedó es endurecimiento de servidor, red y backups, documentado como recomendaciones. El resumen público está en las notas de ingeniería, sin nada que le sirva a un atacante.</p>
+</section>
+<section id="agentes">
+<h2>Agentes en paralelo, cada uno con su brief</h2>
+<p>Varias sesiones trabajan a la vez: una coordina y otras toman un idioma, una mejora de experiencia de usuario o una revisión. Cada una recibe un brief escrito (base, alcance, costo y entregable) y devuelve una copia de trabajo, un checklist de deploy y un informe corto. Ninguna despliega. Las sesiones en la nube trabajan en ramas propias; sus informes llegan a mi Mac cada cinco minutos y su código entra a producción solo por el mismo checklist.</p><div class="callout"><span>Lo que es mío: las reglas, la evidencia que acepto y la decisión de publicar. El resto se delega, y queda escrito.</span></div>
+</section>
+<section id="resultado">
+<h2>Estado</h2>
+<div class="metric-row"><div class="metric "><b><span>155</span></b><span><span>decisiones numeradas</span></span><small><span>en el log, al 1-nov-2026</span></small></div><div class="metric good"><b><span>~3.800</span></b><span><span>tests en dos versiones de Python</span></span><small><span>2.684 del pipeline + 1.184 de la web</span></small></div><div class="metric good"><b><span>197/197</span></b><span><span>archivos idénticos, servidor = Mac</span></span><small><span>30-oct-2026</span></small></div></div><p>Lo que cuesta: cada respuesta del agente tarda uno o dos minutos más porque documenta mientras trabaja, y algunos cambios esperan días a un revisor nativo. Acepto las dos cosas. Es el proceso de una persona para un producto en beta abierta; todavía no lo probé con un equipo.</p><p>Las herramientas genéricas (verificación md5 entre dos copias, lista de deploy contra producción, ediciones ancladas) y ocho registros de decisión de ejemplo están en <a href="https://github.com/pablodpavon/searchedby-engineering">GitHub</a>.</p>
+</section>
+    </article>
+  </div>
+  <a class="next-case" href="/es/proyectos/geo-scan.html">
+    <div><small><span>Siguiente caso</span></small><b><span>SearchedBy: producto con IA</span></b></div>
+    <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </a>
+</div>
+</main>
+
+<footer class="site" style="margin-top:0;padding-top:0"><div class="container"><div class="f-bot" style="margin-top:0">
+  <span>© <span data-year>2026</span> Pablo Pavon</span>
+  <span>Producto propio en beta abierta. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.</span>
+  <span class="f-legal"><a href="/es/impressum.html">Impressum</a> · <a href="/es/privacy.html"><span>Privacidad</span></a></span>
+</div></div></footer>
+<script src="/assets/js/shell.js"></script>
+<script src="/assets/js/contact.js"></script>
+</body>
+</html>
