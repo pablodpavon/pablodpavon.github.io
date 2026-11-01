@@ -162,12 +162,12 @@
     <span class="cs-updated"><span>Updated: October 2026</span></span>
     <h1>AI drafts the report. No number goes out unchecked.</h1>
     <p class="lede">A monthly KPI report where a language model writes the commentary and a checker tests every figure against the data. If a single number cannot be backed, the report is blocked.</p>
-    <div class="cs-tags"><span>Python</span><span>LLM</span><span>pandas</span><span>pytest</span><span>KPI reporting</span><span>Release gate</span></div>
+    <div class="cs-tags"><span>Python</span><span>LLM</span><span>pandas</span><span>pytest</span><span>KPI reporting</span><span>Release gate</span><span>launchd</span><span>Claude Haiku</span></div>
     <div class="cs-actions">
       <a class="btn btn-brand" href="https://github.com/pablodpavon/ai-kpi-commentary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>View the code on GitHub</span></a>
       
     </div>
-    <div class="cs-facts"><div><small><span>Industry</span></small><b><span>E-commerce</span></b></div><div><small><span>My role</span></small><b><span>Control design and QA</span></b></div><div><small><span>Volume</span></small><b><span>~47,000 orders</span></b></div><div><small><span>Validation</span></small><b><span>Release gate + 4 tests</span></b></div></div>
+    <div class="cs-facts"><div><small><span>Industry</span></small><b><span>E-commerce</span></b></div><div><small><span>My role</span></small><b><span>Control design and QA</span></b></div><div><small><span>Volume</span></small><b><span>~47,000 orders</span></b></div><div><small><span>Validation</span></small><b><span>Release gate + 22 tests</span></b></div><div><small><span>Schedule</span></small><b><span>Weekly, Mondays 07:30</span></b></div></div>
     <figure class="cs-shot"><img src="/assets/proj_kpi.jpg" alt="Report blocked: five numbers in the commentary are not backed by the data" width="1600" height="1000"></figure>
   </div>
 </section>
@@ -178,6 +178,7 @@
 <a href="#enfoque"><span>Approach</span></a>
 <a href="#validacion"><span>Test</span></a>
 <a href="#resultado"><span>Result</span></a>
+<a href="#en-vivo"><span>Live</span></a>
 <a href="#entregables"><span>Deliverables</span></a></nav>
     <article class="prose">
 <section id="contexto">
@@ -204,6 +205,10 @@
 <section id="resultado">
 <h2>Result</h2>
 <p>Output of the test case (synthetic data, errors planted on purpose):</p><div class="metric-row"><div class="metric good"><b><span>18</span></b><span><span>numbers in the correct draft</span></span><small><span>all verified: released</span></small></div><div class="metric crit"><b><span>5</span></b><span><span>typical errors planted</span></span><small><span>all flagged: blocked</span></small></div><div class="metric "><b><span>4</span></b><span><span>distinct error types</span></span><small><span>value, metric, period, direction</span></small></div></div><div class="callout"><span><strong>Limit, stated plainly:</strong> the checker proves every number is right. Whether the explanation is the right one is still the analyst's call, which is why the report has a human owner.</span></div>
+</section>
+<section id="en-vivo">
+<h2>Live</h2>
+<p>The same check now runs by itself every Monday at 07:30 (Berlin) on a synthetic weekly feed. Before the model is asked for a draft, a data check reviews the load; about one week in eight the feed carries a problem planted on purpose (a day loaded twice, a missing day, refunds loaded as sales) and that week is blocked without calling the model.</p><div class="metric-row"><div class="metric good"><b><span>2</span></b><span><span>weekly runs</span></span><small><span>last refreshed 2026-11-01</span></small></div><div class="metric crit"><b><span>1</span></b><span><span>blocked</span></span><small><span>by the data or the number check</span></small></div><div class="metric "><b><span>14</span></b><span><span>numbers checked in the last run</span></span><small><span>week 2026-W43: released</span></small></div></div><p>Every run, with its result, reason and cost: <a href="https://github.com/pablodpavon/ai-kpi-commentary/blob/main/reports/index.md" rel="noopener">run history</a>. Synthetic data.</p>
 </section>
 <section id="entregables">
 <h2>Deliverables</h2>

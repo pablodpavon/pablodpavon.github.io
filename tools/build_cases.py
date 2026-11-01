@@ -300,6 +300,57 @@ TERM = ('<div class="term"><div class="tb"><i></i><i></i><i></i><span>kpicheck</
         '  <span class="y">WRONG_PERIOD</span>         30,7  | El CAC subió 30,7% contra agosto.\n'
         '  <span class="y">NOT_FOUND</span>              30  | ... una inflación cercana al 30% anual.</pre></div>')
 
+# ---------------------------------------------------------------- AI KPI report: live weekly runs
+
+import json
+from pathlib import Path
+
+KPI_STATUS = Path.home() / "Documents/UpWork/Web/status_inputs/ai_kpi_report.json"
+KPI_HISTORY = "https://github.com/pablodpavon/ai-kpi-commentary/blob/main/reports/index.md"
+# Fallback tipeado (1-nov-2026): 2 corridas semanales, 1 bloqueada (control de datos), última 2026-W43 publicada.
+KPI_LIVE_FALLBACK = {"date": "2026-11-01", "runs": 2, "blocked": 1, "last_week": "2026-W43",
+                     "last_status": "RELEASED", "numbers": 14}
+
+
+def kpi_live():
+    """Valores para el bloque "Live". Si el JSON de status no está o no se entiende, usa el fallback."""
+    v = dict(KPI_LIVE_FALLBACK)
+    try:
+        s = json.loads(KPI_STATUS.read_text(encoding="utf-8"))
+        # note: "2026-W43: RELEASED, 14 numbers checked. 2 weekly runs, 1 blocked. Synthetic data."
+        head, hist = s["note"].split(". ")[0], s["note"].split(". ")[1]
+        v.update(date=s["last_run_utc"][:10], last_week=head.split(":")[0],
+                 last_status="RELEASED" if "RELEASED" in head else "BLOCKED", numbers=s.get("items") or 0,
+                 runs=int(hist.split()[0]), blocked=int(hist.split(", ")[1].split()[0]))
+    except (OSError, ValueError, KeyError, IndexError):
+        pass
+    return v
+
+
+_L = kpi_live()
+_ST_ES = "publicada" if _L["last_status"] == "RELEASED" else "bloqueada"
+_ST_EN = "released" if _L["last_status"] == "RELEASED" else "blocked"
+
+KPI_LIVE_SECTION = (
+    "en-vivo", "En vivo", "Live",
+    p(f"El mismo control corre solo cada lunes a las 07:30 (hora de Berlín) sobre un feed semanal sintético. "
+      f"Antes de pedirle el borrador al modelo, un control de datos revisa la carga; más o menos una semana de cada ocho "
+      f"el feed trae un problema sembrado a propósito (un día duplicado, un día faltante, devoluciones cargadas como ventas) "
+      f"y esa semana se bloquea sin llamar al modelo.",
+      f"The same check now runs by itself every Monday at 07:30 (Berlin) on a synthetic weekly feed. "
+      f"Before the model is asked for a draft, a data check reviews the load; about one week in eight the feed carries "
+      f"a problem planted on purpose (a day loaded twice, a missing day, refunds loaded as sales) and that week is blocked "
+      f"without calling the model.")
+    + metrics([("good", str(_L["runs"]), str(_L["runs"]), "corridas semanales", "weekly runs",
+                f"actualizado el {_L['date']}", f"last refreshed {_L['date']}"),
+               ("crit", str(_L["blocked"]), str(_L["blocked"]), "bloqueadas", "blocked",
+                "por datos o por números", "by the data or the number check"),
+               ("", str(_L["numbers"]), str(_L["numbers"]), "números verificados en la última", "numbers checked in the last run",
+                f"semana {_L['last_week']}: {_ST_ES}", f"week {_L['last_week']}: {_ST_EN}")])
+    + p(f'Cada corrida, con su resultado, motivo y costo: <a href="{KPI_HISTORY}" rel="noopener">historial de corridas</a>. Datos sintéticos.',
+        f'Every run, with its result, reason and cost: <a href="{KPI_HISTORY}" rel="noopener">run history</a>. Synthetic data.'),
+)
+
 KPI = dict(
     slug="reporte-con-ia", image="proj_kpi.jpg", repo="https://github.com/pablodpavon/ai-kpi-commentary",
     title_es="Reporte de KPIs con IA verificado", title_en="AI KPI report, verified",
@@ -314,11 +365,12 @@ KPI = dict(
     h1_en="AI drafts the report. No number goes out unchecked.",
     lede_es="Un reporte mensual de KPIs en el que un modelo de lenguaje escribe el comentario y un control revisa cada cifra contra los datos. Si un solo número no se puede respaldar, el reporte queda bloqueado.",
     lede_en="A monthly KPI report where a language model writes the commentary and a checker tests every figure against the data. If a single number cannot be backed, the report is blocked.",
-    tags=["Python", "LLM", "pandas", "pytest", "KPI reporting", "Release gate"],
+    tags=["Python", "LLM", "pandas", "pytest", "KPI reporting", "Release gate", "launchd", "Claude Haiku"],
     facts=[("Sector", "Industry", "E-commerce", "E-commerce"),
            ("Mi rol", "My role", "Diseño del control y QA", "Control design and QA"),
            ("Volumen", "Volume", "~47.000 órdenes", "~47,000 orders"),
-           ("Validación", "Validation", "Compuerta + 4 tests", "Release gate + 4 tests")],
+           ("Validación", "Validation", "Compuerta + 22 tests", "Release gate + 22 tests"),
+           ("Frecuencia", "Schedule", "Semanal, lunes 07:30", "Weekly, Mondays 07:30")],
     next=("migracion-de-datos.html", "Migración de datos con conciliación", "Data migration with reconciliation"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -349,6 +401,7 @@ KPI = dict(
                   ("", "4", "4", "tipos de error distintos", "distinct error types", "dato, métrica, período, dirección", "value, metric, period, direction")])
          + '<div class="callout">' + bi("<strong>Límite, dicho claro:</strong> el control asegura que cada número es correcto. Si la explicación es la acertada lo sigue decidiendo el analista, y por eso el reporte tiene un responsable humano.",
                                          "<strong>Limit, stated plainly:</strong> the checker proves every number is right. Whether the explanation is the right one is still the analyst's call, which is why the report has a human owner.") + "</div>"),
+        KPI_LIVE_SECTION,
         ("entregables", "Entregables", "Deliverables",
          '<ul lang="es"><li>Cálculo de KPIs reproducible desde los datos crudos.</li><li>Verificador de números en formato argentino (1.234,5).</li><li>Reporte HTML con cada cifra en verde o rojo.</li><li>Compuerta que bloquea la publicación, lista para un job programado.</li></ul>'
          '<ul lang="en"><li>Reproducible KPI computation from raw data.</li><li>Number checker for Argentine formatting (1.234,5).</li><li>HTML report with every figure in green or red.</li><li>Release gate that blocks publishing, ready for a scheduled job.</li></ul>'),

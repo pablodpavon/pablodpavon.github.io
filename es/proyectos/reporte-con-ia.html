@@ -162,12 +162,12 @@
     <span class="cs-updated"><span>Actualizado: octubre de 2026</span></span>
     <h1>La IA redacta el reporte. Ningún número sale sin verificar.</h1>
     <p class="lede">Un reporte mensual de KPIs en el que un modelo de lenguaje escribe el comentario y un control revisa cada cifra contra los datos. Si un solo número no se puede respaldar, el reporte queda bloqueado.</p>
-    <div class="cs-tags"><span>Python</span><span>LLM</span><span>pandas</span><span>pytest</span><span>KPI reporting</span><span>Release gate</span></div>
+    <div class="cs-tags"><span>Python</span><span>LLM</span><span>pandas</span><span>pytest</span><span>KPI reporting</span><span>Release gate</span><span>launchd</span><span>Claude Haiku</span></div>
     <div class="cs-actions">
       <a class="btn btn-brand" href="https://github.com/pablodpavon/ai-kpi-commentary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>Ver el código en GitHub</span></a>
       
     </div>
-    <div class="cs-facts"><div><small><span>Sector</span></small><b><span>E-commerce</span></b></div><div><small><span>Mi rol</span></small><b><span>Diseño del control y QA</span></b></div><div><small><span>Volumen</span></small><b><span>~47.000 órdenes</span></b></div><div><small><span>Validación</span></small><b><span>Compuerta + 4 tests</span></b></div></div>
+    <div class="cs-facts"><div><small><span>Sector</span></small><b><span>E-commerce</span></b></div><div><small><span>Mi rol</span></small><b><span>Diseño del control y QA</span></b></div><div><small><span>Volumen</span></small><b><span>~47.000 órdenes</span></b></div><div><small><span>Validación</span></small><b><span>Compuerta + 22 tests</span></b></div><div><small><span>Frecuencia</span></small><b><span>Semanal, lunes 07:30</span></b></div></div>
     <figure class="cs-shot"><img src="/assets/proj_kpi.jpg" alt="Reporte bloqueado: cinco números del comentario no se respaldan con los datos" width="1600" height="1000"></figure>
   </div>
 </section>
@@ -178,6 +178,7 @@
 <a href="#enfoque"><span>Enfoque</span></a>
 <a href="#validacion"><span>Prueba</span></a>
 <a href="#resultado"><span>Resultado</span></a>
+<a href="#en-vivo"><span>En vivo</span></a>
 <a href="#entregables"><span>Entregables</span></a></nav>
     <article class="prose">
 <section id="contexto">
@@ -204,6 +205,10 @@
 <section id="resultado">
 <h2>Resultado</h2>
 <p>Salida del caso de prueba (datos sintéticos, errores cargados a propósito):</p><div class="metric-row"><div class="metric good"><b><span>18</span></b><span><span>números en el borrador correcto</span></span><small><span>todos verificados: se publica</span></small></div><div class="metric crit"><b><span>5</span></b><span><span>errores típicos plantados</span></span><small><span>todos marcados: se bloquea</span></small></div><div class="metric "><b><span>4</span></b><span><span>tipos de error distintos</span></span><small><span>dato, métrica, período, dirección</span></small></div></div><div class="callout"><span><strong>Límite, dicho claro:</strong> el control asegura que cada número es correcto. Si la explicación es la acertada lo sigue decidiendo el analista, y por eso el reporte tiene un responsable humano.</span></div>
+</section>
+<section id="en-vivo">
+<h2>En vivo</h2>
+<p>El mismo control corre solo cada lunes a las 07:30 (hora de Berlín) sobre un feed semanal sintético. Antes de pedirle el borrador al modelo, un control de datos revisa la carga; más o menos una semana de cada ocho el feed trae un problema sembrado a propósito (un día duplicado, un día faltante, devoluciones cargadas como ventas) y esa semana se bloquea sin llamar al modelo.</p><div class="metric-row"><div class="metric good"><b><span>2</span></b><span><span>corridas semanales</span></span><small><span>actualizado el 2026-11-01</span></small></div><div class="metric crit"><b><span>1</span></b><span><span>bloqueadas</span></span><small><span>por datos o por números</span></small></div><div class="metric "><b><span>14</span></b><span><span>números verificados en la última</span></span><small><span>semana 2026-W43: publicada</span></small></div></div><p>Cada corrida, con su resultado, motivo y costo: <a href="https://github.com/pablodpavon/ai-kpi-commentary/blob/main/reports/index.md" rel="noopener">historial de corridas</a>. Datos sintéticos.</p>
 </section>
 <section id="entregables">
 <h2>Entregables</h2>
