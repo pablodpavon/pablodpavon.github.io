@@ -41,8 +41,8 @@ PAGES = {
     },
     "links.html": {
         "title": {"en": "Links", "es": "Links"},
-        "description": {"en": "Pablo Pavon, freelance Senior Business & Data Analyst in Berlin: website, systems, SearchedBy, GitHub, LinkedIn, Upwork, email and CV.",
-                        "es": "Pablo Pavon, Senior Business & Data Analyst freelance en Berlín: sitio, sistemas, SearchedBy, GitHub, LinkedIn, Upwork, email y CV."},
+        "description": {"en": "Pablo Pavon, freelance Senior Business & Data Analyst in Berlin: website, systems, SearchedBy, GitHub, LinkedIn, Upwork and email.",
+                        "es": "Pablo Pavon, Senior Business & Data Analyst freelance en Berlín: sitio, sistemas, SearchedBy, GitHub, LinkedIn, Upwork y email."},
         "image_alt": {"en": "Links of Pablo Pavon", "es": "Links de Pablo Pavon"},
         "type": "WebPage",
     },
@@ -319,7 +319,6 @@ LINKS = [  # (href, icon, title es, title en, sub es, sub en, extra attrs)
     ("https://www.linkedin.com/in/pablo-damian-pavon", "in", "LinkedIn", "LinkedIn", "linkedin.com/in/pablo-damian-pavon", "linkedin.com/in/pablo-damian-pavon", ' rel="noopener"'),
     ("https://www.upwork.com/freelancers/pablopavon", "up", "Upwork", "Upwork", "upwork.com/freelancers/pablopavon", "upwork.com/freelancers/pablopavon", ' rel="noopener"'),
     ("mailto:contact@pablodpavon.com", "mail", "Email", "Email", "contact@pablodpavon.com", "contact@pablodpavon.com", ""),
-    ("assets/CV_Pablo_Pavon_ES.pdf", "cv", "CV", "CV", "PDF, en español", "PDF, in English", " data-cv download"),
 ]
 
 ARROW = '<svg class="lk-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'

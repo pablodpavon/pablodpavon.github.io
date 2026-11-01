@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Regenerate assets/data/status.json and publish it (commit + push of that one file only).
-# Runs on Pablo's Mac from launchd (daily 09:30 Berlin): com.pablodpavon.site-status.plist.
+# Runs on a Mac from launchd (daily 09:30 Berlin): com.pablodpavon.site-status.plist.
 # The repo path comes from the script location, so the clone can live anywhere.
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"

@@ -14,13 +14,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_status as bs  # noqa: E402
 
-bs.BANNED = ("secret-word", "employer-x")   # the real list lives in the private config, outside the repo
+bs.BANNED = ("secret-word", "word-x")   # the real list lives in the private config, outside the repo
 NOW = dt.datetime(2026, 11, 1, 9, 30, tzinfo=dt.timezone.utc)
 
 # Simulated lines in the log format of the pipeline (names and categories are placeholders).
-REAL = ('2026-11-01: 16 fuentes leídas, 114 avisos vigentes, CAT_A 27, CAT_B 87, nuevos 5; fallas: '
+REAL = ('2026-11-01: 16 fuentes leídas, 120 avisos vigentes, CAT_A 27, CAT_B 87, nuevos 5; fallas: '
         'Fuente Ejemplo (HTTP 403 ({"error":"Public API disabled"})). Script (modo_x, modelo-x): 1 llamada(s), '
-        'US$ 0,1954; pendientes 0; duración 5 min 16 s.')
+        'US$ 0,2100; pendientes 0; duración 4 min 50 s.')
 NO_CALLS = ('2026-11-02: 16 fuentes leídas, 110 avisos vigentes , CAT_A 20, CAT_B 90, nuevos 0; fallas: ninguna. '
             'Script (real, modelo-x): 0 llamada(s), US$ 0; pendientes 0; duración 48 s.')
 NO_COST = ('2026-11-02: 16 fuentes leídas, 110 avisos vigentes , CAT_A 20, CAT_B 90, nuevos 3; fallas: ninguna. '
@@ -50,8 +50,8 @@ def touch(p: Path, when: dt.datetime):
 class ParseLine(unittest.TestCase):
     def test_real_line(self):
         r = bs.parse_radar_line(REAL)
-        self.assertEqual(r, {"date": "2026-11-01", "sources": 16, "items": 114, "cost_usd": 0.1954,
-                             "duration_s": 316, "sources_failed": 1})
+        self.assertEqual(r, {"date": "2026-11-01", "sources": 16, "items": 120, "cost_usd": 0.21,
+                             "duration_s": 290, "sources_failed": 1})
 
     def test_no_calls_costs_zero(self):
         r = bs.parse_radar_line(NO_CALLS)
@@ -76,7 +76,7 @@ class PickLog(unittest.TestCase):
         shadow = write(self.tmp, "shadow/log.md", REAL + "\n")
         run, path = bs.last_radar_run([(final, "final"), (shadow, "shadow")])
         self.assertEqual(path, shadow)
-        self.assertEqual(run["items"], 114)
+        self.assertEqual(run["items"], 120)
 
     def test_newest_date_wins_and_dry_runs_are_skipped(self):
         final = write(self.tmp, "final/log.md", NO_CALLS + "\n")
@@ -97,7 +97,7 @@ class RadarStatus(unittest.TestCase):
         touch(p, dt.datetime(2026, 11, 1, 7, 45, 16, tzinfo=dt.timezone.utc))
         s = bs.radar_status([(p, "shadow")], NOW)
         self.assertTrue(s["ok"])
-        self.assertEqual((s["items"], s["cost_usd"], s["duration_s"]), (114, 0.1954, 316))
+        self.assertEqual((s["items"], s["cost_usd"], s["duration_s"]), (120, 0.21, 290))
         self.assertEqual(s["last_run_utc"], "2026-11-01T07:45:16Z")
         self.assertEqual(s["title_en"], "Hiring-signal radar · 16 public sources")
         self.assertEqual(s["note"], "1 of 16 sources did not answer.")
@@ -156,7 +156,7 @@ class Inputs(unittest.TestCase):
             "path": {**self.GOOD, "note": "read from /Users/someone/data.csv"},
             "email": {**self.GOOD, "note": "ask someone@example.com"},
             "banned": {**self.GOOD, "title_en": "Secret-word report"},
-            "employer": {**self.GOOD, "note": "built at Employer-X"},
+            "banned": {**self.GOOD, "note": "built at Word-X"},
             "reserved": {**self.GOOD, "system": "website"},
             "slug": {**self.GOOD, "system": "KPI Report!"},
             "long": {**self.GOOD, "note": "x" * 201},

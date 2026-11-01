@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import re
 import ssl
 import subprocess
@@ -33,17 +34,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "assets" / "data" / "status.json"
-UPWORK = Path.home() / "Documents" / "UpWork"
-INPUTS = UPWORK / "Web" / "status_inputs"
+# Both locations come from the environment (set in the launchd job), so the public code holds no local paths.
+INPUTS = Path(os.environ["STATUS_INPUTS"]) if os.environ.get("STATUS_INPUTS") else None
 # Local settings that must not be public (log locations, the list of words that may never be published) live
 # outside the repository: {"pipeline_logs": ["/abs/path/log.md", ...], "banned": ["word", ...]}.
-PRIVATE_CONFIG = UPWORK / "Web" / "status_private.json"
+PRIVATE_CONFIG = Path(os.environ["STATUS_PRIVATE"]) if os.environ.get("STATUS_PRIVATE") else None
 HEALTH_URL = "https://searchedby.com/healthz"
 STALE_HOURS = 48
 SCHEMA = 1
 
 
-def load_private(path: Path = PRIVATE_CONFIG) -> tuple[list, tuple]:
+def load_private(path: Path | None = PRIVATE_CONFIG) -> tuple[list, tuple]:
+    if path is None:
+        return [], ()
     try:
         cfg = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -289,7 +292,7 @@ def check_input(d) -> list[str]:
 
 def input_statuses(folder: Path) -> list[dict]:
     out = []
-    if not folder.is_dir():
+    if folder is None or not folder.is_dir():
         return out
     for f in sorted(folder.glob("*.json")):
         if f.name.startswith("_"):

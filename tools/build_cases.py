@@ -541,7 +541,6 @@ GEO = dict(
 # Paste this block into tools/build_cases.py right before `CASES = (...)`, then add OPS to CASES
 # (suggested order: CASES = (GEO, OPS, CASH, AP, MIG, KPI)). It only uses helpers already in that file
 # (bi, p, checks, metrics, ICON_NEXT). Needs assets/proj_ops.jpg (1600x1000, delivered next to this file).
-# Sources of every figure: INFORME.md, section "Fuentes", in Web/_WIP/2026-11-01_vitrina/P1_operating_model/.
 # Own product, not synthetic: it carries "pill" and "foot" like the GEO case.
 
 OPS_STYLE = """<style>
@@ -777,9 +776,7 @@ OPS = dict(
 
 # ---------------------------------------------------------------- Requirements to backlog (P4, 1-nov-2026)
 # Entry for tools/build_cases.py of pablodpavon.github.io. Paste this block after the GEO dict and before CASES,
-# then add REQ to CASES (see INFORME.md). Uses the helpers already defined in build_cases.py: bi, p, steps, metrics.
-# Image: copy proj_requirements.jpg (1600x1000) to assets/. Every number comes from the real run of 1 Nov 2026
-# in ~/code/vitrina/requirements-to-backlog/outputs/*/check_report.json and run.json (sources in INFORME.md).
+# then add REQ to CASES. Uses the helpers already defined in build_cases.py: bi, p, steps, metrics.
 
 REQ_TERM = ('<div class="term"><div class="tb"><i></i><i></i><i></i><span>r2b check</span></div><pre>'
             '<span class="dim">$</span> python -m r2b check\n'
