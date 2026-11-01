@@ -802,7 +802,7 @@ REQ = dict(
     lede_es="De la transcripción de un workshop de requerimientos a épicas, user stories con criterios de aceptación, preguntas abiertas y contradicciones. Cada story cita la frase textual que la origina, y un control en código la saca del backlog si esa frase no está en la transcripción.",
     lede_en="From a requirements workshop transcript to epics, user stories with acceptance criteria, open questions and contradictions. Every story quotes the sentence it comes from, and a code check removes it from the backlog if that sentence is not in the transcript.",
     tags=["Python", "LLM", "Business analysis", "User stories", "pytest", "Jira / Azure DevOps"],
-    extra_action=f'<a class="btn" href="https://pablodpavon.github.io/requirements-to-backlog/">{ICON_NEXT}{bi("Abrir la demo", "Open the demo")}</a>',
+    extra_action=f'<a class="btn" href="https://pablodpavon.com/requirements-to-backlog/">{ICON_NEXT}{bi("Abrir la demo", "Open the demo")}</a>',
     facts=[("Disciplina", "Discipline", "Análisis de negocio", "Business analysis"),
            ("Mi rol", "My role", "Reglas de evidencia y QA", "Evidence rules and QA"),
            ("Volumen", "Volume", "3 workshops · 64 stories", "3 workshops · 64 stories"),
