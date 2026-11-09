@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-07T08:46:30Z",
+ "generated_utc": "2026-11-08T08:35:18Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -13,14 +13,14 @@
    "kind_en": "Scheduled LLM scoring pipeline",
    "kind_es": "Pipeline programado de puntaje con LLM",
    "last_run_utc": "2026-11-06T07:44:30Z",
-   "ok": true,
+   "ok": false,
    "items": 120,
    "cost_usd": 0.1325,
    "duration_s": 267,
    "sources_total": 16,
    "sources_failed": 1,
-   "note": "1 of 16 sources did not answer.",
-   "note_es": "1 de 16 fuentes no respondió."
+   "note": "1 of 16 sources did not answer; no run in the last 48 h.",
+   "note_es": "1 de 16 fuentes no respondió; sin corridas en las últimas 48 h."
   },
   {
    "system": "searchedby",
@@ -28,11 +28,11 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Own product, open beta",
    "kind_es": "Producto propio, beta abierta",
-   "last_run_utc": "2026-11-07T08:46:30Z",
+   "last_run_utc": "2026-11-08T08:35:18Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 192,
+   "latency_ms": 183,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
