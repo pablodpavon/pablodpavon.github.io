@@ -8,7 +8,7 @@ GitHub Pages also serves them without the extension (pablodpavon.com/links), so 
 canonical URLs keep .html like the rest of the site. Called by tools/build_site.py, which writes the <head>.
 
 Sources of the numbers on /systems (all already public on this site or verified on 1-nov-2026):
-- ~3,800 tests, 4 languages, 98.1 %, 66 runs, 12 rules, 1,260 invoices, 12 checks, 4,060/6,500, 4 error types,
+- 5,000+ tests, 4 languages, 98.1 %, 66 runs, 12 rules, 1,260 invoices, 12 checks, 4,060/6,500, 4 error types,
   ~47,000 orders: tools/build_cases.py (the published case studies).
 - US$ 0.23 for one full scan: Diario/2026-11-01.md 00:03 (US$ 0.2333, one re-scan with 15 engine runs).
 - 155 decisions: 02_Estrategia_y_Decisiones.md (D1-D155). 197 of 197 files: GEO/CLAUDE.md (deploy of 30-oct).
@@ -153,7 +153,7 @@ SYSTEMS = [
               "Shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be cited."),
         runs=("Cada scan corre en dos procesos de fondo: uno lee el sitio y el otro les pregunta a los motores de IA. La salud del servicio se revisa todos los días en la página de estado.",
               "Each scan runs on two background workers: one reads the site, the other asks the AI engines. The service health is checked every day on the status page."),
-        figs=[("~3.800", "~3,800", "tests antes de cada deploy", "tests before every deploy"),
+        figs=[("5.000+", "5,000+", "tests antes de cada deploy", "tests before every deploy"),
               ("US$ 0,23", "US$ 0.23", "costo de IA de un scan completo reciente", "AI cost of a recent full scan"),
               ("4", "4", "idiomas en la interfaz", "interface languages")],
         links=[("proyectos/geo-scan.html", "Leer el caso", "Read the case", "case"),
