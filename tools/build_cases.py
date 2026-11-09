@@ -468,7 +468,7 @@ CASH = dict(
 
 # ---------------------------------------------------------------- SearchedBy, formerly GEO Scan (own product, not synthetic)
 # Renamed on 1-nov-2026 (D146/D148 4a); the slug geo-scan stays (it is linked from LinkedIn, Upwork and the sitemap).
-# Tests: ~3,800 = pipeline 2,677 + web app 1,181 on 1-nov-2026 (GEO/_WIP/2026-11-01_seo_propio_v3/medicion/base_*.log).
+# Tests: 5,000+ (5,873 = pipeline 3,919 + web app 1,954 on 9-nov-2026, GEO/_WIP/2026-11-08_lote9y10_integracion/suites_integracion.txt). Before: 5,000+ on 1-nov.
 # Numbers: GEO/Producto_v1 (README, checks.yaml, sampler.py), test suites of 30-oct-2026 (1,919 + 693),
 # and the facts shown on scan.pablodpavon.com (21 checks in the free scan, 8 real sites on 24 Oct).
 GEO = dict(
@@ -480,8 +480,8 @@ GEO = dict(
     updated="2026-11-01",
     genre="Product case study",
     title_es="SearchedBy: producto con IA", title_en="SearchedBy: an AI product",
-    desc="SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by ~3,800 tests.",
-    desc_es="SearchedBy (antes GEO Scan), producto propio: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con ~3.800 tests.",
+    desc="SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by 5,000+ tests.",
+    desc_es="SearchedBy (antes GEO Scan), producto propio: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 5.000+ tests.",
     alt="Resultado de ejemplo de SearchedBy (antes GEO Scan) para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
     alt_en="SearchedBy (formerly GEO Scan) example result for a fictional business: technical readiness and who AI assistants name",
     published="2026-10-31",
@@ -497,7 +497,7 @@ GEO = dict(
     facts=[("Tipo", "Type", "Producto propio", "Own product"),
            ("Mi rol", "My role", "Producto, reglas y QA", "Product, rules and QA"),
            ("Idiomas", "Languages", "4 en la interfaz", "4 in the interface"),
-           ("Validación", "Validation", "~3.800 tests por deploy", "~3,800 tests per deploy")],
+           ("Validación", "Validation", "5.000+ tests por deploy", "5,000+ tests per deploy")],
     next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -524,7 +524,7 @@ GEO = dict(
          + '<div class="callout">' + bi("Con la IA, el cuello de botella deja de ser escribir código y pasa a ser definir qué es correcto. Ese es trabajo de analista.",
                                          "With AI, the bottleneck moves from writing code to defining what is correct. That is analyst work.") + "</div>"),
         ("validacion", "Cómo sé que está bien", "How I know it is right",
-         checks([("Unos 3.800 tests automáticos (2.677 del pipeline y 1.181 de la web, al 1-nov) en dos versiones de Python antes de cada deploy", "About 3,800 automated tests (2,677 pipeline, 1,181 web app, as of 1 Nov) on two Python versions before every deploy"),
+         checks([("Unos 5.900 tests automáticos (3.919 del pipeline y 1.954 de la web, al 9-nov) en dos versiones de Python antes de cada deploy", "About 5,900 automated tests (3,919 pipeline, 1,954 web app, as of 9 Nov) on two Python versions before every deploy"),
                  ("Backup antes de cada deploy y comparación archivo por archivo entre la Mac y el servidor", "Backup before every deploy and a file-by-file comparison between my machine and the server"),
                  ("Ningún idioma se publica sin revisión nativa: el hebreo estuvo oculto hasta que lo revisó un hablante nativo", "No language ships without native review: Hebrew stayed hidden until a native speaker checked it"),
                  ("Cada resultado de la beta lo reviso yo antes de que cuente", "I review every beta result before it counts")])),
@@ -764,7 +764,7 @@ OPS = dict(
                                          "What I own: the rules, the evidence I accept and the decision to ship. The rest is delegated, and written down.") + "</div>"),
         ("resultado", "Estado", "Status",
          metrics([("", "155", "155", "decisiones numeradas", "numbered decisions", "en el log, al 1-nov-2026", "in the log, as of 1 Nov 2026"),
-                  ("good", "~3.800", "~3,800", "tests en dos versiones de Python", "tests on two Python versions", "2.684 del pipeline + 1.184 de la web", "2,684 pipeline + 1,184 web app"),
+                  ("good", "5.000+", "5,000+", "tests en dos versiones de Python", "tests on two Python versions", "3.919 del pipeline + 1.954 de la web", "3,919 pipeline + 1,954 web app"),
                   ("good", "197/197", "197/197", "archivos idénticos, servidor = Mac", "files identical, server = Mac", "30-oct-2026", "30 Oct 2026")])
          + p("Lo que cuesta: cada respuesta del agente tarda uno o dos minutos más porque documenta mientras trabaja, y algunos cambios esperan días a un revisor nativo. Acepto las dos cosas. Es el proceso de una persona para un producto en beta abierta; todavía no lo probé con un equipo.",
              "What it costs: every answer from the agent takes a minute or two longer because it documents as it works, and some changes wait days for a native reviewer. I accept both. This is one person's process for one product in an open beta; I have not run it with a team yet.")
