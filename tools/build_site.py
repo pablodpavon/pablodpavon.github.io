@@ -44,7 +44,7 @@ SITE = "https://pablodpavon.com"
 LANGS = ("en", "es")
 DEFAULT = "en"                     # served at the root and used as x-default
 UPDATED = "2026-10-21"             # base dateModified / lastmod: the last change that touched every page
-HOME_UPDATED = "2026-11-01"        # the home: SearchedBy card + Impressum/privacy links (1-nov-2026); bump with each home change
+HOME_UPDATED = "2026-11-15"        # the home: repositioned to AI process automation, D231 (15-nov-2026); bump with each home change
 
 
 def modified(published: str, updated: str = UPDATED) -> str:
@@ -54,7 +54,7 @@ def modified(published: str, updated: str = UPDATED) -> str:
 PERSON_ID = SITE + "/#person"
 WEBSITE_ID = SITE + "/#website"
 NAME = "Pablo Pavon"
-JOB_TITLE = "Senior Business & Data Analyst"
+JOB_TITLE = "Business Analyst"         # no "Senior" since D187; AI process automation since D231
 EMAIL = "contact@pablodpavon.com"
 LINKEDIN = "https://www.linkedin.com/in/pablo-damian-pavon"
 GITHUB = "https://github.com/pablodpavon"
@@ -67,75 +67,68 @@ URL_ATTRS = {"href", "src", "data-zoom-src", "poster"}
 
 # ------------------------------------------------------------------ page metadata
 HOME = {
-    "title": {
-        "en": "Pablo Pavon · Data & Business Analyst, AI automation · Berlin",
-        "es": "Pablo Pavon · Data & Business Analyst, automatización con IA · Berlín",
+    "title": {   # D231 (15-nov-2026): Servicio_Optimizacion_IA/Borradores/Web_cambios_pablodpavon_v1.md §0
+        "en": "Pablo Pavon · AI process automation for small teams · Berlin",
+        "es": "Pablo Pavon · Procesos con IA para equipos chicos · Berlín",
     },
     "description": {
-        "en": "Freelance Senior Data & Business Analyst in Berlin. AI automation for reporting and processes, with every number checked by code. Power BI, SQL, Python.",
-        "es": "Senior Data & Business Analyst freelance en Berlín. Automatización con IA de reportes y procesos, con cada número verificado por código. Power BI, SQL.",
+        "en": "I find the work your team repeats every month and hand it to AI, with checks: process review, setup in Claude Code, automations that report their failures.",
+        "es": "Encuentro el trabajo que tu equipo repite cada mes y lo paso a la IA con controles: revisión de procesos, implementación en Claude Code y automatizaciones.",
     },
     "image_alt": {
-        "en": "Pablo Pavon, freelance Senior Business & Data Analyst in Berlin: dashboards, data migration, finance automation",
-        "es": "Pablo Pavon, Senior Business & Data Analyst freelance en Berlín: dashboards, migraciones, automatización financiera",
+        "en": "Pablo Pavon, freelance business analyst in Berlin: AI process automation for small teams",
+        "es": "Pablo Pavon, business analyst freelance en Berlín: procesos con IA para equipos chicos",
     },
     "published": "2026-10-13",
 }
 
-PERSON_DESCRIPTION = {
-    "en": "Pablo Pavon is a freelance Senior Business & Data Analyst based in Berlin, Germany, originally from Argentina. "
-          "He builds AI automations for reporting and business processes in which code checks every number the model writes, and runs his own AI product, SearchedBy. "
-          "He works remotely with small and mid-sized companies, accounting firms and corporate teams in Argentina, "
-          "Latin America, Europe and the United States, in English, Spanish and German. He specialises in Power BI and "
-          "SQL dashboards, data migration with reconciliation, finance automation (bank reconciliation, supplier invoice "
-          "control, cash forecasting) and AI-assisted reporting where every number is verified before release. "
-          "Background: banking, e-commerce, marketing analytics and insurance; 10+ years of experience.",
-    "es": "Pablo Pavon es Senior Business & Data Analyst freelance con base en Berlín, Alemania, y origen argentino. "
-          "Construye automatizaciones con IA para reportes y procesos en las que el código verifica cada número que escribe el modelo, y opera un producto propio con IA, SearchedBy. "
-          "Trabaja en remoto con pymes, estudios contables y equipos corporativos de Argentina, América Latina, Europa y "
-          "Estados Unidos, en español, inglés y alemán. Se especializa en dashboards en Power BI y SQL, migraciones de "
-          "datos con conciliación, automatización financiera (conciliación bancaria, control de facturas de proveedores, "
-          "caja proyectada) y reportes asistidos por IA en los que cada número se verifica antes de publicarse. "
-          "Experiencia en banca, e-commerce, analítica de marketing y seguros; más de 10 años.",
+PERSON_DESCRIPTION = {   # D231: spec §8 (experience intro) in the third person + the SearchedBy line of the hero (§2)
+    "en": "Pablo Pavon is a freelance business analyst based in Berlin, Germany, originally from Argentina. "
+          "He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, "
+          "in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI "
+          "with controls: one place for the team's AI work, automations that report their own failures, and finance processes "
+          "that run themselves. One of the systems he runs, SearchedBy, is his own AI product, live in production. "
+          "He has ten years of experience across banking, e-commerce, marketing analytics and insurance.",
+    "es": "Pablo Pavon es business analyst freelance con base en Berlín, Alemania, y origen argentino. "
+          "Trabaja en remoto con empresas chicas y medianas y con equipos de Argentina, Latinoamérica, Israel y Europa, "
+          "en español, inglés y alemán. Se especializa en revisar cómo trabajan los equipos y pasar a la IA la parte repetitiva, "
+          "con controles: la IA del equipo en un solo lugar, automatizaciones que avisan cuando fallan y procesos de finanzas "
+          "que corren solos. Uno de los sistemas que corre, SearchedBy, es un producto propio con IA en producción. "
+          "Tiene diez años de experiencia en banca, e-commerce, analítica de marketing y seguros.",
 }
 
-SERVICES = [  # (en name, es name, en description, es description, anchor)
-    ("AI automation, verified", "Automatización con IA, verificada",
-     "Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.",
-     "Reportes y tareas repetitivas automatizados con IA, con controles que verifican cada cifra antes de que alguien la lea.",
+SERVICES = [  # (en name, es name, en description, es description, anchor) · the six cards of the home, D231 (spec §3)
+    ("AI process review", "Revisión de procesos con IA",
+     "An inventory of your recurring work, written by your own AI from a task I send; a review area by area; up to seven decisions, each with a recommended option.",
+     "Un inventario del trabajo que se repite, escrito por tu propia IA a partir de una tarea que te paso; una revisión área por área; hasta siete decisiones, cada una con una opción recomendada.",
+     "ai-process-review.html"),
+    ("One place for your AI work", "Tu IA, en un solo lugar",
+     "Chats, projects and scheduled tasks moved into one Claude Code project: clear rules, a folder per area, nightly backups, sending and deleting blocked by default.",
+     "Chats, proyectos y tareas programadas en un solo proyecto de Claude Code: reglas claras, una carpeta por área, backup cada noche, envíos y borrados bloqueados por defecto.",
+     "#ia-en-un-lugar"),
+    ("Automations with controls", "Automatizaciones con controles",
+     "Recurring reports, field notes sorted the same day, reminders to the team as drafts, a check on every draft before it goes out. Each one says whether it ran and alerts you when it fails.",
+     "Informes recurrentes, notas de campo ordenadas el mismo día, recordatorios al equipo como borradores, un chequeo de cada borrador antes de que salga. Cada una dice si corrió y avisa cuando falla.",
      "#ia"),
-    ("Dashboards & BI", "Dashboards y BI",
-     "Power BI, Tableau or web dashboards that replace manual reports: defined KPIs, meaningful filters, one version of the numbers.",
-     "Tableros en Power BI, Tableau o web que reemplazan reportes manuales: KPIs definidos, filtros con sentido y una sola versión de los números.",
-     "#servicios"),
-    ("Finance automation", "Automatización financiera",
+    ("Finance processes that run themselves", "Procesos de finanzas que corren solos",
      "Bank reconciliation, supplier invoice control, collections and cash forecasting that update themselves every morning, for SMEs and accounting firms.",
      "Conciliación bancaria, control de facturas de proveedores, cobranzas y caja proyectada que se actualizan solos cada mañana, para pymes y estudios contables.",
      "#automatizacion-financiera"),
-    ("Data analysis", "Análisis de datos",
-     "SQL and Python to answer concrete business questions, with assumptions and limits stated.",
-     "SQL y Python para responder preguntas concretas del negocio, con supuestos y limitaciones a la vista.",
-     "#servicios"),
-    ("Requirements & processes", "Requerimientos y procesos",
-     "Discovery, user stories with acceptance criteria, functional specs and process maps that IT can build without guessing.",
-     "Relevamiento, user stories con criterios de aceptación, especificaciones funcionales y mapeo de procesos.",
-     "#servicios"),
-    ("Pricing & customer analytics", "Pricing y analítica de clientes",
-     "Pricing by market and channel, elasticity, cohorts, RFM segmentation, churn and customer lifetime value.",
-     "Precios por mercado y canal, elasticidad, cohortes, segmentación RFM, churn y valor de vida del cliente.",
-     "#servicios"),
-    ("Data migration & quality", "Migración y calidad de datos",
-     "Data mapping for system changes, cleansing, deduplication and reconciliations that prove nothing was lost; operational GDPR data management.",
-     "Mapeo de datos para cambios de sistema, limpieza, deduplicación y conciliaciones que prueban que no se perdió nada; gestión operativa de datos personales (GDPR).",
-     "#servicios"),
+    ("Requirements and process maps", "Requerimientos y mapas de procesos",
+     "Discovery, user stories with acceptance criteria, functional specs and process maps that IT can build without guessing, and a manual your team can follow.",
+     "Relevamiento, user stories con criterios de aceptación, especificaciones funcionales y mapeo de procesos, y un manual que tu equipo pueda seguir.",
+     "#requerimientos"),
+    ("Your team and AI", "Tu equipo y la IA",
+     "A short, practical course by role, built on your team's real tasks, and a map of who already uses AI and how.",
+     "Un curso corto y práctico por rol, armado con las tareas reales de tu equipo, y un mapa de quién ya usa IA y cómo.",
+     "#equipo-e-ia"),
 ]
 
-KNOWS_ABOUT = ["Business analysis", "Data analysis", "Power BI", "Tableau", "Looker Studio", "SQL", "Python", "pandas",
-               "Data migration", "Data quality", "Bank reconciliation", "Accounts payable control", "Cash flow forecasting",
-               "Pricing analytics", "Customer analytics", "Cohort analysis", "RFM segmentation", "Customer churn",
-               "Requirements engineering", "User stories", "GDPR", "AI-assisted reporting"]
+KNOWS_ABOUT = ["AI process automation", "Business process analysis", "Claude Code", "Workflow automation", "Business analysis",
+               "Requirements engineering", "User stories", "Process mapping", "Bank reconciliation", "Accounts payable control",
+               "Cash flow forecasting", "Data migration", "Data quality", "AI-assisted reporting", "Python", "SQL", "GDPR"]  # D231
 
-AREA_SERVED = ["Germany", "European Union", "Argentina", "Latin America", "United States"]
+AREA_SERVED = ["Germany", "European Union", "Argentina", "Latin America", "Israel", "United States"]
 
 UI = {
     "en": {"home": "Home", "work": "Work", "switch_label": "Language"},
@@ -319,9 +312,9 @@ def person_node(lang: str, full: bool) -> dict:
         ],
         "knowsAbout": KNOWS_ABOUT,
         "hasOccupation": {
-            "@type": "Occupation", "name": "Business and Data Analyst",
+            "@type": "Occupation", "name": "Business Analyst",
             "occupationLocation": {"@type": "City", "name": "Berlin"},
-            "skills": "Power BI, Tableau, SQL, Python, data migration, bank reconciliation, finance automation, requirements analysis",
+            "skills": "AI process review, Claude Code, workflow automation, finance automation, requirements analysis, process mapping, Python, SQL",
         },
         "alumniOf": [
             {"@type": "EducationalOrganization", "name": "CEUPE European Business School"},
@@ -382,7 +375,7 @@ def case_jsonld(c: dict, lang: str) -> dict:
 
 def vitrina_jsonld(rel: str, page: dict, lang: str) -> dict:
     url = page_url(rel, lang)
-    return {"@context": "https://schema.org", "@graph": [
+    graph = [
         {"@type": page["type"], "@id": url + "#webpage", "url": url, "name": page["title"][lang],
          "description": page["description"][lang], "inLanguage": lang, "isPartOf": {"@id": WEBSITE_ID},
          "about": {"@id": PERSON_ID}, "author": {"@id": PERSON_ID},
@@ -391,7 +384,13 @@ def vitrina_jsonld(rel: str, page: dict, lang: str) -> dict:
             {"@type": "ListItem", "position": 1, "name": UI[lang]["home"], "item": page_url("index.html", lang)},
             {"@type": "ListItem", "position": 2, "name": page["title"][lang], "item": url}]},
         person_node(lang, full=False),
-    ]}
+    ]
+    if page.get("service"):                          # service page (D231): the page is about one Service
+        graph[0]["mainEntity"] = {"@id": url + "#service"}
+        graph.insert(1, {"@type": "Service", "@id": url + "#service", "name": page["service"][lang],
+                         "serviceType": page["service"]["en"], "description": page["description"][lang], "url": url,
+                         "provider": {"@id": PERSON_ID}, "areaServed": AREA_SERVED})
+    return {"@context": "https://schema.org", "@graph": graph}
 
 
 def head_html(rel: str, lang: str, meta: dict) -> str:
@@ -504,9 +503,9 @@ def pages() -> list[tuple[str, dict]]:
                 "published": c["published"], "modified": modified(c["published"], c.get("updated", UPDATED)),
                 "css": ["/assets/css/vitrina.css"],          # nav with the Systems link (1-nov-2026)
                 "jsonld": case_jsonld(c, l)} for l in LANGS}))
-    for rel, page in build_vitrina.PAGES.items():     # /systems, /status, /links (1-nov-2026): indexed, in the sitemap
+    for rel, page in build_vitrina.PAGES.items():     # /systems, /status, /links (1-nov-2026), /ai-process-review (D231): indexed, in the sitemap
         items.append((rel, {
-            l: {"title": page["title"][l] + " · " + NAME, "description": page["description"][l],
+            l: {"title": page.get("seo_title", {}).get(l) or page["title"][l] + " · " + NAME, "description": page["description"][l],
                 "image": f"/assets/og/home-{l}.png", "image_alt": page["image_alt"][l],
                 "published": page["published"], "modified": page["published"], "kind": "page",
                 "css": ["/assets/css/vitrina.css"], "jsonld": vitrina_jsonld(rel, page, l)} for l in LANGS}))
@@ -558,18 +557,20 @@ def write_llms_txt():
         f"- [{c['title_es']}]({page_url('proyectos/' + c['slug'] + '.html', 'es')}): {c['desc_es'].replace('Caso de estudio con datos sintéticos: ', '')}"
         for c in build_cases.CASES)
     services = "\n".join(f"- {en} / {es}: {den}" for en, es, den, des, _ in SERVICES)
-    txt = f"""# Pablo Pavon — Freelance Senior Business & Data Analyst, Berlin
+    txt = f"""# Pablo Pavon: AI process automation for small teams; business analyst, Berlin
 
 > {PERSON_DESCRIPTION['en']}
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
-fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
-All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study).
+fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
+The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
 Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES])}.
 
 ## Site
-- [Home, English]({page_url('index.html', 'en')}): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
+- [Home, English]({page_url('index.html', 'en')}): services, case studies, how I work, three ways to start, experience, FAQ, contact
 - [Inicio, español]({page_url('index.html', 'es')}): la misma página en español
+- [AI process review]({page_url('ai-process-review.html', 'en')}): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
+- [Procesos con IA, español]({page_url('ai-process-review.html', 'es')}): la misma página en español
 - [Systems I built and run]({page_url('systems.html', 'en')}): what each system does, what runs on its own, links to the case and the code
 - [Systems status]({page_url('status.html', 'en')}): last run, items processed, cost and state of each scheduled system, generated daily (data: {SITE}/assets/data/status.json)
 - [Links]({page_url('links.html', 'en')}): all profiles on one page

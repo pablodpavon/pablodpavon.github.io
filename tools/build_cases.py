@@ -44,8 +44,8 @@ def head(title_es, title_en, desc, image):
   <div class="nav-inner">
     <a class="brand" href="../index.html"><span class="logo">PP</span>Pablo Pavon</a>
     <nav class="links" aria-label-es="Secciones" aria-label-en="Sections">
+      <a href="../ai-process-review.html">{bi('Procesos', 'Processes')}</a>
       <a href="../index.html#servicios">{bi('Servicios', 'Services')}</a>
-      <a href="../index.html#lab">Dashboards</a>
       <a href="../index.html#proyectos">{bi('Proyectos', 'Work')}</a>
       <a href="../systems.html">{bi('Sistemas', 'Systems')}</a>
       <a href="../index.html#experiencia">{bi('Experiencia', 'Experience')}</a>
@@ -180,7 +180,8 @@ AP = dict(
     lede_es="Un control automático para el área de cuentas a pagar de una empresa argentina ficticia: valida CUIT, cruza factura, orden de compra y recepción, y entrega una lista de excepciones con el motivo de cada una.",
     lede_en="An automated control for the payables team of a fictional Argentine company: it validates CUITs, matches invoice, purchase order and goods receipt, and hands over an exception list with the reason for each one.",
     tags=["Python", "pandas", "pytest", "Excel", "CUIT / IVA / CAE", "3-way match"],
-    extra_action=f'<a class="btn" href="../index.html#lab-ap">{ICON_CHART}{bi("Abrir el dashboard", "Open the dashboard")}</a>',
+    # D231 (15-nov-2026): the live dashboards left the home, so the "Open the dashboard" button (../index.html#lab-ap) is gone.
+    updated="2026-11-15",
     facts=[("Sector", "Industry", "Servicios compartidos", "Shared services"),
            ("Mi rol", "My role", "Reglas, análisis y QA", "Rules, analysis and QA"),
            ("Volumen", "Volume", "1.260 facturas", "1,260 invoices"),
@@ -215,8 +216,8 @@ AP = dict(
          + p("El equipo deja de revisar todas las facturas: revisa solo las marcadas, y cada una llega con el motivo escrito.",
              "The team stops reviewing every invoice: it reviews only the flagged ones, and each arrives with its reason written down.")),
         ("entregables", "Entregables", "Deliverables",
-         f'<ul lang="es"><li><code>exceptions.csv</code>: una fila por factura con las reglas que activó.</li><li><code>ap_review.xlsx</code>: estados, reglas, excepciones y totales de control, listo para el equipo.</li><li>Catálogo de reglas documentado y 7 tests automáticos.</li><li>Un <a href="../index.html#lab-ap">dashboard interactivo</a> con filtros por estado y regla.</li></ul>'
-         f'<ul lang="en"><li><code>exceptions.csv</code>: one row per invoice with the rules it hit.</li><li><code>ap_review.xlsx</code>: states, rules, exceptions and control totals, ready for the team.</li><li>Documented rule catalogue and 7 automated tests.</li><li>An <a href="../index.html#lab-ap">interactive dashboard</a> with filters by status and rule.</li></ul>'),
+         f'<ul lang="es"><li><code>exceptions.csv</code>: una fila por factura con las reglas que activó.</li><li><code>ap_review.xlsx</code>: estados, reglas, excepciones y totales de control, listo para el equipo.</li><li>Catálogo de reglas documentado y 7 tests automáticos.</li><li>Un dashboard interactivo con filtros por estado y regla.</li></ul>'
+         f'<ul lang="en"><li><code>exceptions.csv</code>: one row per invoice with the rules it hit.</li><li><code>ap_review.xlsx</code>: states, rules, exceptions and control totals, ready for the team.</li><li>Documented rule catalogue and 7 automated tests.</li><li>An interactive dashboard with filters by status and rule.</li></ul>'),
     ],
 )
 

@@ -4,6 +4,10 @@
     src/status.html   -> /status.html   /es/status.html    Systems status, rendered from /assets/data/status.json
     src/links.html    -> /links.html    /es/links.html     short link-in-bio page for profiles and forms
 
+and, since 15-nov-2026 (D231), the service page
+
+    src/ai-process-review.html -> /ai-process-review.html  /es/ai-process-review.html   "AI process review" / "Procesos con IA"
+
 GitHub Pages also serves them without the extension (pablodpavon.com/links), so that is the address to share;
 canonical URLs keep .html like the rest of the site. Called by tools/build_site.py, which writes the <head>.
 
@@ -39,16 +43,27 @@ PAGES = {
         "image_alt": {"en": "Status of the systems run by Pablo Pavon", "es": "Estado de los sistemas que opera Pablo Pavon"},
         "type": "WebPage",
     },
+    "ai-process-review.html": {   # D231 (15-nov-2026): texts from Servicio_Optimizacion_IA/Borradores/Web_Procesos_con_IA_v1.md
+        "title": {"en": "AI process review", "es": "Procesos con IA"},
+        "seo_title": {"en": "AI process review for small teams | Pablo Pavon",
+                      "es": "Procesos con IA para equipos chicos | Pablo Pavon"},
+        "description": {"en": "I find the work your team repeats every month and hand it to AI with checks: a review, a plan, the setup, and one number per change.",
+                        "es": "Encuentro el trabajo que tu equipo repite cada mes y lo paso a la IA con controles: diagnóstico, plan, implementación y un número por cambio."},
+        "image_alt": {"en": "AI process review for small teams, by Pablo Pavon", "es": "Procesos con IA para equipos chicos, de Pablo Pavon"},
+        "type": "WebPage",
+        "service": {"en": "AI process review", "es": "Revisión de procesos con IA"},
+        "published": "2026-11-15",
+    },
     "links.html": {
         "title": {"en": "Links", "es": "Links"},
-        "description": {"en": "Pablo Pavon, freelance Senior Business & Data Analyst in Berlin: website, systems, SearchedBy, GitHub, LinkedIn, Upwork and email.",
-                        "es": "Pablo Pavon, Senior Business & Data Analyst freelance en Berlín: sitio, sistemas, SearchedBy, GitHub, LinkedIn, Upwork y email."},
+        "description": {"en": "Pablo Pavon, freelance business analyst in Berlin, AI process automation for small teams: website, systems, SearchedBy, GitHub, LinkedIn, Upwork and email.",
+                        "es": "Pablo Pavon, business analyst freelance en Berlín, procesos con IA para equipos chicos: sitio, sistemas, SearchedBy, GitHub, LinkedIn, Upwork y email."},
         "image_alt": {"en": "Links of Pablo Pavon", "es": "Links de Pablo Pavon"},
         "type": "WebPage",
     },
 }
 for _p in PAGES.values():
-    _p["published"] = PUBLISHED
+    _p.setdefault("published", PUBLISHED)
 
 ICON = {
     "web": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
@@ -69,8 +84,8 @@ def nav(current: str = "") -> str:
         cur = ' aria-current="page"' if key and key == current else ""
         return f'<a href="{href}"{cur}>{bi(es, en) if es != en else es}</a>'
     return "\n      ".join([
+        a("ai-process-review.html", "Procesos", "Processes", "process"),
         a("index.html#servicios", "Servicios", "Services"),
-        a("index.html#lab", "Dashboards", "Dashboards"),
         a("index.html#proyectos", "Proyectos", "Work"),
         a("systems.html", "Sistemas", "Systems", "systems"),
         a("index.html#experiencia", "Experiencia", "Experience"),
@@ -290,6 +305,136 @@ def systems_page() -> str:
 """ + foot(bi("Los casos marcados usan datos sintéticos y empresas ficticias.", "Cases marked as such use synthetic data and fictional companies."))
 
 
+# ------------------------------------------------------------------ /ai-process-review (D231, 15-nov-2026)
+# Texts: Servicio_Optimizacion_IA/Borradores/Web_Procesos_con_IA_v1.md (ES and EN, as written there). No prices,
+# no unmeasured figures, the pilot client is anonymised ("a construction supervision firm in Israel").
+ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg>'
+ICON_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-6-6 6 6 6-6"/></svg>'
+
+PR_FOR = [
+    ("Equipos de 3 a 50 personas donde todo pasa por el dueño o por una sola persona.",
+     "Teams of 3 to 50 people where everything goes through the owner or one person."),
+    ("El mismo informe, liquidación o reporte se arma a mano todos los meses.",
+     "The same report, statement or summary is built by hand every month."),
+    ("La información del campo o de los clientes llega tarde, por WhatsApp o por mail, y alguien la ordena después.",
+     "Information from the field or from clients arrives late, on WhatsApp or by email, and someone sorts it out later."),
+    ("Hay varias planillas con el mismo dato, y ninguna está al día.",
+     "Several spreadsheets hold the same data, and none is up to date."),
+    ("Ya usan ChatGPT o Claude, pero cada uno a su manera, y nada avisa cuando algo falla.",
+     "You already use ChatGPT or Claude, but everyone in their own way, and nothing tells you when something breaks."),
+]
+
+PR_STEPS = [
+    ("Tu IA hace el inventario.", "Your AI does the inventory.",
+     "Si ya usás Claude o ChatGPT, te paso una tarea para que tu propia IA escriba cómo trabajan hoy: procesos, planillas, automatizaciones, qué falló. Si no la usás, lo hacemos en una llamada de una hora.",
+     "If you already use Claude or ChatGPT, I give you a task so your own AI writes down how you work today: processes, spreadsheets, automations, what broke. If you don't, we do it on a one-hour call."),
+    ("Reviso área por área, y cada hallazgo se chequea.", "I review it area by area, and every finding is checked.",
+     "Separo lo que funciona de lo que no, con la evidencia de tus propios archivos. Una segunda revisión independiente vuelve a mirar las conclusiones antes de que lleguen a vos.",
+     "I separate what works from what doesn't, with evidence from your own files. A second, independent review checks the conclusions before they reach you."),
+    ("Te doy pocas decisiones, no un informe eterno.", "You get a few decisions, not an endless report.",
+     "Como máximo siete, cada una con una opción recomendada. Contestás \"ok 1, 3\" y tu IA aplica solo lo que aprobaste.",
+     "Seven at most, each with a recommended option. You answer \"ok 1, 3\" and your AI applies only what you approved."),
+    ("Lo dejamos andando y lo medimos.", "We set it up and measure it.",
+     "Todo en un solo lugar, con los envíos bloqueados por defecto y un backup cada noche. Cada cambio lleva su número: cuánto tarda hoy y cuánto después.",
+     "Everything in one place, sending blocked by default, and a backup every night. Every change has its number: how long it takes today and how long after."),
+]
+
+PR_PILOT = [
+    ("el material de la obra llegaba días después;", "field material arrived days late;"),
+    ("ninguna automatización avisaba cuando fallaba;", "no automation said when it failed;"),
+    ("todo dependía de una sola computadora.", "everything depended on one computer."),
+]
+
+PR_FAQ = [
+    ("¿Necesito Claude?", "Do I need Claude?",
+     "No para empezar: trabajo con lo que ya usás. Para dejar todo ordenado en un solo lugar uso y recomiendo Claude Code, en tu cuenta y en tu computadora.",
+     "Not to start: I work with what you use. To put everything in one place I use and recommend Claude Code, in your account and on your computer."),
+    ("¿Qué pasa con mis datos y los de mis clientes?", "What about my data and my clients' data?",
+     "No necesito contraseñas. El inventario se hace con los datos de terceros reemplazados, y lo que toca temas legales va como preguntas para tu abogado.",
+     "I don't need passwords. The inventory is done with third-party details replaced, and anything legal goes as questions for your lawyer."),
+    ("¿Cuánto tiempo me lleva a mí?", "How much of my time does it take?",
+     "Contestar unas preguntas, pegar una tarea en tu IA y decidir. En la implementación, unas horas repartidas en dos o tres semanas.",
+     "Answering a few questions, pasting one task into your AI, and deciding. During the setup, a few hours spread over two or three weeks."),
+    ("¿Y si después no estás?", "What if you're not around later?",
+     "Todo queda en tu cuenta, con backup y documentado para que lo siga otra persona.",
+     "Everything stays in your account, backed up and documented so someone else can carry on."),
+    ("¿Cuánto cuesta?", "What does it cost?",
+     "Precio fijo por etapa, acordado por escrito antes de empezar.",
+     "A fixed price per stage, agreed in writing before we start."),
+]
+
+PR_TOC = [("para-quien", "Para quién es", "Who it is for"), ("como-trabajo", "Cómo trabajo", "How I work"),
+          ("que-no-automatizo", "Qué no automatizo", "What I don't automate"), ("caso-piloto", "Caso piloto", "Pilot case"),
+          ("preguntas", "Preguntas frecuentes", "FAQ")]
+
+
+def process_page() -> str:
+    def ul(items):
+        return ('<ul lang="es">' + "".join(f"<li>{es}</li>" for es, _ in items) + "</ul>"
+                + '<ul lang="en">' + "".join(f"<li>{en}</li>" for _, en in items) + "</ul>")
+
+    def h2(es, en):
+        return f'<h2 lang="es">{es}</h2><h2 lang="en">{en}</h2>'
+
+    toc = "\n".join(f'      <a href="#{i}">{bi(es, en)}</a>' for i, es, en in PR_TOC)
+    steps = "".join(f"<div><b>{bi(tes, ten)}</b><span>{bi(des, den)}</span></div>" for tes, ten, des, den in PR_STEPS)
+    faq = "".join(f'<details><summary>{bi(qes, qen)}<i aria-hidden="true"></i></summary>'
+                  f'<div class="a"><p lang="es">{aes}</p><p lang="en">{aen}</p></div></details>' for qes, qen, aes, aen in PR_FAQ)
+    hero_html = f"""<section class="cs-hero v-hero">
+  <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <a class="cs-back" href="index.html">{ICON_BACK}{bi('Inicio', 'Home')}</a><br>
+    <span class="pill"><span class="dot"></span>{bi('Procesos con IA · Diagnóstico · Implementación', 'AI process review · Diagnostic · Setup')}</span>
+    <h1 lang="es" style="max-width:22ch">Encuentro el trabajo que tu equipo repite todos los meses y se lo paso a la IA, con controles.</h1><h1 lang="en" style="max-width:22ch">I find the work your team repeats every month and hand it to AI, with checks.</h1>
+    <p class="lede" lang="es">Informes, planillas, mails, seguimientos, fotos y audios que llegan por WhatsApp. Reviso cómo trabaja tu equipo, automatizo con IA la parte repetitiva y la dejo andando y medida. Así tu gente usa su tiempo en lo que la IA no hace: criterio, conocimiento del negocio y la relación con tus clientes.</p><p class="lede" lang="en">Reports, spreadsheets, emails, follow-ups, photos and voice notes arriving on WhatsApp. I look at how your team works, automate the repetitive part with AI, and leave it running and measured. Your people keep their time for what AI doesn't do: judgement, knowledge of the business and your client relationships.</p>
+    <div class="cs-actions"><button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Contame qué tarea se repite más', 'Tell me which task repeats most')}</button><a class="btn" href="#como-trabajo">{ICON_DOWN}{bi('Ver cómo trabajo', 'See how I work')}</a></div>
+  </div>
+</section>
+"""
+    return head("AI process review for small teams", "process") + "\n<main>\n" + hero_html + f"""
+<div class="container">
+  <div class="cs-body">
+    <nav class="toc" aria-label-es="Contenido" aria-label-en="Contents">
+{toc}
+    </nav>
+    <article class="prose">
+<section id="para-quien">
+{h2('Para quién es', 'Who it is for')}
+{ul(PR_FOR)}
+</section>
+<section id="como-trabajo">
+{h2('Cómo trabajo', 'How I work')}
+<div class="steps">{steps}</div>
+</section>
+<section id="que-no-automatizo">
+{h2('Qué no automatizo', 'What I don\'t automate')}
+<div class="callout"><span lang="es">Tu firma, el criterio profesional, los borrados ni los envíos a tus clientes sin tu OK. La IA prepara y avisa; decide una persona.</span><span lang="en">Your signature, professional judgement, deletions, or anything sent to your clients without your OK. AI prepares and flags; a person decides.</span></div>
+</section>
+<section id="caso-piloto">
+{h2('Caso piloto', 'Pilot case')}
+<p lang="es">Una firma de supervisión de obra en Israel que entrega un informe técnico mensual por obra. Su IA hizo el inventario en unas doce horas. La revisión encontró lo que andaba bien, el motor de informes, y lo que no:</p><p lang="en">A construction supervision firm in Israel that delivers a monthly technical report per site. Its AI did the inventory in about twelve hours. The review found what worked, the report engine, and what didn't:</p>
+{ul(PR_PILOT)}
+<p lang="es">Al día siguiente tenía siete decisiones y un plan por etapas. Los resultados medidos todavía no están; los publico cuando existan.</p><p lang="en">The next day the owner had seven decisions and a staged plan. Measured results are not in yet; I will publish them when they exist.</p>
+</section>
+<section id="preguntas">
+{h2('Preguntas frecuentes', 'FAQ')}
+<div class="faq">{faq}</div>
+</section>
+    </article>
+  </div>
+  <div class="sys-foot" style="margin-bottom:20px">
+    <p lang="es"><strong>¿Qué tarea se repite más en tu equipo?</strong> Contame en dos líneas y te digo por dónde empezaría.</p>
+    <p lang="en"><strong>Which task repeats most in your team?</strong> Tell me in two lines and I'll tell you where I would start.</p>
+    <button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Escribime', 'Message me')}</button>
+  </div>
+  <p class="st-how" lang="es">Si además querés saber cómo te encuentran en Google y en los asistentes de IA, mirá <a href="https://searchedby.com/" rel="noopener">SearchedBy</a>.</p>
+  <p class="st-how" lang="en">If you also want to know how Google and AI assistants find you, see <a href="https://searchedby.com/" rel="noopener">SearchedBy</a>.</p>
+</div>
+</main>
+""" + foot()
+
+
 # ------------------------------------------------------------------ /status
 def status_page() -> str:
     return head("Systems status") + "\n<main>\n" + hero(
@@ -311,7 +456,7 @@ def status_page() -> str:
 
 # ------------------------------------------------------------------ /links
 LINKS = [  # (href, icon, title es, title en, sub es, sub en, extra attrs)
-    ("index.html", "web", "Sitio web", "Website", "Casos, dashboards en vivo y servicios · pablodpavon.com", "Case studies, live dashboards and services · pablodpavon.com", ' class="lk-main-link"'),
+    ("index.html", "web", "Sitio web", "Website", "Servicios, casos y cómo trabajo · pablodpavon.com", "Services, case studies and how I work · pablodpavon.com", ' class="lk-main-link"'),
     ("systems.html", "sys", "Sistemas que construí", "Systems I built", "Qué hace cada uno y qué corre solo", "What each one does and what runs on its own", ""),
     ("status.html", "pulse", "Estado de los sistemas", "Systems status", "Última corrida, costo y estado", "Last run, cost and state", ""),
     ("https://searchedby.com/", "search", "SearchedBy", "SearchedBy", "Mi producto con IA, en beta abierta", "My AI product, in open beta", ' rel="noopener"'),
@@ -339,8 +484,8 @@ def links_page() -> str:
   <div class="lk-who">
     <span class="logo" aria-hidden="true">PP</span>
     <h1>Pablo Pavon</h1>
-    <p lang="es">Senior Business &amp; Data Analyst freelance en Berlín. Construyo sistemas de IA y automatización que corren solos, con cada número verificado.</p>
-    <p lang="en">Freelance Senior Business &amp; Data Analyst in Berlin. I build AI and automation systems that run on their own, with every number checked.</p>
+    <p lang="es">Business analyst freelance en Berlín. Encuentro el trabajo que tu equipo repite todos los meses y se lo paso a la IA, con controles.</p>
+    <p lang="en">Freelance business analyst in Berlin. I find the work your team repeats every month and hand it to AI, with checks.</p>
   </div>
   <ul class="lk-list">
 {chr(10).join('    ' + i for i in items)}
@@ -358,7 +503,8 @@ def build():
     (src / "systems.html").write_text(systems_page(), encoding="utf-8")
     (src / "status.html").write_text(status_page(), encoding="utf-8")
     (src / "links.html").write_text(links_page(), encoding="utf-8")
-    print("wrote src/systems.html, src/status.html, src/links.html")
+    (src / "ai-process-review.html").write_text(process_page(), encoding="utf-8")
+    print("wrote src/systems.html, src/status.html, src/links.html, src/ai-process-review.html")
 
 
 if __name__ == "__main__":

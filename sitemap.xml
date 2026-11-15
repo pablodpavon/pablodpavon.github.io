@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pablodpavon.com/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/"/>
   </url>
   <url>
     <loc>https://pablodpavon.com/es/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/"/>
@@ -72,14 +72,14 @@
   </url>
   <url>
     <loc>https://pablodpavon.com/proyectos/cuentas-a-pagar.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/cuentas-a-pagar.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/cuentas-a-pagar.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/cuentas-a-pagar.html"/>
   </url>
   <url>
     <loc>https://pablodpavon.com/es/proyectos/cuentas-a-pagar.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/proyectos/cuentas-a-pagar.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/proyectos/cuentas-a-pagar.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/proyectos/cuentas-a-pagar.html"/>
@@ -139,6 +139,20 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/status.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/status.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/status.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/ai-process-review.html</loc>
+    <lastmod>2026-11-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/ai-process-review.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/ai-process-review.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/ai-process-review.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/es/ai-process-review.html</loc>
+    <lastmod>2026-11-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/ai-process-review.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/ai-process-review.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/ai-process-review.html"/>
   </url>
   <url>
     <loc>https://pablodpavon.com/links.html</loc>

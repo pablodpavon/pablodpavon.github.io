@@ -1,15 +1,17 @@
-# Pablo Pavon — Freelance Senior Business & Data Analyst, Berlin
+# Pablo Pavon: AI process automation for small teams; business analyst, Berlin
 
-> Pablo Pavon is a freelance Senior Business & Data Analyst based in Berlin, Germany, originally from Argentina. He builds AI automations for reporting and business processes in which code checks every number the model writes, and runs his own AI product, SearchedBy. He works remotely with small and mid-sized companies, accounting firms and corporate teams in Argentina, Latin America, Europe and the United States, in English, Spanish and German. He specialises in Power BI and SQL dashboards, data migration with reconciliation, finance automation (bank reconciliation, supplier invoice control, cash forecasting) and AI-assisted reporting where every number is verified before release. Background: banking, e-commerce, marketing analytics and insurance; 10+ years of experience.
+> Pablo Pavon is a freelance business analyst based in Berlin, Germany, originally from Argentina. He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI with controls: one place for the team's AI work, automations that report their own failures, and finance processes that run themselves. One of the systems he runs, SearchedBy, is his own AI product, live in production. He has ten years of experience across banking, e-commerce, marketing analytics and insurance.
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
-fully remote; engagement models: diagnostic, fixed-scope project, monthly support; replies within 1–2 business days.
-All dashboards and case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exception is SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study).
-Site last updated: 2026-11-01.
+fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
+The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
+Site last updated: 2026-11-15.
 
 ## Site
-- [Home, English](https://pablodpavon.com/): services, three live dashboards (retail sales nominal vs real, accounts payable control, cohort retention), case studies, experience, FAQ, contact
+- [Home, English](https://pablodpavon.com/): services, case studies, how I work, three ways to start, experience, FAQ, contact
 - [Inicio, español](https://pablodpavon.com/es/): la misma página en español
+- [AI process review](https://pablodpavon.com/ai-process-review.html): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
+- [Procesos con IA, español](https://pablodpavon.com/es/ai-process-review.html): la misma página en español
 - [Systems I built and run](https://pablodpavon.com/systems.html): what each system does, what runs on its own, links to the case and the code
 - [Systems status](https://pablodpavon.com/status.html): last run, items processed, cost and state of each scheduled system, generated daily (data: https://pablodpavon.com/assets/data/status.json)
 - [Links](https://pablodpavon.com/links.html): all profiles on one page
@@ -17,13 +19,12 @@ Site last updated: 2026-11-01.
 - [CV (español, PDF)](https://pablodpavon.com/assets/CV_Pablo_Pavon_ES.pdf)
 
 ## Services
-- AI automation, verified / Automatización con IA, verificada: Reports and repetitive work automated with AI, with checks that verify every figure before anyone reads it.
-- Dashboards & BI / Dashboards y BI: Power BI, Tableau or web dashboards that replace manual reports: defined KPIs, meaningful filters, one version of the numbers.
-- Finance automation / Automatización financiera: Bank reconciliation, supplier invoice control, collections and cash forecasting that update themselves every morning, for SMEs and accounting firms.
-- Data analysis / Análisis de datos: SQL and Python to answer concrete business questions, with assumptions and limits stated.
-- Requirements & processes / Requerimientos y procesos: Discovery, user stories with acceptance criteria, functional specs and process maps that IT can build without guessing.
-- Pricing & customer analytics / Pricing y analítica de clientes: Pricing by market and channel, elasticity, cohorts, RFM segmentation, churn and customer lifetime value.
-- Data migration & quality / Migración y calidad de datos: Data mapping for system changes, cleansing, deduplication and reconciliations that prove nothing was lost; operational GDPR data management.
+- AI process review / Revisión de procesos con IA: An inventory of your recurring work, written by your own AI from a task I send; a review area by area; up to seven decisions, each with a recommended option.
+- One place for your AI work / Tu IA, en un solo lugar: Chats, projects and scheduled tasks moved into one Claude Code project: clear rules, a folder per area, nightly backups, sending and deleting blocked by default.
+- Automations with controls / Automatizaciones con controles: Recurring reports, field notes sorted the same day, reminders to the team as drafts, a check on every draft before it goes out. Each one says whether it ran and alerts you when it fails.
+- Finance processes that run themselves / Procesos de finanzas que corren solos: Bank reconciliation, supplier invoice control, collections and cash forecasting that update themselves every morning, for SMEs and accounting firms.
+- Requirements and process maps / Requerimientos y mapas de procesos: Discovery, user stories with acceptance criteria, functional specs and process maps that IT can build without guessing, and a manual your team can follow.
+- Your team and AI / Tu equipo y la IA: A short, practical course by role, built on your team's real tasks, and a map of who already uses AI and how.
 
 ## Case studies (English)
 - [SearchedBy: an AI product](https://pablodpavon.com/proyectos/geo-scan.html): SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by 5,000+ tests. Code: https://github.com/pablodpavon/geo-scan-case-study

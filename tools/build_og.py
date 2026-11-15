@@ -179,12 +179,12 @@ def favicons():
 
 def main():
     A = ROOT / "assets"
-    card("Freelance Data & Business Analyst in Berlin",
-         "Power BI and SQL dashboards · data migration · finance automation · AI reporting, with every number verified.",
-         ["Berlin · remote", "EN · ES · DE", "Power BI · SQL · Python"], A / "case_retention.jpg", OG / "home-en.png")
-    card("Analista de datos y procesos freelance en Berlín",
-         "Dashboards en Power BI y SQL · migraciones · automatización financiera · reportes con IA, con cada número verificado.",
-         ["Berlín · remoto", "ES · EN · DE", "Power BI · SQL · Python"], A / "case_retention.jpg", OG / "home-es.png")
+    card("AI process automation for small teams",
+         "I find the work your team repeats every month and hand it to AI, with checks. Business analyst in Berlin.",
+         ["Berlin · remote", "EN · ES · DE", "Claude Code · processes"], A / "case_requirements.jpg", OG / "home-en.png")
+    card("Procesos con IA para equipos chicos",
+         "Encuentro el trabajo que tu equipo repite cada mes y se lo paso a la IA, con controles. Business analyst en Berlín.",
+         ["Berlín · remoto", "ES · EN · DE", "Claude Code · procesos"], A / "case_requirements.jpg", OG / "home-es.png")
     for c in build_cases.CASES:
         for lang in ("en", "es"):
             title = c["h1_" + lang].rstrip(".")
