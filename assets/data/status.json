@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-15T08:30:05Z",
+ "generated_utc": "2026-11-16T08:30:06Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -12,12 +12,15 @@
    "schedule_es": "Diario, 08:40 Berlín",
    "kind_en": "Scheduled LLM scoring pipeline",
    "kind_es": "Pipeline programado de puntaje con LLM",
-   "last_run_utc": null,
-   "ok": false,
-   "items": null,
-   "cost_usd": null,
-   "note": "No run recorded yet.",
-   "note_es": "Todavía no hay corridas registradas."
+   "last_run_utc": "2026-11-15T08:10:32Z",
+   "ok": true,
+   "items": 53,
+   "cost_usd": 0.0,
+   "duration_s": 105,
+   "sources_total": 16,
+   "sources_failed": 2,
+   "note": "2 of 16 sources did not answer.",
+   "note_es": "2 de 16 fuentes no respondieron."
   },
   {
    "system": "searchedby",
@@ -25,30 +28,16 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Own product, open beta",
    "kind_es": "Producto propio, beta abierta",
-   "last_run_utc": "2026-11-15T08:30:05Z",
+   "last_run_utc": "2026-11-16T08:30:06Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 154,
+   "latency_ms": 179,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
    "note": "",
    "note_es": ""
-  },
-  {
-   "system": "kpi-report",
-   "title_en": "AI KPI report, verified weekly",
-   "title_es": "Reporte de KPIs con IA, verificado cada semana",
-   "last_run_utc": "2026-11-09T06:30:20Z",
-   "ok": true,
-   "items": 16,
-   "items_label_en": "numbers checked",
-   "items_label_es": "números verificados",
-   "cost_usd": 0.001387,
-   "schedule_en": "Weekly, Mondays 07:30 Berlin",
-   "schedule_es": "Semanal, lunes 07:30 Berlín",
-   "note": "2026-W45: BLOCKED by the number check (WRONG_DIRECTION), 16 numbers checked. 4 weekly runs, 2 blocked. Synthetic data."
   },
   {
    "system": "website",
@@ -61,7 +50,7 @@
    "items": null,
    "cost_usd": null,
    "link": "https://github.com/pablodpavon/pablodpavon.github.io",
-   "last_run_utc": "2026-11-09T07:06:51Z",
+   "last_run_utc": "2026-11-15T15:55:26Z",
    "ok": true,
    "note": "",
    "note_es": ""
