@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-16T08:30:06Z",
+ "generated_utc": "2026-11-17T08:30:05Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -12,15 +12,12 @@
    "schedule_es": "Diario, 08:40 Berlín",
    "kind_en": "Scheduled LLM scoring pipeline",
    "kind_es": "Pipeline programado de puntaje con LLM",
-   "last_run_utc": "2026-11-15T08:10:32Z",
-   "ok": true,
-   "items": 53,
-   "cost_usd": 0.0,
-   "duration_s": 105,
-   "sources_total": 16,
-   "sources_failed": 2,
-   "note": "2 of 16 sources did not answer.",
-   "note_es": "2 de 16 fuentes no respondieron."
+   "last_run_utc": null,
+   "ok": false,
+   "items": null,
+   "cost_usd": null,
+   "note": "No run recorded yet.",
+   "note_es": "Todavía no hay corridas registradas."
   },
   {
    "system": "searchedby",
@@ -28,16 +25,30 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Own product, open beta",
    "kind_es": "Producto propio, beta abierta",
-   "last_run_utc": "2026-11-16T08:30:06Z",
+   "last_run_utc": "2026-11-17T08:30:05Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 179,
+   "latency_ms": 187,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
    "note": "",
    "note_es": ""
+  },
+  {
+   "system": "kpi-report",
+   "title_en": "AI KPI report, verified weekly",
+   "title_es": "Reporte de KPIs con IA, verificado cada semana",
+   "last_run_utc": "2026-11-16T06:33:33Z",
+   "ok": true,
+   "items": 13,
+   "items_label_en": "numbers checked",
+   "items_label_es": "números verificados",
+   "cost_usd": 0.001372,
+   "schedule_en": "Weekly, Mondays 07:30 Berlin",
+   "schedule_es": "Semanal, lunes 07:30 Berlín",
+   "note": "2026-W46: RELEASED, 13 numbers checked. 5 weekly runs, 2 blocked. Synthetic data."
   },
   {
    "system": "website",
