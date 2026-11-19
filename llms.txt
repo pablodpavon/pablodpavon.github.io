@@ -12,7 +12,7 @@ Site last updated: 2026-11-19.
 - [Inicio, español](https://pablodpavon.com/es/): la misma página en español
 - [AI process review](https://pablodpavon.com/ai-process-review.html): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
 - [Procesos con IA, español](https://pablodpavon.com/es/ai-process-review.html): la misma página en español
-- [Portfolio](https://pablodpavon.com/portfolio.html): every project grouped by kind: a real pilot without names, products and tools I built, a prototype, demos on synthetic data, and what I can build
+- [Portfolio](https://pablodpavon.com/portfolio.html): every project grouped by kind: a real pilot without names, products and tools I built, automations that run on their own, a prototype, demos on synthetic data, and what I can build
 - [Portfolio, español](https://pablodpavon.com/es/portfolio.html): la misma página en español
 - [Systems I built and run](https://pablodpavon.com/systems.html): what each system does, what runs on its own, links to the case and the code
 - [Systems status](https://pablodpavon.com/status.html): last run, items processed, cost and state of each scheduled system, generated daily (data: https://pablodpavon.com/assets/data/status.json)

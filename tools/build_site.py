@@ -571,7 +571,7 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 - [Inicio, español]({page_url('index.html', 'es')}): la misma página en español
 - [AI process review]({page_url('ai-process-review.html', 'en')}): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
 - [Procesos con IA, español]({page_url('ai-process-review.html', 'es')}): la misma página en español
-- [Portfolio]({page_url('portfolio.html', 'en')}): every project grouped by kind: a real pilot without names, products and tools I built, a prototype, demos on synthetic data, and what I can build
+- [Portfolio]({page_url('portfolio.html', 'en')}): every project grouped by kind: a real pilot without names, products and tools I built, automations that run on their own, a prototype, demos on synthetic data, and what I can build
 - [Portfolio, español]({page_url('portfolio.html', 'es')}): la misma página en español
 - [Systems I built and run]({page_url('systems.html', 'en')}): what each system does, what runs on its own, links to the case and the code
 - [Systems status]({page_url('status.html', 'en')}): last run, items processed, cost and state of each scheduled system, generated daily (data: {SITE}/assets/data/status.json)

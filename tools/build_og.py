@@ -180,10 +180,10 @@ def favicons():
 def portfolio_cards():
     A = ROOT / "assets"
     card("Portfolio: what I've built with AI, and how I know it works",
-         "A real pilot without names, products and tools I built, a prototype and demos on synthetic data.",
+         "A real pilot, products I built, 15+ automations that run on their own, a prototype and demos.",
          ["Portfolio", "Claude Code", "Checks first"], A / "proj_kpi.jpg", OG / "portfolio-en.png")
     card("Portfolio: lo que construí con IA, y cómo sé que funciona",
-         "Un piloto real sin nombres, productos y herramientas que construí, un prototipo y demos con datos sintéticos.",
+         "Un piloto real, productos que construí, más de 15 automatizaciones que corren solas, un prototipo y demos.",
          ["Portfolio", "Claude Code", "Controles primero"], A / "proj_kpi.jpg", OG / "portfolio-es.png")
 
 

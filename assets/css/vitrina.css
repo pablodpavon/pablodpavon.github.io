@@ -80,6 +80,7 @@
 
 /* ---------- /portfolio (19-nov-2026) ---------- */
 .pf-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pf-legend-note{margin:8px 0 0;font-size:14px;color:var(--muted)}
 .pf-toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:14.5px}
 .pf-toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:1px}
 .pf-toc a:hover{color:var(--brand);border-color:var(--brand)}

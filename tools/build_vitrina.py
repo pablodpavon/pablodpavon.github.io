@@ -62,8 +62,8 @@ PAGES = {
         "title": {"en": "Portfolio", "es": "Portfolio"},
         "seo_title": {"en": "Portfolio: AI projects, products and demos | Pablo Pavon",
                       "es": "Portfolio: proyectos con IA, productos y demos | Pablo Pavon"},
-        "description": {"en": "A real pilot without names, products and tools I built, a prototype and demos on synthetic data: what each one does and how it is checked.",
-                        "es": "Un piloto real sin nombres, productos y herramientas que construí, un prototipo y demos con datos sintéticos: qué hace cada uno y cómo se controla."},
+        "description": {"en": "What I've built with AI: a real pilot, products, 15+ automations I run, a prototype and demos, with what each one does and how it is checked.",
+                        "es": "Lo que construí con IA: un piloto real, productos, más de 15 automatizaciones propias, un prototipo y demos, con lo que hace cada uno y cómo se controla."},
         "image_alt": {"en": "Portfolio of Pablo Pavon: AI projects, products and demos", "es": "Portfolio de Pablo Pavon: proyectos con IA, productos y demos"},
         "type": "CollectionPage",
         "published": "2026-11-19",
@@ -463,6 +463,8 @@ def process_page() -> str:
 #   21 automated checks and the four assistants: the public home of https://searchedby.com/ (19-nov-2026).
 # - control tower: 13 projects in its database (19-nov-2026).
 # - KPI report: 4 error types, as in its case study; the runs themselves are on /status.
+# - own automations: 15 recurring scheduled tasks + 2 LaunchAgents (19-nov-2026); the four cards follow their prompts.
+#   The personal-finance task stays out (its prompt says the data is private).
 # - field app: 230 tests (npm test, 19-nov-2026) and a 36-screen check as a new phone (18-nov-2026).
 ICON_EXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
 
@@ -509,8 +511,8 @@ PF_OWN = [
                "SearchedBy: what AI assistants say when someone looks for what you sell"),
         what=("Un chequeo gratis que les hace a ChatGPT, Perplexity, Claude y la IA de Google las preguntas que haría un cliente, y muestra si nombran a tu negocio o a tu competencia. Después ofrece un informe pago, que se cobra con Stripe. Lo diseñé y lo construí con Claude Code; hoy es un producto de NexYn.",
               "A free check that asks ChatGPT, Perplexity, Claude and Google's AI the questions a customer would ask, and shows whether they name your business or your competitors. It then offers a paid report, charged through Stripe. I designed and built it with Claude Code; today it is a NexYn product."),
-        checks=("Antes de cada versión corren más de 7.700 pruebas automáticas. Las subidas se ensayan primero en una copia descartable, con la vuelta atrás incluida, y una persona del equipo revisa cada resultado.",
-                "More than 7,700 automated tests run before every release. Releases are rehearsed first on a throwaway copy, rollback included, and a person on the team reviews every result."),
+        checks=("Antes de cada versión corren más de 7.700 pruebas automáticas, y las subidas se ensayan primero en una copia descartable, con la vuelta atrás incluida. Cada seis horas, otra tarea revisa los resultados nuevos sin gastar en las APIs y marca cualquier error grave; una persona del equipo los revisa igual.",
+                "More than 7,700 automated tests run before every release, and releases are rehearsed first on a throwaway copy, rollback included. Every six hours, another task reviews the new results without spending on the APIs and flags any serious error; a person on the team reviews them too."),
         figs=[("7.700+", "7,700+", "pruebas automáticas antes de cada versión", "automated tests before every release"),
               ("21", "21", "controles automáticos en el chequeo gratis", "automated checks in the free scan"),
               ("4", "4", "asistentes de IA consultados", "AI assistants asked")],
@@ -544,6 +546,51 @@ PF_OWN = [
         figs=[("4", "4", "tipos de error que detecta", "error types it detects")],
         links=[("proyectos/reporte-con-ia.html", "Leer el caso", "Read the case", "case"),
                ("status.html", "Ver la última corrida", "See the last run", "go")],
+    ),
+]
+
+PF_AUTO = [  # 19-nov-2026, Pablo: "subir más automatizaciones". Real scheduled tasks on his Mac (list_scheduled_tasks): 15 recurring
+    # tasks plus 2 LaunchAgents (status page, KPI report). Job-search and LinkedIn tasks are left out on purpose.
+    dict(
+        id="plataformas", kind="own", kind_label=("Automatización propia", "My own automation"), status=("Dos veces por día", "Twice a day"),
+        stack=["Claude Code", "Chrome", "Gmail"],
+        title=("Las bandejas de clientes, revisadas solas", "Client inboxes, checked on their own"),
+        what=("Dos veces por día, una tarea revisa los mensajes y pedidos de las plataformas de trabajo freelance y del mail. A cada novedad le pone un veredicto (responder, esperar, rechazar o posible estafa) con su motivo y, si conviene responder, deja el borrador listo.",
+              "Twice a day, a task reads the messages and orders on the freelance platforms and in the mail. Each new item gets a verdict (reply, wait, decline or likely scam) with its reason and, when a reply makes sense, the draft is ready."),
+        checks=("Solo lectura: no inicia sesión, no acepta ni envía nada, y frena ante cualquier verificación. Una respuesta sale recién cuando contesto \"ok\".",
+                "Read-only: it doesn't log in, accept or send anything, and it stops at any verification check. A reply goes out only after I answer \"ok\"."),
+        figs=[("4", "4", "plataformas en la web, más el mail", "platforms on the web, plus the mail")],
+    ),
+    dict(
+        id="estado", kind="own", kind_label=("Automatización propia", "My own automation"), status=("Cada mañana", "Every morning"),
+        stack=["Python", "GitHub Pages"],
+        title=("Una página que dice si todo corrió", "A page that says whether everything ran"),
+        what=("Cada mañana, un script lee los registros de los sistemas que corren solos y publica, para cada uno, la última corrida, lo que procesó, cuánto costó y si terminó bien. Nadie carga nada a mano.",
+              "Every morning, a script reads the logs of the systems that run on their own and publishes, for each one, the last run, what it processed, what it cost and whether it worked. Nobody types anything in."),
+        checks=("Un dato con más de 48 horas aparece marcado como viejo, y solo se publica desde la rama principal sin otros cambios pendientes, para que no se cuele nada más.",
+                "Any figure older than 48 hours is flagged as stale, and it only publishes from the main branch with nothing else pending, so no other change slips through."),
+        figs=[],
+        links=[("status.html", "Ver la página de estado", "See the status page", "go")],
+    ),
+    dict(
+        id="ferias", kind="own", kind_label=("Automatización propia", "My own automation"), status=("Cada lunes y dos veces por día", "Mondays and twice a day"),
+        stack=["Claude Code", "Todoist", "Gmail"],
+        title=("Ferias: buscar, anotar y seguir las respuestas", "Markets: find them, log them, follow up"),
+        what=("Para un negocio chico que vende en ferias de Berlín. Cada lunes busca mercados y ferias nuevos, los anota con fecha y precio, crea hasta cinco tareas y deja hasta cinco mails de inscripción como borrador. Dos veces por día revisa las respuestas de organizadores y proveedores y avisa qué llegó.",
+              "For a small business that sells at Berlin markets. Every Monday it looks for new markets and fairs, logs them with date and price, creates up to five tasks and leaves up to five sign-up emails as drafts. Twice a day it checks replies from organisers and suppliers and says what came in."),
+        checks=("Nunca se inscribe, compra, completa formularios ni manda mensajes: busca, anota y prepara. El mail lo manda una persona.",
+                "It never signs up, buys, fills in forms or sends messages: it searches, logs and prepares. A person sends the email."),
+        figs=[],
+    ),
+    dict(
+        id="memoria", kind="own", kind_label=("Automatización que uso", "An automation I run"), status=("Cada noche", "Every night"),
+        stack=["Claude Code", ("Agentes", "Agents")],
+        title=("Una memoria que se ordena sola de noche", "A memory that tidies itself every night"),
+        what=("La configuré para que, a las 2 de la mañana, varios agentes lean las conversaciones de IA del día, sumen a la memoria de cada proyecto lo que se aprendió y corrijan lo que resultó falso. A la mañana, la IA arranca sabiendo lo de ayer.",
+              "I set it up so that at 2 a.m. several agents read the day's AI conversations, add what was learned to each project's memory and fix what turned out to be wrong. In the morning, the AI starts out knowing what happened yesterday."),
+        checks=("Hace un respaldo antes de tocar nada, nunca borra una nota, controla que no se cuele ninguna clave y deja en espera las reglas generales hasta mi OK.",
+                "It backs up before touching anything, never deletes a note, checks that no key or password slips in, and holds general rules until I approve them."),
+        figs=[],
     ),
 ]
 
@@ -603,6 +650,18 @@ PF_OFFERS = [  # title es, en, text es, en, (prefix es, link text es, prefix en,
      "El informe mensual que hoy armás a mano, redactado por la IA y controlado número por número antes de salir.",
      "The monthly report you build by hand today, drafted by AI and checked number by number before it goes out.",
      ("Sale del ", "reporte de KPIs", "Built from ", "the KPI report", "reporte-kpi")),
+    ("Tu mail, leído y ordenado", "Your inbox, read and sorted",
+     "Facturas, vencimientos y pedidos de clientes anotados solos, con la acción sugerida y el borrador listo para que vos decidas.",
+     "Invoices, due dates and client requests logged on their own, with the suggested action and a draft ready for you to decide.",
+     ("Sale de ", "mis propias revisiones de mail", "Built from ", "my own mail checks", "plataformas")),
+    ("Un radar de oportunidades", "An opportunity radar",
+     "Cada semana busca clientes, licitaciones o eventos de tu rubro, los anota con su fecha y deja listo el primer mail.",
+     "Every week it looks for clients, tenders or events in your field, logs them with their date and drafts the first email.",
+     ("Sale del ", "radar de ferias", "Built from ", "the markets radar", "ferias")),
+    ("Respuestas a clientes, en borrador", "Client replies, drafted",
+     "Cada consulta nueva con un veredicto y una respuesta preparada. Vos la leés y la mandás con un \"ok\".",
+     "Every new enquiry with a verdict and a prepared reply. You read it and send it with an \"ok\".",
+     ("Sale de la ", "revisión de las bandejas de clientes", "Built from ", "the client-inbox check", "plataformas")),
     ("Requerimientos que el equipo de sistemas puede construir", "Requirements IT can build from",
      "De una reunión grabada a user stories con criterios de aceptación, cada una con la frase de la que sale.",
      "From a recorded meeting to user stories with acceptance criteria, each one quoting the sentence it comes from.",
@@ -618,6 +677,10 @@ PF_GROUPS = [  # id, kicker es, en, heading es, en, intro es, en, items
      "Lo que construí y sigue andando.", "Things I built that keep running.",
      "Están en producción, corren solos o los uso todos los días.",
      "They are live, run on their own, or I use them every day.", PF_OWN),
+    ("automatizaciones", "Automatizaciones propias", "My own automations",
+     "Más de 15 tareas que corren solas en mi computadora.", "More than 15 tasks that run on their own on my computer.",
+     "Estas cuatro siguen la misma regla que aplico con clientes: leen, ordenan y preparan; enviar, pagar o borrar queda para una persona.",
+     "These four follow the rule I apply for clients: they read, sort and prepare; sending, paying or deleting stays with a person.", PF_AUTO),
     ("prototipos", "Prototipos", "Prototypes",
      "Armado de verdad, todavía sin uso diario.", "Built for real, not in daily use yet.",
      "Funciona y la muestro en una llamada, pero todavía no la usa un equipo todos los días.",
@@ -678,7 +741,9 @@ def portfolio_page() -> str:
     toc = [(g[0], g[1], g[2]) for g in PF_GROUPS] + [("puedo-armarte", "Lo que puedo armarte", "What I can build for you")]
     toc_html = '<nav class="pf-toc" aria-label-es="Secciones del portfolio" aria-label-en="Portfolio sections">' + "".join(
         f'<a href="#{i}">{bi(es, en)}</a>' for i, es, en in toc) + "</nav>"
-    legend = '<div class="pf-legend">' + "".join(pf_chip(c, es, en) for c, es, en in PF_KIND.values()) + "</div>"
+    legend = ('<div class="pf-legend">' + "".join(pf_chip(c, es, en) for c, es, en in PF_KIND.values()) + "</div>"
+              + '<p class="pf-legend-note" lang="es">El piloto real va sin el nombre de la firma; las demos usan datos sintéticos de empresas ficticias y lo dicen.</p>'
+              + '<p class="pf-legend-note" lang="en">The real pilot is described without the firm\'s name; demos use synthetic data from fictional companies and say so.</p>')
     groups = []
     for gid, kes, ken, hes, hen, ies, ien, items in PF_GROUPS:
         cards = "\n".join(pf_card(it) for it in (items if items is not None else pf_demos()))
@@ -703,8 +768,8 @@ def portfolio_page() -> str:
 </div>""")
     return head("Portfolio", "portfolio") + "\n<main>\n" + hero(
         {"es": "Lo que construí con IA, y cómo sé que funciona.", "en": "What I've built with AI, and how I know it works."},
-        "Cada proyecto dice para quién es, qué hace, con qué está hecho y qué controles tiene. El piloto real va sin el nombre de la firma; las demos usan datos sintéticos de empresas ficticias y lo dicen.",
-        "Each project says who it is for, what it does, what it is built with and which checks it has. The real pilot is described without the firm's name; demos use synthetic data from fictional companies and say so.",
+        "Si en tu empresa alguien hace a mano lo mismo todas las semanas, te armo un sistema que haga esa parte solo, con controles, para que esa persona use su tiempo y su cabeza en lo que pide criterio. Esto es lo que ya construí, con qué y cómo lo controlo.",
+        "If someone at your company does the same thing by hand every week, I'll build a system that does that part on its own, with checks, so that person can spend their time and attention on what needs judgement. This is what I've already built, with what, and how I check it.",
         pill=("Portfolio · proyectos, productos y demos", "Portfolio · projects, products and demos"),
         extra=legend + toc_html,
     ) + f"""
@@ -721,8 +786,8 @@ def portfolio_page() -> str:
   </div>
 </section>
 <div class="sys-foot">
-  <p lang="es"><strong>¿Cuál te serviría?</strong> Contame en dos líneas qué tarea se repite en tu equipo y te digo por dónde empezaría.</p>
-  <p lang="en"><strong>Which one would help you?</strong> Tell me in two lines which task repeats in your team and I'll tell you where I would start.</p>
+  <p lang="es"><strong>¿Qué hace tu equipo a mano todas las semanas?</strong> Contámelo en dos líneas y te digo qué parte puede hacer un sistema solo.</p>
+  <p lang="en"><strong>What does your team do by hand every week?</strong> Tell me in two lines and I'll tell you which part a system can do on its own.</p>
   <button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Escribime', 'Message me')}</button>
 </div>
 </div>
