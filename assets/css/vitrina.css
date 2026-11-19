@@ -1,4 +1,4 @@
-/* Systems hub (/systems), Systems status (/status), link page (/links) and the Systems band on the home.
+/* Systems hub (/systems), Systems status (/status), link page (/links), portfolio (/portfolio) and the bands on the home.
    Loaded after site.css on those pages only; uses the tokens of site.css. Added 1-nov-2026. */
 
 /* ---------- shared ---------- */
@@ -78,7 +78,32 @@
 .sys-band p{margin:0;color:var(--ink-2);font-size:15.5px;max-width:64ch}
 .sys-band .row{display:flex;flex-wrap:wrap;gap:8px}
 
+/* ---------- /portfolio (19-nov-2026) ---------- */
+.pf-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pf-toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:14.5px}
+.pf-toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:1px}
+.pf-toc a:hover{color:var(--brand);border-color:var(--brand)}
+.pf-group{padding-top:36px;scroll-margin-top:80px}
+.pf-head{max-width:760px;margin:0 0 22px}
+.pf-head .kicker{margin-bottom:10px}
+.pf-head h2{margin:0;font-size:clamp(25px,3vw,36px);line-height:1.1;letter-spacing:-.03em;font-weight:650}
+.pf-head p{margin:10px 0 0;font-size:16.5px;color:var(--ink-2);line-height:1.6}
+.pf-card{scroll-margin-top:80px}
+.pf-card h3{margin:0;font-size:clamp(20px,2vw,24px);line-height:1.2;letter-spacing:-.02em;font-weight:640}
+.pf-card .pf-note{margin:auto 0 0;padding-top:4px;font-size:14px;color:var(--muted)}
+.chip.cli{background:var(--card-2);border-color:var(--ink-2);color:var(--ink)}
+.chip.pro{background:transparent;border-color:var(--brand);color:var(--brand-strong)}
+.chip.st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--good)}
+.pf-offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 40px}
+.pf-offer{display:flex;flex-direction:column;gap:8px;padding:22px;border-radius:var(--r-xl);border:1px dashed var(--line-2);background:var(--card)}
+.pf-offer h3{margin:0;font-size:18px;line-height:1.25;letter-spacing:-.015em;font-weight:640}
+.pf-offer p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.55}
+.pf-offer small{margin-top:auto;color:var(--muted);font-size:13px;line-height:1.45}
+.pf-offer small a{color:inherit}
+@media (max-width:1024px){.pf-offers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 @media (max-width:860px){
+  .pf-offers{grid-template-columns:1fr}
   .sys-grid{grid-template-columns:1fr}
   .sys-card{padding:20px}
   .sys-band{grid-template-columns:1fr;padding:22px}

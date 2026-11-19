@@ -44,7 +44,7 @@ SITE = "https://pablodpavon.com"
 LANGS = ("en", "es")
 DEFAULT = "en"                     # served at the root and used as x-default
 UPDATED = "2026-10-21"             # base dateModified / lastmod: the last change that touched every page
-HOME_UPDATED = "2026-11-15"        # the home: repositioned to AI process automation, D231 (15-nov-2026); bump with each home change
+HOME_UPDATED = "2026-11-19"        # the home: portfolio link and SearchedBy as a NexYn product (19-nov-2026); bump with each home change
 
 
 def modified(published: str, updated: str = UPDATED) -> str:
@@ -87,13 +87,13 @@ PERSON_DESCRIPTION = {   # D231: spec §8 (experience intro) in the third person
           "He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, "
           "in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI "
           "with controls: one place for the team's AI work, automations that report their own failures, and finance processes "
-          "that run themselves. One of the systems he runs, SearchedBy, is his own AI product, live in production. "
+          "that run themselves. He designed and built SearchedBy, an AI product live in production, now part of NexYn. "
           "He has ten years of experience across banking, e-commerce, marketing analytics and insurance.",
     "es": "Pablo Pavon es business analyst freelance con base en Berlín, Alemania, y origen argentino. "
           "Trabaja en remoto con empresas chicas y medianas y con equipos de Argentina, Latinoamérica, Israel y Europa, "
           "en español, inglés y alemán. Se especializa en revisar cómo trabajan los equipos y pasar a la IA la parte repetitiva, "
           "con controles: la IA del equipo en un solo lugar, automatizaciones que avisan cuando fallan y procesos de finanzas "
-          "que corren solos. Uno de los sistemas que corre, SearchedBy, es un producto propio con IA en producción. "
+          "que corren solos. Diseñó y construyó SearchedBy, un producto con IA en producción que hoy es de NexYn. "
           "Tiene diez años de experiencia en banca, e-commerce, analítica de marketing y seguros.",
 }
 
@@ -131,8 +131,8 @@ KNOWS_ABOUT = ["AI process automation", "Business process analysis", "Claude Cod
 AREA_SERVED = ["Germany", "European Union", "Argentina", "Latin America", "Israel", "United States"]
 
 UI = {
-    "en": {"home": "Home", "work": "Work", "switch_label": "Language"},
-    "es": {"home": "Inicio", "work": "Proyectos", "switch_label": "Idioma"},
+    "en": {"home": "Home", "work": "Portfolio", "switch_label": "Language"},
+    "es": {"home": "Inicio", "work": "Portfolio", "switch_label": "Idioma"},
 }
 
 
@@ -367,7 +367,7 @@ def case_jsonld(c: dict, lang: str) -> dict:
          "isBasedOn": c["repo"], **({"mentions": c["product"]} if c.get("product") else {})},   # SearchedBy's Organization (1-nov-2026)
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": UI[lang]["home"], "item": page_url("index.html", lang)},
-            {"@type": "ListItem", "position": 2, "name": UI[lang]["work"], "item": page_url("index.html", lang) + "#proyectos"},
+            {"@type": "ListItem", "position": 2, "name": UI[lang]["work"], "item": page_url("portfolio.html", lang)},
             {"@type": "ListItem", "position": 3, "name": title, "item": url}]},
         person_node(lang, full=False),
     ]}
@@ -506,7 +506,7 @@ def pages() -> list[tuple[str, dict]]:
     for rel, page in build_vitrina.PAGES.items():     # /systems, /status, /links (1-nov-2026), /ai-process-review (D231): indexed, in the sitemap
         items.append((rel, {
             l: {"title": page.get("seo_title", {}).get(l) or page["title"][l] + " · " + NAME, "description": page["description"][l],
-                "image": f"/assets/og/home-{l}.png", "image_alt": page["image_alt"][l],
+                "image": f"/assets/og/{page.get('og', 'home')}-{l}.png", "image_alt": page["image_alt"][l],
                 "published": page["published"], "modified": page["published"], "kind": "page",
                 "css": ["/assets/css/vitrina.css"], "jsonld": vitrina_jsonld(rel, page, l)} for l in LANGS}))
     for rel, page in build_legal.PAGES.items():       # AJ-47 (1-nov-2026): noindex, outside the sitemap
@@ -563,7 +563,7 @@ def write_llms_txt():
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
-The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), Pablo's own product, an open beta at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
+The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and built, now part of NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
 Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES])}.
 
 ## Site
@@ -571,6 +571,8 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 - [Inicio, español]({page_url('index.html', 'es')}): la misma página en español
 - [AI process review]({page_url('ai-process-review.html', 'en')}): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
 - [Procesos con IA, español]({page_url('ai-process-review.html', 'es')}): la misma página en español
+- [Portfolio]({page_url('portfolio.html', 'en')}): every project grouped by kind: a real pilot without names, products and tools I built, a prototype, demos on synthetic data, and what I can build
+- [Portfolio, español]({page_url('portfolio.html', 'es')}): la misma página en español
 - [Systems I built and run]({page_url('systems.html', 'en')}): what each system does, what runs on its own, links to the case and the code
 - [Systems status]({page_url('status.html', 'en')}): last run, items processed, cost and state of each scheduled system, generated daily (data: {SITE}/assets/data/status.json)
 - [Links]({page_url('links.html', 'en')}): all profiles on one page
@@ -586,8 +588,8 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 ## Casos de estudio (español)
 {cases_es}
 
-## Own product
-- SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Google's AI) present it, and whether its site can be read, cited and recommended. Made by Pablo Pavon in Berlin; formerly called GEO Scan. About: https://searchedby.com/about/
+## Product
+- SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and built by Pablo Pavon; today a NexYn product; formerly called GEO Scan. About: https://searchedby.com/about/
 
 ## Profiles
 - LinkedIn: {LINKEDIN}

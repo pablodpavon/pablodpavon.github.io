@@ -2,7 +2,7 @@
 
 Needs Pillow (pip install pillow). Fonts: uses Geist when available on the machine,
 otherwise Inter or DejaVu Sans. Output:
-    assets/og/home-{en,es}.png, assets/og/<slug>-{en,es}.png
+    assets/og/home-{en,es}.png, assets/og/<slug>-{en,es}.png, assets/og/portfolio-{en,es}.png
     favicon.svg, favicon.ico (16/32/48), apple-touch-icon.png (180x180)
 Run after tools/build_site.py:  python3 tools/build_og.py
 """
@@ -177,7 +177,21 @@ def favicons():
     print("wrote favicon.svg, favicon.ico, apple-touch-icon.png")
 
 
+def portfolio_cards():
+    A = ROOT / "assets"
+    card("Portfolio: what I've built with AI, and how I know it works",
+         "A real pilot without names, products and tools I built, a prototype and demos on synthetic data.",
+         ["Portfolio", "Claude Code", "Checks first"], A / "proj_kpi.jpg", OG / "portfolio-en.png")
+    card("Portfolio: lo que construí con IA, y cómo sé que funciona",
+         "Un piloto real sin nombres, productos y herramientas que construí, un prototipo y demos con datos sintéticos.",
+         ["Portfolio", "Claude Code", "Controles primero"], A / "proj_kpi.jpg", OG / "portfolio-es.png")
+
+
 def main():
+    if "--portfolio-only" in sys.argv:          # 19-nov-2026: render only the portfolio images
+        portfolio_cards()
+        return
+    portfolio_cards()
     A = ROOT / "assets"
     card("AI process automation for small teams",
          "I find the work your team repeats every month and hand it to AI, with checks. Business analyst in Berlin.",

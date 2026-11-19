@@ -46,7 +46,7 @@ def head(title_es, title_en, desc, image):
     <nav class="links" aria-label-es="Secciones" aria-label-en="Sections">
       <a href="../ai-process-review.html">{bi('Procesos', 'Processes')}</a>
       <a href="../index.html#servicios">{bi('Servicios', 'Services')}</a>
-      <a href="../index.html#proyectos">{bi('Proyectos', 'Work')}</a>
+      <a href="../portfolio.html">Portfolio</a>
       <a href="../systems.html">{bi('Sistemas', 'Systems')}</a>
       <a href="../index.html#experiencia">{bi('Experiencia', 'Experience')}</a>
       <a href="../index.html#contacto">{bi('Contacto', 'Contact')}</a>
@@ -90,7 +90,7 @@ def page(c):
   <div class="mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="container">
-    <a class="cs-back" href="../index.html#proyectos">{ICON_BACK}{bi('Todos los proyectos', 'All projects')}</a><br>
+    <a class="cs-back" href="../portfolio.html">{ICON_BACK}{bi('Todos los proyectos', 'All projects')}</a><br>
     <span class="pill"><span class="dot"></span>{bi(*c.get('pill', ('Caso de estudio · datos sintéticos', 'Case study · synthetic data')))}</span>
     <span class="cs-updated">{bi('Actualizado: ' + UPDATED_ES, 'Updated: ' + UPDATED_EN)}</span>
     <h1 lang="es">{c['h1_es']}</h1><h1 lang="en">{c['h1_en']}</h1>
@@ -469,20 +469,21 @@ CASH = dict(
 
 # ---------------------------------------------------------------- SearchedBy, formerly GEO Scan (own product, not synthetic)
 # Renamed on 1-nov-2026 (D146/D148 4a); the slug geo-scan stays (it is linked from LinkedIn, Upwork and the sitemap).
-# Tests: 5,000+ (5,873 = pipeline 3,919 + web app 1,954 on 9-nov-2026, GEO/_WIP/2026-11-08_lote9y10_integracion/suites_integracion.txt). Before: 5,000+ on 1-nov.
+# Tests: 7,700+ since 18-nov-2026 (7,780 = web app 2,961 + pipeline 4,819 in release v10c). Before: 5,000+ (5,873 on 9-nov-2026).
+# Languages: the public home of searchedby.com says "5 markets, 2 languages" (19-nov-2026); four AI assistants are asked.
 # Numbers: GEO/Producto_v1 (README, checks.yaml, sampler.py), test suites of 30-oct-2026 (1,919 + 693),
 # and the facts shown on scan.pablodpavon.com (21 checks in the free scan, 8 real sites on 24 Oct).
 GEO = dict(
     slug="geo-scan", image="proj_geo.jpg", repo="https://github.com/pablodpavon/geo-scan-case-study",
-    pill=("Producto propio · beta abierta", "Own product · open beta"),
+    pill=("Producto con IA · hoy de NexYn", "AI product · now a NexYn product"),   # wording of P-1 (a), 19-nov-2026
     repo_label=("Leer el caso en GitHub", "Read the case on GitHub"),
-    foot=bi("Producto propio en beta abierta. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
-            "Own product in an open beta. No client data; the example uses a fictional business."),
-    updated="2026-11-01",
+    foot=bi("Lo diseñé y lo construí; hoy es un producto de NexYn. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
+            "I designed and built it; today it is a NexYn product. No client data; the example uses a fictional business."),
+    updated="2026-11-19",
     genre="Product case study",
     title_es="SearchedBy: producto con IA", title_en="SearchedBy: an AI product",
-    desc="SearchedBy (formerly GEO Scan), my own product: it shows how visible a business is in AI search. Built with Claude Code, checked by 5,000+ tests.",
-    desc_es="SearchedBy (antes GEO Scan), producto propio: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 5.000+ tests.",
+    desc="SearchedBy (formerly GEO Scan), an AI product I designed and built, now part of NexYn: it shows how visible a business is in AI search. Built with Claude Code, checked by 7,700+ tests.",
+    desc_es="SearchedBy (antes GEO Scan), producto con IA que diseñé y construí, hoy de NexYn: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 7.700+ tests.",
     alt="Resultado de ejemplo de SearchedBy (antes GEO Scan) para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
     alt_en="SearchedBy (formerly GEO Scan) example result for a fictional business: technical readiness and who AI assistants name",
     published="2026-10-31",
@@ -495,10 +496,10 @@ GEO = dict(
     tags=["Claude Code", "Python", "FastAPI", "LLM APIs", "pytest", "GEO / SEO"],
     extra_action=f'<a class="btn" href="https://searchedby.com/">{ICON_NEXT}{bi("Abrir SearchedBy", "Open SearchedBy")}</a>',
     product={"@type": "Organization", "@id": "https://searchedby.com/#org", "name": "SearchedBy", "url": "https://searchedby.com/"},
-    facts=[("Tipo", "Type", "Producto propio", "Own product"),
+    facts=[("Tipo", "Type", "Producto, hoy de NexYn", "Product, now NexYn's"),
            ("Mi rol", "My role", "Producto, reglas y QA", "Product, rules and QA"),
-           ("Idiomas", "Languages", "4 en la interfaz", "4 in the interface"),
-           ("Validación", "Validation", "5.000+ tests por deploy", "5,000+ tests per deploy")],
+           ("Idiomas", "Languages", "inglés y español, en público", "English and Spanish, public"),
+           ("Validación", "Validation", "7.700+ tests por deploy", "7,700+ tests per deploy")],
     next=("reporte-con-ia.html", "Reporte de KPIs con IA verificado", "AI KPI report, verified"),
     sections=[
         ("contexto", "Contexto", "Context",
@@ -530,7 +531,7 @@ GEO = dict(
                  ("Ningún idioma se publica sin revisión nativa: el hebreo estuvo oculto hasta que lo revisó un hablante nativo", "No language ships without native review: Hebrew stayed hidden until a native speaker checked it"),
                  ("Cada resultado de la beta lo reviso yo antes de que cuente", "I review every beta result before it counts")])),
         ("resultado", "Estado", "Status",
-         metrics([("good", "4", "4", "idiomas en la interfaz", "interface languages", "inglés y español completos", "English and Spanish complete"),
+         metrics([("good", "4", "4", "asistentes de IA consultados", "AI assistants asked", "ChatGPT, Perplexity, Claude y Google", "ChatGPT, Perplexity, Claude and Google"),
                   ("", "8", "8", "sitios reales probados el 24-oct", "real sites tested on 24 Oct", "antes de abrir la beta", "before opening the beta"),
                   ("", "5", "5", "motores de IA soportados", "AI engines supported", "configurables por mercado", "configurable per market")])
          + p("Beta abierta desde octubre de 2026 en <a href=\"https://searchedby.com/\">searchedby.com</a> (antes se llamaba GEO Scan). El código es privado; el caso completo está en GitHub.",
@@ -677,11 +678,11 @@ OPS_TABLE = ('<div class="ops-tbl"><table><thead><tr>'
 
 OPS = dict(
     slug="ai-systems-operating-model", image="proj_ops.jpg", repo="https://github.com/pablodpavon/searchedby-engineering",
-    pill=("Cómo trabajo · producto propio", "How I work · own product"),
+    pill=("Cómo trabajo · SearchedBy", "How I work · SearchedBy"),
     repo_label=("Ver las notas de ingeniería en GitHub", "Read the engineering notes on GitHub"),
     extra_action=f'<a class="btn" href="geo-scan.html">{ICON_NEXT}{bi("Ver el caso del producto", "Read the product case")}</a>',
-    foot=bi("Producto propio en beta abierta. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.",
-            "Own product in an open beta. No client data or names; the examples are trimmed from the project records."),
+    foot=bi("SearchedBy lo diseñé y lo construí; hoy es un producto de NexYn. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.",
+            "I designed and built SearchedBy; today it is a NexYn product. No client data or names; the examples are trimmed from the project records."),
     updated="2026-11-01",
     genre="Engineering case study",
     title_es="Cómo llevo sistemas con IA a producción", title_en="How I ship AI systems",
@@ -706,8 +707,8 @@ OPS = dict(
     sections=[
         ("contexto", "Contexto", "Context",
          OPS_STYLE
-         + p("SearchedBy (antes GEO Scan) es mi producto: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.",
-             "SearchedBy (formerly GEO Scan) is my own product: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.")
+         + p("SearchedBy (antes GEO Scan) es un producto que diseñé y construí, hoy de NexYn: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.",
+             "SearchedBy (formerly GEO Scan) is a product I designed and built, now part of NexYn: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.")
          + p("Con un agente escribiendo el código, mi trabajo pasó a todo lo que lo rodea: saber qué cambió, probar que funciona, que el servidor sea idéntico a lo que probé y cuánto costó cada paso, con varias sesiones cambiando el producto al mismo tiempo. Esta página es el proceso que uso para eso.",
              "With an agent writing the code, my work moved to everything around it: knowing what changed, proving it works, keeping the server identical to what I tested, and knowing what each step cost, while several sessions change the product at the same time. This page is the process I use for that.")),
         ("circuito", "El circuito", "The loop",

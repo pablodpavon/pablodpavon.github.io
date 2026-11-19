@@ -8,11 +8,15 @@ and, since 15-nov-2026 (D231), the service page
 
     src/ai-process-review.html -> /ai-process-review.html  /es/ai-process-review.html   "AI process review" / "Procesos con IA"
 
+and, since 19-nov-2026, the portfolio with every project grouped by kind (sources of its figures above portfolio_page)
+
+    src/portfolio.html -> /portfolio.html  /es/portfolio.html   "Portfolio"
+
 GitHub Pages also serves them without the extension (pablodpavon.com/links), so that is the address to share;
 canonical URLs keep .html like the rest of the site. Called by tools/build_site.py, which writes the <head>.
 
 Sources of the numbers on /systems (all already public on this site or verified on 1-nov-2026):
-- 5,000+ tests, 4 languages, 98.1 %, 66 runs, 12 rules, 1,260 invoices, 12 checks, 4,060/6,500, 4 error types,
+- 7,700+ tests (19-nov-2026, see /portfolio), 4 AI assistants, 98.1 %, 66 runs, 12 rules, 1,260 invoices, 12 checks, 4,060/6,500, 4 error types,
   ~47,000 orders: tools/build_cases.py (the published case studies).
 - US$ 0.23 for one full scan: Diario/2026-11-01.md 00:03 (US$ 0.2333, one re-scan with 15 engine runs).
 - 155 decisions: 02_Estrategia_y_Decisiones.md (D1-D155). 197 of 197 files: GEO/CLAUDE.md (deploy of 30-oct).
@@ -54,6 +58,17 @@ PAGES = {
         "service": {"en": "AI process review", "es": "Revisión de procesos con IA"},
         "published": "2026-11-15",
     },
+    "portfolio.html": {   # 19-nov-2026: Web/Portfolio_proyectos_brief_v1.md
+        "title": {"en": "Portfolio", "es": "Portfolio"},
+        "seo_title": {"en": "Portfolio: AI projects, products and demos | Pablo Pavon",
+                      "es": "Portfolio: proyectos con IA, productos y demos | Pablo Pavon"},
+        "description": {"en": "A real pilot without names, products and tools I built, a prototype and demos on synthetic data: what each one does and how it is checked.",
+                        "es": "Un piloto real sin nombres, productos y herramientas que construí, un prototipo y demos con datos sintéticos: qué hace cada uno y cómo se controla."},
+        "image_alt": {"en": "Portfolio of Pablo Pavon: AI projects, products and demos", "es": "Portfolio de Pablo Pavon: proyectos con IA, productos y demos"},
+        "type": "CollectionPage",
+        "published": "2026-11-19",
+        "og": "portfolio",
+    },
     "links.html": {
         "title": {"en": "Links", "es": "Links"},
         "description": {"en": "Pablo Pavon, freelance business analyst in Berlin, AI process automation for small teams: website, systems, SearchedBy, GitHub, LinkedIn, Upwork and email.",
@@ -86,7 +101,7 @@ def nav(current: str = "") -> str:
     return "\n      ".join([
         a("ai-process-review.html", "Procesos", "Processes", "process"),
         a("index.html#servicios", "Servicios", "Services"),
-        a("index.html#proyectos", "Proyectos", "Work"),
+        a("portfolio.html", "Portfolio", "Portfolio", "portfolio"),
         a("systems.html", "Sistemas", "Systems", "systems"),
         a("index.html#experiencia", "Experiencia", "Experience"),
         a("index.html#contacto", "Contacto", "Contact"),
@@ -162,15 +177,16 @@ SYN = ("Caso con datos sintéticos", "Case study on synthetic data")
 # links [(href, label es, label en, kind)], feature (full width)
 SYSTEMS = [
     dict(
-        chips=[("own", "Producto propio · beta abierta", "Own product · open beta"), ("", "Python", "Python"), ("", "FastAPI", "FastAPI"), ("", "LLM APIs", "LLM APIs")],
+        # SearchedBy as "a NexYn product" (wording of P-1 a, 19-nov-2026)
+        chips=[("own", "Producto · hoy de NexYn", "Product · now NexYn's"), ("", "Python", "Python"), ("", "FastAPI", "FastAPI"), ("", "LLM APIs", "LLM APIs")],
         title=("SearchedBy: cómo te presentan los asistentes de IA", "SearchedBy: how AI assistants present a business"),
-        what=("Muestra a un negocio qué responden ChatGPT, Perplexity y Google con IA cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo citen.",
-              "Shows a business what ChatGPT, Perplexity and Google's AI answer when a customer asks about its field, and what its site is missing to be cited."),
+        what=("Muestra a un negocio qué responden ChatGPT, Perplexity, Claude y la IA de Google cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo citen.",
+              "Shows a business what ChatGPT, Perplexity, Claude and Google's AI answer when a customer asks about its field, and what its site is missing to be cited."),
         runs=("Cada scan corre en dos procesos de fondo: uno lee el sitio y el otro les pregunta a los motores de IA. La salud del servicio se revisa todos los días en la página de estado.",
               "Each scan runs on two background workers: one reads the site, the other asks the AI engines. The service health is checked every day on the status page."),
-        figs=[("5.000+", "5,000+", "tests antes de cada deploy", "tests before every deploy"),
+        figs=[("7.700+", "7,700+", "tests antes de cada deploy", "tests before every deploy"),
               ("US$ 0,23", "US$ 0.23", "costo de IA de un scan completo reciente", "AI cost of a recent full scan"),
-              ("4", "4", "idiomas en la interfaz", "interface languages")],
+              ("4", "4", "asistentes de IA consultados", "AI assistants asked")],
         links=[("proyectos/geo-scan.html", "Leer el caso", "Read the case", "case"),
                ("https://searchedby.com/", "Abrir SearchedBy", "Open SearchedBy", "ext"),
                (ENG_REPO, "Ingeniería en GitHub", "Engineering on GitHub", "code")],
@@ -287,8 +303,8 @@ def systems_page() -> str:
     cards = "\n".join(system_card(s) for s in SYSTEMS)
     return head("Systems I built and run", "systems") + "\n<main>\n" + hero(
         PAGES["systems.html"]["title"],
-        "Cada tarjeta dice qué hace el sistema, qué parte corre sin mí y dónde leer el caso y el código. SearchedBy es un producto en uso; los demás casos usan datos sintéticos de empresas ficticias.",
-        "Each card says what the system does, which part runs without me, and where to read the case and the code. SearchedBy is a product in use; the other cases use synthetic data from fictional companies.",
+        "Cada tarjeta dice qué hace el sistema, qué parte corre sin mí y dónde leer el caso y el código. SearchedBy es un producto en producción; los demás casos usan datos sintéticos de empresas ficticias.",
+        "Each card says what the system does, which part runs without me, and where to read the case and the code. SearchedBy is a live product; the other cases use synthetic data from fictional companies.",
         extra=f'<div class="cs-actions"><a class="btn" href="status.html">{ICON["pulse"]}{bi("Ver el estado de cada sistema", "See the status of each system")}</a></div>',
     ) + f"""
 <div class="container">
@@ -435,6 +451,285 @@ def process_page() -> str:
 """ + foot()
 
 
+# ------------------------------------------------------------------ /portfolio (19-nov-2026)
+# One page with every project, grouped by what it is: client work described without the client's name, my own
+# products and tools, prototypes, demos on synthetic data, and what I can build that I have not built for a client yet.
+# Nothing invented: a real project keeps its full size, a demo says it is a demo, an offer says it is an offer.
+# Sources of the figures (checked on 19-nov-2026):
+# - pilot: ~12 h and 7 decisions, already public on /ai-process-review; 25 claims, 21 confirmed and 4 corrected by an
+#   independent check before delivery (work log of 15-nov-2026).
+# - migration: 116 sessions on one computer and ~80 pastes in the first plan (independent review, 15-nov-2026).
+# - SearchedBy: 7,700+ tests (2,961 webapp + 4,819 pipeline in release v10c, 18-nov-2026; more in v10d);
+#   21 automated checks and the four assistants: the public home of https://searchedby.com/ (19-nov-2026).
+# - control tower: 13 projects in its database (19-nov-2026).
+# - KPI report: 4 error types, as in its case study; the runs themselves are on /status.
+# - field app: 230 tests (npm test, 19-nov-2026) and a 36-screen check as a new phone (18-nov-2026).
+ICON_EXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
+
+PF_KIND = {  # chip class, es, en
+    "client": ("cli", "Piloto real, sin nombre", "Real pilot, unnamed"),
+    "own": ("own", "Lo construí", "Built by me"),
+    "proto": ("pro", "Prototipo", "Prototype"),
+    "syn": ("syn", "Datos sintéticos", "Synthetic data"),
+}
+
+PF_CLIENT = [
+    dict(
+        id="piloto", kind="client", status=("Diagnóstico entregado", "Diagnostic delivered"), stack=["Claude", "Claude Code"],
+        title=("Revisión de procesos con IA para una firma de supervisión de obra",
+               "AI process review for a construction supervision firm"),
+        what=("Una firma de Israel que entrega un informe técnico mensual por cada obra. Su propia IA escribió el inventario de cómo trabajan, a partir de una tarea que le pasé, en unas doce horas. Al día siguiente el dueño tenía siete decisiones y un plan por etapas.",
+              "A firm in Israel that delivers a monthly technical report for each site. Its own AI wrote the inventory of how the team works, from a task I sent, in about twelve hours. The next day the owner had seven decisions and a staged plan."),
+        checks=("Antes de entregar, una verificación independiente revisó las 25 afirmaciones principales contra los archivos de la firma: 21 se confirmaron y 4 se ajustaron en la redacción. Lo que tocaba temas legales salió como preguntas para su abogado.",
+                "Before delivery, an independent check tested the 25 main claims against the firm's own files: 21 were confirmed and 4 were reworded. Anything legal went out as questions for their lawyer."),
+        figs=[("~12 h", "~12 h", "hasta tener el inventario de su propia IA", "until its own AI's inventory was ready"),
+              ("7", "7", "decisiones, al día siguiente", "decisions, the next day"),
+              ("25", "25", "afirmaciones verificadas antes de entregar", "claims checked before delivery")],
+        links=[("ai-process-review.html#caso-piloto", "Leer el caso piloto", "Read the pilot case", "case")],
+    ),
+    dict(
+        id="migracion", kind="client", status=("En curso", "In progress"), stack=["Claude Code", "Google Docs"],
+        title=("La IA de todo un equipo, pasada a un solo proyecto de Claude Code",
+               "A whole team's AI work, moved into one Claude Code project"),
+        what=("Para la misma firma. El plan pasa sus chats, sus proyectos de Claude, las tareas de Cowork y 116 sesiones guardadas en una computadora a un solo proyecto de Claude Code, con una carpeta por área. Cuando una conversación se llena, deja escrito su traspaso y sigue en una nueva.",
+              "For the same firm. The plan moves its chats, its Claude projects, the Cowork tasks and 116 sessions stored on one computer into a single Claude Code project, with a folder per area. When a conversation fills up, it writes its handover and carries on in a new one."),
+        checks=("El plan bloquea los borrados y deja una copia local desde el primer día. Una revisión independiente de la primera versión encontró que le pedía al dueño unas 80 pegadas de texto; la rehice para que la IA escriba la mayoría de los traspasos a partir del historial y de la exportación de datos.",
+                "The plan blocks deletions and keeps a local copy from day one. An independent review of the first version found it asked the owner for about 80 text pastes; I rebuilt it so the AI writes most handovers from the history and the data export."),
+        figs=[],
+        links=[],
+        note=("En curso: lo cuento entero cuando termine.", "In progress: I will write it up in full when it is done."),
+    ),
+]
+
+PF_OWN = [
+    dict(
+        id="searchedby", kind="own", kind_label=("Producto", "Product"), status=("En producción", "Live"),
+        stack=["Python", "FastAPI", "Stripe", "LLM APIs"],
+        title=("SearchedBy: qué dicen las IA cuando alguien busca lo que vendés",
+               "SearchedBy: what AI assistants say when someone looks for what you sell"),
+        what=("Un chequeo gratis que les hace a ChatGPT, Perplexity, Claude y la IA de Google las preguntas que haría un cliente, y muestra si nombran a tu negocio o a tu competencia. Después ofrece un informe pago, que se cobra con Stripe. Lo diseñé y lo construí con Claude Code; hoy es un producto de NexYn.",
+              "A free check that asks ChatGPT, Perplexity, Claude and Google's AI the questions a customer would ask, and shows whether they name your business or your competitors. It then offers a paid report, charged through Stripe. I designed and built it with Claude Code; today it is a NexYn product."),
+        checks=("Antes de cada versión corren más de 7.700 pruebas automáticas. Las subidas se ensayan primero en una copia descartable, con la vuelta atrás incluida, y una persona del equipo revisa cada resultado.",
+                "More than 7,700 automated tests run before every release. Releases are rehearsed first on a throwaway copy, rollback included, and a person on the team reviews every result."),
+        figs=[("7.700+", "7,700+", "pruebas automáticas antes de cada versión", "automated tests before every release"),
+              ("21", "21", "controles automáticos en el chequeo gratis", "automated checks in the free scan"),
+              ("4", "4", "asistentes de IA consultados", "AI assistants asked")],
+        links=[("https://searchedby.com/", "Abrir SearchedBy", "Open SearchedBy", "ext"),
+               ("proyectos/geo-scan.html", "Leer el caso", "Read the case", "case"),
+               ("proyectos/ai-systems-operating-model.html", "Cómo lo construyo", "How I build it", "go")],
+        feature=True,
+    ),
+    dict(
+        id="torre", kind="own", kind_label=("Herramienta propia", "My own tool"), status=("En uso diario", "In daily use"),
+        stack=["Claude", "Claude Code"],
+        title=("Una torre de control para varias sesiones de IA a la vez",
+               "A control tower for many AI sessions at once"),
+        what=("Un tablero privado donde veo, proyecto por proyecto, qué tiene abierto cada sesión de IA, qué me toca a mí y qué espera de otra persona. Las decisiones se contestan con un botón, y la respuesta le llega a la sesión que preguntó.",
+              "A private dashboard where I see, project by project, what each AI session has open, what is on me and what is waiting on someone else. Decisions are answered with one button, and the answer reaches the session that asked."),
+        checks=("Cada sesión actualiza su tema antes de contestarme, y cada cambio lleva la versión que leyó, así dos sesiones no se pisan. Un botón vale solo para esa decisión y para nada más.",
+                "Each session updates its topic before answering me, and every write carries the version it read, so two sessions never overwrite each other. A button counts for that one decision and nothing else."),
+        figs=[("13", "13", "proyectos en un solo tablero", "projects on one board")],
+        links=[],
+        note=("Es privado: lo muestro en una llamada.", "It is private: I can show it on a call."),
+    ),
+    dict(
+        id="reporte-kpi", kind="own", kind_label=("Sistema propio", "My own system"), status=("Corre solo cada lunes", "Runs every Monday"),
+        stack=[("syn", "Datos sintéticos", "Synthetic data"), "Python"],
+        title=("Un reporte de KPIs que redacta la IA y se frena si un número no cierra",
+               "A KPI report drafted by AI that stops when a number is off"),
+        what=("Cada lunes a las 7:30, una tarea programada genera la semana de una tienda ficticia, recalcula los KPIs y le pide a un modelo de lenguaje el comentario. Antes de publicarlo, prueba cada cifra contra los datos.",
+              "Every Monday at 7:30, a scheduled job generates the week for a fictional store, recomputes the KPIs and asks a language model for the commentary. Before releasing it, it tests every figure against the data."),
+        checks=("Antes de llamar al modelo, un control de la carga frena la semana si los datos vienen mal, por ejemplo un día cargado dos veces. Después, si una cifra del texto no existe, es de otra métrica o de otro período, o dice que algo subió cuando bajó, no se publica nada.",
+                "Before the model is called, a load check stops the week if the data is wrong, for example a day loaded twice. Then, if a figure in the text does not exist, belongs to another metric or period, or says something rose when it fell, nothing is released."),
+        figs=[("4", "4", "tipos de error que detecta", "error types it detects")],
+        links=[("proyectos/reporte-con-ia.html", "Leer el caso", "Read the case", "case"),
+               ("status.html", "Ver la última corrida", "See the last run", "go")],
+    ),
+]
+
+PF_PROTO = [
+    dict(
+        id="app-de-campo", kind="proto", status=("Demo lista", "Demo ready"),
+        stack=[("syn", "Datos sintéticos", "Synthetic data"), "JavaScript", "PWA"],
+        title=("Una app de campo para inspecciones de obra", "A field app for site inspections"),
+        what=("Dos apps que se instalan en el teléfono. La del inspector muestra las tareas de cada edificio, guarda fotos y notas de voz por tarea, manda reportes de problemas y sigue andando sin señal. En la demo, las dos apps comparten el teléfono: lo que manda el inspector aparece enseguida, ordenado, en la del dueño, que además le agrega tareas.",
+              "Two apps that install on a phone. The inspector's app shows the tasks for each building, keeps photos and voice notes per task, sends problem reports and keeps working without signal. In the demo both apps share one phone: what the inspector sends shows up right away, in order, in the owner's app, which can also add tasks for the inspector."),
+        checks=("230 pruebas automáticas y un recorrido de 36 pantallas como si fuera un teléfono nuevo. La demo usa datos inventados y no tiene servidor: lo que se carga queda en ese teléfono.",
+                "230 automated tests and a 36-screen walkthrough as a brand-new phone. The demo uses invented data and has no server: whatever you enter stays on that phone."),
+        figs=[("2", "2", "apps instalables", "installable apps"),
+              ("230", "230", "pruebas automáticas", "automated tests")],
+        links=[],
+        note=("La muestro en una llamada, en la computadora o en tu teléfono.", "I can show it on a call, on a laptop or on your phone."),
+        feature=True,
+    ),
+]
+
+PF_DEMO_LINKS = ["proyectos/requirements-to-backlog.html", "proyectos/conciliacion-y-caja.html",
+                 "proyectos/cuentas-a-pagar.html", "proyectos/migracion-de-datos.html"]
+
+
+def pf_demos() -> list:
+    by_link = {s["links"][0][0]: s for s in SYSTEMS}
+    out = []
+    for link in PF_DEMO_LINKS:
+        s = by_link[link]
+        links = list(s["links"])
+        if not any(k == "code" for *_, k in links):      # the demo's code is public too
+            links.append((GH + "/requirements-to-backlog", "Código", "Code", "code"))
+        out.append(dict(id=link.split("/")[-1].removesuffix(".html"), kind="syn",
+                        stack=[(es, en) if es != en else es for c, es, en in s["chips"] if c != "syn"],
+                        title=s["title"], what=s["what"], figs=s["figs"], links=links))
+    return out
+
+
+PF_OFFERS = [  # title es, en, text es, en, (prefix es, link text es, prefix en, link text en, anchor or "")
+    ("Una app para tu equipo en la calle", "An app for your team in the field",
+     "Tareas, fotos y audios desde el teléfono, aunque no haya señal, y un panel para la oficina.",
+     "Tasks, photos and voice notes from the phone, even without signal, and a dashboard for the office.",
+     ("Sale de la ", "app de campo", "Built from ", "the field app", "app-de-campo")),
+    ("Un tablero para las IA de tu equipo", "A dashboard for your team's AI",
+     "Si usan varias sesiones de IA, un solo lugar para ver qué tiene abierto cada una y decidir con un botón.",
+     "If you run several AI sessions, one place to see what each one has open and to decide with a button.",
+     ("Sale de la ", "torre de control", "Built from ", "the control tower", "torre")),
+    ("Presupuestos en minutos", "Quotes in minutes",
+     "Una planilla donde marcás qué hay que hacer y arma la cotización con tus tarifas. Vos la revisás y la mandás.",
+     "A spreadsheet where you tick what needs doing and it builds the quote with your rates. You review it and send it.",
+     ("Sale de una planilla de cotización de arreglos web que ya armé", "", "Built from a quote sheet for website fixes I already built", "", "")),
+    ("Tu IA, en un solo lugar", "One place for your AI work",
+     "Chats, proyectos y tareas de Claude o ChatGPT en un solo proyecto, con backup cada noche y envíos bloqueados por defecto.",
+     "Chats, projects and tasks from Claude or ChatGPT in one project, with a nightly backup and sending blocked by default.",
+     ("Sale de la ", "migración en curso", "Built from ", "the migration in progress", "migracion")),
+    ("Informes que se frenan si algo no cierra", "Reports that stop when something is off",
+     "El informe mensual que hoy armás a mano, redactado por la IA y controlado número por número antes de salir.",
+     "The monthly report you build by hand today, drafted by AI and checked number by number before it goes out.",
+     ("Sale del ", "reporte de KPIs", "Built from ", "the KPI report", "reporte-kpi")),
+    ("Requerimientos que el equipo de sistemas puede construir", "Requirements IT can build from",
+     "De una reunión grabada a user stories con criterios de aceptación, cada una con la frase de la que sale.",
+     "From a recorded meeting to user stories with acceptance criteria, each one quoting the sentence it comes from.",
+     ("Sale de la ", "demo de requerimientos a backlog", "Built from ", "the requirements-to-backlog demo", "requirements-to-backlog")),
+]
+
+PF_GROUPS = [  # id, kicker es, en, heading es, en, intro es, en, items
+    ("piloto-real", "Piloto real", "Real pilot",
+     "Trabajo real, contado sin el nombre de la firma.", "Real work, described without the firm's name.",
+     "Qué se hizo, con qué y cómo se controló. Los resultados medidos se publican cuando existan.",
+     "What was done, with what, and how it was checked. Measured results get published once they exist.", PF_CLIENT),
+    ("construidos", "Productos y herramientas que construí", "Products and tools I built",
+     "Lo que construí y sigue andando.", "Things I built that keep running.",
+     "Están en producción, corren solos o los uso todos los días.",
+     "They are live, run on their own, or I use them every day.", PF_OWN),
+    ("prototipos", "Prototipos", "Prototypes",
+     "Armado de verdad, todavía sin uso diario.", "Built for real, not in daily use yet.",
+     "Funciona y la muestro en una llamada, pero todavía no la usa un equipo todos los días.",
+     "It works and I can show it on a call, but no team uses it every day yet.", PF_PROTO),
+    ("demos", "Demos con datos sintéticos", "Demos on synthetic data",
+     "Casos completos, con el código publicado.", "Full case studies, with the code published.",
+     "Empresas ficticias y datos inventados, para mostrar el método entero: contexto, enfoque, controles y entregables.",
+     "Fictional companies and invented data, to show the whole method: context, approach, checks and deliverables.", None),
+]
+
+
+def pf_chip(cls, es, en) -> str:
+    return f'<span class="chip{(" " + cls) if cls else ""}">{bi(es, en) if es != en else es}</span>'
+
+
+def pf_card(it) -> str:
+    cls, kes, ken = PF_KIND[it["kind"]]
+    if it.get("kind_label"):
+        kes, ken = it["kind_label"]
+    chips = [pf_chip(cls, kes, ken)]
+    if it.get("status"):
+        chips.append(pf_chip("st", *it["status"]))
+    for s in it.get("stack", []):
+        if isinstance(s, tuple):
+            chips.append(pf_chip(*s) if len(s) == 3 else pf_chip("", *s))
+        else:
+            chips.append(pf_chip("", s, s))
+    t_es, t_en = it["title"]
+    title = f'<h3 lang="es">{t_es}</h3><h3 lang="en">{t_en}</h3>' if t_es != t_en else f"<h3>{t_es}</h3>"
+    checks = ""
+    if it.get("checks"):
+        checks = (f'<div class="sys-run"><span class="v-label">{bi("Controles", "Checks")}</span>'
+                  f'<p lang="es">{it["checks"][0]}</p><p lang="en">{it["checks"][1]}</p></div>')
+    figs = ""
+    if it.get("figs"):
+        figs = '<ul class="sys-figs">' + "".join(
+            f"<li><b>{bi(ve, vn) if ve != vn else ve}</b><span>{bi(le, ln)}</span></li>" for ve, vn, le, ln in it["figs"]) + "</ul>"
+    links = []
+    for href, les, len_, kind in it.get("links", []):
+        icon = {"code": ICON_GH, "ext": ICON_EXT}.get(kind, ICON_NEXT)
+        btn = "btn btn-brand" if kind == "case" else "btn"
+        rel = ' rel="noopener"' if href.startswith("http") else ""
+        links.append(f'<a class="{btn}" href="{href}"{rel}>{icon}{bi(les, len_)}</a>')
+    tail = f'<div class="sys-links">{"".join(links)}</div>' if links else ""
+    if it.get("note"):
+        tail += f'<p class="pf-note" lang="es">{it["note"][0]}</p><p class="pf-note" lang="en">{it["note"][1]}</p>'
+    return f"""<article class="sys-card pf-card{' feature' if it.get('feature') else ''}" id="{it['id']}">
+  <div class="sys-top">{''.join(chips)}</div>
+  {title}
+  <p lang="es">{it['what'][0]}</p><p lang="en">{it['what'][1]}</p>
+  {checks}
+  {figs}
+  {tail}
+</article>"""
+
+
+def portfolio_page() -> str:
+    toc = [(g[0], g[1], g[2]) for g in PF_GROUPS] + [("puedo-armarte", "Lo que puedo armarte", "What I can build for you")]
+    toc_html = '<nav class="pf-toc" aria-label-es="Secciones del portfolio" aria-label-en="Portfolio sections">' + "".join(
+        f'<a href="#{i}">{bi(es, en)}</a>' for i, es, en in toc) + "</nav>"
+    legend = '<div class="pf-legend">' + "".join(pf_chip(c, es, en) for c, es, en in PF_KIND.values()) + "</div>"
+    groups = []
+    for gid, kes, ken, hes, hen, ies, ien, items in PF_GROUPS:
+        cards = "\n".join(pf_card(it) for it in (items if items is not None else pf_demos()))
+        groups.append(f"""<section class="pf-group" id="{gid}">
+  <div class="pf-head">
+    <div class="kicker">{bi(kes, ken)}</div>
+    <h2 lang="es">{hes}</h2><h2 lang="en">{hen}</h2>
+    <p lang="es">{ies}</p><p lang="en">{ien}</p>
+  </div>
+  <div class="sys-grid">
+{cards}
+  </div>
+</section>""")
+    offers = []
+    for tes, ten, pes, pen, (pre_es, les, pre_en, len_, anchor) in PF_OFFERS:
+        src_es = pre_es + (f'<a href="#{anchor}">{les}</a>' if anchor else les)
+        src_en = pre_en + (f'<a href="#{anchor}">{len_}</a>' if anchor else len_)
+        offers.append(f"""<div class="pf-offer">
+  <h3 lang="es">{tes}</h3><h3 lang="en">{ten}</h3>
+  <p lang="es">{pes}</p><p lang="en">{pen}</p>
+  <small lang="es">{src_es}.</small><small lang="en">{src_en}.</small>
+</div>""")
+    return head("Portfolio", "portfolio") + "\n<main>\n" + hero(
+        {"es": "Lo que construí con IA, y cómo sé que funciona.", "en": "What I've built with AI, and how I know it works."},
+        "Cada proyecto dice para quién es, qué hace, con qué está hecho y qué controles tiene. El piloto real va sin el nombre de la firma; las demos usan datos sintéticos de empresas ficticias y lo dicen.",
+        "Each project says who it is for, what it does, what it is built with and which checks it has. The real pilot is described without the firm's name; demos use synthetic data from fictional companies and say so.",
+        pill=("Portfolio · proyectos, productos y demos", "Portfolio · projects, products and demos"),
+        extra=legend + toc_html,
+    ) + f"""
+<div class="container">
+{chr(10).join(groups)}
+<section class="pf-group" id="puedo-armarte">
+  <div class="pf-head">
+    <div class="kicker">{bi('Lo que puedo armarte', 'What I can build for you')}</div>
+    <h2 lang="es">Lo que puedo armarte con piezas que ya funcionan.</h2><h2 lang="en">What I can build from parts that already work.</h2>
+    <p lang="es">Son ofertas, no casos hechos: cada una sale de algo que ya existe.</p><p lang="en">These are offers, not finished cases: each one comes from something that already exists.</p>
+  </div>
+  <div class="pf-offers">
+{chr(10).join(offers)}
+  </div>
+</section>
+<div class="sys-foot">
+  <p lang="es"><strong>¿Cuál te serviría?</strong> Contame en dos líneas qué tarea se repite en tu equipo y te digo por dónde empezaría.</p>
+  <p lang="en"><strong>Which one would help you?</strong> Tell me in two lines which task repeats in your team and I'll tell you where I would start.</p>
+  <button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Escribime', 'Message me')}</button>
+</div>
+</div>
+</main>
+""" + foot(bi("Los casos marcados usan datos sintéticos y empresas ficticias.", "Cases marked as such use synthetic data and fictional companies."))
+
+
 # ------------------------------------------------------------------ /status
 def status_page() -> str:
     return head("Systems status") + "\n<main>\n" + hero(
@@ -459,7 +754,8 @@ LINKS = [  # (href, icon, title es, title en, sub es, sub en, extra attrs)
     ("index.html", "web", "Sitio web", "Website", "Servicios, casos y cómo trabajo · pablodpavon.com", "Services, case studies and how I work · pablodpavon.com", ' class="lk-main-link"'),
     ("systems.html", "sys", "Sistemas que construí", "Systems I built", "Qué hace cada uno y qué corre solo", "What each one does and what runs on its own", ""),
     ("status.html", "pulse", "Estado de los sistemas", "Systems status", "Última corrida, costo y estado", "Last run, cost and state", ""),
-    ("https://searchedby.com/", "search", "SearchedBy", "SearchedBy", "Mi producto con IA, en beta abierta", "My AI product, in open beta", ' rel="noopener"'),
+    ("portfolio.html", "web", "Portfolio", "Portfolio", "Proyectos, productos y demos", "Projects, products and demos", ""),
+    ("https://searchedby.com/", "search", "SearchedBy", "SearchedBy", "Producto con IA que diseñé y construí, hoy de NexYn", "An AI product I designed and built, now NexYn's", ' rel="noopener"'),
     ("https://github.com/pablodpavon", "gh", "GitHub", "GitHub", "github.com/pablodpavon", "github.com/pablodpavon", ' rel="noopener"'),
     ("https://www.linkedin.com/in/pablo-damian-pavon", "in", "LinkedIn", "LinkedIn", "linkedin.com/in/pablo-damian-pavon", "linkedin.com/in/pablo-damian-pavon", ' rel="noopener"'),
     ("https://www.upwork.com/freelancers/pablopavon", "up", "Upwork", "Upwork", "upwork.com/freelancers/pablopavon", "upwork.com/freelancers/pablopavon", ' rel="noopener"'),
@@ -504,7 +800,8 @@ def build():
     (src / "status.html").write_text(status_page(), encoding="utf-8")
     (src / "links.html").write_text(links_page(), encoding="utf-8")
     (src / "ai-process-review.html").write_text(process_page(), encoding="utf-8")
-    print("wrote src/systems.html, src/status.html, src/links.html, src/ai-process-review.html")
+    (src / "portfolio.html").write_text(portfolio_page(), encoding="utf-8")
+    print("wrote src/systems.html, src/status.html, src/links.html, src/ai-process-review.html, src/portfolio.html")
 
 
 if __name__ == "__main__":
