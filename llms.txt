@@ -1,10 +1,10 @@
 # Pablo Pavon: AI process automation for small teams; business analyst, Berlin
 
-> Pablo Pavon is a freelance business analyst based in Berlin, Germany, originally from Argentina. He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI with controls: one place for the team's AI work, automations that report their own failures, and finance processes that run themselves. He designed and built SearchedBy, an AI product live in production, now part of NexYn. He has ten years of experience across banking, e-commerce, marketing analytics and insurance.
+> Pablo Pavon is a freelance business analyst based in Berlin, Germany, originally from Argentina. He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI with controls: one place for the team's AI work, automations that report their own failures, and finance processes that run themselves. He developed two products that are already live: SearchedBy and NexYn. He has ten years of experience across banking, e-commerce, marketing analytics and insurance.
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
-The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and built, now part of NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
+The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and developed, sold together with NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
 Site last updated: 2026-11-19.
 
 ## Site
@@ -29,7 +29,7 @@ Site last updated: 2026-11-19.
 - Your team and AI / Tu equipo y la IA: A short, practical course by role, built on your team's real tasks, and a map of who already uses AI and how.
 
 ## Case studies (English)
-- [SearchedBy: an AI product](https://pablodpavon.com/proyectos/geo-scan.html): SearchedBy (formerly GEO Scan), an AI product I designed and built, now part of NexYn: it shows how visible a business is in AI search. Built with Claude Code, checked by 7,700+ tests. Code: https://github.com/pablodpavon/geo-scan-case-study
+- [SearchedBy: an AI product](https://pablodpavon.com/proyectos/geo-scan.html): SearchedBy (formerly GEO Scan), an AI product I designed and developed: it shows how visible a business is in AI search. Built with Claude Code, checked by 7,700+ tests. Code: https://github.com/pablodpavon/geo-scan-case-study
 - [How I ship AI systems](https://pablodpavon.com/proyectos/ai-systems-operating-model.html): How I build and run SearchedBy with Claude Code: numbered decisions, tests first, md5-verified deploys, blind evaluation sets and native language review. Code: https://github.com/pablodpavon/searchedby-engineering
 - [From workshop to backlog, traceable](https://pablodpavon.com/proyectos/requirements-to-backlog.html): an LLM drafts epics and user stories from a workshop transcript, and code checks that every story quotes what someone actually said. Code: https://github.com/pablodpavon/requirements-to-backlog
 - [Automated daily reconciliation and cash](https://pablodpavon.com/proyectos/conciliacion-y-caja.html): bank reconciliation, collections and a 20-day cash forecast that run by themselves every morning. Code: https://github.com/pablodpavon/daily-cash-control
@@ -38,7 +38,7 @@ Site last updated: 2026-11-19.
 - [AI KPI report, verified](https://pablodpavon.com/proyectos/reporte-con-ia.html): an LLM drafts the monthly KPI commentary and a checker verifies every number before release. Code: https://github.com/pablodpavon/ai-kpi-commentary
 
 ## Casos de estudio (español)
-- [SearchedBy: producto con IA](https://pablodpavon.com/es/proyectos/geo-scan.html): SearchedBy (antes GEO Scan), producto con IA que diseñé y construí, hoy de NexYn: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 7.700+ tests.
+- [SearchedBy: producto con IA](https://pablodpavon.com/es/proyectos/geo-scan.html): SearchedBy (antes GEO Scan), producto con IA que diseñé y desarrollé: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 7.700+ tests.
 - [Cómo llevo sistemas con IA a producción](https://pablodpavon.com/es/proyectos/ai-systems-operating-model.html): Cómo construyo y opero SearchedBy con Claude Code: decisiones numeradas, tests primero, deploys verificados por md5, sets ciegos y revisión nativa por idioma.
 - [Del workshop al backlog, con trazabilidad](https://pablodpavon.com/es/proyectos/requirements-to-backlog.html): un modelo de lenguaje arma épicas y user stories desde la transcripción de un workshop, y un control en código verifica que cada story cite algo que alguien dijo.
 - [Conciliación y caja diaria automáticas](https://pablodpavon.com/es/proyectos/conciliacion-y-caja.html): conciliación bancaria, cobranzas y proyección de caja a 20 días que corren solas cada mañana para una pyme.
@@ -46,8 +46,9 @@ Site last updated: 2026-11-19.
 - [Migración de datos con conciliación](https://pablodpavon.com/es/proyectos/migracion-de-datos.html): migración guiada por una especificación de mapeo, 4.060 clientes y 6.500 contratos, con 12 controles de conciliación.
 - [Reporte de KPIs con IA verificado](https://pablodpavon.com/es/proyectos/reporte-con-ia.html): un modelo de lenguaje redacta el comentario mensual de KPIs y un control verifica cada número antes de publicarlo.
 
-## Product
-- SearchedBy: https://searchedby.com/: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and built by Pablo Pavon; today a NexYn product; formerly called GEO Scan. About: https://searchedby.com/about/
+## Products
+- SearchedBy: https://searchedby.com/: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and developed by Pablo Pavon; sold together with NexYn; formerly called GEO Scan. About: https://searchedby.com/about/
+- NexYn: https://nexyn-ai.com/ (Spanish: https://nexyn-ai.com/es/): process automation for small businesses, with or without AI; free first reading in writing within 48 business hours. Developed by Pablo Pavon.
 
 ## Profiles
 - LinkedIn: https://www.linkedin.com/in/pablo-damian-pavon

@@ -475,15 +475,15 @@ CASH = dict(
 # and the facts shown on scan.pablodpavon.com (21 checks in the free scan, 8 real sites on 24 Oct).
 GEO = dict(
     slug="geo-scan", image="proj_geo.jpg", repo="https://github.com/pablodpavon/geo-scan-case-study",
-    pill=("Producto con IA · hoy de NexYn", "AI product · now a NexYn product"),   # wording of P-1 (a), 19-nov-2026
+    pill=("Producto con IA · lo desarrollé yo", "AI product · developed by me"),   # HOY-6, 19-nov-2026
     repo_label=("Leer el caso en GitHub", "Read the case on GitHub"),
-    foot=bi("Lo diseñé y lo construí; hoy es un producto de NexYn. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
-            "I designed and built it; today it is a NexYn product. No client data; the example uses a fictional business."),
+    foot=bi("Lo diseñé y lo desarrollé; hoy se vende junto con NexYn, el otro producto que desarrollé. Sin datos de clientes; el ejemplo usa un negocio ficticio.",
+            "I designed and developed it; today it is sold together with NexYn, the other product I developed. No client data; the example uses a fictional business."),
     updated="2026-11-19",
     genre="Product case study",
     title_es="SearchedBy: producto con IA", title_en="SearchedBy: an AI product",
-    desc="SearchedBy (formerly GEO Scan), an AI product I designed and built, now part of NexYn: it shows how visible a business is in AI search. Built with Claude Code, checked by 7,700+ tests.",
-    desc_es="SearchedBy (antes GEO Scan), producto con IA que diseñé y construí, hoy de NexYn: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 7.700+ tests.",
+    desc="SearchedBy (formerly GEO Scan), an AI product I designed and developed: it shows how visible a business is in AI search. Built with Claude Code, checked by 7,700+ tests.",
+    desc_es="SearchedBy (antes GEO Scan), producto con IA que diseñé y desarrollé: muestra cuán visible es un negocio en las búsquedas con IA. Hecho con Claude Code y controlado con 7.700+ tests.",
     alt="Resultado de ejemplo de SearchedBy (antes GEO Scan) para un negocio ficticio: preparación técnica y quién nombran los asistentes de IA",
     alt_en="SearchedBy (formerly GEO Scan) example result for a fictional business: technical readiness and who AI assistants name",
     published="2026-10-31",
@@ -496,7 +496,7 @@ GEO = dict(
     tags=["Claude Code", "Python", "FastAPI", "LLM APIs", "pytest", "GEO / SEO"],
     extra_action=f'<a class="btn" href="https://searchedby.com/">{ICON_NEXT}{bi("Abrir SearchedBy", "Open SearchedBy")}</a>',
     product={"@type": "Organization", "@id": "https://searchedby.com/#org", "name": "SearchedBy", "url": "https://searchedby.com/"},
-    facts=[("Tipo", "Type", "Producto, hoy de NexYn", "Product, now NexYn's"),
+    facts=[("Tipo", "Type", "Producto que desarrollé", "Product I developed"),
            ("Mi rol", "My role", "Producto, reglas y QA", "Product, rules and QA"),
            ("Idiomas", "Languages", "inglés y español, en público", "English and Spanish, public"),
            ("Validación", "Validation", "7.700+ tests por deploy", "7,700+ tests per deploy")],
@@ -681,8 +681,8 @@ OPS = dict(
     pill=("Cómo trabajo · SearchedBy", "How I work · SearchedBy"),
     repo_label=("Ver las notas de ingeniería en GitHub", "Read the engineering notes on GitHub"),
     extra_action=f'<a class="btn" href="geo-scan.html">{ICON_NEXT}{bi("Ver el caso del producto", "Read the product case")}</a>',
-    foot=bi("SearchedBy lo diseñé y lo construí; hoy es un producto de NexYn. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.",
-            "I designed and built SearchedBy; today it is a NexYn product. No client data or names; the examples are trimmed from the project records."),
+    foot=bi("SearchedBy lo diseñé y lo desarrollé; hoy se vende junto con NexYn. Sin datos ni nombres de clientes; los ejemplos están recortados de los registros del proyecto.",
+            "I designed and developed SearchedBy; today it is sold together with NexYn. No client data or names; the examples are trimmed from the project records."),
     updated="2026-11-01",
     genre="Engineering case study",
     title_es="Cómo llevo sistemas con IA a producción", title_en="How I ship AI systems",
@@ -707,8 +707,8 @@ OPS = dict(
     sections=[
         ("contexto", "Contexto", "Context",
          OPS_STYLE
-         + p("SearchedBy (antes GEO Scan) es un producto que diseñé y construí, hoy de NexYn: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.",
-             "SearchedBy (formerly GEO Scan) is a product I designed and built, now part of NexYn: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.")
+         + p("SearchedBy (antes GEO Scan) es un producto que diseñé y desarrollé: le muestra a un negocio qué responden los asistentes de IA cuando un cliente pregunta por su rubro. Claude Code escribió casi todo el código. Yo escribí las reglas, revisé los resultados y decidí qué salía a producción.",
+             "SearchedBy (formerly GEO Scan) is a product I designed and developed: it shows a business what AI assistants answer when a customer asks about its field. Claude Code wrote almost all of its code. I wrote the rules, reviewed the results and decided what went live.")
          + p("Con un agente escribiendo el código, mi trabajo pasó a todo lo que lo rodea: saber qué cambió, probar que funciona, que el servidor sea idéntico a lo que probé y cuánto costó cada paso, con varias sesiones cambiando el producto al mismo tiempo. Esta página es el proceso que uso para eso.",
              "With an agent writing the code, my work moved to everything around it: knowing what changed, proving it works, keeping the server identical to what I tested, and knowing what each step cost, while several sessions change the product at the same time. This page is the process I use for that.")),
         ("circuito", "El circuito", "The loop",

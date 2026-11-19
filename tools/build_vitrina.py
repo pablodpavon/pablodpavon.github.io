@@ -177,8 +177,8 @@ SYN = ("Caso con datos sintéticos", "Case study on synthetic data")
 # links [(href, label es, label en, kind)], feature (full width)
 SYSTEMS = [
     dict(
-        # SearchedBy as "a NexYn product" (wording of P-1 a, 19-nov-2026)
-        chips=[("own", "Producto · hoy de NexYn", "Product · now NexYn's"), ("", "Python", "Python"), ("", "FastAPI", "FastAPI"), ("", "LLM APIs", "LLM APIs")],
+        # HOY-6 (Pablo, 19-nov-2026): "ambos NexYn-AI como searchedBy son productos desarrollados por mi"
+        chips=[("own", "Producto · lo desarrollé yo", "Product · developed by me"), ("", "Python", "Python"), ("", "FastAPI", "FastAPI"), ("", "LLM APIs", "LLM APIs")],
         title=("SearchedBy: cómo te presentan los asistentes de IA", "SearchedBy: how AI assistants present a business"),
         what=("Muestra a un negocio qué responden ChatGPT, Perplexity, Claude y la IA de Google cuando un cliente pregunta por su rubro, y qué le falta a su sitio para que lo citen.",
               "Shows a business what ChatGPT, Perplexity, Claude and Google's AI answer when a customer asks about its field, and what its site is missing to be cited."),
@@ -513,8 +513,8 @@ PF_OWN = [
         stack=["Python", "FastAPI", "Stripe", "LLM APIs"],
         title=("SearchedBy: qué dicen las IA cuando alguien busca lo que vendés",
                "SearchedBy: what AI assistants say when someone looks for what you sell"),
-        what=("Un chequeo gratis que les hace a ChatGPT, Perplexity, Claude y la IA de Google las preguntas que haría un cliente, y muestra si nombran a tu negocio o a tu competencia. Después ofrece un informe pago, que se cobra con Stripe. Lo diseñé y lo construí con Claude Code; hoy es un producto de NexYn.",
-              "A free check that asks ChatGPT, Perplexity, Claude and Google's AI the questions a customer would ask, and shows whether they name your business or your competitors. It then offers a paid report, charged through Stripe. I designed and built it with Claude Code; today it is a NexYn product."),
+        what=("Un chequeo gratis que les hace a ChatGPT, Perplexity, Claude y la IA de Google las preguntas que haría un cliente, y muestra si nombran a tu negocio o a tu competencia. Después ofrece un informe pago, que se cobra con Stripe. Lo diseñé y lo desarrollé con Claude Code; hoy se vende junto con NexYn, el otro producto que desarrollé.",
+              "A free check that asks ChatGPT, Perplexity, Claude and Google's AI the questions a customer would ask, and shows whether they name your business or your competitors. It then offers a paid report, charged through Stripe. I designed and developed it with Claude Code; today it is sold together with NexYn, the other product I developed."),
         checks=("Antes de cada versión corren más de 7.700 pruebas automáticas, y las subidas se ensayan primero en una copia descartable, con la vuelta atrás incluida. Cada seis horas, otra tarea revisa los resultados nuevos sin gastar en las APIs y marca cualquier error grave; una persona del equipo los revisa igual.",
                 "More than 7,700 automated tests run before every release, and releases are rehearsed first on a throwaway copy, rollback included. Every six hours, another task reviews the new results without spending on the APIs and flags any serious error; a person on the team reviews them too."),
         figs=[("7.700+", "7,700+", "pruebas automáticas antes de cada versión", "automated tests before every release"),
@@ -523,6 +523,20 @@ PF_OWN = [
         links=[("https://searchedby.com/", "Abrir SearchedBy", "Open SearchedBy", "ext"),
                ("proyectos/geo-scan.html", "Leer el caso", "Read the case", "case"),
                ("proyectos/ai-systems-operating-model.html", "Cómo lo construyo", "How I build it", "go")],
+        feature=True,
+    ),
+    dict(
+        id="nexyn", kind="own", kind_label=("Producto", "Product"), status=("En línea desde el 19-nov", "Live since 19 Nov"),
+        stack=["Python", "Cloudflare Workers", "Claude Code"],
+        title=("NexYn: automatización de procesos para pymes, con o sin IA",
+               "NexYn: process automation for small businesses, with or without AI"),
+        what=("Un sitio y un servicio para empresas de 3 a 50 personas, de cualquier país: primera lectura gratis por escrito en 48 horas hábiles, diagnóstico y armado en la cuenta del cliente. Lo desarrollé yo y está en línea en español e inglés desde el 19 de noviembre.",
+              "A website and a service for companies of 3 to 50 people, in any country: a free first reading in writing within 48 business hours, a diagnostic, and the setup in the client's own account. I developed it, and it has been live in Spanish and English since 19 November."),
+        checks=("196 pruebas automáticas en el sitio, una prueba que impide publicar precios y nada se envía ni se borra sin el OK del cliente.",
+                "196 automated tests on the site, a test that blocks publishing prices, and nothing is sent or deleted without the client's OK."),
+        figs=[("196", "196", "pruebas automáticas", "automated tests"),
+              ("48 h", "48 h", "hábiles para la primera lectura gratis", "business hours for the free first reading")],
+        links=[((NEXYN_ES, NEXYN_EN), "Abrir NexYn", "Open NexYn", "ext")],
         feature=True,
     ),
     dict(
@@ -726,6 +740,10 @@ def pf_card(it) -> str:
     for href, les, len_, kind in it.get("links", []):
         icon = {"code": ICON_GH, "ext": ICON_EXT}.get(kind, ICON_NEXT)
         btn = "btn btn-brand" if kind == "case" else "btn"
+        if isinstance(href, tuple):               # one address per language (es, en)
+            links.append(f'<a class="{btn}" lang="es" href="{href[0]}" rel="noopener">{icon}{les}</a>'
+                         f'<a class="{btn}" lang="en" href="{href[1]}" rel="noopener">{icon}{len_}</a>')
+            continue
         rel = ' rel="noopener"' if href.startswith("http") else ""
         links.append(f'<a class="{btn}" href="{href}"{rel}>{icon}{bi(les, len_)}</a>')
     tail = f'<div class="sys-links">{"".join(links)}</div>' if links else ""
@@ -824,7 +842,7 @@ LINKS = [  # (href, icon, title es, title en, sub es, sub en, extra attrs)
     ("systems.html", "sys", "Sistemas que construí", "Systems I built", "Qué hace cada uno y qué corre solo", "What each one does and what runs on its own", ""),
     ("status.html", "pulse", "Estado de los sistemas", "Systems status", "Última corrida, costo y estado", "Last run, cost and state", ""),
     ("portfolio.html", "web", "Portfolio", "Portfolio", "Proyectos, productos y demos", "Projects, products and demos", ""),
-    ("https://searchedby.com/", "search", "SearchedBy", "SearchedBy", "Producto con IA que diseñé y construí, hoy de NexYn", "An AI product I designed and built, now NexYn's", ' rel="noopener"'),
+    ("https://searchedby.com/", "search", "SearchedBy", "SearchedBy", "Producto con IA que desarrollé", "An AI product I developed", ' rel="noopener"'),
     ("https://github.com/pablodpavon", "gh", "GitHub", "GitHub", "github.com/pablodpavon", "github.com/pablodpavon", ' rel="noopener"'),
     ("https://www.linkedin.com/in/pablo-damian-pavon", "in", "LinkedIn", "LinkedIn", "linkedin.com/in/pablo-damian-pavon", "linkedin.com/in/pablo-damian-pavon", ' rel="noopener"'),
     ("https://www.upwork.com/freelancers/pablopavon", "up", "Upwork", "Upwork", "upwork.com/freelancers/pablopavon", "upwork.com/freelancers/pablopavon", ' rel="noopener"'),

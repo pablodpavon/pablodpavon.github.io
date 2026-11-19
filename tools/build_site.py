@@ -87,13 +87,13 @@ PERSON_DESCRIPTION = {   # D231: spec §8 (experience intro) in the third person
           "He works remotely with small and mid-sized companies and teams in Argentina, Latin America, Israel and Europe, "
           "in Spanish, English and German. He specialises in reviewing how teams work and moving the repetitive part to AI "
           "with controls: one place for the team's AI work, automations that report their own failures, and finance processes "
-          "that run themselves. He designed and built SearchedBy, an AI product live in production, now part of NexYn. "
+          "that run themselves. He developed two products that are already live: SearchedBy and NexYn. "
           "He has ten years of experience across banking, e-commerce, marketing analytics and insurance.",
     "es": "Pablo Pavon es business analyst freelance con base en Berlín, Alemania, y origen argentino. "
           "Trabaja en remoto con empresas chicas y medianas y con equipos de Argentina, Latinoamérica, Israel y Europa, "
           "en español, inglés y alemán. Se especializa en revisar cómo trabajan los equipos y pasar a la IA la parte repetitiva, "
           "con controles: la IA del equipo en un solo lugar, automatizaciones que avisan cuando fallan y procesos de finanzas "
-          "que corren solos. Diseñó y construyó SearchedBy, un producto con IA en producción que hoy es de NexYn. "
+          "que corren solos. Desarrolló dos productos que ya están en línea: SearchedBy y NexYn. "
           "Tiene diez años de experiencia en banca, e-commerce, analítica de marketing y seguros.",
 }
 
@@ -563,7 +563,7 @@ def write_llms_txt():
 
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
-The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and built, now part of NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
+The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and developed, sold together with NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
 Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES])}.
 
 ## Site
@@ -588,8 +588,9 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 ## Casos de estudio (español)
 {cases_es}
 
-## Product
-- SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and built by Pablo Pavon; today a NexYn product; formerly called GEO Scan. About: https://searchedby.com/about/
+## Products
+- SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and developed by Pablo Pavon; sold together with NexYn; formerly called GEO Scan. About: https://searchedby.com/about/
+- NexYn: https://nexyn-ai.com/ (Spanish: https://nexyn-ai.com/es/): process automation for small businesses, with or without AI; free first reading in writing within 48 business hours. Developed by Pablo Pavon.
 
 ## Profiles
 - LinkedIn: {LINKEDIN}

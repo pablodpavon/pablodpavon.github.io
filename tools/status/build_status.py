@@ -231,7 +231,7 @@ def fetch_health(url: str = HEALTH_URL, timeout: float = 8.0) -> tuple[bool, int
 def searchedby_status(now: dt.datetime, fetch=fetch_health) -> dict:
     ok, ms, note = fetch()
     return {"system": "searchedby", "title_en": "SearchedBy · public web app", "title_es": "SearchedBy · aplicación web pública",
-            "kind_en": "Live product, now NexYn's", "kind_es": "Producto en producción, hoy de NexYn",
+            "kind_en": "Live product", "kind_es": "Producto en producción",
             "last_run_utc": iso(now), "ok": ok, "items": None, "cost_usd": None, "latency_ms": ms,
             "schedule_en": "Health checked once a day", "schedule_es": "Salud revisada una vez por día",
             "link": "https://searchedby.com/", "note": note, "note_es": note_es(note)}
