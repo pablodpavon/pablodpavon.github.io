@@ -79,6 +79,8 @@
 .sys-band .row{display:flex;flex-wrap:wrap;gap:8px}
 
 /* ---------- /portfolio (19-nov-2026) ---------- */
+.v-nexyn{max-width:640px;margin:18px 0 0;padding:14px 18px;border-radius:var(--r-l);border:1px solid var(--line);background:var(--card)}
+.v-nexyn p{margin:0;color:var(--ink-2);font-size:15.5px;line-height:1.55}
 .pf-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .pf-legend-note{margin:8px 0 0;font-size:14px;color:var(--muted)}
 .pf-toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:14.5px}

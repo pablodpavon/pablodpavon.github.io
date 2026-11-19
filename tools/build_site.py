@@ -569,7 +569,7 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 ## Site
 - [Home, English]({page_url('index.html', 'en')}): services, case studies, how I work, three ways to start, experience, FAQ, contact
 - [Inicio, español]({page_url('index.html', 'es')}): la misma página en español
-- [AI process review]({page_url('ai-process-review.html', 'en')}): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ
+- [AI process review]({page_url('ai-process-review.html', 'en')}): the service page: who it is for, how it works in four steps, what is not automated, a pilot case with a construction supervision firm, FAQ. For companies, the service now lives at NexYn: https://nexyn-ai.com/
 - [Procesos con IA, español]({page_url('ai-process-review.html', 'es')}): la misma página en español
 - [Portfolio]({page_url('portfolio.html', 'en')}): every project grouped by kind: a real pilot without names, products and tools I built, automations that run on their own, a prototype, demos on synthetic data, and what I can build
 - [Portfolio, español]({page_url('portfolio.html', 'es')}): la misma página en español

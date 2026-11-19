@@ -325,6 +325,9 @@ def systems_page() -> str:
 # Texts: Servicio_Optimizacion_IA/Borradores/Web_Procesos_con_IA_v1.md (ES and EN, as written there). No prices,
 # no unmeasured figures, the pilot client is anonymised ("a construction supervision firm in Israel").
 ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg>'
+# OP-P17 (NX-11a, D237): since nexyn-ai.com went live (19-nov-2026), this page sends companies to NexYn; the pilot case stays
+# (NexYn names nobody outside its legal pages). Spanish goes to /es/, English to the root.
+NEXYN_ES, NEXYN_EN = "https://nexyn-ai.com/es/", "https://nexyn-ai.com/"
 ICON_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-6-6 6 6 6-6"/></svg>'
 
 PR_FOR = [
@@ -404,7 +407,8 @@ def process_page() -> str:
     <span class="pill"><span class="dot"></span>{bi('Procesos con IA · Diagnóstico · Implementación', 'AI process review · Diagnostic · Setup')}</span>
     <h1 lang="es" style="max-width:22ch">Encuentro el trabajo que tu equipo repite todos los meses y se lo paso a la IA, con controles.</h1><h1 lang="en" style="max-width:22ch">I find the work your team repeats every month and hand it to AI, with checks.</h1>
     <p class="lede" lang="es">Informes, planillas, mails, seguimientos, fotos y audios que llegan por WhatsApp. Reviso cómo trabaja tu equipo, automatizo con IA la parte repetitiva y la dejo andando y medida. Así tu gente usa su tiempo en lo que la IA no hace: criterio, conocimiento del negocio y la relación con tus clientes.</p><p class="lede" lang="en">Reports, spreadsheets, emails, follow-ups, photos and voice notes arriving on WhatsApp. I look at how your team works, automate the repetitive part with AI, and leave it running and measured. Your people keep their time for what AI doesn't do: judgement, knowledge of the business and your client relationships.</p>
-    <div class="cs-actions"><button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Contame qué tarea se repite más', 'Tell me which task repeats most')}</button><a class="btn" href="#como-trabajo">{ICON_DOWN}{bi('Ver cómo trabajo', 'See how I work')}</a></div>
+    <div class="v-nexyn"><p lang="es"><strong>Para empresas, este servicio ahora está en NexYn:</strong> automatización de procesos con o sin IA, con el mismo método que se cuenta abajo.</p><p lang="en"><strong>For companies, this service now lives at NexYn:</strong> process automation with or without AI, with the same method described below.</p></div>
+    <div class="cs-actions"><a class="btn btn-brand" lang="es" href="{NEXYN_ES}" rel="noopener">{ICON_NEXT}Ir a NexYn</a><a class="btn btn-brand" lang="en" href="{NEXYN_EN}" rel="noopener">{ICON_NEXT}Go to NexYn</a><a class="btn" href="#como-trabajo">{ICON_DOWN}{bi('Ver cómo trabajo', 'See how I work')}</a></div>
   </div>
 </section>
 """
@@ -440,9 +444,9 @@ def process_page() -> str:
     </article>
   </div>
   <div class="sys-foot" style="margin-bottom:20px">
-    <p lang="es"><strong>¿Qué tarea se repite más en tu equipo?</strong> Contame en dos líneas y te digo por dónde empezaría.</p>
-    <p lang="en"><strong>Which task repeats most in your team?</strong> Tell me in two lines and I'll tell you where I would start.</p>
-    <button class="btn btn-brand" type="button" data-open-contact>{ICON_CHAT}{bi('Escribime', 'Message me')}</button>
+    <p lang="es"><strong>¿Tenés una empresa y querés empezar?</strong> El servicio sigue en NexYn: ahí contás qué tarea se repite más y te responden por escrito.</p>
+    <p lang="en"><strong>Running a company and want to start?</strong> The service continues at NexYn: tell them which task repeats most and you get a written answer.</p>
+    <a class="btn btn-brand" lang="es" href="{NEXYN_ES}" rel="noopener">{ICON_NEXT}Ir a NexYn</a><a class="btn btn-brand" lang="en" href="{NEXYN_EN}" rel="noopener">{ICON_NEXT}Go to NexYn</a>
   </div>
   <p class="st-how" lang="es">Si además querés saber cómo te encuentran en Google y en los asistentes de IA, mirá <a href="https://searchedby.com/" rel="noopener">SearchedBy</a>.</p>
   <p class="st-how" lang="en">If you also want to know how Google and AI assistants find you, see <a href="https://searchedby.com/" rel="noopener">SearchedBy</a>.</p>
