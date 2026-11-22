@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-21T08:30:03Z",
+ "generated_utc": "2026-11-22T08:30:04Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -12,15 +12,15 @@
    "schedule_es": "Diario, 08:40 Berlín",
    "kind_en": "Scheduled LLM scoring pipeline",
    "kind_es": "Pipeline programado de puntaje con LLM",
-   "last_run_utc": "2026-11-20T08:27:27Z",
+   "last_run_utc": "2026-11-22T08:17:11Z",
    "ok": true,
-   "items": 27,
-   "cost_usd": 0.0588,
-   "duration_s": 124,
+   "items": 85,
+   "cost_usd": 0.0613,
+   "duration_s": 132,
    "sources_total": 16,
-   "sources_failed": 3,
-   "note": "3 of 16 sources did not answer.",
-   "note_es": "3 de 16 fuentes no respondieron."
+   "sources_failed": 4,
+   "note": "4 of 16 sources did not answer.",
+   "note_es": "4 de 16 fuentes no respondieron."
   },
   {
    "system": "searchedby",
@@ -28,11 +28,11 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Live product",
    "kind_es": "Producto en producción",
-   "last_run_utc": "2026-11-21T08:30:03Z",
+   "last_run_utc": "2026-11-22T08:30:04Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 188,
+   "latency_ms": 178,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
