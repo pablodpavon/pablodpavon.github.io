@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-22T08:30:04Z",
+ "generated_utc": "2026-11-23T08:30:07Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -28,11 +28,11 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Live product",
    "kind_es": "Producto en producción",
-   "last_run_utc": "2026-11-22T08:30:04Z",
+   "last_run_utc": "2026-11-23T08:30:07Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 178,
+   "latency_ms": 1157,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
@@ -43,15 +43,15 @@
    "system": "kpi-report",
    "title_en": "AI KPI report, verified weekly",
    "title_es": "Reporte de KPIs con IA, verificado cada semana",
-   "last_run_utc": "2026-11-16T06:33:33Z",
+   "last_run_utc": "2026-11-23T06:31:32Z",
    "ok": true,
-   "items": 13,
+   "items": 21,
    "items_label_en": "numbers checked",
    "items_label_es": "números verificados",
-   "cost_usd": 0.001372,
+   "cost_usd": 0.00171,
    "schedule_en": "Weekly, Mondays 07:30 Berlin",
    "schedule_es": "Semanal, lunes 07:30 Berlín",
-   "note": "2026-W46: RELEASED, 13 numbers checked. 5 weekly runs, 2 blocked. Synthetic data."
+   "note": "2026-W47: BLOCKED by the number check (WRONG_DIRECTION), 21 numbers checked. 6 weekly runs, 3 blocked. Synthetic data."
   },
   {
    "system": "website",
