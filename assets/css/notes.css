@@ -1,0 +1,43 @@
+/* Notes (/notes/): Pablo's LinkedIn posts, republished in English. Loaded after site.css and vitrina.css; uses their tokens.
+   Added 24-nov-2026 (tools/build_notes.py). */
+.nt-hero .lede{max-width:56ch}
+.nt-hero-post h1{max-width:22ch;font-size:clamp(34px,4.6vw,56px)}
+.nt-origin{margin:18px 0 0;color:var(--ink-2);font-size:16px}
+.nt-origin a,.nt-update a,.nt-link a{color:var(--brand-strong);text-underline-offset:3px}
+.nt-wrap{padding-top:36px;padding-bottom:88px}
+
+/* list */
+.nt-list{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;max-width:920px}
+.nt-item{display:grid;grid-template-columns:112px minmax(0,1fr) 40px;align-items:start;gap:20px;padding:22px 24px;border-radius:var(--r-l);
+  background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .2s,transform .2s,background .2s}
+.nt-item:hover{border-color:var(--brand);transform:translateY(-2px)}
+.nt-item:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.nt-item time{padding-top:4px;color:var(--muted);font-size:14.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nt-item h2{margin:0 0 6px;font-size:clamp(20px,2vw,24px);line-height:1.2;letter-spacing:-.022em;font-weight:640}
+.nt-first{display:block;max-width:70ch;color:var(--ink-2);font-size:16px;line-height:1.55}
+.nt-go{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--bg-2);color:var(--brand-strong);transition:background .2s,color .2s,transform .2s}
+.nt-go svg{width:18px;height:18px}
+.nt-item:hover .nt-go{background:var(--brand);color:var(--brand-ink);transform:translateX(3px)}
+
+/* one note */
+.nt-body{max-width:64ch;font-size:clamp(17px,1.35vw,19px);line-height:1.65;color:var(--ink)}
+.nt-body p{margin:0 0 1.05em}
+.nt-body>p:first-child{font-size:clamp(21px,2vw,25px);line-height:1.4;letter-spacing:-.015em;font-weight:560}
+.nt-link{font-weight:550}
+.nt-link a{display:inline-flex;align-items:center;gap:4px}
+.nt-link svg{width:16px;height:16px}
+.nt-update{margin:28px 0 0;padding:18px 20px;border-radius:var(--r-m);background:var(--brand-tint);color:var(--ink);font-size:16px;line-height:1.6}
+.nt-more{margin-top:72px}
+.nt-more h2{margin:0 0 14px;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.03em;font-weight:650}
+.nt-band{margin-top:56px;max-width:920px}
+
+@media (max-width:720px){
+  .nt-item{grid-template-columns:minmax(0,1fr);gap:8px;padding:18px}
+  .nt-item time{padding-top:0;font-size:14px}
+  .nt-go{display:none}
+  .nt-more{margin-top:56px}
+}
+@media (prefers-reduced-motion:reduce){
+  .nt-item,.nt-go{transition:none}
+  .nt-item:hover{transform:none}
+}

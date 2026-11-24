@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pablodpavon.com/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/"/>
   </url>
   <url>
     <loc>https://pablodpavon.com/es/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/"/>
@@ -181,5 +181,23 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/links.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://pablodpavon.com/es/links.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/links.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/notes/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/notes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/notes/"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/notes/a-request-in-a-closing-comment.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/notes/a-request-in-a-closing-comment.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/notes/a-request-in-a-closing-comment.html"/>
+  </url>
+  <url>
+    <loc>https://pablodpavon.com/notes/reading-a-searchedby-result.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pablodpavon.com/notes/reading-a-searchedby-result.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pablodpavon.com/notes/reading-a-searchedby-result.html"/>
   </url>
 </urlset>

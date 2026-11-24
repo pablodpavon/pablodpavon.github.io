@@ -36,6 +36,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_cases  # noqa: E402
 import build_legal  # noqa: E402  (Impressum and privacy notice, AJ-47, 1-nov-2026)
 import build_vitrina  # noqa: E402  (/systems, /status, /links, 1-nov-2026)
+import build_notes  # noqa: E402  (/notes/, English only, 24-nov-2026)
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
@@ -44,7 +45,7 @@ SITE = "https://pablodpavon.com"
 LANGS = ("en", "es")
 DEFAULT = "en"                     # served at the root and used as x-default
 UPDATED = "2026-10-21"             # base dateModified / lastmod: the last change that touched every page
-HOME_UPDATED = "2026-11-19"        # the home: portfolio link and SearchedBy as a NexYn product (19-nov-2026); bump with each home change
+HOME_UPDATED = "2026-11-24"        # the home: band with the link to /notes/ (24-nov-2026); bump with each home change
 
 
 def modified(published: str, updated: str = UPDATED) -> str:
@@ -130,6 +131,8 @@ KNOWS_ABOUT = ["AI process automation", "Business process analysis", "Claude Cod
 
 AREA_SERVED = ["Germany", "European Union", "Argentina", "Latin America", "Israel", "United States"]
 
+EN_ONLY = ("notes/",)               # folders published in English only: no /es/ copy, links from ES pages go to the English page
+
 UI = {
     "en": {"home": "Home", "work": "Portfolio", "switch_label": "Language"},
     "es": {"home": "Inicio", "work": "Portfolio", "switch_label": "Idioma"},
@@ -144,6 +147,8 @@ def lang_root(lang: str) -> str:
 def page_url(rel: str, lang: str) -> str:
     """rel is the source path relative to src/, e.g. 'index.html' or 'proyectos/x.html'."""
     root = lang_root(lang)
+    if rel.endswith("/index.html"):                 # /notes/ instead of /notes/index.html
+        rel = rel[: -len("index.html")]
     return SITE + (root if rel == "index.html" else root + rel)
 
 
@@ -158,6 +163,10 @@ def rewrite_url(url: str, src_dir: str, lang: str) -> str:
     norm = posixpath.normpath(posixpath.join(src_dir, path)) if path else ""
     if norm.startswith("assets/") or norm in ("favicon.svg", "favicon.ico", "apple-touch-icon.png", "sitemap.xml", "llms.txt"):
         new = "/" + norm
+    elif norm.startswith(EN_ONLY) or norm + "/" in EN_ONLY:
+        new = "/" + (norm[: -len("index.html")] if norm.endswith("/index.html") else norm)
+        if norm + "/" in EN_ONLY:
+            new += "/"
     elif norm in ("index.html", ".", ""):
         new = lang_root(lang)
     else:
@@ -393,10 +402,46 @@ def vitrina_jsonld(rel: str, page: dict, lang: str) -> dict:
     return {"@context": "https://schema.org", "@graph": graph}
 
 
+def notes_index_jsonld(notes: list[dict]) -> dict:
+    url = page_url("notes/index.html", "en")
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type": "Blog", "@id": url + "#blog", "url": url, "name": "Notes · " + NAME,
+         "description": build_notes.INDEX_DESCRIPTION, "inLanguage": "en", "isPartOf": {"@id": WEBSITE_ID},
+         "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID},
+         "blogPost": [{"@id": page_url(f"notes/{n['slug']}.html", "en") + "#post"} for n in notes]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": UI["en"]["home"], "item": page_url("index.html", "en")},
+            {"@type": "ListItem", "position": 2, "name": "Notes", "item": url}]},
+        person_node("en", full=False),
+    ]}
+
+
+def note_jsonld(n: dict) -> dict:
+    url = page_url(f"notes/{n['slug']}.html", "en")
+    post = {"@type": "BlogPosting", "@id": url + "#post", "headline": n["title"], "description": n["description"],
+            "inLanguage": "en", "url": url, "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+            "datePublished": n["date"], "dateModified": n.get("update", {}).get("date", n["date"]),
+            "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID},
+            "isPartOf": {"@id": page_url("notes/index.html", "en") + "#blog"},
+            "image": SITE + "/assets/og/home-en.png", "isAccessibleForFree": True,
+            "articleBody": "\n\n".join(n["body"])}
+    if n.get("linkedin_url"):
+        post["sameAs"] = n["linkedin_url"]
+    return {"@context": "https://schema.org", "@graph": [
+        post,
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": UI["en"]["home"], "item": page_url("index.html", "en")},
+            {"@type": "ListItem", "position": 2, "name": "Notes", "item": page_url("notes/index.html", "en")},
+            {"@type": "ListItem", "position": 3, "name": n["title"], "item": url}]},
+        person_node("en", full=False),
+    ]}
+
+
 def head_html(rel: str, lang: str, meta: dict) -> str:
     url = page_url(rel, lang)
-    alt = {l: page_url(rel, l) for l in LANGS}
-    other = [l for l in LANGS if l != lang][0]
+    langs = meta.get("langs", LANGS)
+    alt = {l: page_url(rel, l) for l in langs}
+    other = ([l for l in langs if l != lang] or [None])[0]
     is_article = rel != "index.html" and not meta.get("legal") and meta.get("kind") != "page"
     lines = [
         '<meta charset="utf-8">',
@@ -406,12 +451,12 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
         f'<meta name="author" content="{NAME}">',
         f'<meta name="robots" content="{meta.get("robots", "index, follow, max-image-preview:large")}">',
         f'<link rel="canonical" href="{url}">',
-    ] + [f'<link rel="alternate" hreflang="{l}" href="{alt[l]}">' for l in LANGS] + [
+    ] + [f'<link rel="alternate" hreflang="{l}" href="{alt[l]}">' for l in langs] + [
         f'<link rel="alternate" hreflang="x-default" href="{alt[DEFAULT]}">',
         f'<meta property="og:type" content="{"article" if is_article else "website"}">',
         f'<meta property="og:site_name" content="{NAME}">',
         f'<meta property="og:locale" content="{OG_LOCALE[lang]}">',
-        f'<meta property="og:locale:alternate" content="{OG_LOCALE[other]}">',
+    ] + ([f'<meta property="og:locale:alternate" content="{OG_LOCALE[other]}">'] if other else []) + [
         f'<meta property="og:url" content="{url}">',
         f'<meta property="og:title" content="{esc(meta["title"])}">',
         f'<meta property="og:description" content="{esc(meta["description"])}">',
@@ -431,7 +476,7 @@ def head_html(rel: str, lang: str, meta: dict) -> str:
             f'<meta property="article:published_time" content="{meta["published"]}">',
             f'<meta property="article:modified_time" content="{meta.get("modified", UPDATED)}">',
             f'<meta property="article:author" content="{SITE}/">',
-            '<meta property="article:section" content="Case studies">',
+            f'<meta property="article:section" content="{meta.get("section", "Case studies")}">',
         ]
     lines += [
         '<meta name="msvalidate.01" content="26A77F480A2263EBDD3125FC7D7DB2BD">',  # Bing Webmaster Tools verification
@@ -472,7 +517,7 @@ def build_page(rel: str, lang: str, meta: dict) -> Path:
     sp.close()
     html = sp.result()
     html = re.sub(r"<head>.*?</head>", lambda _: head_html(rel, lang, meta), html, count=1, flags=re.S)
-    html = html.replace("<!--LANGSWITCH-->", lang_switch(rel, lang))
+    html = html.replace("<!--LANGSWITCH-->", lang_switch(rel, lang) if len(meta.get("langs", LANGS)) > 1 else "")
     # sanity checks
     if html.count("<h1") != 1:
         raise SystemExit(f"{rel} [{lang}]: expected exactly one <h1>, found {html.count('<h1')}")
@@ -509,6 +554,20 @@ def pages() -> list[tuple[str, dict]]:
                 "image": f"/assets/og/{page.get('og', 'home')}-{l}.png", "image_alt": page["image_alt"][l],
                 "published": page["published"], "modified": page["published"], "kind": "page",
                 "css": ["/assets/css/vitrina.css"], "jsonld": vitrina_jsonld(rel, page, l)} for l in LANGS}))
+    notes = build_notes.published()                  # /notes/ (24-nov-2026): English only, in the sitemap
+    if notes:
+        newest = notes[0]["date"]
+        items.append(("notes/index.html", {"en": {
+            "title": "Notes · " + NAME, "description": build_notes.INDEX_DESCRIPTION,
+            "image": "/assets/og/home-en.png", "image_alt": HOME["image_alt"]["en"], "published": "2026-11-24",
+            "modified": max("2026-11-24", newest), "kind": "page", "langs": ("en",),
+            "css": ["/assets/css/vitrina.css", "/assets/css/notes.css"], "jsonld": notes_index_jsonld(notes)}}))
+        for n in notes:
+            items.append((f"notes/{n['slug']}.html", {"en": {
+                "title": n["title"] + " · " + NAME, "description": n["description"],
+                "image": "/assets/og/home-en.png", "image_alt": HOME["image_alt"]["en"], "published": n["date"],
+                "modified": n.get("update", {}).get("date", n["date"]), "langs": ("en",), "section": "Notes",
+                "css": ["/assets/css/vitrina.css", "/assets/css/notes.css"], "jsonld": note_jsonld(n)}}))
     for rel, page in build_legal.PAGES.items():       # AJ-47 (1-nov-2026): noindex, outside the sitemap
         items.append((rel, {
             l: {"title": page["title"][l] + " · " + NAME, "description": page["description"][l],
@@ -526,12 +585,13 @@ def write_sitemap(items):
     for rel, meta in items:
         if meta[DEFAULT].get("legal"):               # noindex pages stay out of the sitemap
             continue
-        for lang in LANGS:
+        langs = meta[DEFAULT].get("langs", LANGS)
+        for lang in langs:
             lines.append("  <url>")
             lines.append(f"    <loc>{page_url(rel, lang)}</loc>")
             day = modified(meta[lang]["published"], HOME_UPDATED) if rel == "index.html" else meta[lang]["modified"]
             lines.append(f"    <lastmod>{day}</lastmod>")
-            for l in LANGS:
+            for l in langs:
                 lines.append(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{page_url(rel, l)}"/>')
             lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{page_url(rel, DEFAULT)}"/>')
             lines.append("  </url>")
@@ -557,6 +617,9 @@ def write_llms_txt():
         f"- [{c['title_es']}]({page_url('proyectos/' + c['slug'] + '.html', 'es')}): {c['desc_es'].replace('Caso de estudio con datos sintéticos: ', '')}"
         for c in build_cases.CASES)
     services = "\n".join(f"- {en} / {es}: {den}" for en, es, den, des, _ in SERVICES)
+    notes = build_notes.published()
+    notes_txt = "\n".join(f"- [{n['title']}]({page_url('notes/' + n['slug'] + '.html', 'en')}) ({n['date']}): {n['description']}"
+                          for n in notes) or "- (none yet)"
     txt = f"""# Pablo Pavon: AI process automation for small teams; business analyst, Berlin
 
 > {PERSON_DESCRIPTION['en']}
@@ -564,7 +627,7 @@ def write_llms_txt():
 Facts: based in Berlin, Germany (CET); from Argentina; languages: Spanish (native), English (C1), German (B2);
 fully remote; engagement models: process review, setup at a fixed price, monthly follow-up; replies within 1–2 business days.
 The case studies on the site use synthetic data from fictional companies, and the code is public on GitHub. The exceptions are SearchedBy (formerly GEO Scan), an AI product Pablo designed and developed, sold together with NexYn, live at https://searchedby.com/ (private code, public case study), and the pilot case on the AI process review page, a real engagement described without the client's name.
-Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES])}.
+Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.get("updated", UPDATED)) for c in build_cases.CASES] + [n["date"] for n in notes])}.
 
 ## Site
 - [Home, English]({page_url('index.html', 'en')}): services, case studies, how I work, three ways to start, experience, FAQ, contact
@@ -575,6 +638,7 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 - [Portfolio, español]({page_url('portfolio.html', 'es')}): la misma página en español
 - [Systems I built and run]({page_url('systems.html', 'en')}): what each system does, what runs on its own, links to the case and the code
 - [Systems status]({page_url('status.html', 'en')}): last run, items processed, cost and state of each scheduled system, generated daily (data: {SITE}/assets/data/status.json)
+- [Notes]({page_url('notes/index.html', 'en')}): short notes in English on what Pablo builds with AI, how he checks it and what broke; each one first posted on LinkedIn
 - [Links]({page_url('links.html', 'en')}): all profiles on one page
 - [CV (English, PDF)]({SITE}/assets/CV_Pablo_Pavon_EN.pdf)
 - [CV (español, PDF)]({SITE}/assets/CV_Pablo_Pavon_ES.pdf)
@@ -587,6 +651,9 @@ Site last updated: {max([HOME_UPDATED, UPDATED] + [modified(c["published"], c.ge
 
 ## Casos de estudio (español)
 {cases_es}
+
+## Notes (English, first posted on LinkedIn)
+{notes_txt}
 
 ## Products
 - SearchedBy: {"https://searchedby.com/"}: shows a business how AI assistants (ChatGPT, Perplexity, Claude, Google's AI) present it, and whether its site can be read, cited and recommended. Designed and developed by Pablo Pavon; sold together with NexYn; formerly called GEO Scan. About: https://searchedby.com/about/
@@ -609,10 +676,16 @@ def main():
     build_cases.build()
     build_legal.build()
     build_vitrina.build()
+    build_notes.build()
     items = pages()
+    keep = {rel for rel, _ in items if rel.startswith("notes/")}
+    for old in (ROOT / "notes").glob("*.html") if (ROOT / "notes").exists() else []:
+        if "notes/" + old.name not in keep:          # a note taken back disappears from the site too
+            old.unlink()
+            print("removed", old.relative_to(ROOT))
     missing_og = []
     for rel, by_lang in items:
-        for lang in LANGS:
+        for lang in by_lang:
             meta = by_lang[lang]
             out = build_page(rel, lang, meta)
             print("wrote", out.relative_to(ROOT))

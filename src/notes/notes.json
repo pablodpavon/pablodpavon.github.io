@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "reading-a-searchedby-result",
+    "title": "How I'd read a SearchedBy result",
+    "description": "How to read a SearchedBy scan: how many AI answers named you, the technical foundation, who gets named instead, and why each scan is a sample.",
+    "date": "2026-11-10",
+    "on_linkedin": true,
+    "linkedin_url": "",
+    "body": [
+      "If you run your site through SearchedBy, here's how I'd read the result.",
+      "The number on top is how many AI answers named you. That's the one to watch. Zero is common, especially for small businesses and new sites.",
+      "Below it is the technical foundation: can AI crawlers reach your pages, read your content, and understand who you are. If something is broken there, fix it. It's the part you fully control, but a good score alone won't get you named.",
+      "Then look at who gets named instead of you. Those names tell you who AI thinks your competitors are, and they're often not the ones you'd guess.",
+      "One thing I'm careful about: each scan is a sample, not a verdict. AI answers change from day to day, so treat it as a starting point and run it again after you change something."
+    ],
+    "link": {
+      "lead": "It's free",
+      "url": "https://searchedby.com/"
+    },
+    "update": {
+      "date": "2026-11-24",
+      "text": "Later on the day this post went out, visitors stopped seeing the technical score. The result now opens with what each AI engine said, and the technical side is three plain answers: yes, partly or no.",
+      "see": "a-score-that-predicted-nothing"
+    }
+  },
+  {
+    "slug": "a-request-in-a-closing-comment",
+    "title": "A new request hidden in a closing comment",
+    "description": "An AI assistant closed a ticket and tucked a new request into the closing comment. The rule I added to the board's instructions so the next one becomes a ticket.",
+    "date": "2026-11-23",
+    "on_linkedin": true,
+    "linkedin_url": "",
+    "body": [
+      "An AI assistant closed a ticket on our task board and tucked a brand-new request into the closing comment.",
+      "The board is new. I built it for NexYn last week, so the people on it, each working with their own Claude, see the same tasks. Every open ticket has an owner and a date, and the assistants can open, update and close tickets.",
+      "A closed ticket drops out of view. I only found the request because I went through what the other side had done that morning.",
+      "The instructions said a new task gets created right away. They didn't say a comment doesn't count. Now they do: a new request is always a new ticket, with an owner and a date. Never a comment, and never the closing note.",
+      "The same day I added a box at the top of the board: work you asked for that the other side has finished. No emails. Each person's assistant is told to bring it up at the start of the next session.",
+      "If AI assistants share your task list, which rule did you have to write down first?"
+    ],
+    "link": {
+      "lead": "NexYn",
+      "url": "https://nexyn-ai.com/"
+    }
+  }
+]
