@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-11-26T08:30:05Z",
+ "generated_utc": "2026-11-27T08:30:01Z",
  "systems": [
   {
    "system": "scoring-pipeline",
@@ -28,11 +28,11 @@
    "title_es": "SearchedBy · aplicación web pública",
    "kind_en": "Live product",
    "kind_es": "Producto en producción",
-   "last_run_utc": "2026-11-26T08:30:05Z",
+   "last_run_utc": "2026-11-27T08:30:01Z",
    "ok": true,
    "items": null,
    "cost_usd": null,
-   "latency_ms": 171,
+   "latency_ms": 176,
    "schedule_en": "Health checked once a day",
    "schedule_es": "Salud revisada una vez por día",
    "link": "https://searchedby.com/",
